@@ -6,19 +6,19 @@
     "default": "https://raw.githubusercontent.com/forbole/big-dipper-assets/master/desmos/logo.svg?sanitize=true"
   },
   "prefix": {
-    "consensus": "desmosvalcons",
-    "validator": "desmosvaloper",
-    "account": "desmos"
+    "consensus": "[consensus]",
+    "validator": "[validator]",
+    "account": "[account]"
   },
   "genesis": {
     "time": "2021-07-13T08:00:00",
     "height": 1
   },
-  "primaryTokenUnit": "udaric",
-  "votingPowerTokenUnit": "udaric",
+  "primaryTokenUnit": "core",
+  "votingPowerTokenUnit": "core",
   "tokenUnits": {
-    "udaric": {
-      "display": "daric",
+    "core": {
+      "display": "core",
       "exponent": 6
     }
   },

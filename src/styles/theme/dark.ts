@@ -1,7 +1,5 @@
-import Color from 'color';
-
-const backgroundDefault = '#0A0A0A';
-const surfaceOne = '#131316';
+const backgroundDefault = '#17191E';
+const surfaceOne = '#1B1D23';
 const surfaceTwo = '#19191D';
 const fontOne = '#E6E6E6';
 const fontTwo = '#AAAAAB';
@@ -20,7 +18,7 @@ export const darkThemeOverride = {
   palette: {
     type: 'dark',
     primary: {
-      main: Color('#FD3B4C').alpha(0.7).string(),
+      main: '#25D695',
       contrastText: '#fff',
     },
     background: {
@@ -29,14 +27,15 @@ export const darkThemeOverride = {
     },
     divider: '#3D3D43',
     text: {
-      primary: '#E6E6E6',
-      secondary: '#AAAAAB',
+      primary: '#F3F3F3',
+      secondary: '#868991',
     },
     custom: {
       general: {
         background: backgroundDefault, // same as background default
         surfaceOne, // same as background paper
         surfaceTwo, // striped tables
+        single_block: 'linear-gradient(110.16deg, rgba(94, 103, 115, 0.35) 0%, rgba(94, 103, 115, 0.15) 100%)',
       },
       fonts: {
         fontOne,
