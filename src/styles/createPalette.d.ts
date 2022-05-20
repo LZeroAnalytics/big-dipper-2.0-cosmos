@@ -8,6 +8,8 @@ declare module '@material-ui/core/styles/createPalette' {
             surfaceOne: string;
             surfaceTwo: string;
             icon: string;
+            single_block: string;
+            nav_drawer: string;
         },
         fonts: {
             fontOne: string;

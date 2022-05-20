@@ -13,8 +13,13 @@ export const useStyles = () => {
           },
         },
         logo: {
+          display: 'flex',
+          alignItems: 'center',
+          gap: 24,
+          // justifyContent: 'space-between',
           width: '216px',
-          padding: theme.spacing(2, 1.75, 2.5),
+          height: 70,
+          padding: theme.spacing(2.5),
           '&:hover': {
             cursor: 'pointer',
           },
@@ -52,6 +57,7 @@ export const useStyles = () => {
           boxSizing: 'border-box',
         },
         drawerOpen: {
+          background: theme.palette.custom.general.nav_drawer,
           width: OPEN_DRAWER_WIDTH,
           transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.easeIn,
@@ -59,6 +65,7 @@ export const useStyles = () => {
           }),
         },
         drawerClose: {
+          background: theme.palette.custom.general.nav_drawer,
           transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.easeIn,
             duration: theme.transitions.duration.enteringScreen,

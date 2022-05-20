@@ -7,21 +7,20 @@ import {
 } from '@material-ui/core';
 import { useRecoilValue } from 'recoil';
 import { readTheme } from '@recoil/settings/selectors';
-import BigDipperLogoWhite from '@assets/big-dipper-white.svg';
-import BigDipperLogoRed from '@assets/big-dipper-red.svg';
+import Logo from '@assets/logo.svg';
+import LogoTextDark from '@assets/logo-text-dark.svg';
 import { useStyles } from './styles';
 import { useDesktop } from './hooks';
 import {
   MenuItems,
-  TitleBar,
+  // TitleBar,
 } from '..';
 import { ActionBar } from './components';
 
 const Desktop: React.FC<{
   className?: string;
-  title: string;
 }> = ({
-  className, title,
+  className,
 }) => {
   const classes = useStyles();
   const theme = useRecoilValue(readTheme);
@@ -47,7 +46,7 @@ const Desktop: React.FC<{
             toggleNetwork={toggleNetwork}
             isNetwork={isNetwork}
           />
-          <TitleBar title={title} />
+          {/* <TitleBar title={title} /> */}
         </AppBar>
         <Drawer
           variant="permanent"
@@ -66,19 +65,23 @@ const Desktop: React.FC<{
             }),
           }}
         >
-          {theme === 'light' ? (
-            <BigDipperLogoRed
-              className={classes.logo}
-              onClick={toggleMenu}
-              role="button"
-            />
-          ) : (
-            <BigDipperLogoWhite
-              className={classes.logo}
-              onClick={toggleMenu}
-              role="button"
-            />
-          )}
+          <div className={classes.logo} role="button" onClick={toggleMenu}>
+            {/* FIXME get light and dark theme assets */}
+            {theme === 'light' ? <Logo /> : <Logo />}
+            {isMenu && theme === 'light' ? (
+              <LogoTextDark
+                style={{
+                  opacity: isMenu ? 1 : 0, transition: '.3s ease',
+                }}
+              />
+            ) : (
+              <LogoTextDark
+                style={{
+                  opacity: isMenu ? 1 : 0, transition: '.3s ease',
+                }}
+              />
+            )}
+          </div>
           <MenuItems />
         </Drawer>
       </div>
