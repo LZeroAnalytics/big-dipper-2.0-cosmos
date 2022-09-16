@@ -38,7 +38,7 @@ const TitleBar:React.FC<{
             <Typography variant="body1" className="label">
               {t(x.key)}
             </Typography>
-            <Typography variant="body1">
+            <Typography variant="body1" className="data">
               {x.data}
             </Typography>
           </div>
