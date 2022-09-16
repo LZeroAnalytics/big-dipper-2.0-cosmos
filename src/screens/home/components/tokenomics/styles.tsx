@@ -18,6 +18,8 @@ export const useStyles = () => {
         },
         data: {
           display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
           '& .data__item': {
             width: '50%',
             whiteSpace: 'pre-wrap',
@@ -27,6 +29,9 @@ export const useStyles = () => {
             '& .MuiTypography-caption': {
               color: theme.palette.custom.fonts.fontThree,
             },
+          },
+          '& .data__item:last-child': {
+            textAlign: 'right',
           },
         },
         legends: {
