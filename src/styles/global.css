@@ -106,11 +106,20 @@ svg {
   fill: #999999;
 }
 
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #25d695;
+  border-radius: 4px;
+}
+
 .scrollbar::-webkit-scrollbar {
   display: none;
 }
-/* 
-::-webkit-scrollbar-thumb {
-  color: "green";
-  width: 8px;
-} */
