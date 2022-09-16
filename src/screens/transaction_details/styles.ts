@@ -22,7 +22,7 @@ export const useStyles = () => {
           gridTemplateColumns: '1fr',
           gap: theme.spacing(2),
           [theme.breakpoints.up('lg')]: {
-            gridTemplateColumns: '1fr 1fr',
+            gridTemplateColumns: '1.25fr 1fr',
           },
         },
         messages: {
