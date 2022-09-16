@@ -5,7 +5,7 @@ export const useStyles = () => {
     (theme) => {
       return ({
         root: {
-          padding: theme.spacing(1, 2),
+          padding: theme.spacing(1, 1),
           display: 'grid',
           // justifyContent: 'center',
           // flexDirection: 'column',
@@ -35,9 +35,9 @@ export const useStyles = () => {
           padding: theme.spacing(1),
           display: 'grid',
           placeItems: 'center start',
-          [theme.breakpoints.up('lg')]: {
-            gridTemplateColumns: 'repeat(2, 1fr)',
-          },
+          // [theme.breakpoints.up('lg')]: {
+          //   gridTemplateColumns: 'repeat(2, 1fr)',
+          // },
           // [theme.breakpoints.up('lg')]: {
           //   alignItems: 'center',
           //   justifyContent: 'space-between',
@@ -52,12 +52,15 @@ export const useStyles = () => {
           // alignItems: 'center',
           // justifyContent: 'center',
           // flexDirectionc:
-          display: 'grid',
+          display: 'flex',
           padding: theme.spacing(1),
           width: '100%',
           '& .label': {
             color: theme.palette.text.secondary,
             marginRight: theme.spacing(1),
+          },
+          '& .data': {
+            textAlign: 'right',
           },
           [theme.breakpoints.up('sm')]: {
             flexDirection: 'row',
