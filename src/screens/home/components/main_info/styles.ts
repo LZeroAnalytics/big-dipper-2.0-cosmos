@@ -5,12 +5,13 @@ export const useStyles = () => {
     (theme) => {
       return {
         root: {
+          padding: theme.spacing(1, 1),
           height: '100%',
           display: 'grid',
           gridTemplateRows: '1fr auto 1fr',
           gap: 16,
           [theme.breakpoints.up('md')]: {
-            gridTemplateColumns: '1fr auto 1fr',
+            gridTemplateColumns: '1.5fr auto 1fr',
             gridTemplateRows: 'unset',
           },
           // [theme.breakpoints.up('lg')]: {
