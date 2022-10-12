@@ -14,10 +14,6 @@ exports[`screen: Nav/Desktop hook toggles correctly 1`] = `
       isNetwork={false}
       toggleNetwork={[Function]}
     />
-    <div
-      id="TitleBar"
-      title="hello world"
-    />
   </header>
   <div
     className="MuiDrawer-root MuiDrawer-docked makeStyles-drawer open makeStyles-drawerOpen"
@@ -25,11 +21,33 @@ exports[`screen: Nav/Desktop hook toggles correctly 1`] = `
     <div
       className="MuiPaper-root MuiDrawer-paper open makeStyles-drawerOpen MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft MuiPaper-elevation0"
     >
-      <
+      <div
         className="makeStyles-logo"
         onClick={[Function]}
         role="button"
-      />
+      >
+        < />
+        <div
+          className="makeStyles-logo_text"
+        >
+          <
+            style={
+              Object {
+                "opacity": 1,
+                "transition": ".3s ease",
+              }
+            }
+          />
+          <
+            style={
+              Object {
+                "opacity": 1,
+                "transition": ".3s ease",
+              }
+            }
+          />
+        </div>
+      </div>
       <div
         id="MenuItems"
       />
@@ -52,10 +70,6 @@ exports[`screen: Nav/Desktop it renders 1`] = `
       isNetwork={false}
       toggleNetwork={[Function]}
     />
-    <div
-      id="TitleBar"
-      title="hello world"
-    />
   </header>
   <div
     className="MuiDrawer-root MuiDrawer-docked makeStyles-drawer closed makeStyles-drawerClose"
@@ -63,11 +77,33 @@ exports[`screen: Nav/Desktop it renders 1`] = `
     <div
       className="MuiPaper-root MuiDrawer-paper closed makeStyles-drawerClose MuiDrawer-paperAnchorLeft MuiDrawer-paperAnchorDockedLeft MuiPaper-elevation0"
     >
-      <
+      <div
         className="makeStyles-logo"
         onClick={[Function]}
         role="button"
-      />
+      >
+        < />
+        <div
+          className="makeStyles-logo_text"
+        >
+          <
+            style={
+              Object {
+                "opacity": 0,
+                "transition": ".3s ease",
+              }
+            }
+          />
+          <
+            style={
+              Object {
+                "opacity": 0,
+                "transition": ".3s ease",
+              }
+            }
+          />
+        </div>
+      </div>
       <div
         id="MenuItems"
       />
