@@ -27,7 +27,7 @@ jobs:
           NEXT_PUBLIC_GRAPHQL_URL="https://hasura.devnet-1.coreum.dev/v1/graphql"
           NEXT_PUBLIC_GRAPHQL_WS="wss://hasura.devnet-1.coreum.dev/v1/graphql"
           NEXT_PUBLIC_URL="https://explorer.devnet-1.coreum.com"
-          NEXT_PUBLIC_RPC_WEBSOCKET="wss://s-0.devnet-1.coreum.dev/rpc/websocket"
+          NEXT_PUBLIC_RPC_WEBSOCKET="wss://s-0.devnet-1.coreum.dev/websocket"
           NEXT_PUBLIC_CHAIN_TYPE="testnet"
           NODE_ENV="production"
           PORT=3000
