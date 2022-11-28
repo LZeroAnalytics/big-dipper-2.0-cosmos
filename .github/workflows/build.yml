@@ -21,6 +21,7 @@ jobs:
           DOCKER_IMAGE=${{ env.ORG }}/${{ env.REPO }}
           echo "DEV_SHA8=dev-${GITHUB_SHA::8}" >> $GITHUB_ENV
           echo "DEVNET_SHA8=devnet-${GITHUB_SHA::8}" >> $GITHUB_ENV
+          echo "DEVNET_2_SHA8=devnet-2-${GITHUB_SHA::8}" >> $GITHUB_ENV
       - name: Prepare docker build env
         id: dockerPrep
         run: |
@@ -28,6 +29,23 @@ jobs:
           NEXT_PUBLIC_GRAPHQL_WS="wss://hasura.devnet-1.coreum.dev/v1/graphql"
           NEXT_PUBLIC_URL="https://explorer.devnet-1.coreum.com"
           NEXT_PUBLIC_RPC_WEBSOCKET="wss://s-0.devnet-1.coreum.dev/websocket/websocket"
+          NEXT_PUBLIC_CHAIN_TYPE="testnet"
+          NODE_ENV="production"
+          PORT=3000
+          echo ::set-output name=NEXT_PUBLIC_GRAPHQL_URL::${NEXT_PUBLIC_GRAPHQL_URL}
+          echo ::set-output name=NEXT_PUBLIC_GRAPHQL_WS::${NEXT_PUBLIC_GRAPHQL_WS}
+          echo ::set-output name=NEXT_PUBLIC_URL::${NEXT_PUBLIC_URL}
+          echo ::set-output name=NEXT_PUBLIC_RPC_WEBSOCKET::${NEXT_PUBLIC_RPC_WEBSOCKET}
+          echo ::set-output name=NEXT_PUBLIC_CHAIN_TYPE::${NEXT_PUBLIC_CHAIN_TYPE}
+          echo ::set-output name=NODE_ENV::${NODE_ENV}
+          echo ::set-output name=PORT::${PORT}
+      - name: Prepare docker build env devnet-2
+        id: dockerPrep-devnet-2
+        run: |
+          NEXT_PUBLIC_GRAPHQL_URL="https://hasura.devnet-2.coreum.dev/v1/graphql"
+          NEXT_PUBLIC_GRAPHQL_WS="wss://hasura.devnet-2.coreum.dev/v1/graphql"
+          NEXT_PUBLIC_URL="https://explorer.devnet-2.coreum.com"
+          NEXT_PUBLIC_RPC_WEBSOCKET="wss://s-0.devnet-2.coreum.dev/websocket/websocket"
           NEXT_PUBLIC_CHAIN_TYPE="testnet"
           NODE_ENV="production"
           PORT=3000
@@ -46,7 +64,26 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push devnet image
+      - name: Build and push devnet-2 image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          tags: |
+            ${{ env.ORG }}/${{ env.REPO }}:${{ env.DEVNET_2_SHA8 }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          push: true
+          build-args: |
+            "NEXT_PUBLIC_GRAPHQL_URL=${{ steps.dockerPrep-devnet-2.outputs.NEXT_PUBLIC_GRAPHQL_URL }}"
+            "NEXT_PUBLIC_GRAPHQL_WS=${{ steps.dockerPrep-devnet-2.outputs.NEXT_PUBLIC_GRAPHQL_WS }}"
+            "NEXT_PUBLIC_URL=${{ steps.dockerPrep-devnet-2.outputs.NEXT_PUBLIC_URL }}"
+            "NEXT_PUBLIC_RPC_WEBSOCKET=${{ steps.dockerPrep-devnet-2.outputs.NEXT_PUBLIC_RPC_WEBSOCKET }}"
+            "NEXT_PUBLIC_CHAIN_TYPE=${{ steps.dockerPrep-devnet-2.outputs.NEXT_PUBLIC_CHAIN_TYPE }}"
+            "NODE_ENV=${{ steps.dockerPrep-devnet-2.outputs.NODE_ENV }}"
+            "PORT=${{ steps.dockerPrep-devnet-2.outputs.PORT }}"
+
+      - name: Build and push devnet-1 image
         uses: docker/build-push-action@v2
         with:
           context: .
