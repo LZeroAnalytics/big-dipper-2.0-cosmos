@@ -1,7 +1,8 @@
 import React from 'react';
 import { RecoilRoot } from 'recoil';
-import renderer from 'react-test-renderer';
+import renderer, { act } from 'react-test-renderer';
 import { MockTheme } from '@tests/utils';
+import axios from 'axios';
 import TitleBar from '.';
 
 // ==================================
@@ -35,22 +36,30 @@ describe('screen: Nav/TitleBar', () => {
     );
   });
 
+  const mAxiosResponse = {
+    data: { coreum: { usd: 1 } },
+  };
+
+  jest.spyOn(axios, 'get').mockResolvedValueOnce(mAxiosResponse);
+
   it('it renders', () => {
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('hook toggles correctly', () => {
-    mockUseNavContext.title = 'Validators';
-    component.update(
-      <RecoilRoot>
-        <MockTheme>
-          <TitleBar />
-        </MockTheme>
-      </RecoilRoot>,
-    );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+  act(() => {
+    it('hook toggles correctly', () => {
+      mockUseNavContext.title = 'Validators';
+      component.update(
+        <RecoilRoot>
+          <MockTheme>
+            <TitleBar />
+          </MockTheme>
+        </RecoilRoot>,
+      );
+      const tree = component.toJSON();
+      expect(tree).toMatchSnapshot();
+    });
   });
 });
 
