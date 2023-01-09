@@ -1,4 +1,4 @@
-import chainConfigTestnet from './chain_config.testnet.json';
+import chainConfigDevnet from './chain_config.devnet.json';
 import chainConfigMainnet from './chain_config.mainnet.json';
 import generalConfig from './general_config.json';
 
@@ -11,7 +11,10 @@ const getChainConfig = () => {
   if (chainType === 'mainnet') {
     return chainConfigMainnet;
   }
-  return chainConfigTestnet;
+  if (chainType === 'devnet') {
+    return chainConfigDevnet;
+  }
+  return chainConfigDevnet;
 };
 
 const chainConfig = getChainConfig();
