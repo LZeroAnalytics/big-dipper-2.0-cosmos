@@ -1,6 +1,6 @@
 {
   "title": "Coreum Block Explorer",
-  "network": "coreum-testnet",
+  "network": "coreum",
   "icon": "https://raw.githubusercontent.com/forbole/big-dipper-assets/master/desmos/icon.svg?sanitize=true",
   "logo": {
     "default": "/images/logo.svg"

@@ -28,7 +28,7 @@ export const useStyles = () => {
           '&.retired': {
             background: theme.palette.custom.primaryData.four,
           },
-          '&.testnet': {
+          '&.devnet': {
             background: theme.palette.custom.primaryData.three,
           },
           '&.mainnet': {
