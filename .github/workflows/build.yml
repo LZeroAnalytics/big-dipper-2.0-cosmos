@@ -14,12 +14,20 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        env: [ "devnet", "devnet-2", "znet" ]
+        env: [ "testnet", "devnet", "devnet-2", "znet" ]
         include:
+          - env: "testnet"
+            NEXT_PUBLIC_GRAPHQL_URL: ""
+            NEXT_PUBLIC_GRAPHQL_WS: ""
+            NEXT_PUBLIC_URL: ""
+            NEXT_PUBLIC_RPC_WEBSOCKET: ""
+            NEXT_PUBLIC_CHAIN_TYPE: "testnet"
+            NODE_ENV: "production"
+            PORT: "3000"
           - env: "devnet"
             NEXT_PUBLIC_GRAPHQL_URL: "https://hasura.devnet-1.coreum.dev/v1/graphql"
             NEXT_PUBLIC_GRAPHQL_WS: "wss://hasura.devnet-1.coreum.dev/v1/graphql"
-            NEXT_PUBLIC_URL="https: //explorer.devnet-1.coreum.com"
+            NEXT_PUBLIC_URL: "https://explorer.devnet-1.coreum.com"
             NEXT_PUBLIC_RPC_WEBSOCKET: "wss://tendermint-rpc-s-0.devnet-2.coreum.dev/websocket"
             NEXT_PUBLIC_CHAIN_TYPE: "devnet"
             NODE_ENV: "production"

@@ -31,6 +31,9 @@ export const useStyles = () => {
           '&.devnet': {
             background: theme.palette.custom.primaryData.three,
           },
+          '&.testnet': {
+            background: theme.palette.custom.primaryData.three,
+          },
           '&.mainnet': {
             background: theme.palette.primary.main,
           },

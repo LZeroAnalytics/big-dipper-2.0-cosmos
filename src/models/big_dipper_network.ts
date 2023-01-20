@@ -8,6 +8,7 @@ class BigDipperNetwork {
   public logo: string;
   public name: string;
   public mainnet: Link[];
+  public testnet: Link[];
   public devnet: Link[];
   public retired: Link[];
   public other: Link[];
@@ -16,6 +17,7 @@ class BigDipperNetwork {
     this.name = payload.name;
     this.logo = payload.logo;
     this.mainnet = payload.mainnet;
+    this.testnet = payload.testnet;
     this.devnet = payload.devnet;
     this.retired = payload.retired;
     this.other = payload.other;
@@ -30,6 +32,7 @@ class BigDipperNetwork {
       });
     });
     const mainnet = [];
+    const testnet = [];
     const devnet = [];
     const retired = [];
     const other = [];
@@ -38,6 +41,8 @@ class BigDipperNetwork {
       // main
       if (x.name.toLowerCase().includes('mainnet')) {
         mainnet.push((x));
+      } else if (x.name.toLowerCase().includes('testnet')) {
+        testnet.push((x));
       } else if (x.name.toLowerCase().includes('devnet')) {
         devnet.push((x));
       } else if (x.name.toLowerCase().includes('retired')) {

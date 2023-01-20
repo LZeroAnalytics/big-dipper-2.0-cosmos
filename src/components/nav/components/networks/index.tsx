@@ -38,6 +38,15 @@ const Networks:React.FC<{
                 chainId={network.chainId}
               />
             ))}
+            {x.testnet.map((network) => (
+              <SingleNetwork
+                className="testnet"
+                key={network.chainId}
+                url={network.url}
+                name={network.name}
+                chainId={network.chainId}
+              />
+            ))}
             {x.retired.map((network) => (
               <SingleNetwork
                 className="retired"
