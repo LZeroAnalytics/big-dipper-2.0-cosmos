@@ -402,7 +402,12 @@ const getDataByType = (type: string) => {
       tagTheme: 'four',
       tagDisplay: 'txUnblockUserLabel',
     },
-
+    '/coreum.asset.ft.v1.MsgIssue': {
+      model: MODELS.MsgIssue,
+      content: COMPONENTS.Issue,
+      tagTheme: 'one',
+      tagDisplay: 'msgIssueLabel',
+    },
   };
 
   if (defaultTypeToModel[type]) return defaultTypeToModel[type];
