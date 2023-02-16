@@ -21,6 +21,7 @@ const DataBlocks: FC<ComponentDefault> = ({ className }) => {
       value: `${numeral(state.blockTime).format('0.00')} s`,
       className: classes.blockTime,
     },
+    // Comment out if not needed
     {
       key: t('price'),
       value: state.price !== null ? `$${numeral(state.price).format('0.000')}` : 'N/A',
