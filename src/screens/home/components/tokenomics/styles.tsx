@@ -8,15 +8,18 @@ export const useStyles = () => {
       return ({
         root: {
           height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
+          display: 'grid',
+          gridTemplateRows: 'auto 1fr auto',
+          // justifyContent: 'center',
+          // flexDirection: 'column',
         },
         label: {
           marginBottom: theme.spacing(2),
         },
         data: {
           display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
           '& .data__item': {
             width: '50%',
             whiteSpace: 'pre-wrap',
@@ -26,6 +29,9 @@ export const useStyles = () => {
             '& .MuiTypography-caption': {
               color: theme.palette.custom.fonts.fontThree,
             },
+          },
+          '& .data__item:last-child': {
+            textAlign: 'right',
           },
         },
         legends: {
@@ -61,11 +67,11 @@ export const useStyles = () => {
           },
         },
         content: {
-          flex: 1,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-around',
           flexDirection: 'column',
+          height: '100%',
         },
       });
     },

@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout } from '@components';
 import { useStyles } from './styles';
 import {
+  MainInfo,
   DataBlocks,
   Consensus,
   Tokenomics,
@@ -15,12 +16,15 @@ const Home = () => {
 
   return (
     <Layout className={classes.root}>
+      <MainInfo className={classes.mainInfo} />
       <DataBlocks className={classes.dataBlocks} />
       <Hero className={classes.hero} />
       <Tokenomics className={classes.tokenomics} />
       <Consensus className={classes.consensus} />
-      <Blocks className={classes.blocks} />
-      <Transactions className={classes.transactions} />
+      <div className={classes.bottom}>
+        <Blocks className="blocks" />
+        <Transactions className="transactions" />
+      </div>
     </Layout>
   );
 };

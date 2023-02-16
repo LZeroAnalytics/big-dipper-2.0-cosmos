@@ -1,24 +1,24 @@
 {
-  "title": "Cosmos Block Explorer",
-  "network": "theta-testnet-001",
-  "icon": "/images/icon.svg",
+  "title": "Coreum Testnet Block Explorer",
+  "network": "coreum-testnet",
+  "icon": "https://raw.githubusercontent.com/forbole/big-dipper-assets/master/desmos/icon.svg?sanitize=true",
   "logo": {
     "default": "/images/logo.svg"
   },
   "prefix": {
-    "consensus": "cosmosvalcons",
-    "validator": "cosmosvaloper",
-    "account": "cosmos"
+    "consensus": "testcorevalcons",
+    "validator": "testcorevaloper",
+    "account": "testcore"
   },
   "genesis": {
     "time": "2021-07-13T08:00:00",
     "height": 1
   },
-  "primaryTokenUnit": "uatom",
-  "votingPowerTokenUnit": "uatom",
+  "primaryTokenUnit": "utestcore",
+  "votingPowerTokenUnit": "utestcore",
   "tokenUnits": {
-    "uatom": {
-      "display": "atom",
+    "utestcore": {
+      "display": "testcore",
       "exponent": 6
     }
   },

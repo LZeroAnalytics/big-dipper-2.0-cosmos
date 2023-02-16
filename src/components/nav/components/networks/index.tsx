@@ -29,6 +29,15 @@ const Networks:React.FC<{
                 chainId={network.chainId}
               />
             ))}
+            {x.devnet.map((network) => (
+              <SingleNetwork
+                className="devnet"
+                key={network.chainId}
+                url={network.url}
+                name={network.name}
+                chainId={network.chainId}
+              />
+            ))}
             {x.testnet.map((network) => (
               <SingleNetwork
                 className="testnet"

@@ -21,7 +21,7 @@ export const common = {
   mixins: {
     toolbar: {
       '@media (min-width: 1280px)': {
-        height: '160px',
+        height: '80px',
         overflow: 'hidden',
       },
     },
@@ -46,21 +46,24 @@ export const common = {
   },
   props: {
     MuiSvgIcon: {
-      htmlColor: '#999999', // same as custom /general /icons
+      htmlColor: '#868991', // same as custom /general /icons
     },
     MuiButton: {
       disableElevation: true,
     },
   },
   typography: {
-    fontFamily: '"Hind Madurai", sans-serif',
+    fontFamily: '"Noto Sans", sans-serif',
     h1: {
       fontSize: '2rem',
       letterSpacing: 0.25,
+      fontWeight: 600,
+      marginBottom: 12,
     },
     h2: {
       fontSize: '1.5rem',
       letterSpacing: 0,
+      fontWeight: 600,
     },
     h3: {
       fontSize: '1.25rem',
@@ -102,7 +105,7 @@ export const common = {
   palette: {
     custom: {
       general: {
-        icon: '#999999',
+        icon: '#868991',
       },
       tags: {
         zero: '#E8E8E8',

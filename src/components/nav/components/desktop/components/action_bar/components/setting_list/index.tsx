@@ -1,6 +1,5 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import classnames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import SettingIcon from '@assets/icon-setting.svg';
 import { generalConfig } from '@configs';
@@ -14,11 +13,19 @@ import {
   Button,
   IconButton,
   Select,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
 } from '@material-ui/core';
-import { Close as CloseIcon } from '@material-ui/icons';
 import {
-  THEME_LIST, DATE_LIST, TX_LIST,
+  Close as CloseIcon,
+  Brightness2 as Dark,
+  Brightness7 as Light,
+} from '@material-ui/icons';
+import {
+  readTx, TX_LIST,
 } from '@recoil/settings';
+import { useRecoilValue } from 'recoil';
 import { useSettingList } from './hooks';
 import { useStyles } from './styles';
 
@@ -27,6 +34,7 @@ const Settings: React.FC<{
 }> = (props) => {
   const classes = useStyles();
   const router = useRouter();
+  const txListFormat = useRecoilValue(readTx);
   const {
     t, lang,
   } = useTranslation('common');
@@ -41,13 +49,14 @@ const Settings: React.FC<{
 
   return (
     <div>
-      <div
-        onClick={handleOpen}
-        role="button"
-        className={classnames(props.className, classes.icon)}
-      >
-        <SettingIcon />
-      </div>
+      <ListItem button className={props.className} onClick={handleOpen}>
+        <ListItemIcon>
+          <div role="button" className={classes.icon}>
+            <SettingIcon />
+          </div>
+        </ListItemIcon>
+        <ListItemText primary={t('settings')} />
+      </ListItem>
       <Dialog
         maxWidth="md"
         onClose={handleCancel}
@@ -56,46 +65,36 @@ const Settings: React.FC<{
       >
         <DialogTitle disableTypography className={classes.header}>
           <div className={classes.title}>
-            <Typography variant="h2">
-              {t('settings')}
-            </Typography>
-            <Typography variant="body2" className={classes.version}>
-              (
-              {generalConfig.version}
-              )
-            </Typography>
+            <Typography variant="h2">{t('settings')}</Typography>
           </div>
-          <IconButton
-            aria-label="close"
-            onClick={handleCancel}
-          >
+          <IconButton aria-label="close" onClick={handleCancel}>
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogContent dividers>
+        <DialogContent>
           <form onSubmit={handleFormSubmit}>
             <div className={classes.formItem}>
-              <Typography className="form-item--label">
-                {t('theme')}
-              </Typography>
-              <Select
-                variant="outlined"
-                value={state.theme}
-                onChange={(e) => handleChange('theme', e?.target?.value)}
-                MenuProps={{ MenuListProps: {
-                  disablePadding: true,
-                } }}
-              >
-                {THEME_LIST
-                  .map((l) => (
-                    <MenuItem
-                      key={l}
-                      value={l}
-                    >
-                      {t(l)}
-                    </MenuItem>
-                  ))}
-              </Select>
+              <Typography className="form-item--label">{t('theme')}</Typography>
+              <div className="theme_container">
+                <div
+                  className={`theme_item ${
+                    state.theme === 'dark' ? 'active' : ''
+                  }`}
+                  role="button"
+                  onClick={() => handleChange('theme', 'dark')}
+                >
+                  <Dark htmlColor={state.theme === 'dark' ? 'white' : undefined} />
+                </div>
+                <div
+                  className={`theme_item ${
+                    state.theme === 'light' ? 'active' : ''
+                  }`}
+                  role="button"
+                  onClick={() => handleChange('theme', 'light')}
+                >
+                  <Light htmlColor={state.theme === 'light' ? 'white' : undefined} />
+                </div>
+              </div>
             </div>
 
             <div className={classes.formItem}>
@@ -106,43 +105,17 @@ const Settings: React.FC<{
                 variant="outlined"
                 value={state.lang}
                 onChange={(e) => handleChange('lang', e?.target?.value)}
-                MenuProps={{ MenuListProps: {
-                  disablePadding: true,
-                } }}
+                MenuProps={{
+                  MenuListProps: {
+                    disablePadding: true,
+                  },
+                }}
               >
-                {router.locales
-                  .map((l) => (
-                    <MenuItem
-                      key={l}
-                      value={l}
-                    >
-                      {t(l)}
-                    </MenuItem>
-                  ))}
-              </Select>
-            </div>
-
-            <div className={classes.formItem}>
-              <Typography className="form-item--label">
-                {t('dateFormat')}
-              </Typography>
-              <Select
-                variant="outlined"
-                value={state.dateFormat}
-                onChange={(e) => handleChange('dateFormat', e?.target?.value)}
-                MenuProps={{ MenuListProps: {
-                  disablePadding: true,
-                } }}
-              >
-                {DATE_LIST
-                  .map((l) => (
-                    <MenuItem
-                      key={l}
-                      value={l}
-                    >
-                      {t(l)}
-                    </MenuItem>
-                  ))}
+                {router?.locales?.map((l) => (
+                  <MenuItem key={l} value={l}>
+                    {t(l)}
+                  </MenuItem>
+                ))}
               </Select>
             </div>
 
@@ -152,30 +125,34 @@ const Settings: React.FC<{
               </Typography>
               <Select
                 variant="outlined"
-                value={state.txListFormat}
+                value={txListFormat}
                 onChange={(e) => handleChange('txListFormat', e?.target?.value)}
-                MenuProps={{ MenuListProps: {
-                  disablePadding: true,
-                } }}
+                MenuProps={{
+                  MenuListProps: {
+                    disablePadding: true,
+                  },
+                }}
               >
-                {TX_LIST
-                  .map((l) => (
-                    <MenuItem
-                      key={l}
-                      value={l}
-                    >
-                      {t(l)}
-                    </MenuItem>
-                  ))}
+                {TX_LIST.map((l) => (
+                  <MenuItem key={l} value={l}>
+                    {t(l)}
+                  </MenuItem>
+                ))}
               </Select>
             </div>
           </form>
         </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleFormSubmit}
-            color="primary"
-          >
+        <div />
+        <DialogActions
+          style={{
+            justifyContent: 'space-between', paddingLeft: '24px',
+          }}
+        >
+          <Typography variant="body2" className={classes.version}>
+            {t('version')}
+            {generalConfig.version}
+          </Typography>
+          <Button onClick={handleFormSubmit} color="primary">
             Save
           </Button>
         </DialogActions>

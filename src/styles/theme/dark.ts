@@ -1,6 +1,6 @@
-const backgroundDefault = '#020202';
-const surfaceOne = '#191B26';
-const surfaceTwo = '#282A36';
+const backgroundDefault = '#17191E';
+const surfaceOne = '#1B1D23';
+const surfaceTwo = '#19191D';
 const fontOne = '#E6E6E6';
 const fontTwo = '#C4C4C4';
 const fontThree = '#818181';
@@ -10,15 +10,16 @@ export const darkThemeOverride = {
   mixins: {
     tableCell: {
       background: surfaceOne, // surface one
-      '&.odd': {
-        background: surfaceTwo, // surface two
-      },
+      borderBottom: '1px solid #23272E',
+      // '&.odd': {
+      //   background: surfaceTwo, // surface two
+      // },
     },
   },
   palette: {
     type: 'dark',
     primary: {
-      main: '#6B9EFF',
+      main: '#25D695',
       contrastText: '#fff',
     },
     background: {
@@ -27,21 +28,29 @@ export const darkThemeOverride = {
     },
     divider: '#363A51',
     text: {
-      primary: '#E6E6E6',
-      secondary: '#C4C4C4',
+      primary: '#F3F3F3',
+      secondary: '#868991',
     },
     custom: {
       general: {
         background: backgroundDefault, // same as background default
         surfaceOne, // same as background paper
         surfaceTwo, // striped tables
+        single_block:
+          'linear-gradient(110.16deg, rgba(37, 214, 149, 0.15) 0%, rgba(37, 214, 149, 0.05) 100%)',
+        nav_drawer: '#2B3138',
+        modal_header: '#1D222C',
+        search: '#2B3138',
       },
       fonts: {
         fontOne,
         fontTwo,
         fontThree,
         fontFour: '#999999',
-        highlight: '#6AA6FF',
+        highlight: '#F1C34E',
+        settings_label: '#868991',
+        table_headers: '#6C6F78',
+        data_blocks: '#25D695',
       },
       primaryData: {
         one: '#AE73F8',
@@ -50,9 +59,9 @@ export const darkThemeOverride = {
         four: '#E3AB55',
       },
       tokenomics: {
-        one: '#5E94FF',
+        one: '#004DC2',
         two: '#E3AB55',
-        three: '#5ACF78',
+        three: '#25D695',
       },
       results: {
         pass: '#1EC490',
@@ -79,11 +88,12 @@ export const darkThemeOverride = {
       root: {
         '& .MuiTableRow-root': {
           '&:nth-child(odd)': {
-            backgroundColor: surfaceTwo, // surface two
+            // backgroundColor: surfaceTwo, // surface two
           },
         },
         '& .MuiTableCell-root': {
           color: fontTwo, // font two
+          borderBottom: '1px solid #23272E',
         },
       },
     },

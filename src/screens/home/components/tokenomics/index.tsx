@@ -25,11 +25,19 @@ const Tokenomics:React.FC<{
   } = useStyles();
   const { state } = useTokenomics();
 
+  // const state = {
+  //   bonded: 30,
+  //   unbonded: 20,
+  //   unbonding: 50,
+  //   total: 100,
+  //   // denom: 'asdf';
+  // };
+
   const data = [
     {
       legendKey: 'bonded',
       percentKey: 'bondedPercent',
-      value: numeral(state.bonded).format('0,0'),
+      value: numeral(state.bonded).format('0a'),
       rawValue: state.bonded,
       percent: `${numeral((state.bonded * 100) / state.total).format('0.00')}%`,
       fill: theme.palette.custom.tokenomics.one,
@@ -37,14 +45,14 @@ const Tokenomics:React.FC<{
     {
       legendKey: 'unbonded',
       percentKey: 'unbondedPercent',
-      value: numeral(state.unbonded).format('0,0'),
+      value: numeral(state.unbonded).format('0a'),
       rawValue: state.unbonded,
       percent: `${numeral((state.unbonded * 100) / state.total).format('0.00')}%`,
       fill: theme.palette.custom.tokenomics.two,
     },
     {
       legendKey: 'unbonding',
-      value: numeral(state.unbonding).format('0,0'),
+      value: numeral(state.unbonding).format('0a'),
       rawValue: state.unbonding,
       percent: `${numeral((state.unbonding * 100) / state.total).format('0.00')}%`,
       fill: theme.palette.custom.tokenomics.three,
@@ -56,27 +64,11 @@ const Tokenomics:React.FC<{
       <Typography variant="h2" className={classes.label}>
         {t('tokenomics')}
       </Typography>
-      <div className={classes.data}>
-        {data.slice(0, 2).map((x) => (
-          <div className="data__item" key={x.percentKey}>
-            <Typography variant="h4">
-              {x.value}
-              {' '}
-              {chainConfig.tokenUnits[state.denom]?.display?.toUpperCase()}
-            </Typography>
-            <Typography variant="caption">
-              {t(x.percentKey, {
-                percent: x.percent,
-              })}
-            </Typography>
-          </div>
-        ))}
-      </div>
       <div className={classes.content}>
 
         <PieChart
           width={200}
-          height={100}
+          height={200}
           cy={100}
         >
           <Pie
@@ -84,8 +76,8 @@ const Tokenomics:React.FC<{
             // cornerRadius={40}
             cy={90}
             data={data}
-            startAngle={180}
-            endAngle={0}
+            startAngle={0}
+            endAngle={360}
             // innerRadius={79}
             outerRadius={90}
             fill="#8884d8"
@@ -125,7 +117,7 @@ const Tokenomics:React.FC<{
           />
         </PieChart>
 
-        <div className={classes.legends}>
+        {/* <div className={classes.legends}>
           {
             data.map((x) => {
               return (
@@ -137,7 +129,23 @@ const Tokenomics:React.FC<{
               );
             })
           }
-        </div>
+        </div> */}
+      </div>
+      <div className={classes.data}>
+        {data.slice(0, 2).map((x) => (
+          <div className="data__item" key={x.percentKey}>
+            <Typography variant="h4" style={{ color: x.fill }}>
+              {x.value}
+              {' '}
+              {chainConfig.tokenUnits[state.denom]?.display?.toUpperCase()}
+            </Typography>
+            <Typography variant="caption">
+              {t(x.percentKey, {
+                percent: x.percent,
+              })}
+            </Typography>
+          </div>
+        ))}
       </div>
     </Box>
   );

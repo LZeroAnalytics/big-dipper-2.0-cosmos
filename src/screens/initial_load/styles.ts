@@ -21,9 +21,9 @@ export const useStyles = () => {
         },
         logo: {
           width: '100%',
-          [theme.breakpoints.up('sm')]: {
-            width: '300px',
-          },
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         },
         divider: {
           margin: theme.spacing(2, 0),

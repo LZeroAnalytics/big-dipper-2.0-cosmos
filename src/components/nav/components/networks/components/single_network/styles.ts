@@ -28,6 +28,9 @@ export const useStyles = () => {
           '&.retired': {
             background: theme.palette.custom.primaryData.four,
           },
+          '&.devnet': {
+            background: theme.palette.custom.primaryData.three,
+          },
           '&.testnet': {
             background: theme.palette.custom.primaryData.three,
           },

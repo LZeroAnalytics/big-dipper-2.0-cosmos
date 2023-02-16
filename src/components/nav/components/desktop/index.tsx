@@ -7,21 +7,21 @@ import {
 } from '@material-ui/core';
 import { useRecoilValue } from 'recoil';
 import { readTheme } from '@recoil/settings/selectors';
-import BigDipperLogoWhite from '@assets/big-dipper-white.svg';
-import BigDipperLogoRed from '@assets/big-dipper-red.svg';
+import Logo from '@assets/logo.svg';
+import LogoTextDark from '@assets/logo-text-dark.svg';
+import DevnetBadge from '@assets/devnet-badge.svg';
 import { useStyles } from './styles';
 import { useDesktop } from './hooks';
 import {
   MenuItems,
-  TitleBar,
+  // TitleBar,
 } from '..';
 import { ActionBar } from './components';
 
 const Desktop: React.FC<{
   className?: string;
-  title: string;
 }> = ({
-  className, title,
+  className,
 }) => {
   const classes = useStyles();
   const theme = useRecoilValue(readTheme);
@@ -29,7 +29,6 @@ const Desktop: React.FC<{
     isMenu,
     toggleMenu,
     turnOffAll,
-    toggleNetwork,
     isNetwork,
   } = useDesktop();
   return (
@@ -43,11 +42,8 @@ const Desktop: React.FC<{
             open: isMenu,
           })}
         >
-          <ActionBar
-            toggleNetwork={toggleNetwork}
-            isNetwork={isNetwork}
-          />
-          <TitleBar title={title} />
+          <ActionBar isNetwork={isNetwork} />
+          {/* <TitleBar title={title} /> */}
         </AppBar>
         <Drawer
           variant="permanent"
@@ -66,19 +62,37 @@ const Desktop: React.FC<{
             }),
           }}
         >
-          {theme === 'light' ? (
-            <BigDipperLogoRed
-              className={classes.logo}
-              onClick={toggleMenu}
-              role="button"
-            />
-          ) : (
-            <BigDipperLogoWhite
-              className={classes.logo}
-              onClick={toggleMenu}
-              role="button"
-            />
-          )}
+          <div className={classes.logo} role="button" onClick={toggleMenu}>
+            {/* FIXME get light and dark theme assets */}
+            {theme === 'light' ? <Logo /> : <Logo />}
+            {isMenu && theme === 'light' ? (
+              <div className={classes.logo_text}>
+                <LogoTextDark
+                  style={{
+                    opacity: isMenu ? 1 : 0, transition: '.3s ease',
+                  }}
+                />
+                <DevnetBadge
+                  style={{
+                    opacity: isMenu ? 1 : 0, transition: '.3s ease',
+                  }}
+                />
+              </div>
+            ) : (
+              <div className={classes.logo_text}>
+                <LogoTextDark
+                  style={{
+                    opacity: isMenu ? 1 : 0, transition: '.3s ease',
+                  }}
+                />
+                <DevnetBadge
+                  style={{
+                    opacity: isMenu ? 1 : 0, transition: '.3s ease',
+                  }}
+                />
+              </div>
+            )}
+          </div>
           <MenuItems />
         </Drawer>
       </div>

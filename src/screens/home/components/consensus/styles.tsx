@@ -9,17 +9,19 @@ export const useStyles = () => {
       return ({
         root: {
           height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
+          display: 'grid',
+          gridTemplateRows: 'auto 1fr auto',
+          // flexDirection: 'column',
           overflow: 'auto',
+          minWidth: 0,
         },
         content: {
-          flex: 1,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-around',
-          flexDirection: 'column',
+          // flex: 1,
+          // display: 'flex',
+          // alignItems: 'center',
+          // justifyContent: 'space-around',
+          // flexDirection: 'column',
+          placeSelf: 'start center',
         },
         label: {
           marginBottom: theme.spacing(2),
@@ -43,6 +45,7 @@ export const useStyles = () => {
         info: {
           display: 'flex',
           flexDirection: 'column',
+          overflow: 'hidden',
           width: '100%',
           color: theme.palette.custom.fonts.fontTwo,
           '& > *': {
@@ -50,6 +53,14 @@ export const useStyles = () => {
             alignItems: 'center',
             '& > *': {
               width: '50%',
+            },
+          },
+
+          '& .values': {
+            textOverflow: 'ellipses',
+
+            '& .height': {
+              color: theme.palette.custom.fonts.fontOne,
             },
           },
           '& .label': {

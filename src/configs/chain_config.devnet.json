@@ -1,0 +1,28 @@
+{
+  "title": "Coreum Devnet Block Explorer",
+  "network": "coreum-devnet",
+  "icon": "https://raw.githubusercontent.com/forbole/big-dipper-assets/master/desmos/icon.svg?sanitize=true",
+  "logo": {
+    "default": "/images/logo.svg"
+  },
+  "prefix": {
+    "consensus": "devcorevalcons",
+    "validator": "devcorevaloper",
+    "account": "devcore"
+  },
+  "genesis": {
+    "time": "2021-07-13T08:00:00",
+    "height": 1
+  },
+  "primaryTokenUnit": "udevcore",
+  "votingPowerTokenUnit": "udevcore",
+  "tokenUnits": {
+    "udevcore": {
+      "display": "devcore",
+      "exponent": 6
+    }
+  },
+  "extra": {
+    "profile": true
+  }
+}
