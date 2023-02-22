@@ -12,11 +12,11 @@ import { FC } from 'react';
 type ActionBarProps = {
   isNetwork: boolean;
   className?: string;
-  toggleNetwork: () => void;
+  // toggleNetwork?: () => void;
 };
 
-const ActionBar: FC<ActionBarProps> = ({ toggleNetwork, className, isNetwork }) => {
-  const { ref: heightRef, height } = useGetComponentDimension();
+const ActionBar: FC<ActionBarProps> = ({ className, isNetwork }) => {
+  const { ref: heightRef } = useGetComponentDimension();
   const { classes, cx } = useStyles();
   return (
     <div className={cx(classes.root, className)} ref={heightRef}>

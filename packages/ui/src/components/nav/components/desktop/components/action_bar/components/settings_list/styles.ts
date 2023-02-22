@@ -34,6 +34,7 @@ const useStyles = makeStyles()((theme) => ({
     '& .MuiButtonBase-root': {
       padding: 0,
     },
+    background: theme.palette.custom.general.modal_header,
   },
   title: {
     display: 'flex',
@@ -45,17 +46,42 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   formItem: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 150px',
+    placeItems: 'center start',
     marginBottom: theme.spacing(2),
     '& .MuiOutlinedInput-root': {
       width: '100%',
+      padding: 0,
     },
     '& .form-item--label': {
-      marginBottom: theme.spacing(1),
+      color: theme.palette.custom.fonts.settings_label,
+    },
+    '& .theme-container': {
+      display: 'grid',
+      gridAutoFlow: 'column',
+      background: theme.palette.background.default,
+      borderRadius: '10%',
+      placeSelf: 'end',
+      '& .theme_item': {
+        padding: 12,
+        borderRadius: '10%',
+        transition: 'background .2s',
+        display: 'grid',
+        placeItems: 'center',
+        color: theme.palette.text.primary,
+        '&.active': {
+          background: theme.palette.primary.main,
+        },
+      },
     },
   },
   version: {
     color: theme.palette.custom.fonts.fontFour,
-    marginLeft: theme.spacing(1),
+    display: 'flex',
+    alignItems: 'start',
+    justifyContent: 'center',
+    // marginLeft: theme.spacing(1),
   },
 }));
 

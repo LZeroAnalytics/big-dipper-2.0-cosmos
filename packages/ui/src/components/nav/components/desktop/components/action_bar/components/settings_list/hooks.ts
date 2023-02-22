@@ -72,6 +72,11 @@ export const useSettingList = ({ lang }: { lang: string }) => {
     setTimeFormat((prevTheme: TimeFormat) => (prevTheme === '12-hour' ? '24-hour' : '12-hour'));
   };
 
+  // Custom method that allows for changing state from tx page
+  const updateTxFormat = () => {
+    setTx(tx === 'compact' ? 'detailed' : 'compact');
+  };
+
   const handleFormSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
@@ -98,6 +103,9 @@ export const useSettingList = ({ lang }: { lang: string }) => {
     if (state.txListFormat !== tx) {
       setTx(state.txListFormat);
     }
+    // if (state.txListFormat !== tx) {
+    //   setTx(state.txListFormat);
+    // }
 
     handleClose();
   };
@@ -112,5 +120,6 @@ export const useSettingList = ({ lang }: { lang: string }) => {
     time,
     handleFormSubmit,
     handleCancel,
+    updateTxFormat,
   };
 };
