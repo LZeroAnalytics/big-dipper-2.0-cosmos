@@ -8,31 +8,32 @@
   "previewImage": "https://s3.bigdipper.live/desmos.png",
   "themes": {
     "default": "light",
-    "themeList": ["dark", "light"],
+    "themeList": [
+      "dark",
+      "light",
+      "deuteranopia",
+      "tritanopia"
+    ],
     "dark": {
       "primary": {
-        "main": "#25D695",
+        "main": "#FF835B",
         "contrastText": "#FFFFFF"
       },
       "background": {
-        "default": "#17191E",
+        "default": "#000000",
         "paper": "#131316"
       },
       "divider": "#282828",
       "text": {
-        "primary": "#f3f3f3",
-        "secondary": "#868991"
+        "primary": "#E6E6E6",
+        "secondary": "#C4C4C4"
       },
       "custom": {
         "general": {
-          "background": "#17191E",
+          "background": "#000000",
           "surfaceOne": "#131316",
           "surfaceTwo": "#212123",
-          "icon": "#999999",
-          "single_block": "linear-gradient(110.16deg, rgba(94,103,115, 0.35) 0%, rgba(94,103,115,0.5) 100%)",
-          "nav_drawer": "#2B3138",
-          "modal_header": "#1D222C",
-          "search": "#2B3138"
+          "icon": "#999999"
         },
         "fonts": {
           "fontOne": "#E6E6E6",
@@ -40,10 +41,7 @@
           "fontThree": "#818181",
           "fontFour": "#999999",
           "fontFive": "#FFFFFF",
-          "highlight": "#F1C34E",
-          "settings_label": "#868991",
-          "table_headers": "#6C6F78",
-          "data_blocks": "#25D695"
+          "highlight": "#4092CD"
         },
         "primaryData": {
           "one": "#F87255",
@@ -56,9 +54,9 @@
           "fail": "#FD3B4C"
         },
         "tokenomics": {
-          "one": "#004DC2",
-          "two": "#E3AB55",
-          "three": "#25D695"
+          "one": "#43A1BE",
+          "two": "#E3BB55",
+          "three": "#20D292"
         },
         "condition": {
           "zero": "#E6E6E6",
@@ -113,7 +111,7 @@
     },
     "light": {
       "primary": {
-        "main": "#25D695",
+        "main": "#FF835B",
         "contrastText": "#FFFFFF"
       },
       "background": {
@@ -137,7 +135,6 @@
           "fontTwo": "#414141",
           "fontThree": "#777777",
           "fontFour": "#999999",
-          "data_blocks": "#FFF",
           "fontFive": "#FFFFFF",
           "highlight": "#4092CD"
         },
@@ -218,9 +215,9 @@
         "height": 1
       },
       "prefix": {
-        "consensus": "[consensus]",
-        "validator": "[validator]",
-        "account": "[account]"
+        "consensus": "desmosvalcons",
+        "validator": "desmosvaloper",
+        "account": "desmos"
       },
       "primaryTokenUnit": "udsm",
       "votingPowerTokenUnit": "udsm",
@@ -252,11 +249,11 @@
         "validator": "desmosvaloper",
         "account": "desmos"
       },
-      "primaryTokenUnit": "core",
-      "votingPowerTokenUnit": "core",
+      "primaryTokenUnit": "udaric",
+      "votingPowerTokenUnit": "udaric",
       "tokenUnits": {
-        "core": {
-          "display": "core",
+        "udaric": {
+          "display": "daric",
           "exponent": 6
         }
       },
