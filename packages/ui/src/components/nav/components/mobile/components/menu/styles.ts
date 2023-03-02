@@ -9,28 +9,30 @@ const useStyles = makeStyles()((theme) => ({
   },
   menu: {
     flex: '1',
+    '& .searchbar': {
+      padding: theme.spacing(1),
+    },
   },
   footerActions: {
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    padding: '1rem',
+    width: '100%',
+    padding: theme.spacing(2),
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
   language: {
-    width: '50%',
     display: 'flex',
     alignItems: 'center',
-    paddingBottom: theme.spacing(2),
+    justifyContent: 'center',
     '& .MuiTypography-caption': {
       fontSize: theme.spacing(2),
       margin: theme.spacing(0, 1, 0, 3.8),
     },
   },
   theme: {
-    width: '50%',
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'center',
     '& svg': {
       width: theme.spacing(3),
       height: theme.spacing(3),
