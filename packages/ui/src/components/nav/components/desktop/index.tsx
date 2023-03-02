@@ -14,6 +14,8 @@ import ActionBar from '@/components/nav/components/desktop/components/action_bar
 import Logo from '@/assets/logo.svg';
 import LogoTextDark from '@/assets/logo-text-dark.svg';
 import DevnetBadge from '@/assets/devnet-badge.svg';
+import ArrowIcon from '@/assets/icon_nav.svg';
+import NetworkSelector from '../network_selector';
 
 type DesktopProps = {
   className?: string;
@@ -106,6 +108,7 @@ const Desktop: FC<DesktopProps> = ({ className }) => {
           )} */}
           <MenuItems />
         </Drawer>
+        <NetworkSelector isNavOpen={isMenu} />
       </div>
     </ClickAwayListener>
   );
