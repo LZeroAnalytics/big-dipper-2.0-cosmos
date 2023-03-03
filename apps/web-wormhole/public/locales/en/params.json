@@ -7,7 +7,7 @@
   "unbondingTime": "Unbonding Time",
   "maxEntries": "Max Entries",
   "historicalEntries": "Historical Entries",
-  "maxValidators": "Max Validators",
+  "maxValidators": "Max Guardians",
   "slashing": "Slashing",
   "downtimeJailDuration": "Downtime Jail Duration",
   "minSignedPerWindow": "Min Signed Per Window",
