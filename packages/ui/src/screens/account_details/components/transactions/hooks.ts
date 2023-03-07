@@ -9,12 +9,13 @@ import {
 import type { TransactionState } from '@/screens/account_details/components/transactions/types';
 import { convertMsgType } from '@/utils/convert_msg_type';
 
-const LIMIT = 50;
+const LIMIT = 100;
+const LIMITPlusOne = LIMIT + 1;
 
 const formatTransactions = (data: GetMessagesByAddressQuery): Transactions[] => {
   let formattedData = data.messagesByAddress;
-  if (data.messagesByAddress.length === 51) {
-    formattedData = data.messagesByAddress.slice(0, 51);
+  if (data.messagesByAddress.length === LIMITPlusOne) {
+    formattedData = data.messagesByAddress.slice(0, LIMITPlusOne);
   }
   return formattedData.map((x) => {
     const { transaction } = x;
@@ -83,9 +84,11 @@ export function useTransactions() {
     onCompleted: (data) => {
       const itemsLength = data.messagesByAddress.length;
       const newItems = R.uniq([...state.data, ...formatTransactions(data)]);
+      console.log(newItems, 'NEWNEWNEWNENWE');
+
       const stateChange: TransactionState = {
         data: newItems,
-        hasNextPage: itemsLength === 51,
+        hasNextPage: itemsLength === LIMITPlusOne,
         isNextPageLoading: false,
         offsetCount: state.offsetCount + LIMIT,
       };
@@ -100,14 +103,14 @@ export function useTransactions() {
     await fetchMore({
       variables: {
         offset: state.offsetCount,
-        limit: LIMIT + 1,
+        limit: LIMITPlusOne,
       },
     }).then(({ data }) => {
       const itemsLength = data.messagesByAddress.length;
       const newItems = R.uniq([...state.data, ...formatTransactions(data)]);
       const stateChange: TransactionState = {
         data: newItems,
-        hasNextPage: itemsLength === 51,
+        hasNextPage: itemsLength === LIMITPlusOne,
         isNextPageLoading: false,
         offsetCount: state.offsetCount + LIMIT,
       };
