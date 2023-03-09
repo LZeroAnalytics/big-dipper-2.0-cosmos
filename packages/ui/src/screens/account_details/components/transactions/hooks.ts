@@ -84,7 +84,6 @@ export function useTransactions() {
     onCompleted: (data) => {
       const itemsLength = data.messagesByAddress.length;
       const newItems = R.uniq([...state.data, ...formatTransactions(data)]);
-      console.log(newItems, 'NEWNEWNEWNENWE');
 
       const stateChange: TransactionState = {
         data: newItems,
