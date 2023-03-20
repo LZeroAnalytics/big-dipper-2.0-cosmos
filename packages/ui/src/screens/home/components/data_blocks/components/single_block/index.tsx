@@ -1,11 +1,12 @@
 import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 import useStyles from '@/screens/home/components/data_blocks/components/single_block/styles';
+import Spinner from '@/components/loadingSpinner';
 
 type SingleBlockProps = {
   className?: string;
   label: string;
-  value: string;
+  value: string | null;
   description?: string;
   Icon?: JSX.Element;
 };
@@ -19,15 +20,12 @@ const SingleBlock: FC<SingleBlockProps> = ({ className, label, value, descriptio
         {label}
       </Typography>
       <div className="content">
-        <Typography variant="h1">{value}</Typography>
-        <div className="flexContent">
-          {!!description && (
-            <Typography variant="caption" className="description">
-              {description}
-            </Typography>
-          )}
-          {!!Icon && Icon}
-        </div>
+        {value ? <Typography variant="h1">{value}</Typography> : <Spinner />}
+        {!!description && (
+          <Typography variant="caption" className="description">
+            {description}
+          </Typography>
+        )}
       </div>
     </div>
   );

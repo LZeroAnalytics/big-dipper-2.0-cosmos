@@ -13,7 +13,7 @@ const DataBlocks: FC<ComponentDefault> = ({ className }) => {
   const data = [
     {
       key: t('latestBlock'),
-      value: numeral(state.blockHeight).format('0,0'),
+      value: state.blockHeight ? numeral(state.blockHeight).format('0,0') : null,
       className: classes.blockHeight,
     },
     {
