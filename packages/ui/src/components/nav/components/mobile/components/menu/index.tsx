@@ -17,7 +17,6 @@ import ThemeToggle from '@/components/nav/components/theme_toggle';
 import Language from 'shared-utils/assets/icon-language.svg';
 import ThemeIcon from 'shared-utils/assets/icon-theme.svg';
 import SearchBar from '@/components/nav/components/search_bar';
-import NetworkSelector from '../../../network_selector';
 
 const Menu = (props: MenuProps) => {
   const router = useRouter();
