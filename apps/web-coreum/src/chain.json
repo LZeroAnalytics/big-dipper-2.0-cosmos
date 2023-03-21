@@ -101,6 +101,9 @@
           "eighteen": "#F0A479",
           "nineteen": "#D37763",
           "twenty": "#D9C788"
+        },
+        "tags_bg": {
+          "six": "#36383F"
         }
       }
     },
@@ -194,6 +197,9 @@
           "eighteen": "#F0A479",
           "nineteen": "#D37763",
           "twenty": "#D9C788"
+        },
+        "tags_bg": {
+          "six": "#F6F6F6"
         }
       }
     }
