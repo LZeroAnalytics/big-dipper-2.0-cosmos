@@ -92,8 +92,9 @@ const Tokenomics: FC<ComponentDefault> = ({ className }) => {
       <div className={classes.data}>
         {data.slice(0, 2).map((x) => (
           <div className="data__item" key={x.percentKey}>
-            <Typography variant="h4">
-              {x.value} {tokenUnits?.[state.denom]?.display?.toUpperCase()}
+            <Typography variant="h4" style={{ color: x.fill }}>
+              {/* Removed ".toUpperCase()" from the end of the line below per Reza's request */}
+              {x.value} {tokenUnits?.[state.denom]?.display}
             </Typography>
             <Typography variant="caption">
               {x.percentKey
