@@ -107,6 +107,10 @@ export const useSettingList = ({ lang }: { lang: string }) => {
     //   setTx(state.txListFormat);
     // }
 
+    if (state.txListFormat !== tx) {
+      setTx(state.txListFormat);
+    }
+
     handleClose();
   };
 
