@@ -16,8 +16,8 @@ const RecieverName: FC<{ address: string; coins: MsgCoin[] }> = (props) => {
   const parsedAmount = coins
     ?.map((x) => {
       const amount = formatToken(x.amount, x.denom);
-      //Removed ".toUpperCase()" from the end of the line below per Reza's request
-      return `${formatNumber(amount.value, amount.exponent)} ${amount.displayDenom}`;
+      //Kept the "toUpperCase()" in order to show the token symbol in uppercase
+      return `${formatNumber(amount.value, amount.exponent)} ${amount.displayDenom.toUpperCase()}`;
     })
     .reduce(
       (text, value, j, array) => text + (j < array.length - 1 ? ', ' : ` ${t('and')} `) + value
@@ -45,8 +45,8 @@ const Multisend: FC<{ message: MsgMultiSend }> = (props) => {
   const senderAmount = sender?.coins
     ?.map((x) => {
       const amount = formatToken(x.amount, x.denom);
-      //Removed ".toUpperCase()" from the end of the line below per Reza's request
-      return `${formatNumber(amount.value, amount.exponent)} ${amount.displayDenom}`;
+      //Kept the "toUpperCase()" in order to show the token symbol in uppercase
+      return `${formatNumber(amount.value, amount.exponent)} ${amount.displayDenom.toUpperCase()}`;
     })
     .reduce(
       (text, value, i, array) => text + (i < array.length - 1 ? ', ' : ` ${t('and')} `) + value
