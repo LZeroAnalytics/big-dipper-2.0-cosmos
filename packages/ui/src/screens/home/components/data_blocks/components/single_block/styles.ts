@@ -21,11 +21,9 @@ const useStyles = makeStyles()((theme) => ({
       justifyContent: 'space-between',
     },
     '& .description': {
-      display: 'none',
-      color: theme.palette.custom.fonts.fontFive,
-      [theme.breakpoints.up('md')]: {
-        display: 'block',
-      },
+      display: 'block',
+      color: theme.palette.primary.contrastText,
+      fontSize: '1rem',
     },
     '& .flexContent': {
       display: 'flex',
