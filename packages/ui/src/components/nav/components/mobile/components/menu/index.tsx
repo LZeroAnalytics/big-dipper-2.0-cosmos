@@ -90,7 +90,7 @@ const Menu = (props: MenuProps) => {
         {/* ========================= */}
         {/* Footer Actions */}
         {/* ========================= */}
-        <div className={classes.footerActions}>
+        {/* <div className={classes.footerActions}>
           <div
             className={classes.language}
             role="button"
@@ -104,8 +104,19 @@ const Menu = (props: MenuProps) => {
             </Typography>
             <ExpandMoreOutlinedIcon fontSize="small" />
           </div>
-          <ThemeToggle />
-        </div>
+          <div
+            className={classes.theme}
+            role="button"
+            onClick={themeOptions.toggleDrawer}
+            tabIndex={0}
+            aria-label={t(themeOptions.theme) ?? undefined}
+          >
+            <span role="button">
+              <ThemeIcon />
+            </span>
+            <Typography variant="caption">{t(themeOptions.theme)}</Typography>
+          </div>
+        </div> */}
       </div>
     </>
   );
