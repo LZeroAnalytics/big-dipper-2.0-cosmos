@@ -489,6 +489,12 @@ const customTypeToModel = {
     tagTheme: 'six',
     tagDisplay: 'msgNftUnfreezeLabel',
   },
+  '/coreum.nft.v1beta1.MsgSend': {
+    model: MODELS.MsgNftSend,
+    content: COMPONENTS.NftSend,
+    tagTheme: 'six',
+    tagDisplay: 'msgNftSendLabel',
+  },
 };
 type CustomTypeToModel = typeof customTypeToModel;
 

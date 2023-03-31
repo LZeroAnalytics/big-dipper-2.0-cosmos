@@ -73,3 +73,4 @@ export { default as NftMint } from '@/components/msg/asset/nft_mint';
 export { default as NftFreeze } from '@/components/msg/asset/nft_freeze';
 export { default as NftUnfreeze } from '@/components/msg/asset/nft_unfreeze';
 export { default as NftIssueClass } from '@/components/msg/asset/nft_issue_class';
+export { default as NftSend } from '@/components/msg/nft/send';

@@ -83,3 +83,4 @@ export { default as MsgNftMint } from '@/models/msg/asset/msg_nft_mint';
 export { default as MsgNftFreeze } from '@/models/msg/asset/msg_nft_freeze';
 export { default as MsgNftUnfreeze } from '@/models/msg/asset/msg_nft_unfreeze';
 export { default as MsgNftIssueClass } from '@/models/msg/asset/msg_nft_issue_class';
+export { default as MsgNftSend } from '@/models/msg/nft/msg_send';
