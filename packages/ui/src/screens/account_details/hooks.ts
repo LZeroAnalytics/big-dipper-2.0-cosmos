@@ -277,7 +277,7 @@ export const useAccountDetails = () => {
     }));
   }, [handleSetState, address, withdrawalAddress.withdrawalAddress?.address]);
 
-  if (loadingDesmosProfile) state.loading = true;
+  // if (loadingDesmosProfile) state.loading = true;
 
   return { state };
 };
