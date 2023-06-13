@@ -46,7 +46,7 @@ const DepositProposal: FC<{ message: MsgDeposit }> = (props) => {
         ]}
         values={{
           amount: parsedAmount,
-          proposal: message.proposalId,
+          proposal: `#${message.proposalId}`,
         }}
       />
     </Typography>
