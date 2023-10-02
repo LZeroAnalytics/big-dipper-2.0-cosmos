@@ -11,7 +11,7 @@ import useStyles from './styles';
 
 const PriceChart: React.FC = () => {
   const { classes } = useStyles();
-  const chartRef = useRef<IChartApi>(null);
+  const chartRef = useRef<IChartApi>();
   const theme = useRecoilValue(readTheme);
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [isError, setIsError] = useState<Boolean>(false);
@@ -77,7 +77,8 @@ const PriceChart: React.FC = () => {
         handleScroll: false,
         handleScale: false,
       };
-      chartRef.current = createChart(document.getElementById('price-chart'), chartOptions);
+      const chartPrice = document.getElementById('price-chart')!;
+      chartRef.current = createChart(chartPrice, chartOptions);
       const baselineSeries = chartRef.current.addBaselineSeries({
         baseValue: {
           type: 'price',

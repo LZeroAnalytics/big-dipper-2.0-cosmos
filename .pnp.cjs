@@ -6149,6 +6149,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@next/font", [\
+        ["npm:13.5.3", {\
+          "packageLocation": "./.yarn/cache/@next-font-npm-13.5.3-3ae7564d72-cadd3f3d0d.zip/node_modules/@next/font/",\
+          "packageDependencies": [\
+            ["@next/font", "npm:13.5.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@next/swc-darwin-arm64", [\
         ["npm:13.4.1", {\
           "packageLocation": "./.yarn/unplugged/@next-swc-darwin-arm64-npm-13.4.1-f6ae90ba2d/node_modules/@next/swc-darwin-arm64/",\
@@ -20648,6 +20657,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@mui/icons-material", "virtual:9dce388d82c018b4a7af5edc7243e51f7023d1ab93a923b3959d0066ac6881c93b965a0932486426cbefa96c9c8e47849d5ff541d2404b8aca246480fa32f0d2#npm:5.11.16"],\
             ["@mui/material", "virtual:9dce388d82c018b4a7af5edc7243e51f7023d1ab93a923b3959d0066ac6881c93b965a0932486426cbefa96c9c8e47849d5ff541d2404b8aca246480fa32f0d2#npm:5.12.3"],\
             ["@next/eslint-plugin-next", "npm:13.4.1"],\
+            ["@next/font", "npm:13.5.3"],\
             ["@socialgouv/matomo-next", "virtual:9dce388d82c018b4a7af5edc7243e51f7023d1ab93a923b3959d0066ac6881c93b965a0932486426cbefa96c9c8e47849d5ff541d2404b8aca246480fa32f0d2#npm:1.6.1"],\
             ["@svgr/webpack", "npm:7.0.0"],\
             ["@testing-library/jest-dom", "npm:5.16.5"],\
@@ -20674,6 +20684,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@walletconnect/encoding", "npm:1.0.2"],\
             ["@yarnpkg/pnpify", "npm:4.0.0-rc.43"],\
             ["apollo-link-rest", "virtual:9dce388d82c018b4a7af5edc7243e51f7023d1ab93a923b3959d0066ac6881c93b965a0932486426cbefa96c9c8e47849d5ff541d2404b8aca246480fa32f0d2#npm:0.9.0"],\
+            ["axios", "npm:1.5.1"],\
             ["bech32", "npm:2.0.0"],\
             ["big.js", "npm:6.2.1"],\
             ["color", "npm:4.2.3"],\

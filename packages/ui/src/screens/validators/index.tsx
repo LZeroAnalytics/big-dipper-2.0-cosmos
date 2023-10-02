@@ -1,9 +1,9 @@
 import { NextSeo } from 'next-seo';
-import { useTranslation } from 'next-i18next';
 import { Typography } from '@mui/material';
 import Layout from '@/components/layout';
 import List from '@/screens/validators/components/list';
 import useStyles from '@/screens/validators/styles';
+import useAppTranslation from '@/hooks/useAppTranslation';
 
 const Validators = () => {
   const { t } = useAppTranslation('validators');

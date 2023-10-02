@@ -1,6 +1,18 @@
 import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles()((theme) => ({
+  listItemIcon: {
+    minWidth: 0,
+  },
+  listItemText: {
+    '&& *': {
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
+      fontWeight: 600,
+      fontSize: 14,
+      lineHeight: '21px',
+    },
+  },
   icon: {
     display: 'flex',
     alignItems: 'center',
@@ -8,18 +20,6 @@ const useStyles = makeStyles()((theme) => ({
     '&:hover': {
       cursor: 'pointer',
     },
-    '& svg': {
-      fill: theme.palette.custom.general.icon,
-      '& path': {
-        fill: theme.palette.custom.general.icon,
-      },
-    },
-  },
-  timeToggleDiv: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    paddingTop: theme.spacing(1.25),
   },
   closeButton: {
     position: 'absolute',
@@ -57,13 +57,15 @@ const useStyles = makeStyles()((theme) => ({
     '& .form-item--label': {
       color: theme.palette.custom.fonts.settings_label,
     },
-    '& .theme-container': {
+    '& .theme_container': {
       display: 'grid',
       gridAutoFlow: 'column',
       background: theme.palette.background.default,
       borderRadius: '10%',
       placeSelf: 'end',
+      margin: theme.spacing(1.5, 0),
       '& .theme_item': {
+        cursor: 'pointer',
         padding: 12,
         borderRadius: '10%',
         transition: 'background .2s',
@@ -72,6 +74,9 @@ const useStyles = makeStyles()((theme) => ({
         color: theme.palette.text.primary,
         '&.active': {
           background: theme.palette.primary.main,
+          svg: {
+            color: theme.palette.primary.contrastText,
+          },
         },
       },
     },

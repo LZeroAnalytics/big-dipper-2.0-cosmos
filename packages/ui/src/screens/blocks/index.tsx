@@ -8,7 +8,7 @@ import { useBlocks } from '@/screens/blocks/hooks';
 import useStyles from '@/screens/blocks/styles';
 import { useDisplayStyles } from '@/styles/useSharedStyles';
 import { NextSeo } from 'next-seo';
-import useAppTranslation from '@/hooks/useAppTranslation';
+import { useTranslation } from 'next-i18next';
 import { ReactNode } from 'react';
 import { Typography } from '@mui/material';
 

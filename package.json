@@ -19,7 +19,7 @@
     "ts-check:ci": "turbo run ts-check --continue",
     "lint": "dotenv -- turbo run lint --filter=$(dotenv -- printenv PROJECT_NAME || echo web)...",
     "lint:ci": "turbo run lint --continue",
-    "test": "dotenv -- turbo run test --filter=$(dotenv -- printenv PROJECT_NAME || echo web)...",
+    "test": "dotenv -- turbo run test --filter=$(dotenv -- printenv PROJECT_NAME || echo web)... -- -u",
     "test:ci": "turbo run test --continue",
     "e2e": "playwright test",
     "e2e:install": "playwright install --with-deps",

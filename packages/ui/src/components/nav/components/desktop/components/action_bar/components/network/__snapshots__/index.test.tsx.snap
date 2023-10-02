@@ -90,7 +90,7 @@ exports[`screen: Nav/Network it renders 1`] = `
 }
 
 <div
-  aria-label="coreum"
+  aria-label="coreum-devnet"
   className="emotion-0"
   onClick={[MockFunction]}
   role="button"
@@ -137,7 +137,7 @@ exports[`screen: Nav/Network it renders 1`] = `
   <p
     className="MuiTypography-root MuiTypography-body1 emotion-4"
   >
-    coreum
+    coreum-devnet
   </p>
   <svg
     aria-hidden={true}

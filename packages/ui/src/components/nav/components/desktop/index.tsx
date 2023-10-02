@@ -28,6 +28,7 @@ const Desktop: FC<DesktopProps> = ({ className }) => {
   const theme = useRecoilValue(readTheme);
   const netName = process.env.NEXT_PUBLIC_CHAIN_TYPE;
   const { isMenu, toggleMenu, turnOffAll, toggleNetwork, isNetwork } = useDesktop();
+
   return (
     <ClickAwayListener onClickAway={turnOffAll}>
       <div className={cx(classes.root, className)}>
@@ -37,9 +38,13 @@ const Desktop: FC<DesktopProps> = ({ className }) => {
             open: isMenu,
           })}
         >
-          <ActionBar toggleNetwork={toggleNetwork} isNetwork={isNetwork} />
+          <ActionBar isNetwork={isNetwork} />
           {/* <TitleBar title={title} /> */}
         </AppBar>
+        <ArrowIcon
+          className={cx(classes.arrowIcon, isMenu ? 'collapse' : '')}
+          onClick={toggleMenu}
+        />
         <Drawer
           variant="permanent"
           className={cx(classes.drawer, {
@@ -59,8 +64,8 @@ const Desktop: FC<DesktopProps> = ({ className }) => {
         >
           <div className={classes.logo} role="button" onClick={toggleMenu}>
             {/* FIXME get light and dark theme assets */}
-            {theme === 'light' ? <LogoTextDark /> : <Logo />}
-            {isMenu && theme === 'light' ? (
+            {<Logo />}
+            {
               <div className={classes.logo_text}>
                 <LogoText
                   style={{
@@ -76,22 +81,7 @@ const Desktop: FC<DesktopProps> = ({ className }) => {
                   <MainnetBadge style={{ opacity: isMenu ? 1 : 0, transition: '.3s ease' }} />
                 )}
               </div>
-            ) : (
-              <div className={classes.logo_text}>
-                <Logo
-                  style={{
-                    opacity: isMenu ? 1 : 0,
-                    transition: '.3s ease',
-                  }}
-                />
-                <DevnetBadge
-                  style={{
-                    opacity: isMenu ? 1 : 0,
-                    transition: '.3s ease',
-                  }}
-                />
-              </div>
-            )}
+            }
           </div>
           {/* {theme === 'light' ? (
             // <BigDipperLogoRed

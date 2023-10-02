@@ -32,6 +32,7 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
+  color: #FFF;
   background: linear-gradient(110.16deg, rgba(94,103,115, 0.35) 0%, rgba(94,103,115,0.5) 100%);
 }
 
@@ -55,14 +56,9 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
 }
 
 .emotion-1 .description {
-  display: none;
+  display: block;
   color: #FFFFFF;
-}
-
-@media (min-width:768px) {
-  .emotion-1 .description {
-    display: block;
-  }
+  font-size: 1rem;
 }
 
 .emotion-1 .flexContent {
@@ -114,6 +110,7 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
+  color: #FFF;
   background: linear-gradient(110.16deg, rgba(94,103,115, 0.35) 0%, rgba(94,103,115,0.5) 100%);
 }
 
@@ -137,14 +134,9 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
 }
 
 .emotion-4 .description {
-  display: none;
+  display: block;
   color: #FFFFFF;
-}
-
-@media (min-width:768px) {
-  .emotion-4 .description {
-    display: block;
-  }
+  font-size: 1rem;
 }
 
 .emotion-4 .flexContent {
@@ -177,6 +169,7 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
+  color: #FFF;
   background: linear-gradient(110.16deg, rgba(94,103,115, 0.35) 0%, rgba(94,103,115,0.5) 100%);
 }
 
@@ -200,14 +193,9 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
 }
 
 .emotion-7 .description {
-  display: none;
+  display: block;
   color: #FFFFFF;
-}
-
-@media (min-width:768px) {
-  .emotion-7 .description {
-    display: block;
-  }
+  font-size: 1rem;
 }
 
 .emotion-7 .flexContent {
@@ -249,9 +237,6 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
       >
         953,992
       </h1>
-      <div
-        className="flexContent"
-      />
     </div>
   </div>
   <div
@@ -270,9 +255,6 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
       >
         6.54 s
       </h1>
-      <div
-        className="flexContent"
-      />
     </div>
   </div>
   <div
@@ -294,12 +276,8 @@ exports[`screen: Home/DataBlocks matches snapshot 1`] = `
       <span
         className="MuiTypography-root MuiTypography-caption description emotion-10"
       >
-        <span
-          className="MuiTypography-root MuiTypography-caption description emotion-10"
-        >
-          outOfValidators
-        </span>
-      </div>
+        outOfValidators
+      </span>
     </div>
   </div>
 </div>

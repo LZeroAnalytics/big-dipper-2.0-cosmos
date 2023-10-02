@@ -3,14 +3,21 @@ import * as R from 'ramda';
 import { useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import { SetterOrUpdater, useRecoilState } from 'recoil';
-import { writeDate, writeTx, writeTimeFormat } from '@/recoil/settings';
-import type { Date, Tx, TimeFormat } from '@/recoil/settings';
+import {
+  THEME_DICTIONARY,
+  writeDate,
+  writeTheme,
+  writeTx,
+  writeTimeFormat,
+} from '@/recoil/settings';
+import type { Date, Theme, Tx, TimeFormat } from '@/recoil/settings';
 
 type SettingListState = {
   lang: string;
   dateFormat: Date;
   timeFormat: TimeFormat;
   txListFormat: Tx;
+  theme: Theme;
 };
 
 export const useSettingList = ({ lang }: { lang: string }) => {
@@ -19,12 +26,14 @@ export const useSettingList = ({ lang }: { lang: string }) => {
   const [tx, setTx] = useRecoilState(writeTx) as [Tx, SetterOrUpdater<Tx>];
   const [time, setTimeFormat] = useRecoilState(writeTimeFormat) as [
     TimeFormat,
-    SetterOrUpdater<TimeFormat>
+    SetterOrUpdater<TimeFormat>,
   ];
+  const [theme, setTheme] = useRecoilState(writeTheme) as [Theme, SetterOrUpdater<Theme>];
 
   const [open, setOpen] = useState(false);
   const [state, setState] = useState({
     lang,
+    theme,
     dateFormat: date,
     timeFormat: time,
     txListFormat: tx,
@@ -68,6 +77,12 @@ export const useSettingList = ({ lang }: { lang: string }) => {
     }));
   };
 
+  const changeTheme = (value: Theme) => {
+    if (THEME_DICTIONARY[value]) {
+      setTheme(value);
+    }
+  };
+
   const handleTimeFormatChange = () => {
     setTimeFormat((prevTheme: TimeFormat) => (prevTheme === '12-hour' ? '24-hour' : '12-hour'));
   };
@@ -79,6 +94,9 @@ export const useSettingList = ({ lang }: { lang: string }) => {
 
   const handleFormSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    if (state.theme !== theme) {
+      changeTheme(state.theme);
+    }
 
     if (state.lang !== lang) {
       router.push(

@@ -13,7 +13,7 @@ exports[`screen: Nav/mobile/navbar it renders 1`] = `
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
-  padding: 24px 16px 0px;
+  padding: 24px 16px;
 }
 
 .emotion-1 {
@@ -130,7 +130,7 @@ exports[`screen: Nav/mobile/navbar toggleNavMenus is called onClick 1`] = `
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   justify-content: space-between;
-  padding: 24px 16px 0px;
+  padding: 24px 16px;
 }
 
 .emotion-1 {
