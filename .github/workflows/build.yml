@@ -30,7 +30,7 @@ jobs:
           skip-commit:  'true'
           skip-tag: 'true'
           skip-push:  'true'
-          target-branch: 'main'
+          target-branch: 'master'
           commit-message: 'CI: bumps version to {{version}} [skip ci]'
 
       - name: Export new TAG
