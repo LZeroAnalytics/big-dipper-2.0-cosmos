@@ -13,16 +13,36 @@ env:
   MAINNET_WEBHOOK_ENDPOINT: https://keel.mainnet-1.coreum.dev/v1/webhooks/native
 
 jobs:
+  bump_version:
+    name: Automated Version Bump
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.tag_name.outputs.tag }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name:  'Automated Version Bump'
+        uses:  'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          target-branch: 'main'
+          commit-message: 'CI: bumps version to {{version}} [skip ci]'
+
+      - name: Export new TAG
+        id: tag_name
+        run: |
+          echo "tag=`cat package.json | jq -r .version`" >> $GITHUB_OUTPUT
+        shell: bash
   Build-and-Publish:
     runs-on: ubuntu-latest
+    needs: bump_version
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Set Env
-        run: |
-          echo "TAG=`ruby -e 'puts File.read("apps/web-coreum/package.json").match(/"version": "(?<semver>(0|[1-9][0-9]*).(0|[1-9][0-9]*).(0|[1-9][0-9]*)-(0|[1-9][0-9]*))"/)[:semver]'`" >> $GITHUB_ENV
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to DockerHub
@@ -37,7 +57,7 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ env.ORG }}/${{ env.REPO }}:${{ env.TAG }}
+            ${{ env.ORG }}/${{ env.REPO }}:${{ needs.bump_version.outputs.tag }}
             ${{ env.ORG }}/${{ env.REPO }}:latest
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -47,12 +67,12 @@ jobs:
 
       - name: Update Devnet Deployment
         run: |-
-          curl -v -u "${{ secrets.KEEL_DEVNET_USERNAME }}:${{ secrets.KEEL_DEVNET_PASSWORD }}" -X POST ${{ env.DEVNET_WEBHOOK_ENDPOINT }}  -H "Content-Type: application/json" -d "{\"name\": \"${{ env.ORG }}/${{ env.REPO }}\", \"tag\": \"${{ env.TAG }}\"}"
+          curl -v -u "${{ secrets.KEEL_DEVNET_USERNAME }}:${{ secrets.KEEL_DEVNET_PASSWORD }}" -X POST ${{ env.DEVNET_WEBHOOK_ENDPOINT }}  -H "Content-Type: application/json" -d "{\"name\": \"${{ env.ORG }}/${{ env.REPO }}\", \"tag\": \"${{ needs.bump_version.outputs.tag }}\"}"
 
       - name: Update Testnet Deployment
         run: |-
-          curl -v -u "${{ secrets.KEEL_TESTNET_USERNAME }}:${{ secrets.KEEL_TESTNET_PASSWORD }}" -X POST ${{ env.TESTNET_WEBHOOK_ENDPOINT }} -H "Content-Type: application/json" -d "{\"name\": \"${{ env.ORG }}/${{ env.REPO }}\", \"tag\": \"${{ env.TAG }}\"}"
+          curl -v -u "${{ secrets.KEEL_TESTNET_USERNAME }}:${{ secrets.KEEL_TESTNET_PASSWORD }}" -X POST ${{ env.TESTNET_WEBHOOK_ENDPOINT }} -H "Content-Type: application/json" -d "{\"name\": \"${{ env.ORG }}/${{ env.REPO }}\", \"tag\": \"${{ needs.bump_version.outputs.tag }}\"}"
 
       - name: Update Mainnet Deployment
         run: |-
-          curl -v -u "${{ secrets.KEEL_MAINNET_USERNAME }}:${{ secrets.KEEL_MAINNET_PASSWORD }}" -X POST ${{ env.MAINNET_WEBHOOK_ENDPOINT }} -H "Content-Type: application/json" -d "{\"name\": \"${{ env.ORG }}/${{ env.REPO }}\", \"tag\": \"${{ env.TAG }}\"}"
+          curl -v -u "${{ secrets.KEEL_MAINNET_USERNAME }}:${{ secrets.KEEL_MAINNET_PASSWORD }}" -X POST ${{ env.MAINNET_WEBHOOK_ENDPOINT }} -H "Content-Type: application/json" -d "{\"name\": \"${{ env.ORG }}/${{ env.REPO }}\", \"tag\": \"${{ needs.bump_version.outputs.tag }}\"}"
