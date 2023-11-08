@@ -25,6 +25,7 @@ jobs:
       - name:  'Automated Version Bump'
         uses:  'phips28/gh-action-bump-version@master'
         env:
+          PACKAGEJSON_DIR:  'apps/web-coreum'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           skip-commit:  'true'
