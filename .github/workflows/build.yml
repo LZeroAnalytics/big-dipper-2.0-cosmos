@@ -3,7 +3,7 @@ name: Docker-Production
 on:
   push:
     branches:
-      - master
+      - add_automatic_bump_step_to_ci
 
 env:
   REPO: big-dipper-ui
