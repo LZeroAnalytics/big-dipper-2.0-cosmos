@@ -14272,7 +14272,7 @@ __metadata:
     js-yaml: ^4.1.0
     lightweight-charts: ^4.0.0
     markdown-to-jsx: ^7.1.9
-    next: ^13.1.6
+    next: ^13.5.6
     next-i18next: ^13.1.5
     next-seo: ^5.15.0
     numeral: ^2.0.6
