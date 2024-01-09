@@ -14,7 +14,7 @@ export const fetchColumns = (): {
   },
   {
     key: 'name',
-    sortKey: 'name',
+    sortKey: 'denom',
     width: 20,
     sort: true,
   },
@@ -22,7 +22,6 @@ export const fetchColumns = (): {
     key: 'token_type',
     sortKey: 'token_type',
     width: 15,
-    sort: true,
   },
   {
     key: 'supply',
