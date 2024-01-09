@@ -71,7 +71,7 @@ const formatAssets = ({
       (coin: any) => coin.denom === item.denom
     );
 
-    const exponent = assetInMetadata?.denom_units[1]?.exponent ?? 0;
+    let exponent = assetInMetadata?.denom_units[1]?.exponent ?? 0;
     const descriptionValue = item.description.length
       ? item.description
       : assetInMetadata.description;
@@ -90,7 +90,12 @@ const formatAssets = ({
       );
       holders = String(assetInHolders?.holders) ?? '0';
 
-      tokenType = item.denom.includes('ibc') ? 'ibc' : 'asset';
+      tokenType = item.denom.includes('ibc/') ? 'ibc' : 'asset';
+    }
+
+    if (tokenType === 'ibc') {
+      display = item.ibc_info.display_name;
+      exponent = item.ibc_info.precision;
     }
 
     return {
