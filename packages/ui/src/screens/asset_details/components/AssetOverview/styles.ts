@@ -124,6 +124,10 @@ const useStyles = makeStyles()((theme) => ({
     background: alpha('#868991', 0.25),
     borderRadius: 2,
     minWidth: 'min-content',
+
+    '&:hover': {
+      background: alpha('#C3C3C3', 0.25),
+    },
   },
   linkIcon: {
     marginRight: theme.spacing(0.5),
@@ -136,6 +140,16 @@ const useStyles = makeStyles()((theme) => ({
     fontSize: theme.spacing(1.75),
     gap: theme.spacing(2.25),
     padding: theme.spacing(0.5, 0),
+
+    '&:hover': {
+      svg: {
+        path: {
+          fill: '#fff !important',
+          color: '#fff  !important',
+          stopColor: '#fff !important',
+        },
+      },
+    },
   },
 }));
 
