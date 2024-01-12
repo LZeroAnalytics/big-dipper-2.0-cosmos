@@ -65,14 +65,14 @@ const formatAsset = ({ asset, additionalData }: { asset: Asset; additionalData: 
   if (asset.denom === primaryTokenUnit) {
     const { count } = additionalData.accountAggregate.aggregate;
     holders = count;
-    tokenType = 'gov';
+    tokenType = 'native';
     display = tokenUnits[primaryTokenUnit]?.display;
   } else {
     const assetInHolders = additionalData.tokenHolderCount.find(
       (tokenHolderCount: any) => tokenHolderCount.denom === asset.denom
     );
     holders = String(assetInHolders?.holders) ?? '0';
-    tokenType = asset.denom.includes('ibc') ? 'ibc' : 'asset';
+    tokenType = asset.denom.includes('ibc') ? 'ibc' : 'native';
   }
 
   return {

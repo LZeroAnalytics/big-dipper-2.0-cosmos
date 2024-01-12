@@ -82,7 +82,7 @@ const formatAssets = ({
     if (item.denom === primaryTokenUnit) {
       const { count } = additionalData.accountAggregate.aggregate;
       holders = count;
-      tokenType = 'gov';
+      tokenType = 'native';
       display = tokenUnits[primaryTokenUnit]?.display;
     } else {
       const assetInHolders = additionalData.tokenHolderCount.find(
@@ -90,7 +90,7 @@ const formatAssets = ({
       );
       holders = String(assetInHolders?.holders) ?? '0';
 
-      tokenType = item.denom.includes('ibc/') ? 'ibc' : 'asset';
+      tokenType = item.denom.includes('ibc/') ? 'ibc' : 'native';
     }
 
     if (tokenType === 'ibc') {

@@ -19,10 +19,10 @@ const AssetDetailsOverview: FC<AssetDetailsOverviewProps> = ({ asset, className 
 
   const preDividerDataItems = [
     {
-      key: 'subunit',
+      key: 'denom',
       name: (
         <Typography variant="h4" className="label">
-          {t('subunit')}
+          {t('denom')}
         </Typography>
       ),
       value: (
