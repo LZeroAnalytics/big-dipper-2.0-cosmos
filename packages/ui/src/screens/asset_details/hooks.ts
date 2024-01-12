@@ -211,12 +211,18 @@ export const useAssetDetails = () => {
   });
 
   useEffect(() => {
-    if (!state.assetsLoading && !state.metadataLoading && !state.loading) {
+    const { assetsListItem } = state;
+    if (!assetsListItem && !state.assetsLoading && !state.metadataLoading && !state.loading) {
+      handleSetState((prevState) => ({
+        ...prevState,
+        exists: false,
+      }));
+    } else if (!state.assetsLoading && !state.metadataLoading && !state.loading) {
       handleSetState((prevState) => ({
         ...prevState,
         asset: formatAsset({
           metadata: state.metadata,
-          asset: state.assetsListItem!,
+          asset: assetsListItem!,
           additionalData: state.data,
         }),
       }));

@@ -174,11 +174,18 @@ export const useAssetDetails = () => {
   });
 
   useEffect(() => {
-    if (!state.assetsLoading && !state.loading) {
+    const { assetsListItem } = state;
+
+    if (!assetsListItem && !state.assetsLoading && !state.loading) {
+      handleSetState((prevState) => ({
+        ...prevState,
+        exists: false,
+      }));
+    } else if (!state.assetsLoading && !state.loading) {
       handleSetState((prevState) => ({
         ...prevState,
         asset: formatAsset({
-          asset: state.assetsListItem!,
+          asset: assetsListItem!,
           additionalData: state.data,
         }),
       }));
