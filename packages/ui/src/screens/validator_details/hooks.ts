@@ -57,6 +57,7 @@ const formatOverview = (data: ValidatorDetailsQuery) => {
     selfDelegateAddress,
     description: data.validator[0]?.validatorDescriptions?.[0]?.details ?? '',
     website: data.validator[0]?.validatorDescriptions?.[0]?.website ?? '',
+    moniker: data.validator[0]?.validatorDescriptions?.[0]?.moniker ?? '',
   };
 
   return profile;

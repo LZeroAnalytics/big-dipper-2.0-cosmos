@@ -4,6 +4,7 @@ export interface OverviewType {
   selfDelegateAddress: string;
   description: string;
   website: string;
+  moniker?: string;
 }
 
 export interface StatusType {

@@ -43,7 +43,7 @@ const Profile: FC<{ className?: string; profile: OverviewType }> = ({ className,
                 className={cx(classes.avatar, display.hiddenWhenLg)}
               />
               <div className="header__content">
-                <Typography variant="h2">{name}</Typography>
+                <Typography variant="h2">{profile.moniker || name}</Typography>
               </div>
             </div>
           </div>
