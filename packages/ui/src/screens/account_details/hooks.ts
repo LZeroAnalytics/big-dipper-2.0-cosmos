@@ -244,7 +244,7 @@ export const useAccountDetails = () => {
         desmosProfile: dataDesmosProfile?.[0],
         loading: loadingDesmosProfile,
       })),
-    [dataDesmosProfile]
+    [dataDesmosProfile, loadingDesmosProfile]
   );
 
   const commission = useCommission(address);
@@ -277,16 +277,7 @@ export const useAccountDetails = () => {
   // Fetch Data
   // ==========================
   const { address: withdrawalAddress, error } = useAccountWithdrawalAddress(address);
-
-  useEffect(() => {
-    if (error && state.exists) {
-      handleSetState((prevState) => ({
-        ...prevState,
-        loading: false,
-        exists: false,
-      }));
-    }
-  }, [error]);
+  console.log({ error, withdrawalAddress });
 
   useEffect(() => {
     handleSetState((prevState) => ({
@@ -298,6 +289,22 @@ export const useAccountDetails = () => {
       },
     }));
   }, [handleSetState, address, withdrawalAddress.withdrawalAddress?.address]);
+
+  useEffect(() => {
+    if (error) {
+      handleSetState((prevState) => ({
+        ...prevState,
+        loading: false,
+        exists: false,
+      }));
+    } else if (!state.exists) {
+      handleSetState((prevState) => ({
+        ...prevState,
+        loading: false,
+        exists: true,
+      }));
+    }
+  }, [error, state.exists, handleSetState]);
 
   return { state };
 };

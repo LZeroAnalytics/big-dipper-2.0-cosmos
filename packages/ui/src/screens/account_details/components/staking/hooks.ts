@@ -157,12 +157,14 @@ export const useStaking = (
       offset: delegationsPage * ROWS_PER_PAGE,
     },
   });
+
   useEffect(() => {
     if (delegationsLoading) return;
     if (delegationsError) {
       delegationsRefetch({ pagination: false });
     }
   }, [delegationsError, delegationsLoading, delegationsRefetch]);
+
   useAccountDelegationsQuery({
     variables: {
       address,

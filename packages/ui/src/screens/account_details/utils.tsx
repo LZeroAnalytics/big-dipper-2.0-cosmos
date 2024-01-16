@@ -56,6 +56,7 @@ export const useAccountWithdrawalAddress = (address?: string) => {
   useEffect(() => {
     if (error) refetch();
   }, [error, refetch]);
+
   return {
     address: data ?? defaultReturnValue,
     error,
