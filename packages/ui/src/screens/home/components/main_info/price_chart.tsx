@@ -3,7 +3,7 @@ import { createChart, IChartApi } from 'lightweight-charts';
 import React, { useEffect, useMemo, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import Spinner from '@/components/loadingSpinner';
-
+import { readMarket } from '@/recoil/market';
 import useStyles from './styles';
 import { useHero } from '../hero/hooks';
 
@@ -11,8 +11,14 @@ const PriceChart: React.FC = () => {
   const { classes } = useStyles();
   const chartRef = useRef<IChartApi>();
   const theme = useRecoilValue(readTheme);
-
   const { state } = useHero();
+  const marketState = useRecoilValue(readMarket);
+
+  const currentTime = useMemo(() => {
+    const time = new Date(Date.now());
+
+    return Math.floor(time.getTime() / 1000);
+  }, []);
 
   const formattedData = useMemo(
     () =>
@@ -27,8 +33,23 @@ const PriceChart: React.FC = () => {
     [state.tokenPriceHistory]
   );
 
+  const finalChartData = useMemo(() => {
+    const newArray = formattedData;
+
+    if (marketState.price) {
+      newArray.push({
+        value: marketState.price,
+        time: currentTime,
+      });
+
+      return newArray;
+    }
+
+    return newArray;
+  }, [formattedData, currentTime, marketState]);
+
   useEffect(() => {
-    if (typeof window !== 'undefined' && !chartRef.current && formattedData.length) {
+    if (typeof window !== 'undefined' && !chartRef.current && finalChartData.length > 1) {
       const chartOptions = {
         layout: {
           textColor: theme === 'dark' ? 'white' : 'black',
@@ -53,7 +74,7 @@ const PriceChart: React.FC = () => {
       const baselineSeries = chartRef.current.addBaselineSeries({
         baseValue: {
           type: 'price',
-          price: formattedData[0].value,
+          price: finalChartData[0].value,
         },
         priceFormat: {
           type: 'price',
@@ -68,11 +89,11 @@ const PriceChart: React.FC = () => {
         bottomFillColor2: 'rgba( 239, 83, 80, 0.28)',
       });
 
-      baselineSeries.setData(formattedData as any);
+      baselineSeries.setData(finalChartData as any);
 
       chartRef.current.timeScale().fitContent();
     }
-  }, [formattedData]);
+  }, [finalChartData]);
 
   useEffect(() => {
     if (chartRef.current) {
