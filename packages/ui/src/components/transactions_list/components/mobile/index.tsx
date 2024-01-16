@@ -106,9 +106,10 @@ const ListItem: FC<ListItemProps> = ({
         </Link>
       ),
     amount:
-      typeof transaction.amount === 'string' &&
-      (transaction.amount === '' || transaction.amount === '-') ? (
-        transaction.amount === '' ? (
+      (typeof transaction.amount === 'string' &&
+        (transaction.amount === '' || transaction.amount === '-')) ||
+      transaction.amount?.value === '' ? (
+        transaction.amount === '' || transaction.amount?.value === '' ? (
           <Link shallow prefetch={false} href={TRANSACTION_DETAILS(transaction.hash)}>
             {t('transactions:more')}
           </Link>

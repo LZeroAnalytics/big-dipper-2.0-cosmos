@@ -17,8 +17,6 @@ const AccountDetails = () => {
   const { classes } = useStyles();
   const { state } = useAccountDetails();
 
-  console.log({ exists: state.exists });
-
   return (
     <>
       <NextSeo

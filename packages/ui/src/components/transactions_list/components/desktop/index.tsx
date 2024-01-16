@@ -129,8 +129,9 @@ const Desktop: FC<TransactionsListState> = ({
       </div>
     ),
     amount:
-      typeof x.amount === 'string' && (x.amount === '' || x.amount === '-') ? (
-        x.amount === '' ? (
+      (typeof x.amount === 'string' && (x.amount === '' || x.amount === '-')) ||
+      x.amount?.value === '' ? (
+        x.amount === '' || x.amount?.value === '' ? (
           <Link
             shallow
             prefetch={false}

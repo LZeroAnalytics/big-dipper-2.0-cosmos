@@ -277,7 +277,6 @@ export const useAccountDetails = () => {
   // Fetch Data
   // ==========================
   const { address: withdrawalAddress, error } = useAccountWithdrawalAddress(address);
-  console.log({ error, withdrawalAddress });
 
   useEffect(() => {
     handleSetState((prevState) => ({

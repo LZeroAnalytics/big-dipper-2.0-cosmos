@@ -99,6 +99,7 @@ const formatTransactions = (data: TransactionsListenerSubscription): Transaction
       x.logs,
       feeAmount.denom
     );
+
     const formatedAmount =
       amount !== '' && amount !== '-'
         ? formatToken(amount.replace(feeAmount.denom, ''), feeAmount.denom)

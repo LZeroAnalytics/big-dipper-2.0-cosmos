@@ -34,7 +34,15 @@ export const formatToken = (value: number | string | null | undefined, denom = '
   }
 
   const ratio = Big(10 ** selectedDenom.exponent);
-  results.value = !ratio.eq(0) ? Big(value).div(ratio).toFixed(selectedDenom.exponent) : '';
+
+  const isValidToken = value.includes('ibc/') || value.includes(',');
+
+  if (isValidToken) {
+    results.value = '';
+  } else {
+    results.value = !ratio.eq(0) ? Big(value).div(ratio).toFixed(selectedDenom.exponent) : '';
+  }
+
   results.displayDenom = selectedDenom.display;
   return results;
 };
