@@ -12,6 +12,22 @@ const useStyles = makeStyles()((theme) => ({
   mobile: {
     height: '100%',
   },
+  box: {
+    paddingTop: `0 !important`,
+    paddingRight: `0 !important`,
+    paddingBottom: `0 !important`,
+    paddingLeft: `${theme.spacing(2)} !important`,
+    minHeight: '500px',
+    height: `calc(100% - 60px) !important`,
+    overflow: 'hidden !important',
+    display: 'flex',
+    flexDirection: 'column',
+    [theme.breakpoints.up('lg')]: {
+      height: `calc(100% - 60px)`,
+      minHeight: '65vh',
+      padding: '0 !important',
+    },
+  },
 }));
 
 export default useStyles;
