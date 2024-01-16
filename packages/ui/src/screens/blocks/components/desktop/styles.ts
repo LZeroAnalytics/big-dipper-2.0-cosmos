@@ -14,6 +14,10 @@ const useStyles = makeStyles()((theme) => ({
     background: theme.palette.custom.general.modal_header,
     color: theme.palette.custom.fonts.table_headers,
     textTransform: 'uppercase',
+
+    '.MuiTypography-h5': {
+      fontSize: '12px',
+    },
   },
   body: {
     color: theme.palette.custom.fonts.fontTwo,

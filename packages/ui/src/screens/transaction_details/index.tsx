@@ -26,7 +26,7 @@ const TransactionDetails = () => {
       />
       <Layout navTitle={t('transactionDetails') ?? undefined}>
         <div className={classes.block}>
-          <Link href="/validators" className={classes.breadcrumb}>
+          <Link href="/transactions" className={classes.breadcrumb}>
             <svg
               width="16"
               height="17"

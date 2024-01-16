@@ -3,6 +3,7 @@ import { makeStyles } from 'tss-react/mui';
 const useStyles = makeStyles()((theme) => ({
   root: {
     height: '100%',
+    paddingLeft: theme.spacing(2),
   },
   denom: {
     color: theme.palette.primary.main,

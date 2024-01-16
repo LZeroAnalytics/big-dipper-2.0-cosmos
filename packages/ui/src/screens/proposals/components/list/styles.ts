@@ -2,7 +2,6 @@ import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles()((theme) => ({
   root: {
-    paddingRight: `0 !important`,
     minHeight: '500px',
     height: `100%`,
     overflow: 'hidden !important',
@@ -11,7 +10,7 @@ const useStyles = makeStyles()((theme) => ({
     [theme.breakpoints.up('lg')]: {
       height: `100%`,
       minHeight: '65vh',
-      padding: '0 !important',
+      paddingRight: '0 !important',
     },
   },
   list: {
@@ -44,8 +43,6 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   topContent: {
-    paddingRight: theme.spacing(2),
-
     [theme.breakpoints.up('lg')]: {
       display: 'flex',
       alignItems: 'center',

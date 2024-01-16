@@ -25,7 +25,7 @@ const BlockDetails = () => {
       />
       <Layout navTitle={t('blockDetails') ?? undefined}>
         <div className={classes.block}>
-          <Link href="/validators" className={classes.breadcrumb}>
+          <Link href="/blocks" className={classes.breadcrumb}>
             <svg
               width="16"
               height="17"

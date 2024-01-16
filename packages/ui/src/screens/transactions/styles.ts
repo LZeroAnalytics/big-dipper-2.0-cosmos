@@ -9,9 +9,7 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   box: {
-    paddingTop: `0 !important`,
-    paddingRight: `0 !important`,
-    paddingBottom: `0 !important`,
+    padding: `0 !important`,
     minHeight: '500px',
     height: '100%',
     overflow: 'hidden !important',

@@ -56,7 +56,7 @@ export const fetchColumns = (
     align: 'center',
     width: 15,
     component: (
-      <Typography variant="h4" className="label popover">
+      <Typography variant="h5" className="label popover">
         {t('condition')}
         <InfoPopover content={<ConditionExplanation />} />
       </Typography>
