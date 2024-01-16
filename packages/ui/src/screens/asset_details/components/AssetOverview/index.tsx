@@ -28,24 +28,30 @@ const AssetOverview: FC<AssetOverviewProps> = ({ asset, className }) => {
       ),
       value: (
         <Typography variant="body1" className="value links">
-          {Object.keys(urls).map((linkItem: string) => {
-            const icon = getURLIcon(linkItem);
+          {Object.keys(urls)
+            .map((linkItem: string) => {
+              if (!urls[linkItem].length) {
+                return null;
+              }
 
-            return (
-              <a
-                href={urls[linkItem]}
-                target="_blank"
-                rel="noreferrer"
-                key={`link-${linkItem}`}
-                className={classes.linkRow}
-              >
-                <span className={classes.linkItem}>
-                  <span className={classes.linkIcon}>{icon}</span>
-                  {t(linkItem)}
-                </span>
-              </a>
-            );
-          })}
+              const icon = getURLIcon(linkItem);
+
+              return (
+                <a
+                  href={urls[linkItem]}
+                  target="_blank"
+                  rel="noreferrer"
+                  key={`link-${linkItem}`}
+                  className={classes.linkRow}
+                >
+                  <span className={classes.linkItem}>
+                    <span className={classes.linkIcon}>{icon}</span>
+                    {t(linkItem)}
+                  </span>
+                </a>
+              );
+            })
+            .filter((item) => item !== null)}
         </Typography>
       ),
     }),
@@ -62,21 +68,27 @@ const AssetOverview: FC<AssetOverviewProps> = ({ asset, className }) => {
       ),
       value: (
         <Typography variant="body1" className="value social-links">
-          {Object.keys(social_media).map((linkItem) => {
-            const icon = getURLIcon(linkItem);
+          {Object.keys(social_media)
+            .map((linkItem) => {
+              if (!social_media[linkItem].length) {
+                return null;
+              }
 
-            return (
-              <a
-                href={social_media[linkItem]}
-                target="_blank"
-                rel="noreferrer"
-                key={`link-${linkItem}`}
-                className={classes.linkRow}
-              >
-                <span className={classes.socialMediaLink}>{icon}</span>
-              </a>
-            );
-          })}
+              const icon = getURLIcon(linkItem);
+
+              return (
+                <a
+                  href={social_media[linkItem]}
+                  target="_blank"
+                  rel="noreferrer"
+                  key={`link-${linkItem}`}
+                  className={classes.linkRow}
+                >
+                  <span className={classes.socialMediaLink}>{icon}</span>
+                </a>
+              );
+            })
+            .filter((item) => item !== null)}
         </Typography>
       ),
     }),
