@@ -117,7 +117,7 @@ const Balance: FC<BalanceProps> = (props) => {
           <Divider />
           <div className="total__secondary--container total__single--container">
             <Typography variant="body1" className="label">
-              ${numeral(market.price).format('0,0.[00]', Math.floor)} /{' '}
+              ${numeral(market.price).format('0,0.0000', Math.floor)} /{' '}
               {(tokenUnits?.[primaryTokenUnit]?.display ?? '').toUpperCase()}
             </Typography>
             <Typography variant="body1">{totalAmount}</Typography>

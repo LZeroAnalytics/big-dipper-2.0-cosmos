@@ -1,61 +1,34 @@
 import { readTheme } from '@/recoil/settings';
-import axios from 'axios';
-import { createChart, IChartApi, SingleValueData } from 'lightweight-charts';
-import React, { useEffect, useRef, useState } from 'react';
+import { createChart, IChartApi } from 'lightweight-charts';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import Spinner from '@/components/loadingSpinner';
 
 import useStyles from './styles';
+import { useHero } from '../hero/hooks';
 
 const PriceChart: React.FC = () => {
   const { classes } = useStyles();
   const chartRef = useRef<IChartApi>();
   const theme = useRecoilValue(readTheme);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false);
-  const [gqlData, setGqlData] = useState<SingleValueData[]>();
+
+  const { state } = useHero();
+
+  const formattedData = useMemo(
+    () =>
+      state.tokenPriceHistory.map((item: any) => {
+        const time = new Date(item.time);
+
+        return {
+          value: item.value as number,
+          time: Math.floor(time.getTime() / 1000),
+        };
+      }),
+    [state.tokenPriceHistory]
+  );
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      (async () => {
-        try {
-          setIsLoading(true);
-          setIsError(false);
-          const gqlResponse = await axios({
-            url: 'https://hasura.mainnet-1.coreum.dev/v1/graphql',
-            method: 'post',
-            data: {
-              query: `
-              query tokenPriceHistory {
-                token_price_history (order_by: {timestamp: asc}) {
-                  price
-                  timestamp
-                }
-              }`,
-            },
-          });
-          if (gqlResponse.status === 200) {
-            const formattedData = gqlResponse.data.data.token_price_history.map((item: any) => {
-              const time = new Date(item.timestamp);
-              return {
-                value: item.price,
-                time: Math.floor(time.getTime() / 1000),
-              };
-            });
-            setGqlData(formattedData);
-            setIsLoading(false);
-          }
-        } catch (e) {
-          console.error('Error fetching price chart.', e);
-          setIsLoading(false);
-          setIsError(true);
-        }
-      })();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && !chartRef.current && gqlData) {
+    if (typeof window !== 'undefined' && !chartRef.current && formattedData.length) {
       const chartOptions = {
         layout: {
           textColor: theme === 'dark' ? 'white' : 'black',
@@ -80,7 +53,7 @@ const PriceChart: React.FC = () => {
       const baselineSeries = chartRef.current.addBaselineSeries({
         baseValue: {
           type: 'price',
-          price: gqlData[0].value,
+          price: formattedData[0].value,
         },
         priceFormat: {
           type: 'price',
@@ -95,11 +68,11 @@ const PriceChart: React.FC = () => {
         bottomFillColor2: 'rgba( 239, 83, 80, 0.28)',
       });
 
-      baselineSeries.setData(gqlData);
+      baselineSeries.setData(formattedData as any);
 
       chartRef.current.timeScale().fitContent();
     }
-  }, [gqlData]);
+  }, [formattedData]);
 
   useEffect(() => {
     if (chartRef.current) {
@@ -137,19 +110,10 @@ const PriceChart: React.FC = () => {
     };
   }, []);
 
-  return (
-    <>
-      {isLoading ? (
-        <Spinner customStyle={{ justifyContent: 'center' }} />
-      ) : (
-        !isError && <div className={classes.chart} id="price-chart" />
-      )}
-      {isError && (
-        <div className={classes.error}>
-          Error getting price chart. Please refresh or try again later
-        </div>
-      )}
-    </>
+  return state.loading ? (
+    <Spinner customStyle={{ justifyContent: 'center' }} />
+  ) : (
+    <div className={classes.chart} id="price-chart" />
   );
 };
 

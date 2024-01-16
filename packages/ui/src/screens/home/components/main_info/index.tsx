@@ -1,6 +1,5 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-// import useTranslation from 'next-translate/useTranslation';
 import Box from '@/components/box';
 import { TitleBar } from '@/components/nav/components';
 import { Typography, Divider } from '@mui/material';

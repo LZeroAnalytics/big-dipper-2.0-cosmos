@@ -13056,7 +13056,7 @@ export function useTokenPriceListenerSubscription(baseOptions?: Apollo.Subscript
 export type TokenPriceListenerSubscriptionHookResult = ReturnType<typeof useTokenPriceListenerSubscription>;
 export type TokenPriceListenerSubscriptionResult = Apollo.SubscriptionResult<TokenPriceListenerSubscription>;
 export const TokenPriceHistoryDocument = gql`
-    query TokenPriceHistory($denom: String, $limit: Int = 10) {
+    query TokenPriceHistory($denom: String, $limit: Int = 100) {
   tokenPrice: token_price_history(
     where: {unit_name: {_eq: $denom}}
     limit: $limit
