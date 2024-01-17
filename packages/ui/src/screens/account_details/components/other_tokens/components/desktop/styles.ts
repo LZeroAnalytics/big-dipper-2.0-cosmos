@@ -1,32 +1,14 @@
-import { alpha } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
+import { alpha } from '@mui/material';
 
 const useStyles = makeStyles()((theme) => ({
-  list: {
-    margin: theme.spacing(2, 0),
-    width: '100%',
-  },
-  item: {
-    marginBottom: theme.spacing(2),
-    '& .label': {
-      marginBottom: theme.spacing(1),
-      color: theme.palette.custom.fonts.fontThree,
-    },
-    '& p.value': {
-      color: theme.palette.custom.fonts.fontTwo,
-      wordBreak: 'break-all',
-    },
-    '& a': {
-      color: theme.palette.custom.fonts.highlight,
+  tableRow: {
+    '&:hover': {
+      opacity: 0.5,
     },
   },
-  flex: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    '& > div': {
-      width: '50%',
-    },
+  tableRegisteredAsset: {
+    cursor: 'pointer',
   },
   nameBlock: {
     display: 'flex',

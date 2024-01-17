@@ -142,7 +142,7 @@ const GridRow: FC<GridRowProps> = ({ column, style, rowIndex, align, item, i }) 
             <div className={classes.nameColumn}>
               <div className={classes.name}>{item.display}</div>
               <div className={classes.chainRow}>
-                <div className={classes.nameChain}>Chain: Coreum</div>
+                <div className={classes.nameChain}>Chain: {item.chain}</div>
               </div>
             </div>
           </div>

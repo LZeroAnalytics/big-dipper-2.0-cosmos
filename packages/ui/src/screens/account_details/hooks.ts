@@ -19,8 +19,10 @@ import {
 } from '@/screens/account_details/utils';
 import { formatToken } from '@/utils/format_token';
 import { getDenom } from '@/utils/get_denom';
+import axios from 'axios';
+import { Asset } from '../assets/hooks';
 
-const { extra, primaryTokenUnit, tokenUnits } = chainConfig();
+const { extra, primaryTokenUnit, tokenUnits, chainType } = chainConfig();
 
 const defaultTokenUnit: TokenUnit = {
   value: '0',
@@ -50,6 +52,8 @@ const initialState: AccountDetailState = {
     commission: defaultTokenUnit,
     total: defaultTokenUnit,
   },
+  assetsList: [],
+  assetsLoading: true,
   rewards: {},
 };
 
@@ -136,7 +140,7 @@ const formatBalance = (data: Data): BalanceType => {
 // ============================
 // other tokens
 // ============================
-const formatOtherTokens = (data: Data) => {
+const formatOtherTokens = (data: Data, assets: Asset[]) => {
   // Loop through balance and delegation to figure out what the other tokens are
   const otherTokenUnits = new Set<string>();
   const otherTokens: OtherTokenType[] = [];
@@ -178,11 +182,20 @@ const formatOtherTokens = (data: Data) => {
     const commissionRawAmount = getDenom(commission, x);
     const commissionAmount = formatToken(commissionRawAmount.amount, x);
 
+    const asset = assets.find(
+      (assetItem: Asset) => assetItem.denom.toLowerCase() === x.toLowerCase()
+    );
+
     otherTokens.push({
       denom: tokenUnits?.[x]?.display ?? x,
       available: availableAmount,
       reward: rewardAmount,
       commission: commissionAmount,
+      ...(asset && {
+        displayName: asset.ibc_info.display_name,
+        logoURL: asset.logo_URIs.svg || asset.logo_URIs.png,
+        chain: asset.ibc_info.source_chain,
+      }),
     });
   });
 
@@ -195,18 +208,14 @@ const formatOtherTokens = (data: Data) => {
 // ==========================
 // Format Data
 // ==========================
-const formatAllBalance = (data: Data) => {
+const formatAllBalance = (data: Data, assets: Asset[]) => {
   const stateChange: Partial<AccountDetailState> = {
     balanceLoading: false,
   };
 
   stateChange.rewards = formatRewards(data);
-
   stateChange.balance = formatBalance(data);
-
-  formatOtherTokens(data);
-
-  stateChange.otherTokens = formatOtherTokens(data);
+  stateChange.otherTokens = formatOtherTokens(data, assets);
 
   return stateChange;
 };
@@ -253,6 +262,30 @@ export const useAccountDetails = () => {
   const unbonding = useUnbondingBalance(address);
   const rewards = useRewards(address);
 
+  const getAssetsList = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `https://raw.githubusercontent.com/CoreumFoundation/token-registry/master/${chainType.toLowerCase()}/assets.json`
+      );
+
+      handleSetState((prevState) => ({
+        ...prevState,
+        assetsLoading: false,
+        assetsList: response.data.assets,
+      }));
+    } catch (error) {
+      handleSetState((prevState) => ({
+        ...prevState,
+        assetsLoading: false,
+        exists: false,
+      }));
+    }
+  }, []);
+
+  useEffect(() => {
+    getAssetsList();
+  }, []);
+
   useEffect(() => {
     const formattedRawData: {
       commission?: (typeof commission)['commission'];
@@ -269,9 +302,9 @@ export const useAccountDetails = () => {
 
     handleSetState((prevState) => ({
       ...prevState,
-      ...formatAllBalance(formattedRawData),
+      ...formatAllBalance(formattedRawData, state.assetsList),
     }));
-  }, [commission, available, delegation, unbonding, rewards, handleSetState]);
+  }, [commission, available, delegation, unbonding, rewards, handleSetState, state.assetsList]);
 
   // ==========================
   // Fetch Data

@@ -13,6 +13,7 @@ export interface Asset {
   ibc_info: {
     display_name: string;
     precision: number;
+    source_chain: string;
   };
   logo_URIs: {
     png: string;
@@ -65,6 +66,7 @@ const formatAssets = ({
   assets.map((item: Asset) => {
     let holders = '0';
     let tokenType = '';
+    let chain = 'Coreum';
 
     const assetInMetadata = metadatas.find((metadataItem: any) => metadataItem.base === item.denom);
     const assetInTotalSupply = additionalData.supply.coins.find(
@@ -96,6 +98,7 @@ const formatAssets = ({
     if (tokenType === 'ibc') {
       display = item.ibc_info.display_name;
       exponent = item.ibc_info.precision;
+      chain = item.ibc_info.source_chain;
     }
 
     return {
@@ -107,6 +110,7 @@ const formatAssets = ({
       holders,
       supply,
       tokenType,
+      chain,
     };
   });
 

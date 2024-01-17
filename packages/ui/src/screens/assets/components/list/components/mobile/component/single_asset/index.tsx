@@ -3,7 +3,16 @@ import { useTranslation } from 'next-i18next';
 import useStyles from '@/screens/assets/components/list/components/mobile/component/single_asset/styles';
 import Image from 'next/image';
 
-const SingleAsset = ({ className, tokenType, supply, holders, logo_URIs, denom, display }: any) => {
+const SingleAsset = ({
+  className,
+  tokenType,
+  supply,
+  holders,
+  logo_URIs,
+  denom,
+  display,
+  chain,
+}: any) => {
   const { t } = useTranslation('assets');
   const { classes, cx } = useStyles();
 
@@ -69,7 +78,7 @@ const SingleAsset = ({ className, tokenType, supply, holders, logo_URIs, denom, 
               {display}
             </Typography>
             <Typography variant="body1" className={classes.chainRow}>
-              <span className={classes.nameChain}>Chain: Coreum</span>
+              <span className={classes.nameChain}>Chain: {chain}</span>
             </Typography>
           </div>
         </div>

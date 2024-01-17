@@ -17,7 +17,7 @@ type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
 };
 
 const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, item, isLast, i }) => {
-  const { name, tokenType, supply, holders, logo_URIs, denom, display } = item;
+  const { name, tokenType, supply, holders, logo_URIs, denom, display, chain } = item;
   const { rowRef } = useListRow(index, setRowHeight);
   const router = useRouter();
 
@@ -30,6 +30,7 @@ const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, item, isLast,
     denom,
     logo_URIs,
     display,
+    chain,
   };
 
   return (

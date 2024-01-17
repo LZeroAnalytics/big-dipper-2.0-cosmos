@@ -1,3 +1,5 @@
+import { Asset } from '../assets/hooks';
+
 export interface OverviewType {
   address: string;
   withdrawalAddress: string;
@@ -17,6 +19,9 @@ export interface OtherTokenType {
   available: TokenUnit;
   reward: TokenUnit;
   commission: TokenUnit;
+  logoURL?: string;
+  displayName?: string;
+  chain?: string;
 }
 
 export interface RewardsType {
@@ -30,6 +35,8 @@ export interface AccountDetailState {
   desmosProfile: DesmosProfile | null;
   overview: OverviewType;
   balance: BalanceType;
+  assetsList: Asset[];
+  assetsLoading: boolean;
   otherTokens: {
     data: OtherTokenType[];
     count: number;

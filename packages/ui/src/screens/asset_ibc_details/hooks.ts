@@ -6,7 +6,7 @@ import axios from 'axios';
 import chainConfig from '@/chainConfig';
 import { useRouter } from 'next/router';
 
-const { chainType, primaryTokenUnit, tokenUnits } = chainConfig();
+const { chainType } = chainConfig();
 
 interface Asset {
   denom: string;
@@ -14,6 +14,7 @@ interface Asset {
   ibc_info: {
     display_name: string;
     precision: number;
+    source_chain: string;
   };
   logo_URIs: {
     png: string;
@@ -50,30 +51,20 @@ interface AssetDetailsState {
 }
 
 const formatAsset = ({ asset, additionalData }: { asset: Asset; additionalData: any }) => {
-  let holders = '0';
-  let tokenType = '';
-
   const assetInTotalSupply = additionalData.supply.coins.find(
     (coin: any) => coin.denom === asset.denom
   );
 
   const exponent = asset.ibc_info.precision ?? 0;
   const descriptionValue = asset.description;
-  let display = asset.ibc_info.display_name ?? '';
+  const display = asset.ibc_info.display_name ?? '';
   const supply = assetInTotalSupply?.amount ?? '0';
-
-  if (asset.denom === primaryTokenUnit) {
-    const { count } = additionalData.accountAggregate.aggregate;
-    holders = count;
-    tokenType = 'native';
-    display = tokenUnits[primaryTokenUnit]?.display;
-  } else {
-    const assetInHolders = additionalData.tokenHolderCount.find(
-      (tokenHolderCount: any) => tokenHolderCount.denom === asset.denom
-    );
-    holders = String(assetInHolders?.holders) ?? '0';
-    tokenType = asset.denom.includes('ibc') ? 'ibc' : 'native';
-  }
+  const assetInHolders = additionalData.tokenHolderCount.find(
+    (tokenHolderCount: any) => tokenHolderCount.denom === asset.denom
+  );
+  const holders = String(assetInHolders?.holders) ?? '0';
+  const tokenType = 'ibc';
+  const chain = asset.ibc_info.source_chain ?? '';
 
   return {
     ...asset,
@@ -83,6 +74,7 @@ const formatAsset = ({ asset, additionalData }: { asset: Asset; additionalData: 
     holders,
     supply,
     tokenType,
+    chain,
   };
 };
 
