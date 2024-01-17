@@ -52,7 +52,7 @@ export const useVotesGraph = () => {
   });
 
   const foramtProposalTally = (data: ProposalDetailsTallyQuery) => {
-    const quorumRaw = (data as any).quorum?.[0].params.quorum ?? '0';
+    const quorumRaw = (data as any).quorum?.[0]?.params?.quorum ?? '0';
 
     return {
       votes: {
