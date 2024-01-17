@@ -31,6 +31,7 @@ exports[`component: TransactionsList it renders 1`] = `
   </div>,
   .emotion-0 {
   height: 100%;
+  padding-left: 16px;
 }
 
 @media (min-width:1025px) {

@@ -31,6 +31,10 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
   white-space: nowrap;
 }
 
+.emotion-1 .MuiTypography-h5 {
+  font-size: 12px;
+}
+
 .emotion-2 {
   margin: 0;
   font-size: 0.875rem;

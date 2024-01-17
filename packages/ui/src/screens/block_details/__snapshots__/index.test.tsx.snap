@@ -82,7 +82,7 @@ exports[`screen: BlockDetails matches snapshot 1`] = `
   >
     <a
       className="emotion-1"
-      href="/validators"
+      href="/blocks"
       onClick={[Function]}
       onMouseEnter={[Function]}
       onTouchStart={[Function]}

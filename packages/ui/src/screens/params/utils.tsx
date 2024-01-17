@@ -220,7 +220,7 @@ export const formatNFT = (data: NFT, t: TFunction) => [
 
 export const formatFT = (data: FT, t: TFunction) => {
   if (data.tokenUpgradeDecisionTimeout && data.tokenUpgradeGracePeriod !== undefined) {
-    const tokenDecisionTimeout = new Date(data.tokenUpgradeDecisionTimeout);
+    // const tokenDecisionTimeout = new Date(data.tokenUpgradeDecisionTimeout);
     return [
       {
         key: 'ftIssueFee',
@@ -229,16 +229,16 @@ export const formatFT = (data: FT, t: TFunction) => {
           '0.[0000]'
         )} ${data.ftIssueFee.displayDenom.toUpperCase()}`,
       },
-      {
-        key: 'tokenUpgradeGracePeriod',
-        label: t('tokenUpgradeGracePeriod'),
-        detail: convertBySeconds(nanoToSeconds(data.tokenUpgradeGracePeriod), t),
-      },
-      {
-        key: 'tokenUpgradeDecisionTimeout',
-        label: t('tokenUpgradeDecisionTimeout'),
-        detail: `${tokenDecisionTimeout.toLocaleDateString()} at ${tokenDecisionTimeout.toLocaleTimeString()}`,
-      },
+      // {
+      //   key: 'tokenUpgradeGracePeriod',
+      //   label: t('tokenUpgradeGracePeriod'),
+      //   detail: convertBySeconds(nanoToSeconds(data.tokenUpgradeGracePeriod), t),
+      // },
+      // {
+      //   key: 'tokenUpgradeDecisionTimeout',
+      //   label: t('tokenUpgradeDecisionTimeout'),
+      //   detail: `${tokenDecisionTimeout.toLocaleDateString()} at ${tokenDecisionTimeout.toLocaleTimeString()}`,
+      // },
     ];
   }
   return [
