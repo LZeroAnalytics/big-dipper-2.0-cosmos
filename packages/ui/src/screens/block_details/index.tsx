@@ -24,22 +24,22 @@ const BlockDetails = () => {
         }}
       />
       <Layout navTitle={t('blockDetails') ?? undefined}>
-        <div className={classes.block}>
-          <Link href="/blocks" className={classes.breadcrumb}>
-            <svg
-              width="16"
-              height="17"
-              viewBox="0 0 16 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="#25D695" strokeWidth="1.5" />
-            </svg>
-            Back to all blocks
-          </Link>
-          <div className={classes.title}>{t('blockDetails')}</div>
-        </div>
         <LoadAndExist loading={state.loading} exists={state.exists}>
+          <div className={classes.block}>
+            <Link href="/blocks" className={classes.breadcrumb}>
+              <svg
+                width="16"
+                height="17"
+                viewBox="0 0 16 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="#25D695" strokeWidth="1.5" />
+              </svg>
+              Back to all blocks
+            </Link>
+            <div className={classes.title}>{t('blockDetails')}</div>
+          </div>
           <span className={classes.root}>
             <Overview
               height={overview.height}
