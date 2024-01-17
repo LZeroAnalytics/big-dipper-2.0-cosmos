@@ -51,9 +51,9 @@ const BlockRow: FC<BlockRowProps> = ({ item }) => {
   return (
     <TableRow>
       {columns.map((column) => {
-        const { key, align } = column;
+        const { key, align, width } = column;
         return (
-          <TableCell key={`${item.hash}-${key}`} align={align}>
+          <TableCell key={`${item.hash}-${key}`} align={align} style={{ width: `${width}%` }}>
             <motion.div key={`${item.hash}-${key}`} initial="initial" variants={variants}>
               {formattedData[key as keyof typeof formattedData]}
             </motion.div>
@@ -79,7 +79,12 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
         <TableHead>
           <TableRow>
             {columns.map((column) => (
-              <TableCell key={column.key} align={column.align} className={classes.header}>
+              <TableCell
+                key={column.key}
+                align={column.align}
+                className={classes.header}
+                style={{ width: `${column.width}%` }}
+              >
                 {t(column.key)}
               </TableCell>
             ))}

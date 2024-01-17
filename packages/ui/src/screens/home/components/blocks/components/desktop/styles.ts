@@ -27,6 +27,11 @@ const useStyles = makeStyles()((theme) => ({
       '& .MuiTableCell-root': {
         whiteSpace: 'nowrap',
         height: 'auto',
+
+        '& .MuiTypography-body1': {
+          whiteSpace: 'nowrap',
+          height: 'auto',
+        },
       },
     },
   },

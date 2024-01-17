@@ -41,6 +41,11 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
   height: auto;
 }
 
+.emotion-1 .MuiTableBody-root .MuiTableCell-root .MuiTypography-body1 {
+  white-space: nowrap;
+  height: auto;
+}
+
 .emotion-2 {
   display: table-header-group;
 }
@@ -195,6 +200,11 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
           aria-sort={null}
           className="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
           scope="col"
+          style={
+            {
+              "width": "15%",
+            }
+          }
         >
           height
         </th>
@@ -202,6 +212,11 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
           aria-sort={null}
           className="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
           scope="col"
+          style={
+            {
+              "width": "30%",
+            }
+          }
         >
           proposer
         </th>
@@ -209,6 +224,11 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
           aria-sort={null}
           className="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium emotion-4"
           scope="col"
+          style={
+            {
+              "width": "30%",
+            }
+          }
         >
           hash
         </th>
@@ -216,6 +236,11 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
           aria-sort={null}
           className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-7"
           scope="col"
+          style={
+            {
+              "width": "10%",
+            }
+          }
         >
           txs
         </th>
@@ -223,6 +248,11 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
           aria-sort={null}
           className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-7"
           scope="col"
+          style={
+            {
+              "width": "15%",
+            }
+          }
         >
           time
         </th>
@@ -239,6 +269,11 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
         <td
           aria-sort={null}
           className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-11"
+          style={
+            {
+              "width": "15%",
+            }
+          }
         >
           <div
             style={
@@ -265,6 +300,11 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
         <td
           aria-sort={null}
           className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-11"
+          style={
+            {
+              "width": "30%",
+            }
+          }
         >
           <div
             style={
@@ -288,6 +328,11 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
         <td
           aria-sort={null}
           className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium emotion-11"
+          style={
+            {
+              "width": "30%",
+            }
+          }
         >
           <div
             style={
@@ -306,6 +351,11 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
         <td
           aria-sort={null}
           className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-14"
+          style={
+            {
+              "width": "10%",
+            }
+          }
         >
           <div
             style={
@@ -324,6 +374,11 @@ exports[`screen: Home/Blocks/Desktop matches snapshot 1`] = `
         <td
           aria-sort={null}
           className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignRight MuiTableCell-sizeMedium emotion-14"
+          style={
+            {
+              "width": "15%",
+            }
+          }
         >
           <div
             style={
