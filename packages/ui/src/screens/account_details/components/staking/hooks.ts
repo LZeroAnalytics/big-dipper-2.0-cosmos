@@ -185,7 +185,6 @@ export const useStaking = (
       offset: 0,
       pagination: true,
     },
-    skip: delegationsPagination !== undefined,
   });
   useEffect(() => {
     if (dError) {
@@ -236,7 +235,6 @@ export const useStaking = (
       offset: 0,
       pagination: true,
     },
-    skip: redelegationsPagination !== undefined,
   });
   useEffect(() => {
     if (rError) {
@@ -287,7 +285,6 @@ export const useStaking = (
       offset: 0,
       pagination: true,
     },
-    skip: undelegationsPagination !== undefined,
   });
   useEffect(() => {
     if (uError) {
