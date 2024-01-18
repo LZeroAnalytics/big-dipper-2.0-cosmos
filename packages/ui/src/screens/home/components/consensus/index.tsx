@@ -84,7 +84,25 @@ const Consensus: FC<ComponentDefault> = ({ className }) => {
         )}
       </div>
       <div className={classes.info}>
-        <div>
+        <div className={classes.infoColumn}>
+          <Typography variant="caption" className="label" component="div">
+            {t('height')}
+          </Typography>
+          <Typography variant="h4">
+            {state.loadingNewRound ? '-' : numeral(state.height).format('0,0')}
+          </Typography>
+        </div>
+        <div className={classes.infoColumn}>
+          <Typography variant="caption" className="label" component="div">
+            {t('proposer')}
+          </Typography>
+          {!state.loadingNewStep && state.proposer ? (
+            <AvatarName address={delegator} imageUrl={imageUrl} name={name} />
+          ) : (
+            '-'
+          )}
+        </div>
+        {/* <div>
           <Typography variant="caption" className="label" component="div">
             {t('height')}
           </Typography>
@@ -101,7 +119,7 @@ const Consensus: FC<ComponentDefault> = ({ className }) => {
           ) : (
             '-'
           )}
-        </div>
+        </div> */}
       </div>
     </Box>
   );

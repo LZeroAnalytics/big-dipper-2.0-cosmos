@@ -38,34 +38,25 @@ const useStyles = makeStyles()((theme) => ({
     color: theme.palette.custom.fonts.fontOne,
   },
   info: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, 1fr)',
     overflow: 'hidden',
     width: '100%',
     color: theme.palette.custom.fonts.fontTwo,
-    '& > *': {
-      display: 'flex',
-      alignItems: 'center',
-      '& > *': {
-        width: '50%',
-      },
-    },
-    '& .values': {
-      textOverflow: 'ellipses',
 
-      '& .height': {
-        color: theme.palette.custom.fonts.fontOne,
-      },
-    },
     '& .label': {
       fontSize: theme.spacing(1.75),
       fontWeight: 400,
       color: theme.palette.custom.fonts.fontThree,
-      marginBottom: theme.spacing(0.5),
     },
     [theme.breakpoints.up('lg')]: {
       marginBottom: 0,
     },
+  },
+  infoColumn: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: theme.spacing(0.5),
   },
 }));
 
