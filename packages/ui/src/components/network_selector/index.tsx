@@ -1,7 +1,7 @@
 import useStyles from '@/components/network_selector/styles';
 import IconConnected from '@/assets/icon_connected.svg';
 import Arrow from '@/assets/icon_network_expand.svg';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 type NetSelectorProps = {
@@ -18,9 +18,6 @@ const isClient = typeof window === 'object';
 
 const NetworkSelector: FC<NetSelectorProps> = () => {
   const { classes, cx } = useStyles();
-  const netNameLowercase = process.env.NEXT_PUBLIC_CHAIN_TYPE;
-  let netName = '';
-  let selectedNetwork: NetType = { name: '', link: '' };
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { width } = getSize();
   const [windowWidth, setWindowWidth] = useState<number>(0);
@@ -31,34 +28,47 @@ const NetworkSelector: FC<NetSelectorProps> = () => {
     }
   }, [width]);
 
-  const networks = [
-    {
-      name: 'Mainnet',
-      link: 'explorer.coreum.com',
-    },
-    {
-      name: 'Testnet',
-      version: 1,
-      link: 'explorer.testnet-1.coreum.dev',
-    },
-    {
-      name: 'Devnet',
-      version: 1,
-      link: 'explorer.devnet-1.coreum.dev',
-    },
-  ];
+  const networks = useMemo(
+    () => [
+      {
+        name: 'Mainnet',
+        link: 'explorer.coreum.com',
+      },
+      {
+        name: 'Testnet',
+        version: 1,
+        link: 'explorer.testnet-1.coreum.dev',
+      },
+      {
+        name: 'Devnet',
+        version: 1,
+        link: 'explorer.devnet-1.coreum.dev',
+      },
+    ],
+    []
+  );
 
-  if (netNameLowercase) {
-    netName = netNameLowercase.charAt(0).toUpperCase() + netNameLowercase.slice(1);
-  }
+  const netName = useMemo(() => {
+    const netNameLowercase = process.env.NEXT_PUBLIC_CHAIN_TYPE;
 
-  networks.forEach((network) => {
-    if (network.name === netName) {
-      selectedNetwork = network;
+    if (netNameLowercase) {
+      return netNameLowercase.charAt(0).toUpperCase() + netNameLowercase.slice(1);
     }
-  });
 
-  if (windowWidth < 1025) {
+    return '';
+  }, []);
+
+  const selectedNetwork: NetType = useMemo(() => {
+    const currentNetwork = networks.find((network) => network.name === netName);
+
+    if (currentNetwork) {
+      return currentNetwork;
+    }
+
+    return { name: '', link: '' };
+  }, [netName, networks]);
+
+  if (windowWidth < 1025 && windowWidth !== 0) {
     return (
       <ClickAwayListener onClickAway={() => setIsModalOpen(false)}>
         {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}

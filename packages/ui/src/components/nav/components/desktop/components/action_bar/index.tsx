@@ -3,15 +3,16 @@ import useStyles from '@/components/nav/components/desktop/components/action_bar
 import SearchBar from '@/components/nav/components/search_bar';
 import { useGetComponentDimension } from '@/hooks/use_get_component_dimension';
 import NetworkSelector from '@/components/network_selector';
+import { useDesktop } from '@/components/nav/components/desktop/hooks';
 
 type ActionBarProps = {
-  isNetwork: boolean;
   className?: string;
 };
 
-const ActionBar: FC<ActionBarProps> = ({ className, isNetwork }) => {
+const ActionBar: FC<ActionBarProps> = ({ className }) => {
   const { ref: heightRef } = useGetComponentDimension();
   const { classes, cx } = useStyles();
+  const { isNetwork } = useDesktop();
 
   return (
     <div className={cx(classes.root, className)} ref={heightRef}>

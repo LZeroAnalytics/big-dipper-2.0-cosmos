@@ -20,7 +20,7 @@ type DesktopProps = {
 const Desktop: FC<DesktopProps> = ({ className }) => {
   const { classes, cx } = useStyles();
   const netName = process.env.NEXT_PUBLIC_CHAIN_TYPE;
-  const { isMenu, toggleMenu, turnOffAll, isNetwork } = useDesktop();
+  const { isMenu, toggleMenu, turnOffAll } = useDesktop();
 
   const renderBadge = useMemo(() => {
     switch (netName) {
@@ -42,7 +42,7 @@ const Desktop: FC<DesktopProps> = ({ className }) => {
             open: isMenu,
           })}
         >
-          <ActionBar isNetwork={isNetwork} />
+          <ActionBar />
         </AppBar>
         <ArrowIcon
           className={cx(classes.arrowIcon, isMenu ? 'collapse' : '')}

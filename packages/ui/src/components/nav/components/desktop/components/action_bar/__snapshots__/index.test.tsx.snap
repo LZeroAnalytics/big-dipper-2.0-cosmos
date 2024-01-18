@@ -573,14 +573,62 @@ label[data-shrink=false]+.MuiInputBase-formControl .emotion-4:focus::-ms-input-p
       >
         <div
           className="currentNetName"
-        />
-        <div
-          className="currentNetLink"
-        />
+        >
+           
+        </div>
       </div>
       <svg
         className="arrowIcon"
       />
+      <div
+        className="modal"
+      >
+        <a
+          className="linkItem"
+          href="https://explorer.coreum.com"
+        >
+          <div
+            className="netName"
+          >
+            Mainnet 
+          </div>
+          <div
+            className="netLink"
+          >
+            explorer.coreum.com
+          </div>
+        </a>
+        <a
+          className="linkItem"
+          href="https://explorer.testnet-1.coreum.dev"
+        >
+          <div
+            className="netName"
+          >
+            Testnet 1
+          </div>
+          <div
+            className="netLink"
+          >
+            explorer.testnet-1.coreum.dev
+          </div>
+        </a>
+        <a
+          className="linkItem"
+          href="https://explorer.devnet-1.coreum.dev"
+        >
+          <div
+            className="netName"
+          >
+            Devnet 1
+          </div>
+          <div
+            className="netLink"
+          >
+            explorer.devnet-1.coreum.dev
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </div>
