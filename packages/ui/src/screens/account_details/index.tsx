@@ -10,12 +10,33 @@ import Staking from '@/screens/account_details/components/staking';
 import Transactions from '@/screens/account_details/components/transactions';
 import { useAccountDetails } from '@/screens/account_details/hooks';
 import useStyles from '@/screens/account_details/styles';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect, useState } from 'react';
 
-const AccountDetails = () => {
+export default function AccountDetails() {
   const { t } = useTranslation('accounts');
   const { classes } = useStyles();
   const { state } = useAccountDetails();
+  const router = useRouter();
+  const [previousRouteDefined, setPreviousRouteDefined] = useState<boolean>(false);
+
+  useEffect(() => {
+    Object.keys((router as any).components).forEach((key) => {
+      const parsedKey = key.replace('_', '');
+
+      if (parsedKey !== router.pathname && parsedKey !== '/app') {
+        setPreviousRouteDefined(true);
+      }
+    });
+  }, []);
+
+  const goBack = useCallback(() => {
+    if (previousRouteDefined) {
+      router.back();
+    } else {
+      router.push('/');
+    }
+  }, [router, previousRouteDefined]);
 
   return (
     <>
@@ -39,7 +60,8 @@ const AccountDetails = () => {
               />
             )}
             <div className={classes.block}>
-              <Link href="/transactions" className={classes.breadcrumb}>
+              {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+              <div onClick={goBack} className={classes.breadcrumb}>
                 <svg
                   width="16"
                   height="17"
@@ -49,8 +71,8 @@ const AccountDetails = () => {
                 >
                   <path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="#25D695" strokeWidth="1.5" />
                 </svg>
-                Back to all transactions
-              </Link>
+                Back
+              </div>
               <div className={classes.title}>{t('accountDetails')}</div>
             </div>
             <Overview
@@ -75,6 +97,4 @@ const AccountDetails = () => {
       </Layout>
     </>
   );
-};
-
-export default AccountDetails;
+}
