@@ -50,11 +50,18 @@ const Balance: FC<BalanceProps> = (props) => {
   const dataMemo = useShallowMemo(notEmpty ? formatData : [...formatData, empty]);
 
   const dataCount = formatData.filter((x) => x.value && Big(x.value).gt(0)).length;
-  const totalAmount = `$${numeral(
-    Big(market.price || 0)
-      ?.times(props.total.value)
-      .toPrecision()
-  ).format('0,0.0000')}`;
+  let totalAmount = '';
+
+  const totalAmountValue = Big(market.price || 0)
+    .times(props.total.value)
+    .toPrecision()
+    .valueOf();
+
+  if (Number(totalAmountValue) < 0.0001) {
+    totalAmount = `Less than $0.0001`;
+  } else {
+    totalAmount = `$${numeral(totalAmountValue).format('0,0.0000')}`;
+  }
 
   // format
   const totalDisplay = formatNumber(props.total.value, props.total.exponent);
