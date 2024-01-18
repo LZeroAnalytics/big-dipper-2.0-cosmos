@@ -78,41 +78,41 @@ exports[`screen: BlockDetails matches snapshot 1`] = `
   navTitle="blockDetails"
 >
   <div
-    className="emotion-0"
-  >
-    <a
-      className="emotion-1"
-      href="/blocks"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-      onTouchStart={[Function]}
-    >
-      <svg
-        fill="none"
-        height="17"
-        viewBox="0 0 16 17"
-        width="16"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M10.5 13.5L5.5 8.5L10.5 3.5"
-          stroke="#25D695"
-          strokeWidth="1.5"
-        />
-      </svg>
-      Back to all blocks
-    </a>
-    <div
-      className="emotion-2"
-    >
-      blockDetails
-    </div>
-  </div>
-  <div
     exists={true}
     id="LoadAndExist"
     loading={false}
   >
+    <div
+      className="emotion-0"
+    >
+      <a
+        className="emotion-1"
+        href="/blocks"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onTouchStart={[Function]}
+      >
+        <svg
+          fill="none"
+          height="17"
+          viewBox="0 0 16 17"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10.5 13.5L5.5 8.5L10.5 3.5"
+            stroke="#25D695"
+            strokeWidth="1.5"
+          />
+        </svg>
+        Back to all blocks
+      </a>
+      <div
+        className="emotion-2"
+      >
+        blockDetails
+      </div>
+    </div>
     <span
       className="emotion-3"
     >

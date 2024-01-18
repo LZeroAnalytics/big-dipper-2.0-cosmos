@@ -28,27 +28,60 @@ exports[`screen: ProposalDetails matches snapshot 1`] = `
   }
 }
 
+.emotion-2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #25D695!important;
+}
+
+.emotion-2 svg {
+  fill: transparent;
+}
+
+.emotion-3 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+@media (min-width:1025px) {
+  .emotion-4 {
+    grid-column: 1/4;
+  }
+}
+
 @media (min-width:768px) {
-  .emotion-2 {
+  .emotion-5 {
     grid-column: 1/2;
   }
 }
 
 @media (min-width:1025px) {
-  .emotion-2 {
+  .emotion-5 {
     grid-column: 1/4;
     height: auto;
   }
 }
 
 @media (min-width:1025px) {
-  .emotion-3 {
+  .emotion-6 {
     grid-column: 1/4;
   }
 }
 
 @media (min-width:1025px) {
-  .emotion-4 {
+  .emotion-7 {
     grid-column: 1/4;
   }
 }
@@ -67,6 +100,37 @@ exports[`screen: ProposalDetails matches snapshot 1`] = `
     >
       <div
         className="emotion-1"
+      >
+        <a
+          className="emotion-2"
+          href="/proposals"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onTouchStart={[Function]}
+        >
+          <svg
+            fill="none"
+            height="17"
+            viewBox="0 0 16 17"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10.5 13.5L5.5 8.5L10.5 3.5"
+              stroke="#25D695"
+              strokeWidth="1.5"
+            />
+          </svg>
+          Back to all proposals
+        </a>
+        <div
+          className="emotion-3"
+        >
+          proposalDetails
+        </div>
+      </div>
+      <div
+        className="emotion-4"
         id="Overview"
         overview={
           {
@@ -89,15 +153,15 @@ exports[`screen: ProposalDetails matches snapshot 1`] = `
         }
       />
       <div
-        className="emotion-2"
+        className="emotion-5"
         id="VotesGraph"
       />
       <div
-        className="emotion-3"
+        className="emotion-6"
         id="Votes"
       />
       <div
-        className="emotion-4"
+        className="emotion-7"
         id="Deposits"
       />
     </span>
