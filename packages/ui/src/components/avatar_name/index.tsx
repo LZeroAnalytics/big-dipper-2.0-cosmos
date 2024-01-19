@@ -16,9 +16,25 @@ const AvatarName: FC<AvatarName & JSX.IntrinsicElements['div']> = ({
   image,
   target,
   shorten,
+  isMobile,
   ...props
 }) => {
   const { classes, cx } = useStyles();
+
+  if (isMobile) {
+    return (
+      <Link shallow href={href(address)} target={target}>
+        <span className={cx(classes.root, className)} {...props}>
+          <Avatar className={classes.avatar} address={address} imageUrl={imageUrl ?? undefined} />
+          {/* <MiddleEllipsis className={classes.text} content={name} /> */}
+
+          <Typography variant="body1" className={shorten ? classes.short : undefined}>
+            {name}
+          </Typography>
+        </span>
+      </Link>
+    );
+  }
 
   return (
     <Tooltip

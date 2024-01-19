@@ -41,7 +41,7 @@ const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, item, isLast,
   const votingPower = numeral(item.votingPower).format('0,0');
   const selectedItem = {
     idx: `#${i + 1}`,
-    validator: <AvatarName address={address} imageUrl={imageUrl} name={name} />,
+    validator: <AvatarName address={address} imageUrl={imageUrl} name={name} isMobile />,
     commission: `${numeral(item.commission).format('0.[00]')}%`,
     condition: <Condition className={condition} />,
     votingPower: (

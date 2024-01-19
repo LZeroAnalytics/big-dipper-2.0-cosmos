@@ -19,6 +19,7 @@ exports[`component: AvatarName matches snapshot 1`] = `
   -webkit-flex-flow: row nowrap;
   -ms-flex-flow: row nowrap;
   flex-flow: row nowrap;
+  word-break: break-all;
 }
 
 .emotion-0:hover {
@@ -91,6 +92,7 @@ exports[`component: AvatarName matches snapshot with imageUrl 1`] = `
   -webkit-flex-flow: row nowrap;
   -ms-flex-flow: row nowrap;
   flex-flow: row nowrap;
+  word-break: break-all;
 }
 
 .emotion-0:hover {

@@ -7,6 +7,8 @@ const useStyles = makeStyles()((theme) => ({
     justifyContent: 'flex-start',
     gap: theme.spacing(1),
     flexFlow: 'row nowrap',
+    wordBreak: 'break-all',
+
     '&:hover': {
       cursor: 'pointer',
     },

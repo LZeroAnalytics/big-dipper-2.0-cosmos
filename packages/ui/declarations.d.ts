@@ -20,6 +20,7 @@ interface AvatarName {
   image?: React.ReactNode;
   target?: JSX.IntrinsicElements['a']['target'];
   shorten?: boolean;
+  isMobile?: boolean;
 }
 
 type Transactions = {
