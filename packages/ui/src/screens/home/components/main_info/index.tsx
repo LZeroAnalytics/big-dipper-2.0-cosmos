@@ -19,19 +19,19 @@ const MainInfo: React.FC<{
   const { isMobile } = useScreenSize();
   const marketState = useRecoilValue(readMarket);
 
-  const renderPriceChange = useMemo(() => {
-    const inflation = `${formatNumber(Big(marketState.inflation)?.times(100).toPrecision(), 2)}%`;
+  // const renderPriceChange = useMemo(() => {
+  //   const inflation = `${formatNumber(Big(marketState.inflation)?.times(100).toPrecision(), 2)}%`;
 
-    if (marketState.inflation === 0) {
-      return <span className={classes.priceChange}>{inflation}</span>;
-    }
+  //   if (marketState.inflation === 0) {
+  //     return <span className={classes.priceChange}>{inflation}</span>;
+  //   }
 
-    if (marketState.inflation > 0) {
-      return <span className={cx(classes.priceChange, classes.priceUp)}>+{inflation}</span>;
-    }
+  //   if (marketState.inflation > 0) {
+  //     return <span className={cx(classes.priceChange, classes.priceUp)}>+{inflation}</span>;
+  //   }
 
-    return <span className={cx(classes.priceChange, classes.priceDown)}>-{inflation}</span>;
-  }, [marketState.inflation, classes.priceChange, classes.priceUp, classes.priceDown]);
+  //   return <span className={cx(classes.priceChange, classes.priceDown)}>-{inflation}</span>;
+  // }, [marketState.inflation, classes.priceChange, classes.priceUp, classes.priceDown]);
 
   return (
     <Box className={cx(classes.root, className)}>
@@ -66,7 +66,7 @@ const MainInfo: React.FC<{
           </Typography>
           <Typography variant="h2" className={classes.price}>
             ${marketState.price}
-            {renderPriceChange}
+            {/* {renderPriceChange} */}
           </Typography>
         </div>
         <PriceChart />
