@@ -144,3 +144,14 @@ export const removeEndingZeros = (value: string) => {
   }
   return value.substring(0, end);
 };
+
+export const getFormatString = (precision: number) => {
+  let formatString = '0,0.';
+
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < precision; i++) {
+    formatString += '0';
+  }
+
+  return formatString;
+};

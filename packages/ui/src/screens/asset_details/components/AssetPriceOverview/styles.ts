@@ -36,15 +36,15 @@ const useStyles = makeStyles()((theme) => ({
     display: 'grid',
     gridTemplateColumns: 'repeat(2, 1fr)',
     gap: theme.spacing(2),
-    marginTop: theme.spacing(3),
+    // marginTop: theme.spacing(3),
   },
   pricesRoot: {
     display: 'grid',
     gridTemplateColumns: 'repeat(1, 1fr)',
     gap: theme.spacing(2),
-    [theme.breakpoints.up('md')]: {
-      gridTemplateColumns: 'repeat(2, 1fr)',
-    },
+    // [theme.breakpoints.up('md')]: {
+    //   gridTemplateColumns: 'repeat(2, 1fr)',
+    // },
   },
   priceDataRoot: {
     display: 'grid',

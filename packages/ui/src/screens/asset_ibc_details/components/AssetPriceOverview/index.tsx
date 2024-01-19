@@ -1,4 +1,5 @@
 import Box from '@/components/box';
+import { getFormatString } from '@/utils/format_token';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'next-i18next';
 import numeral from 'numeral';
@@ -14,7 +15,10 @@ const AssetPriceOverview: FC<AssetPriceOverviewProps> = ({ asset, className }) =
   const { classes } = useStyles();
   const { t } = useTranslation('assets');
 
-  const { tokenType, supply, denom } = asset;
+  const { tokenType, supply, display, exponent } = asset;
+
+  const value = supply / 10 ** exponent;
+  const supplyValue = numeral(value).format(getFormatString(exponent));
 
   const dataItems = [
     // {
@@ -39,7 +43,7 @@ const AssetPriceOverview: FC<AssetPriceOverviewProps> = ({ asset, className }) =
       ),
       value: (
         <Typography variant="body1" className="value">
-          {numeral(supply).format('0,0.00')} {denom}
+          {supplyValue} {display}
         </Typography>
       ),
     },
@@ -54,21 +58,6 @@ const AssetPriceOverview: FC<AssetPriceOverviewProps> = ({ asset, className }) =
         <Typography variant="body1" className="value">
           <span className={classes.tokenTypeBlock}>
             <span className={classes.tokenType}>{tokenType}</span>
-          </span>
-        </Typography>
-      ),
-    },
-    {
-      key: 'chain',
-      name: (
-        <Typography variant="h4" className="label">
-          {t('chain')}
-        </Typography>
-      ),
-      value: (
-        <Typography variant="body1" className="value">
-          <span className={classes.chain}>
-            <span className={classes.nameChain}>Coreum</span>
           </span>
         </Typography>
       ),

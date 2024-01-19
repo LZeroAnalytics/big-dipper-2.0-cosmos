@@ -67,6 +67,7 @@ const useStyles = makeStyles()((theme) => ({
       fontSize: theme.spacing(2),
       color: theme.palette.custom.fonts.fontTwo,
       fontWeight: 500,
+      wordBreak: 'break-all',
     },
     '& a': {
       color: theme.palette.custom.fonts.highlight,

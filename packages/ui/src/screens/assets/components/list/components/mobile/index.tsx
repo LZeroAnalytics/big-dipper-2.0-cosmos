@@ -8,6 +8,7 @@ import SingleAsset from '@/screens/assets/components/list/components/mobile/comp
 import numeral from 'numeral';
 import { useRouter } from 'next/router';
 import { ASSETS_DETAILS } from '@/utils/go_to_page';
+import { getFormatString } from '@/utils/format_token';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   setRowHeight: Parameters<typeof useListRow>[1];
@@ -17,15 +18,18 @@ type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
 };
 
 const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, item, isLast, i }) => {
-  const { name, tokenType, supply, holders, logo_URIs, denom, display, chain } = item;
+  const { name, tokenType, supply, holders, logo_URIs, denom, display, chain, exponent } = item;
   const { rowRef } = useListRow(index, setRowHeight);
   const router = useRouter();
+
+  const value = supply / 10 ** exponent;
+  const supplyValue = numeral(value).format(getFormatString(item.exponent));
 
   const selectedItem = {
     id: i,
     name,
     tokenType,
-    supply: numeral(supply).format('0,0'),
+    supply: supplyValue,
     holders: numeral(holders).format('0,0'),
     denom,
     logo_URIs,

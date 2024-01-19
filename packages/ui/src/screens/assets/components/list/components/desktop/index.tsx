@@ -11,6 +11,7 @@ import numeral from 'numeral';
 import Image from 'next/image';
 import { ASSETS_DETAILS } from '@/utils/go_to_page';
 import { useRouter } from 'next/router';
+import { getFormatString } from '@/utils/format_token';
 
 type GridColumnProps = {
   column: ReturnType<typeof fetchColumns>[number];
@@ -72,7 +73,9 @@ const GridRow: FC<GridRowProps> = ({ column, style, rowIndex, align, item, i }) 
   const { classes, cx } = useStyles();
   const router = useRouter();
 
-  const supply = numeral(item.supply).format('0,0');
+  const value = item.supply / 10 ** item.exponent;
+
+  const supply = numeral(value).format(getFormatString(item.exponent));
   const holders = numeral(item.holders).format('0,0');
 
   let formatItem: ReactNode | null = null;
