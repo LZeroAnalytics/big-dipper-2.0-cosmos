@@ -90,6 +90,10 @@ exports[`components: SingleTransaction matches snapshot 1`] = `
   margin-top: 24px;
 }
 
+.emotion-28 {
+  word-break: break-all;
+}
+
 .emotion-28:not(:last-child) {
   margin-bottom: 32px;
 }

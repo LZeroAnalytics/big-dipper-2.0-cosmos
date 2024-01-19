@@ -61,10 +61,10 @@ describe('misc: useSearchBar', () => {
       wrapper: RecoilRoot,
     });
     act(() => {
-      result.current.handleOnSubmit(`${prefix.account}1jrld5g998gqm4yx26l6cvhxz7y5adgxquy94nz`);
+      result.current.handleOnSubmit(`${prefix.account}18h3zscwav6a4v5jt62at4xs9l88fsrm9hxepup`);
     });
     expect(mockPush).toBeCalledWith(
-      `/accounts/${prefix.account}1jrld5g998gqm4yx26l6cvhxz7y5adgxquy94nz`
+      `/accounts/${prefix.account}18h3zscwav6a4v5jt62at4xs9l88fsrm9hxepup`
     );
   });
 

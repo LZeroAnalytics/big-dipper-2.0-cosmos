@@ -49,6 +49,7 @@ const useStyles = makeStyles()((theme) => ({
     marginTop: theme.spacing(3),
   },
   msg: {
+    wordBreak: 'break-all',
     '&:not(:last-child)': {
       marginBottom: theme.spacing(4),
     },
