@@ -14,7 +14,7 @@ export const fetchColumns = (): {
   },
   {
     key: 'name',
-    sortKey: 'denom',
+    sortKey: 'display',
     width: 20,
     sort: true,
   },

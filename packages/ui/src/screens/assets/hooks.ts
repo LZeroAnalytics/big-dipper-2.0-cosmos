@@ -187,8 +187,13 @@ export const useAssets = () => {
 
       if (state.sortKey && state.sortDirection) {
         sorted.sort((a, b) => {
-          let compareA = R.pathOr('', [...state.sortKey.split('.')], a);
-          let compareB = R.pathOr('', [...state.sortKey.split('.')], b);
+          let compareA: string | number = R.pathOr('', [...state.sortKey.split('.')], a);
+          let compareB: string | number = R.pathOr('', [...state.sortKey.split('.')], b);
+
+          if (state.sortKey === 'supply' || state.sortKey === 'holders') {
+            compareA = +compareA;
+            compareB = +compareB;
+          }
 
           if (typeof compareA === 'string' && typeof compareB === 'string') {
             compareA = compareA.toLowerCase();
