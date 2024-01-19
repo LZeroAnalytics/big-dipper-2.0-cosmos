@@ -25,12 +25,13 @@ const TabsHeader: FC<TabsHeaderProps> = ({ className, tab, handleTabChange }) =>
           if (x === 'nonFungibleToken') {
             return (
               <Tooltip
+                key={x}
                 TransitionComponent={Zoom}
                 title={<p>{t('commingSoon')}</p>}
                 placement="top"
                 arrow
               >
-                <Tab key={x} label={t(x)} {...a11yProps(i)} />
+                <Tab label={t(x)} {...a11yProps(i)} />
               </Tooltip>
             );
           }

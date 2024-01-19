@@ -22,6 +22,7 @@ export interface OtherTokenType {
   logoURL?: string;
   displayName?: string;
   chain?: string;
+  exponent?: number;
 }
 
 export interface RewardsType {

@@ -27,7 +27,7 @@ const useStyles = makeStyles()((theme) => ({
       fontSize: theme.spacing(1.75),
       padding: `${theme.spacing(1.5)} ${theme.spacing(3.5)}`,
 
-      '&:first-child': {
+      '&:first-of-type': {
         borderTopLeftRadius: theme.spacing(0.5),
         borderBottomLeftRadius: theme.spacing(0.5),
       },

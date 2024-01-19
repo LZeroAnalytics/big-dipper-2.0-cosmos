@@ -5,12 +5,13 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useTranslation } from 'next-i18next';
 import { FC } from 'react';
-import { formatNumber } from '@/utils/format_token';
+import { formatNumber, getFormatString } from '@/utils/format_token';
 import type { OtherTokenType } from '@/screens/account_details/types';
 import { columns } from '@/screens/account_details/components/other_tokens/components/desktop/utils';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { ASSETS_DETAILS } from '@/utils/go_to_page';
+import numeral from 'numeral';
 import useStyles from './styles';
 
 type DesktopProps = {
@@ -27,7 +28,9 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
     key: i,
     token: x.denom,
     commission: formatNumber(x.commission.value, x.commission.exponent),
-    available: formatNumber(x.available.value, x.available.exponent),
+    available: x.exponent
+      ? numeral(+x.available.value / 10 ** x.exponent).format(getFormatString(x.exponent))
+      : formatNumber(x.available.value, x.available.exponent),
     reward: x.reward ? formatNumber(x.reward.value, x.reward.exponent) : '',
     ...(x.logoURL && { logo: x.logoURL }),
     ...(x.displayName && { displayName: x.displayName }),

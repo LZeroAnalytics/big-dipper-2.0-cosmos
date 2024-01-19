@@ -195,6 +195,7 @@ const formatOtherTokens = (data: Data, assets: Asset[]) => {
         displayName: asset.ibc_info.display_name,
         logoURL: asset.logo_URIs.svg || asset.logo_URIs.png,
         chain: asset.ibc_info.source_chain,
+        exponent: asset.ibc_info.precision,
       }),
     });
   });
