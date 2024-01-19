@@ -8,8 +8,29 @@ import {
   useAccountWithdrawalAddressQuery,
 } from '@/graphql/types/general_types';
 import { toValidatorAddress } from '@/utils/prefix_convert';
+import { bech32 } from 'bech32';
+import chainConfig from '@/chainConfig';
+
+const {
+  prefix: { account },
+} = chainConfig();
+
+export const validateAddress = (address: string) => {
+  try {
+    const decodedAddress = bech32.decode(address);
+    const { prefix, words } = decodedAddress;
+
+    if (prefix && words.length === 32) {
+      return { prefix, result: true };
+    }
+  } catch (error) {
+    // Invalid address or decoding error
+  }
+  return { prefix: '', result: false };
+};
 
 export const useCommission = (address?: string) => {
+  const { prefix, result } = validateAddress(address as string);
   /* Converting the address to a validator address. */
   let validatorAddress = '';
   try {
@@ -30,7 +51,7 @@ export const useCommission = (address?: string) => {
     variables: {
       validatorAddress,
     },
-    skip: !address,
+    skip: !address || prefix !== account || !result,
   });
   useEffect(() => {
     if (error) refetch();
@@ -39,6 +60,8 @@ export const useCommission = (address?: string) => {
 };
 
 export const useAccountWithdrawalAddress = (address?: string) => {
+  const { prefix, result } = validateAddress(address as string);
+
   const defaultReturnValue = useMemo(
     () => ({
       withdrawalAddress: {
@@ -51,7 +74,7 @@ export const useAccountWithdrawalAddress = (address?: string) => {
     variables: {
       address: address ?? '',
     },
-    skip: !address,
+    skip: !address || prefix !== account || !result,
   });
   useEffect(() => {
     if (error) refetch();
@@ -64,6 +87,7 @@ export const useAccountWithdrawalAddress = (address?: string) => {
 };
 
 export const useAvailableBalances = (address?: string) => {
+  const { prefix, result } = validateAddress(address as string);
   const defaultReturnValue = useMemo(
     () => ({
       accountBalances: {
@@ -76,7 +100,7 @@ export const useAvailableBalances = (address?: string) => {
     variables: {
       address: address ?? '',
     },
-    skip: !address,
+    skip: !address || prefix !== account || !result,
   });
   useEffect(() => {
     if (error) refetch();
@@ -85,6 +109,7 @@ export const useAvailableBalances = (address?: string) => {
 };
 
 export const useDelegationBalance = (address?: string) => {
+  const { prefix, result } = validateAddress(address as string);
   const defaultReturnValue = useMemo(
     () => ({
       delegationBalance: {
@@ -97,7 +122,7 @@ export const useDelegationBalance = (address?: string) => {
     variables: {
       address: address ?? '',
     },
-    skip: !address,
+    skip: !address || prefix !== account || !result,
   });
   useEffect(() => {
     if (error) refetch();
@@ -106,6 +131,7 @@ export const useDelegationBalance = (address?: string) => {
 };
 
 export const useUnbondingBalance = (address?: string) => {
+  const { prefix, result } = validateAddress(address as string);
   const defaultReturnValue = useMemo(
     () => ({
       unbondingBalance: {
@@ -118,7 +144,7 @@ export const useUnbondingBalance = (address?: string) => {
     variables: {
       address: address ?? '',
     },
-    skip: !address,
+    skip: !address || prefix !== account || !result,
   });
   useEffect(() => {
     if (error) refetch();
@@ -127,12 +153,13 @@ export const useUnbondingBalance = (address?: string) => {
 };
 
 export const useRewards = (address?: string) => {
+  const { prefix, result } = validateAddress(address as string);
   const defaultReturnValue = useMemo(() => ({ delegationRewards: [] }), []);
   const { data, error, refetch } = useAccountDelegationRewardsQuery({
     variables: {
       address: address ?? '',
     },
-    skip: !address,
+    skip: !address || prefix !== account || !result,
   });
   useEffect(() => {
     if (error) refetch();

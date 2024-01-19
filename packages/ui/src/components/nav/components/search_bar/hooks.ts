@@ -1,5 +1,6 @@
 import chainConfig from '@/chainConfig';
 import { readValidator } from '@/recoil/validators';
+import { validateAddress } from '@/screens/account_details/utils';
 import { Asset } from '@/screens/assets/hooks';
 import {
   ACCOUNT_DETAILS,
@@ -20,7 +21,6 @@ import { useRecoilCallback } from 'recoil';
 const { extra, prefix, chainType } = chainConfig();
 const consensusRegex = new RegExp(`^(${prefix.consensus})`);
 const validatorRegex = new RegExp(`^(${prefix.validator})`);
-const userRegex = new RegExp(`^(${prefix.account})`);
 
 export const useSearchBar = (t: TFunction) => {
   const router = useRouter();
@@ -45,6 +45,7 @@ export const useSearchBar = (t: TFunction) => {
     ({ snapshot }) =>
       async (value: string, clear?: () => void) => {
         const parsedValue = value.replace(/\s+/g, '');
+        const { prefix: validatePrefix, result } = validateAddress(parsedValue as string);
 
         if (/^-?\d+$/.test(String(parsedValue.replace(/[.,]/g, '')))) {
           router.push(BLOCK_DETAILS(String(parsedValue.replace(/[.,]/g, ''))));
@@ -57,7 +58,7 @@ export const useSearchBar = (t: TFunction) => {
           }
         } else if (validatorRegex.test(parsedValue) && isValidAddress(parsedValue)) {
           router.push(VALIDATOR_DETAILS(parsedValue));
-        } else if (userRegex.test(parsedValue) && isValidAddress(parsedValue)) {
+        } else if (result && validatePrefix) {
           router.push(ACCOUNT_DETAILS(parsedValue));
         } else {
           const assetItem = assets.find((item) => item.denom.includes(parsedValue));

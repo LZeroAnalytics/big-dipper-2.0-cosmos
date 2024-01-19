@@ -13,9 +13,15 @@ export const toValidatorAddress = (address: string) => {
 
 export const isValidAddress = (address: string) => {
   try {
-    const decoded = bech32.decode(address).words;
-    return !!decoded;
+    const decodedAddress = bech32.decode(address);
+    const { prefix: decodedPrefix, words } = decodedAddress;
+
+    if (decodedPrefix && words.length === 32) {
+      return true;
+    }
   } catch {
-    return false;
+    // error
   }
+
+  return false;
 };

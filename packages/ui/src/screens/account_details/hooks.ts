@@ -16,6 +16,7 @@ import {
   useDelegationBalance,
   useRewards,
   useUnbondingBalance,
+  validateAddress,
 } from '@/screens/account_details/utils';
 import { formatToken } from '@/utils/format_token';
 import { getDenom } from '@/utils/get_denom';
@@ -278,7 +279,6 @@ export const useAccountDetails = () => {
       handleSetState((prevState) => ({
         ...prevState,
         assetsLoading: false,
-        exists: false,
       }));
     }
   }, []);
@@ -324,20 +324,18 @@ export const useAccountDetails = () => {
   }, [handleSetState, address, withdrawalAddress.withdrawalAddress?.address]);
 
   useEffect(() => {
-    if (error) {
-      handleSetState((prevState) => ({
-        ...prevState,
-        loading: false,
-        exists: false,
-      }));
-    } else if (!state.exists) {
-      handleSetState((prevState) => ({
-        ...prevState,
-        loading: false,
-        exists: true,
-      }));
+    if (address.length) {
+      const { result } = validateAddress(address);
+
+      if (!result) {
+        handleSetState((prevState) => ({
+          ...prevState,
+          loading: false,
+          exists: false,
+        }));
+      }
     }
-  }, [error, state.exists, handleSetState]);
+  }, [error, state.exists, handleSetState, address]);
 
   return { state };
 };

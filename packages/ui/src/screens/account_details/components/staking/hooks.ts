@@ -20,8 +20,12 @@ import type { RewardsType } from '@/screens/account_details/types';
 import { ValidatorType } from '@/screens/validators/components/list/types';
 import { formatToken } from '@/utils/format_token';
 import { getDenom } from '@/utils/get_denom';
+import { validateAddress } from '../../utils';
 
-const { primaryTokenUnit } = chainConfig();
+const {
+  primaryTokenUnit,
+  prefix: { account },
+} = chainConfig();
 
 export const ROWS_PER_PAGE = 10;
 
@@ -141,6 +145,7 @@ export const useStaking = (
   const address = Array.isArray(router?.query?.address)
     ? router.query.address[0]
     : router?.query?.address ?? '';
+  const { prefix, result } = validateAddress(address as string);
 
   // =====================================
   // delegations
@@ -156,6 +161,7 @@ export const useStaking = (
       limit: ROWS_PER_PAGE,
       offset: delegationsPage * ROWS_PER_PAGE,
     },
+    skip: !address || prefix !== account || !result,
   });
 
   useEffect(() => {
@@ -171,6 +177,7 @@ export const useStaking = (
       limit: ROWS_PER_PAGE,
       offset: (delegationsPage + 1) * ROWS_PER_PAGE,
     },
+    skip: !address || prefix !== account || !result,
   });
 
   const [delegationsPagination, setDelegationsPagination] = useState<number | undefined>();
@@ -185,6 +192,7 @@ export const useStaking = (
       offset: 0,
       pagination: true,
     },
+    skip: !address || prefix !== account || !result,
   });
   useEffect(() => {
     if (dError) {
@@ -208,6 +216,7 @@ export const useStaking = (
       limit: ROWS_PER_PAGE,
       offset: redelegationsPage * ROWS_PER_PAGE,
     },
+    skip: !address || prefix !== account || !result,
   });
   useEffect(() => {
     if (redelegationsLoading) return;
@@ -221,6 +230,7 @@ export const useStaking = (
       limit: ROWS_PER_PAGE,
       offset: (redelegationsPage + 1) * ROWS_PER_PAGE,
     },
+    skip: !address || prefix !== account || !result,
   });
 
   const [redelegationsPagination, setRedelegationsPagination] = useState<number | undefined>();
@@ -235,6 +245,7 @@ export const useStaking = (
       offset: 0,
       pagination: true,
     },
+    skip: !address || prefix !== account || !result,
   });
   useEffect(() => {
     if (rError) {
@@ -258,6 +269,7 @@ export const useStaking = (
       limit: ROWS_PER_PAGE,
       offset: unbondingsPage * ROWS_PER_PAGE,
     },
+    skip: !address || prefix !== account || !result,
   });
   useEffect(() => {
     if (undelegationsLoading) return;
@@ -271,6 +283,7 @@ export const useStaking = (
       limit: ROWS_PER_PAGE,
       offset: (unbondingsPage + 1) * ROWS_PER_PAGE,
     },
+    skip: !address || prefix !== account || !result,
   });
 
   const [undelegationsPagination, setUndelegationsPagination] = useState<number | undefined>();
@@ -285,6 +298,7 @@ export const useStaking = (
       offset: 0,
       pagination: true,
     },
+    skip: !address || prefix !== account || !result,
   });
   useEffect(() => {
     if (uError) {
