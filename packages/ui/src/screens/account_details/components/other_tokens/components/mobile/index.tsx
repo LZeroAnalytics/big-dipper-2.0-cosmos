@@ -2,10 +2,11 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'next-i18next';
 import { FC, Fragment } from 'react';
-import { formatNumber } from '@/utils/format_token';
+import { formatNumber, getFormatString } from '@/utils/format_token';
 import type { OtherTokenType } from '@/screens/account_details/types';
 import useStyles from '@/screens/account_details/components/other_tokens/components/mobile/styles';
 import Image from 'next/image';
+import numeral from 'numeral';
 
 type MobileProps = {
   className?: string;
@@ -19,7 +20,9 @@ const Mobile: FC<MobileProps> = ({ className, items }) => {
     <div className={className}>
       {items?.map((x, i) => {
         const { logoURL, displayName, chain } = x;
-        const available = formatNumber(x.available.value, x.available.exponent);
+        const available = x.exponent
+          ? numeral(+x.available.value / 10 ** x.exponent).format(getFormatString(x.exponent))
+          : formatNumber(x.available.value, x.available.exponent);
         const reward = x.reward ? formatNumber(x.reward.value, x.reward.exponent) : '';
         const isLast = !items || i === items.length - 1;
 
