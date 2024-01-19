@@ -52,7 +52,8 @@
           "table_headers": "#6C6F78",
           "data_blocks": "#25D695",
           "staking_tab": "#5E6773",
-          "active_tab": "#FFFFFF"
+          "active_tab": "#FFFFFF",
+          "settings_label_version": "#5E6773"
         },
         "primaryData": {
           "one": "#F87255",
@@ -153,7 +154,8 @@
           "highlight": "#F1C34E",
           "table_headers": "#A5A8B2",
           "staking_tab": "#A5A8B2",
-          "active_tab": "#1B1D23"
+          "active_tab": "#1B1D23",
+          "settings_label_version": "#C3C3C3"
         },
         "primaryData": {
           "one": "#F87255",

@@ -46,6 +46,7 @@ declare module '@mui/material/styles/createPalette' {
       data_blocks: string;
       staking_tab: string;
       active_tab: string;
+      settings_label_version: string;
     };
     primaryData: {
       one: string;

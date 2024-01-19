@@ -95,11 +95,13 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   version: {
-    color: theme.palette.custom.fonts.fontFour,
+    color: theme.palette.custom.fonts.settings_label_version,
     display: 'flex',
     alignItems: 'start',
     justifyContent: 'center',
-    // marginLeft: theme.spacing(1),
+    fontSize: theme.spacing(1.5),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(0.5),
   },
 }));
 

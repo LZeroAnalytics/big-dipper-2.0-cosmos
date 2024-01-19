@@ -29,6 +29,7 @@ const Settings: FC<ComponentDefault> = (props) => {
     txListFormat,
     handleClose,
   } = useSettingList();
+  const currentVersion = process.env.NEXT_PUBLIC_VERSION;
 
   return (
     <div>
@@ -134,6 +135,7 @@ const Settings: FC<ComponentDefault> = (props) => {
               ))}
             </Select>
           </div>
+          <Typography className={classes.version}>Version: {currentVersion}</Typography>
         </DialogContent>
         <div />
       </Dialog>
