@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import dynamic from 'next/dynamic';
 import Box from '@/components/box';
 import { TitleBar } from '@/components/nav/components';
@@ -6,8 +6,8 @@ import { Typography, Divider } from '@mui/material';
 import { useScreenSize } from '@/hooks/use_screen_size';
 import { useRecoilValue } from 'recoil';
 import { readMarket } from '@/recoil/market';
-import Big from 'big.js';
-import { formatNumber } from '@/utils/format_token';
+// import Big from 'big.js';
+// import { formatNumber } from '@/utils/format_token';
 import useStyles from './styles';
 
 const PriceChart = dynamic(() => import('./price_chart'), { ssr: false });
@@ -19,7 +19,7 @@ const MainInfo: React.FC<{
   const { isMobile } = useScreenSize();
   const marketState = useRecoilValue(readMarket);
 
-  // const renderPriceChange = useMemo(() => {
+  // const renderPriceChange = React.useMemo(() => {
   //   const inflation = `${formatNumber(Big(marketState.inflation)?.times(100).toPrecision(), 2)}%`;
 
   //   if (marketState.inflation === 0) {
