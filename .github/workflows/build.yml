@@ -43,7 +43,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           push: true
           build-args: |
-            "PROJECT_NAME=web-coreum"
+            PROJECT_NAME=web-coreum
+            VERSION=${{ env.TAG }}
 
       - name: Update Devnet Deployment
         run: |-
