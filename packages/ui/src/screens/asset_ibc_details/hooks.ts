@@ -51,7 +51,7 @@ interface AssetDetailsState {
 }
 
 const formatAsset = ({ asset, additionalData }: { asset: Asset; additionalData: any }) => {
-  const assetInTotalSupply = additionalData.supply.coins.find(
+  const assetInTotalSupply = additionalData?.supply?.coins?.find(
     (coin: any) => coin.denom === asset.denom
   );
 
@@ -59,7 +59,7 @@ const formatAsset = ({ asset, additionalData }: { asset: Asset; additionalData: 
   const descriptionValue = asset.description;
   const display = asset.ibc_info.display_name ?? '';
   const supply = assetInTotalSupply?.amount ?? '0';
-  const assetInHolders = additionalData.tokenHolderCount.find(
+  const assetInHolders = additionalData?.tokenHolderCount?.find(
     (tokenHolderCount: any) => tokenHolderCount.denom === asset.denom
   );
   const holders = String(assetInHolders?.holders) ?? '0';
@@ -166,23 +166,23 @@ export const useAssetDetails = () => {
   });
 
   useEffect(() => {
-    const { assetsListItem } = state;
+    const { assetsListItem, assetsLoading, loading, data } = state;
 
-    if (!assetsListItem && !state.assetsLoading && !state.loading) {
+    if (!assetsListItem && !assetsLoading && !loading) {
       handleSetState((prevState) => ({
         ...prevState,
         exists: false,
       }));
-    } else if (!state.assetsLoading && !state.loading) {
+    } else if (!assetsLoading && !loading && assetsListItem) {
       handleSetState((prevState) => ({
         ...prevState,
         asset: formatAsset({
-          asset: assetsListItem!,
-          additionalData: state.data,
+          asset: assetsListItem,
+          additionalData: data,
         }),
       }));
     }
-  }, [state.assetsLoading, state.loading, state.data, state.assetsListItem]);
+  }, [state]);
 
   return {
     state,

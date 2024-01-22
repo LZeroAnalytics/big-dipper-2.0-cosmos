@@ -69,29 +69,27 @@ const formatAssets = ({
     let chain = 'Coreum';
 
     const assetInMetadata = metadatas.find((metadataItem: any) => metadataItem.base === item.denom);
-    const assetInTotalSupply = additionalData.supply.coins.find(
+    const assetInTotalSupply = additionalData?.supply?.coins?.find(
       (coin: any) => coin.denom === item.denom
     );
 
     let exponent = assetInMetadata?.denom_units[1]?.exponent ?? 0;
     const descriptionValue = item.description.length
       ? item.description
-      : assetInMetadata.description;
+      : assetInMetadata?.description;
     let display = assetInMetadata?.display ?? '';
     const symbol = assetInMetadata?.symbol ?? '';
     const supply = assetInTotalSupply?.amount ?? '0';
 
     if (item.denom === primaryTokenUnit) {
-      const { count } = additionalData.accountAggregate.aggregate;
-      holders = count;
+      holders = additionalData?.accountAggregate?.aggregate?.count ?? 0;
       tokenType = 'native';
       display = tokenUnits[primaryTokenUnit]?.display;
     } else {
-      const assetInHolders = additionalData.tokenHolderCount.find(
+      const assetInHolders = additionalData?.tokenHolderCount?.find(
         (tokenHolderCount: any) => tokenHolderCount.denom === item.denom
       );
       holders = String(assetInHolders?.holders) ?? '0';
-
       tokenType = item.denom.includes('ibc/') ? 'ibc' : 'native';
     }
 
@@ -292,24 +290,19 @@ export const useAssets = () => {
   });
 
   useEffect(() => {
-    if (!state.assetsLoading && !state.metadataLoading && !state.loading) {
+    const { assetsLoading, metadataLoading, loading, data, assetsList, metadatas } = state;
+
+    if (!assetsLoading && !metadataLoading && !loading) {
       handleSetState((prevState) => ({
         ...prevState,
         items: formatAssets({
-          metadatas: state.metadatas,
-          assets: state.assetsList,
-          additionalData: state.data,
+          metadatas,
+          assets: assetsList,
+          additionalData: data,
         }),
       }));
     }
-  }, [
-    state.assetsLoading,
-    state.metadataLoading,
-    state.loading,
-    state.data,
-    state.assetsList,
-    state.metadatas,
-  ]);
+  }, [state]);
 
   return {
     state,

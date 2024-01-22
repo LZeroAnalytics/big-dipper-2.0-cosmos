@@ -61,30 +61,26 @@ const formatAsset = ({
   additionalData: any;
 }) => {
   let holders = '0';
-  let tokenType = '';
+  const tokenType = 'native';
 
-  const assetInTotalSupply = additionalData.supply.coins.find(
+  const assetInTotalSupply = additionalData?.supply?.coins?.find(
     (coin: any) => coin.denom === asset.denom
   );
 
-  const exponent = metadata.denom_units[1]?.exponent ?? 0;
-  const descriptionValue = asset.description.length ? asset.description : metadata.description;
-  let display = metadata.display ?? '';
-  const symbol = metadata.symbol ?? '';
+  const exponent = metadata?.denom_units?.[1]?.exponent ?? 0;
+  const descriptionValue = asset.description.length ? asset.description : metadata?.description;
+  let display = metadata?.display ?? '';
+  const symbol = metadata?.symbol ?? '';
   const supply = assetInTotalSupply?.amount ?? '0';
 
   if (asset.denom === primaryTokenUnit) {
-    const { count } = additionalData.accountAggregate.aggregate;
-    holders = count;
-    tokenType = 'native';
+    holders = additionalData?.accountAggregate?.aggregate?.count ?? 0;
     display = tokenUnits[primaryTokenUnit]?.display;
   } else {
-    const assetInHolders = additionalData.tokenHolderCount.find(
+    const assetInHolders = additionalData?.tokenHolderCount.find(
       (tokenHolderCount: any) => tokenHolderCount.denom === asset.denom
     );
     holders = String(assetInHolders?.holders) ?? '0';
-
-    tokenType = asset.denom.includes('ibc') ? 'ibc' : 'native';
   }
 
   return {
@@ -211,30 +207,24 @@ export const useAssetDetails = () => {
   });
 
   useEffect(() => {
-    const { assetsListItem } = state;
-    if (!assetsListItem && !state.assetsLoading && !state.metadataLoading && !state.loading) {
+    const { assetsListItem, assetsLoading, metadataLoading, loading, data, metadata } = state;
+
+    if (!assetsListItem && !assetsLoading && !metadataLoading && !loading) {
       handleSetState((prevState) => ({
         ...prevState,
         exists: false,
       }));
-    } else if (!state.assetsLoading && !state.metadataLoading && !state.loading) {
+    } else if (!assetsLoading && !metadataLoading && !loading && assetsListItem) {
       handleSetState((prevState) => ({
         ...prevState,
         asset: formatAsset({
-          metadata: state.metadata,
-          asset: assetsListItem!,
-          additionalData: state.data,
+          metadata,
+          asset: assetsListItem,
+          additionalData: data,
         }),
       }));
     }
-  }, [
-    state.assetsLoading,
-    state.metadataLoading,
-    state.loading,
-    state.data,
-    state.assetsListItem,
-    state.metadata,
-  ]);
+  }, [state]);
 
   return {
     state,
