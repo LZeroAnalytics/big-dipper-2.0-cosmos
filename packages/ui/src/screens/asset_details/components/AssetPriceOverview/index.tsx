@@ -18,7 +18,11 @@ const AssetPriceOverview: FC<AssetPriceOverviewProps> = ({ asset, className }) =
   const { tokenType, supply, display, exponent } = asset;
 
   const value = supply / 10 ** exponent;
-  const supplyValue = numeral(value).format(getFormatString(exponent));
+  let supplyValue = numeral(value).format(getFormatString(exponent));
+
+  if (Number(value) < 1) {
+    supplyValue = value.toFixed(exponent);
+  }
 
   const dataItems = [
     // {

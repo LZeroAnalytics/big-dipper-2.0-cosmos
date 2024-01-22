@@ -74,8 +74,12 @@ const GridRow: FC<GridRowProps> = ({ column, style, rowIndex, align, item, i }) 
   const router = useRouter();
 
   const value = item.supply / 10 ** item.exponent;
+  let supply = numeral(value).format(getFormatString(item.exponent));
 
-  const supply = numeral(value).format(getFormatString(item.exponent));
+  if (Number(value) < 1) {
+    supply = value.toFixed(item.exponent);
+  }
+
   const holders = numeral(item.holders).format('0,0');
 
   let formatItem: ReactNode | null = null;

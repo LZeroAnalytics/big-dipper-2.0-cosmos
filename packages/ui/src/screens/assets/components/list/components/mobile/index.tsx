@@ -23,7 +23,11 @@ const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, item, isLast,
   const router = useRouter();
 
   const value = supply / 10 ** exponent;
-  const supplyValue = numeral(value).format(getFormatString(item.exponent));
+  let supplyValue = numeral(value).format(getFormatString(item.exponent));
+
+  if (Number(value) < 1) {
+    supplyValue = value.toFixed(item.exponent);
+  }
 
   const selectedItem = {
     id: i,
