@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import Box from '@/components/box';
 import { TitleBar } from '@/components/nav/components';
@@ -6,9 +6,11 @@ import { Typography, Divider } from '@mui/material';
 import { useScreenSize } from '@/hooks/use_screen_size';
 import { useRecoilValue } from 'recoil';
 import { readMarket } from '@/recoil/market';
-// import Big from 'big.js';
-// import { formatNumber } from '@/utils/format_token';
+import Big from 'big.js';
+import { formatNumber } from '@/utils/format_token';
 import useStyles from './styles';
+import { useHero } from '../hero/hooks';
+import { TokenPriceType } from '../hero/types';
 
 const PriceChart = dynamic(() => import('./price_chart'), { ssr: false });
 
@@ -18,20 +20,50 @@ const MainInfo: React.FC<{
   const { classes, cx } = useStyles();
   const { isMobile } = useScreenSize();
   const marketState = useRecoilValue(readMarket);
+  const { state } = useHero();
 
-  // const renderPriceChange = React.useMemo(() => {
-  //   const inflation = `${formatNumber(Big(marketState.inflation)?.times(100).toPrecision(), 2)}%`;
+  const priceChange = useMemo(() => {
+    const currentDate = new Date();
+    const yesterday = new Date(currentDate);
+    yesterday.setDate(yesterday.getDate() - 1);
 
-  //   if (marketState.inflation === 0) {
-  //     return <span className={classes.priceChange}>{inflation}</span>;
-  //   }
+    const yesterdayTimestamp = yesterday.getTime();
 
-  //   if (marketState.inflation > 0) {
-  //     return <span className={cx(classes.priceChange, classes.priceUp)}>+{inflation}</span>;
-  //   }
+    const priceChangeHistory: TokenPriceType[] = state.tokenPriceHistory.filter(
+      (priceValue: TokenPriceType) => {
+        const time = new Date(priceValue.time);
+        const priceChangeTimestamp = time.getTime();
 
-  //   return <span className={cx(classes.priceChange, classes.priceDown)}>-{inflation}</span>;
-  // }, [marketState.inflation, classes.priceChange, classes.priceUp, classes.priceDown]);
+        return yesterdayTimestamp > priceChangeTimestamp;
+      }
+    );
+
+    if (priceChangeHistory.length && marketState.price) {
+      const prevValue = priceChangeHistory[priceChangeHistory.length - 1].value;
+      const currentValue = marketState.price;
+
+      const substract = currentValue - prevValue;
+      const priceChangePercentage = (substract * 100) / prevValue;
+
+      return priceChangePercentage;
+    }
+
+    return 0;
+  }, [state.tokenPriceHistory, marketState.price]);
+
+  const renderPriceChange = React.useMemo(() => {
+    const priceChange24h = `${formatNumber(Big(priceChange)?.toPrecision(), 2)}%`;
+
+    if (priceChange === 0) {
+      return <span className={classes.priceChange}>{priceChange24h}</span>;
+    }
+
+    if (priceChange > 0) {
+      return <span className={cx(classes.priceChange, classes.priceUp)}>+{priceChange24h}</span>;
+    }
+
+    return <span className={cx(classes.priceChange, classes.priceDown)}>{priceChange24h}</span>;
+  }, [priceChange]);
 
   return (
     <Box className={cx(classes.root, className)}>
@@ -66,7 +98,7 @@ const MainInfo: React.FC<{
           </Typography>
           <Typography variant="h2" className={classes.price}>
             ${marketState.price}
-            {/* {renderPriceChange} */}
+            {renderPriceChange}
           </Typography>
         </div>
         <PriceChart />

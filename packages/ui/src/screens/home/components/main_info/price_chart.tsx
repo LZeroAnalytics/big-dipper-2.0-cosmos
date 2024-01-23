@@ -68,7 +68,11 @@ const PriceChart: React.FC = () => {
         // disable scaling and panning since we aren't implementing a scrollback-refetch
         handleScroll: false,
         handleScale: false,
+        timeScale: {
+          timeVisible: true,
+        },
       };
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const chartPrice = document.getElementById('price-chart')!;
       chartRef.current = createChart(chartPrice, chartOptions);
       const baselineSeries = chartRef.current.addBaselineSeries({
@@ -90,10 +94,9 @@ const PriceChart: React.FC = () => {
       });
 
       baselineSeries.setData(finalChartData as any);
-
       chartRef.current.timeScale().fitContent();
     }
-  }, [finalChartData]);
+  }, [finalChartData, theme]);
 
   useEffect(() => {
     if (chartRef.current) {
