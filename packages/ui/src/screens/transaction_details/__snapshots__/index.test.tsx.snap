@@ -158,6 +158,7 @@ exports[`screen: Blocks/List matches snapshot 1`] = `
           id="Overview"
         />
         <div
+          assets={[]}
           className="emotion-5"
           id="Messages"
           messages={

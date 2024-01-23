@@ -27,7 +27,7 @@ describe('screen: TransactionDetails/MsgDelegate', () => {
     });
     const component = renderer.create(
       <MockTheme>
-        <Delegate message={message} />
+        <Delegate message={message} assets={[]} />
       </MockTheme>
     );
     const tree = component?.toJSON();

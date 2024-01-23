@@ -10,6 +10,7 @@ import useStyles from '@/screens/transaction_details/components/messages/styles'
 import { useList, useListRow } from '@/hooks/use_react_window';
 import { getMessageByType } from '@/components/msg/utils';
 import Box from '@/components/box';
+import { Asset } from '@/screens/assets/hooks';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   setRowHeight: Parameters<typeof useListRow>[1];
@@ -17,6 +18,7 @@ type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   classes: ReturnType<typeof useStyles>['classes'];
   isLast: boolean;
   viewRaw: boolean;
+  assets: Asset[];
 };
 
 const ListItem: FC<ListItemProps> = ({
@@ -27,10 +29,12 @@ const ListItem: FC<ListItemProps> = ({
   classes,
   isLast,
   viewRaw,
+  assets,
 }) => {
   const { t } = useTranslation('transactions');
   const { rowRef } = useListRow(index, setRowHeight);
-  const formattedItem = getMessageByType(message, viewRaw, t);
+
+  const formattedItem = getMessageByType(message, viewRaw, t, assets);
 
   return (
     <div style={style}>
@@ -51,12 +55,12 @@ type MessagesProps = {
   viewRaw: boolean;
   toggleMessageDisplay: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
   onMessageFilterCallback: (value: string) => void;
+  assets: Asset[];
 };
 
 const Messages: FC<MessagesProps> = ({ className, ...props }) => {
   const { t } = useTranslation('transactions');
   const { classes, cx } = useStyles();
-
   const { listRef, getRowHeight, setRowHeight } = useList();
 
   return (
@@ -110,6 +114,7 @@ const Messages: FC<MessagesProps> = ({ className, ...props }) => {
                   classes={classes}
                   isLast={index === props.messages.length}
                   viewRaw={props.viewRaw}
+                  assets={props.assets}
                 />
               )}
             </List>

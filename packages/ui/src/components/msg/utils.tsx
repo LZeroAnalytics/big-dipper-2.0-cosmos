@@ -7,6 +7,7 @@ import { TFunction } from 'next-i18next';
 import * as R from 'ramda';
 import { ComponentProps, FC } from 'react';
 import { convertMsgType } from '@/utils/convert_msg_type';
+import { Asset } from '@/screens/assets/hooks';
 
 // =====================================
 // DO NOT UPDATE IF THIS IS A FORK.
@@ -549,13 +550,18 @@ export const getMessageModelByType = (type: string): Data['model'] => {
  * Helper function to correctly display the correct UI
  * @param type Model type
  */
-export const getMessageByType = <TMessage,>(message: TMessage, viewRaw: boolean, t: TFunction) => {
+export const getMessageByType = <TMessage,>(
+  message: TMessage,
+  viewRaw: boolean,
+  t: TFunction,
+  assets?: Asset[]
+) => {
   const { type } = (message as { type: string }) ?? {};
 
   const convertedMsgType = convertMsgType([type]);
 
   type ResultType = {
-    content: FC<{ message: TMessage }>;
+    content: FC<{ message: TMessage; assets: Asset[] }>;
     tagDisplay: Data['tagDisplay'];
     tagTheme: TagTheme;
   };
@@ -569,7 +575,7 @@ export const getMessageByType = <TMessage,>(message: TMessage, viewRaw: boolean,
   const data = getDataByType(type);
 
   if (data) {
-    results.content = data?.content as unknown as FC<{ message: TMessage }>;
+    results.content = data?.content as unknown as FC<{ message: TMessage; assets: Asset[] }>;
     results.tagTheme = data.tagTheme as ResultType['tagTheme'];
   }
 
@@ -582,7 +588,12 @@ export const getMessageByType = <TMessage,>(message: TMessage, viewRaw: boolean,
 
   return {
     type: <Tag value={t(results.tagDisplay)} theme={results.tagTheme} />,
-    message: <Content message={message as unknown as ComponentProps<typeof Content>['message']} />,
+    message: (
+      <Content
+        message={message as unknown as ComponentProps<typeof Content>['message']}
+        assets={assets || []}
+      />
+    ),
   };
 };
 

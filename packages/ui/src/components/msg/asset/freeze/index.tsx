@@ -5,20 +5,35 @@ import { Trans } from 'react-i18next';
 import Name from '@/components/name';
 import { MsgFreeze } from '@/models';
 import { formatToken, formatNumber } from '@/utils';
+import { Asset } from '@/screens/assets/hooks';
 
-const Freeze: FC<{ message: MsgFreeze }> = (props) => {
-  const { message } = props;
+const Freeze: FC<{ message: MsgFreeze; assets: Asset[] }> = (props) => {
+  const { message, assets } = props;
 
   const sender = useProfileRecoil(message.sender);
   const account = useProfileRecoil(message.account);
 
   const amount = formatToken(message.coin.amount, message.coin.denom);
 
-  const parsedAmount = `${formatNumber(
+  let parsedAmount = `${formatNumber(
     amount.value,
     amount.exponent
     // Kept the "toUpperCase()" in order to show the token symbol in uppercase
   )} ${amount.displayDenom.toUpperCase()}`;
+
+  const tokenInAssets = assets.find(
+    (assetItem) => amount.displayDenom.toLowerCase() === assetItem.denom.toLowerCase()
+  );
+  if (tokenInAssets) {
+    if (amount.displayDenom.includes('ibc')) {
+      const tokenDenom = tokenInAssets.ibc_info.display_name;
+      parsedAmount = `${formatNumber(
+        amount.value,
+        tokenInAssets.ibc_info.precision
+        // Kept the "toUpperCase()" in order to show the token symbol in uppercase
+      )} ${tokenDenom}`;
+    }
+  }
 
   return (
     <Typography>

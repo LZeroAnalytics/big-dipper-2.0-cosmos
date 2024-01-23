@@ -35,7 +35,7 @@ describe('screen: TransactionDetails/IBCTransfer', () => {
     });
     const component = renderer.create(
       <MockTheme>
-        <Transfer message={message} />
+        <Transfer message={message} assets={[]} />
       </MockTheme>
     );
     const tree = component?.toJSON();

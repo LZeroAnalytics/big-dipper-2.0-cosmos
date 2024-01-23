@@ -1,3 +1,5 @@
+import { Asset } from '../assets/hooks';
+
 export interface OverviewType {
   hash: string;
   height: number;
@@ -23,4 +25,5 @@ export interface TransactionState {
     viewRaw: boolean;
     items: unknown[];
   };
+  assets: Asset[];
 }

@@ -5,6 +5,10 @@ import { convertMsgsToModels } from '@/components/msg/utils';
 import { TransactionDetailsQuery, useTransactionDetailsQuery } from '@/graphql/types/general_types';
 import type { TransactionState } from '@/screens/transaction_details/types';
 import { formatToken } from '@/utils/format_token';
+import axios from 'axios';
+import chainConfig from '@/chainConfig';
+
+const { chainType } = chainConfig();
 
 // =============================
 // overview
@@ -102,6 +106,7 @@ export const useTransactionDetails = () => {
       viewRaw: false,
       items: [],
     },
+    assets: [],
   });
 
   const handleSetState = useCallback(
@@ -130,9 +135,31 @@ export const useTransactionDetails = () => {
       hash: router.query.tx as string,
     },
     onCompleted: (data) => {
-      handleSetState((prevState) => ({ ...prevState, ...formatTransactionDetails(data) }));
+      handleSetState((prevState) => ({
+        ...prevState,
+        ...formatTransactionDetails(data),
+      }));
     },
   });
+
+  const getAssetsList = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `https://raw.githubusercontent.com/CoreumFoundation/token-registry/master/${chainType.toLowerCase()}/assets.json`
+      );
+
+      handleSetState((prevState) => ({
+        ...prevState,
+        assets: response.data.assets,
+      }));
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    getAssetsList();
+  }, []);
 
   const onMessageFilterCallback = useCallback(
     (value: string) => {

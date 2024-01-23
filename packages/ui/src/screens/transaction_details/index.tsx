@@ -14,7 +14,7 @@ const TransactionDetails = () => {
   const { classes } = useStyles();
   const { state, onMessageFilterCallback, toggleMessageDisplay, filterMessages } =
     useTransactionDetails();
-  const { overview, logs, messages } = state;
+  const { overview, logs, messages, assets } = state;
 
   return (
     <>
@@ -50,6 +50,7 @@ const TransactionDetails = () => {
                 viewRaw={messages.viewRaw}
                 toggleMessageDisplay={toggleMessageDisplay}
                 onMessageFilterCallback={onMessageFilterCallback}
+                assets={assets}
               />
             </div>
             {!!logs && <Logs logs={logs} />}
