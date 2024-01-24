@@ -28,7 +28,7 @@ const Transfer: FC<{ message: MsgTransfer; assets: Asset[] }> = (props) => {
     if (tokenFormatDenom.displayDenom.includes('ibc')) {
       const tokenDenom = tokenInAssets.ibc_info.display_name;
       token = `${formatNumber(
-        tokenFormatDenom.value,
+        String(+tokenFormatDenom.value / 10 ** tokenInAssets.ibc_info.precision),
         tokenInAssets.ibc_info.precision
         // Kept the "toUpperCase()" in order to show the token symbol in uppercase
       )} ${tokenDenom}`;

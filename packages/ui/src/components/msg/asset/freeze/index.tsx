@@ -28,7 +28,7 @@ const Freeze: FC<{ message: MsgFreeze; assets: Asset[] }> = (props) => {
     if (amount.displayDenom.includes('ibc')) {
       const tokenDenom = tokenInAssets.ibc_info.display_name;
       parsedAmount = `${formatNumber(
-        amount.value,
+        String(+amount.value / 10 ** tokenInAssets.ibc_info.precision),
         tokenInAssets.ibc_info.precision
         // Kept the "toUpperCase()" in order to show the token symbol in uppercase
       )} ${tokenDenom}`;
