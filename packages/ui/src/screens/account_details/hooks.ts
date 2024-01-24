@@ -56,6 +56,8 @@ const initialState: AccountDetailState = {
   assetsList: [],
   assetsLoading: true,
   rewards: {},
+  metadataLoading: true,
+  metadatas: [],
 };
 
 type Data = {
@@ -141,7 +143,7 @@ const formatBalance = (data: Data): BalanceType => {
 // ============================
 // other tokens
 // ============================
-const formatOtherTokens = (data: Data, assets: Asset[]) => {
+const formatOtherTokens = (data: Data, assets: Asset[], metadatas: any[]) => {
   // Loop through balance and delegation to figure out what the other tokens are
   const otherTokenUnits = new Set<string>();
   const otherTokens: OtherTokenType[] = [];
@@ -186,6 +188,19 @@ const formatOtherTokens = (data: Data, assets: Asset[]) => {
     const asset = assets.find(
       (assetItem: Asset) => assetItem.denom.toLowerCase() === x.toLowerCase()
     );
+    const assetInMetadata = metadatas.find(
+      (metadataItem: any) => metadataItem.base === x.toLowerCase()
+    );
+
+    let exponent = assetInMetadata?.denom_units[1]?.exponent ?? 0;
+    let display = assetInMetadata?.display ?? '';
+    let chain = 'Coreum';
+
+    if (asset && asset.denom.includes('ibc')) {
+      display = asset.ibc_info.display_name;
+      exponent = asset.ibc_info.precision;
+      chain = asset.ibc_info.source_chain;
+    }
 
     otherTokens.push({
       denom: tokenUnits?.[x]?.display ?? x,
@@ -193,10 +208,10 @@ const formatOtherTokens = (data: Data, assets: Asset[]) => {
       reward: rewardAmount,
       commission: commissionAmount,
       ...(asset && {
-        displayName: asset.ibc_info.display_name,
+        displayName: display,
         logoURL: asset.logo_URIs.svg || asset.logo_URIs.png,
-        chain: asset.ibc_info.source_chain,
-        exponent: asset.ibc_info.precision,
+        chain,
+        exponent,
       }),
     });
   });
@@ -210,14 +225,14 @@ const formatOtherTokens = (data: Data, assets: Asset[]) => {
 // ==========================
 // Format Data
 // ==========================
-const formatAllBalance = (data: Data, assets: Asset[]) => {
+const formatAllBalance = (data: Data, assets: Asset[], metadatas: any[]) => {
   const stateChange: Partial<AccountDetailState> = {
     balanceLoading: false,
   };
 
   stateChange.rewards = formatRewards(data);
   stateChange.balance = formatBalance(data);
-  stateChange.otherTokens = formatOtherTokens(data, assets);
+  stateChange.otherTokens = formatOtherTokens(data, assets, metadatas);
 
   return stateChange;
 };
@@ -283,8 +298,37 @@ export const useAccountDetails = () => {
     }
   }, []);
 
+  const getDenomMetadatas = useCallback(async () => {
+    try {
+      const {
+        data: {
+          pagination: { total },
+        },
+      } = await axios.get(
+        `https://full-node.${chainType.toLowerCase()}-1.coreum.dev:1317/cosmos/bank/v1beta1/denoms_metadata`
+      );
+      const {
+        data: { metadatas },
+      } = await axios.get(
+        `https://full-node.${chainType.toLowerCase()}-1.coreum.dev:1317/cosmos/bank/v1beta1/denoms_metadata?pagination.limit=${total}`
+      );
+
+      handleSetState((prevState) => ({
+        ...prevState,
+        metadataLoading: false,
+        metadatas,
+      }));
+    } catch (error) {
+      handleSetState((prevState) => ({
+        ...prevState,
+        metadataLoading: false,
+      }));
+    }
+  }, []);
+
   useEffect(() => {
     getAssetsList();
+    getDenomMetadatas();
   }, []);
 
   useEffect(() => {
@@ -303,9 +347,18 @@ export const useAccountDetails = () => {
 
     handleSetState((prevState) => ({
       ...prevState,
-      ...formatAllBalance(formattedRawData, state.assetsList),
+      ...formatAllBalance(formattedRawData, state.assetsList, state.metadatas),
     }));
-  }, [commission, available, delegation, unbonding, rewards, handleSetState, state.assetsList]);
+  }, [
+    commission,
+    available,
+    delegation,
+    unbonding,
+    rewards,
+    handleSetState,
+    state.assetsList,
+    state.metadatas,
+  ]);
 
   // ==========================
   // Fetch Data

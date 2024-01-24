@@ -32,6 +32,7 @@ export interface RewardsType {
 export interface AccountDetailState {
   loading: boolean;
   balanceLoading: boolean;
+  metadataLoading: boolean;
   exists: boolean;
   desmosProfile: DesmosProfile | null;
   overview: OverviewType;
@@ -43,4 +44,5 @@ export interface AccountDetailState {
     count: number;
   };
   rewards: RewardsType;
+  metadatas: any[];
 }
