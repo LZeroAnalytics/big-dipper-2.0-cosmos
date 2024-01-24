@@ -20,7 +20,7 @@ export const validateAddress = (address: string) => {
     const decodedAddress = bech32.decode(address);
     const { prefix, words } = decodedAddress;
 
-    if (prefix && words.length === 32) {
+    if ((prefix && words.length === 32) || words.length === 52) {
       return { prefix, result: true };
     }
   } catch (error) {

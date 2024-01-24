@@ -19,6 +19,7 @@ const formatOverview = (data: TransactionDetailsQuery) => {
     denom: '',
     amount: 0,
   };
+
   const { success } = data.transaction[0];
   const overview = {
     hash: data.transaction[0].hash,
