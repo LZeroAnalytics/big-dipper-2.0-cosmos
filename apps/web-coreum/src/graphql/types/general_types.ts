@@ -11758,7 +11758,7 @@ export type OnlineVotingPowerQuery = { activeTotal: { __typename?: 'validator_st
 export type ParamsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ParamsQuery = { stakingParams: Array<{ __typename?: 'staking_params', params: any }>, slashingParams: Array<{ __typename?: 'slashing_params', params: any }>, mintParams: Array<{ __typename?: 'mint_params', params: any }>, distributionParams: Array<{ __typename?: 'distribution_params', params: any }>, govParams: any, feeModelParams: Array<{__typename?: 'feemodel_params', params: any}>, customParams: Array<{__typename?: 'custom_params', customStakingParams: any }>, nftParams: Array<{ __typename?: 'assetnft_params', params: any }>, ftParams: Array<{ __typename?: 'assetft_params', params: any, token_upgrade_grace_period: any, token_upgrade_decision_timeout: any }>};
+export type ParamsQuery = { stakingParams: Array<{ __typename?: 'staking_params', params: any }>, slashingParams: Array<{ __typename?: 'slashing_params', params: any }>, mintParams: Array<{ __typename?: 'mint_params', params: any }>, distributionParams: Array<{ __typename?: 'distribution_params', params: any }>, govParams: Array<{ __typename?: 'gov_params', params: any }>, authParams: Array<{ __typename?: 'auth_params', params: any }>, feeModelParams: Array<{__typename?: 'feemodel_params', params: any}>, customParams: Array<{__typename?: 'custom_params', customStakingParams: any }>, nftParams: Array<{ __typename?: 'assetnft_params', params: any }>, ftParams: Array<{ __typename?: 'assetft_params', params: any, token_upgrade_grace_period: any, token_upgrade_decision_timeout: any }>};
 
 export type ProposalDetailsQueryVariables = Exact<{
   proposalId?: InputMaybe<Scalars['Int']>;
@@ -12771,6 +12771,9 @@ export const ParamsDocument = gql`
     params
   }
   ftParams: assetft_params{
+    params
+  }
+  authParams: auth_params(limit: 1, order_by: {height: desc, params: asc }) {
     params
   }
 }

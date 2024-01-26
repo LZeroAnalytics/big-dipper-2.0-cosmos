@@ -47,5 +47,11 @@
   "longEmaBlockLength": "Long EMA Block Length",
   "shortEmaBlockLength": "Short EMA Block Length",
   "maxGasPriceMultiplier": "Max Gas Price Multiplier",
-  "escalationStartFraction": "Escalation Start Fraction"
+  "escalationStartFraction": "Escalation Start Fraction",
+  "auth": "Auth",
+  "txSigLimit": "Tx signatures limit",
+  "maxMemoCharacters": "Max memo characters",
+  "txSizeCostPerByte": "Tx Size cost per byte",
+  "sigVerifyCostEd25519": "Signature verify cost ed25519",
+  "sigVerifyCostSecp256k1": "Signature verify cost secp256k1"
 }

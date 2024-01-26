@@ -25,8 +25,6 @@ export interface Minting {
 }
 
 export interface Distribution {
-  baseProposerReward: number;
-  bonusProposerReward: number;
   communityTax: number;
   withdrawAddressEnabled: boolean;
 }
@@ -59,6 +57,15 @@ export interface FT {
   tokenUpgradeGracePeriod?: number | undefined;
   tokenUpgradeDecisionTimeout?: string | undefined;
 }
+
+export interface Auth {
+  txSigLimit: number | undefined;
+  maxMemoCharacters: number | undefined;
+  txSizeCostPerByte: number | undefined;
+  sigVerifyCostEd25519: number | undefined;
+  sigVerifyCostSecp256k1: number | undefined;
+}
+
 export interface ParamsState {
   loading: boolean;
   exists: boolean;
@@ -70,4 +77,5 @@ export interface ParamsState {
   feeModel: FeeModel | null;
   nft: NFT | null;
   ft: FT | null;
+  auth: Auth | null;
 }

@@ -15,6 +15,7 @@ import {
   formatFeeModel,
   formatFT,
   formatNFT,
+  formatAuth,
 } from '@/screens/params/utils';
 
 const Params = () => {
@@ -64,6 +65,13 @@ const Params = () => {
       }
     : null;
 
+  const auth = state.auth
+    ? {
+        title: t('auth') ?? undefined,
+        details: formatAuth(state.auth, t),
+      }
+    : null;
+
   const ft = state.ft ? { title: t('ft') ?? undefined, details: formatFT(state.ft, t) } : null;
   const nft = state.nft ? { title: t('nft') ?? undefined, details: formatNFT(state.nft, t) } : null;
 
@@ -89,6 +97,7 @@ const Params = () => {
             {feeModel && <BoxDetails {...feeModel} />}
             {ft && <BoxDetails {...ft} />}
             {nft && <BoxDetails {...nft} />}
+            {auth && <BoxDetails {...auth} />}
           </span>
         </LoadAndExist>
       </Layout>

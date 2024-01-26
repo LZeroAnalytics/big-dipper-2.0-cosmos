@@ -7,6 +7,7 @@ import type {
   FeeModel,
   NFT,
   FT,
+  Auth,
 } from '@/screens/params/types';
 import { nanoToSeconds, secondsToDays } from '@/utils/time';
 import { TFunction } from 'next-i18next';
@@ -251,3 +252,31 @@ export const formatFT = (data: FT, t: TFunction) => {
     },
   ];
 };
+
+export const formatAuth = (data: Auth, t: TFunction) => [
+  {
+    key: 'txSigLimit',
+    label: t('txSigLimit'),
+    detail: numeral(data.txSigLimit).format('0,0'),
+  },
+  {
+    key: 'maxMemoCharacters',
+    label: t('maxMemoCharacters'),
+    detail: numeral(data.maxMemoCharacters).format('0,0'),
+  },
+  {
+    key: 'txSizeCostPerByte',
+    label: t('txSizeCostPerByte'),
+    detail: numeral(data.txSizeCostPerByte).format('0,0'),
+  },
+  {
+    key: 'sigVerifyCostEd25519',
+    label: t('sigVerifyCostEd25519'),
+    detail: numeral(data.sigVerifyCostEd25519).format('0,0'),
+  },
+  {
+    key: 'sigVerifyCostSecp256k1',
+    label: t('sigVerifyCostSecp256k1'),
+    detail: numeral(data.sigVerifyCostSecp256k1).format('0,0'),
+  },
+];

@@ -13,8 +13,9 @@ import {
   TokenParams,
 } from '@/models';
 import { customStakingParams } from '@/models/staking_params';
-import type { ParamsState } from '@/screens/params/types';
+import type { Auth, ParamsState } from '@/screens/params/types';
 import { formatToken } from '@/utils/format_token';
+import AuthParams from '@/models/auth_params';
 
 const { primaryTokenUnit } = chainConfig();
 
@@ -29,6 +30,7 @@ const initialState: ParamsState = {
   feeModel: null,
   nft: null,
   ft: null,
+  auth: null,
 };
 
 // ================================
@@ -202,6 +204,14 @@ const formatFTParams = (data: ParamsQuery) => {
   return null;
 };
 
+const formatAuthParams = (data: ParamsQuery): Auth | null => {
+  if (data.authParams?.length) {
+    return AuthParams.fromJson(data.authParams?.[0]?.params ?? {});
+  }
+
+  return null;
+};
+
 const formatParam = (data: ParamsQuery) => {
   const results: Partial<ParamsState> = {};
 
@@ -220,6 +230,8 @@ const formatParam = (data: ParamsQuery) => {
   results.nft = formatNFTParams(data);
 
   results.ft = formatFTParams(data);
+
+  results.auth = formatAuthParams(data);
 
   return results;
 };

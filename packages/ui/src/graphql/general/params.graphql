@@ -17,4 +17,7 @@ query Params {
   feeModelParams: feemodel_params (limit: 1, order_by: {height: desc}) {
     params
   }
+  authParams: auth_params(limit: 1, order_by: {height: desc, params: asc }) {
+    params
+  }
 }
