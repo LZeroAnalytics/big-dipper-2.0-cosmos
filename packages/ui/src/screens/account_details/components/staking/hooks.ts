@@ -160,8 +160,17 @@ export const useStaking = (
       address,
       limit: ROWS_PER_PAGE,
       offset: delegationsPage * ROWS_PER_PAGE,
+      pagination: true,
     },
     skip: !address || prefix !== account || !result,
+    onError: () => {
+      delegationsRefetch({
+        address,
+        limit: ROWS_PER_PAGE,
+        offset: delegationsPage * ROWS_PER_PAGE,
+        pagination: false,
+      });
+    },
   });
 
   useEffect(() => {
@@ -169,7 +178,7 @@ export const useStaking = (
     if (delegationsError) {
       delegationsRefetch({ pagination: false });
     }
-  }, [delegationsError, delegationsLoading, delegationsRefetch]);
+  }, [delegationsData, delegationsError, delegationsLoading, delegationsRefetch]);
 
   useAccountDelegationsQuery({
     variables: {
@@ -178,6 +187,9 @@ export const useStaking = (
       offset: (delegationsPage + 1) * ROWS_PER_PAGE,
     },
     skip: !address || prefix !== account || !result,
+    onError: () => {
+      delegationsRefetch();
+    },
   });
 
   const [delegationsPagination, setDelegationsPagination] = useState<number | undefined>();
@@ -193,6 +205,9 @@ export const useStaking = (
       pagination: true,
     },
     skip: !address || prefix !== account || !result,
+    onError: () => {
+      dRefetch();
+    },
   });
   useEffect(() => {
     if (dError) {
@@ -217,6 +232,14 @@ export const useStaking = (
       offset: redelegationsPage * ROWS_PER_PAGE,
     },
     skip: !address || prefix !== account || !result,
+    onError: () => {
+      redelegationsRefetch({
+        address,
+        limit: ROWS_PER_PAGE,
+        offset: redelegationsPage * ROWS_PER_PAGE,
+        pagination: false,
+      });
+    },
   });
   useEffect(() => {
     if (redelegationsLoading) return;
@@ -224,6 +247,7 @@ export const useStaking = (
       redelegationsRefetch({ pagination: false });
     }
   }, [redelegationsError, redelegationsLoading, redelegationsRefetch]);
+
   useAccountRedelegationsQuery({
     variables: {
       address,
@@ -231,6 +255,14 @@ export const useStaking = (
       offset: (redelegationsPage + 1) * ROWS_PER_PAGE,
     },
     skip: !address || prefix !== account || !result,
+    onError: () => {
+      redelegationsRefetch({
+        address,
+        limit: ROWS_PER_PAGE,
+        offset: (redelegationsPage + 1) * ROWS_PER_PAGE,
+        pagination: false,
+      });
+    },
   });
 
   const [redelegationsPagination, setRedelegationsPagination] = useState<number | undefined>();
@@ -246,6 +278,9 @@ export const useStaking = (
       pagination: true,
     },
     skip: !address || prefix !== account || !result,
+    onError: () => {
+      rRefetch();
+    },
   });
   useEffect(() => {
     if (rError) {
@@ -270,6 +305,14 @@ export const useStaking = (
       offset: unbondingsPage * ROWS_PER_PAGE,
     },
     skip: !address || prefix !== account || !result,
+    onError: () => {
+      undelegationsRefetch({
+        address,
+        limit: ROWS_PER_PAGE,
+        offset: unbondingsPage * ROWS_PER_PAGE,
+        pagination: false,
+      });
+    },
   });
   useEffect(() => {
     if (undelegationsLoading) return;
@@ -284,6 +327,14 @@ export const useStaking = (
       offset: (unbondingsPage + 1) * ROWS_PER_PAGE,
     },
     skip: !address || prefix !== account || !result,
+    onError: () => {
+      undelegationsRefetch({
+        address,
+        limit: ROWS_PER_PAGE,
+        offset: unbondingsPage * ROWS_PER_PAGE,
+        pagination: false,
+      });
+    },
   });
 
   const [undelegationsPagination, setUndelegationsPagination] = useState<number | undefined>();
@@ -299,6 +350,9 @@ export const useStaking = (
       pagination: true,
     },
     skip: !address || prefix !== account || !result,
+    onError: () => {
+      uRefetch();
+    },
   });
   useEffect(() => {
     if (uError) {

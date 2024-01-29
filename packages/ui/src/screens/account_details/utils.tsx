@@ -47,11 +47,15 @@ export const useCommission = (address?: string) => {
     }),
     []
   );
+
   const { data, error, refetch } = useAccountCommissionQuery({
     variables: {
       validatorAddress,
     },
     skip: !address || prefix !== account || !result,
+    onError: () => {
+      refetch();
+    },
   });
   useEffect(() => {
     if (error) refetch();
@@ -75,6 +79,9 @@ export const useAccountWithdrawalAddress = (address?: string) => {
       address: address ?? '',
     },
     skip: !address || prefix !== account || !result,
+    onError: () => {
+      refetch();
+    },
   });
   useEffect(() => {
     if (error) refetch();
@@ -101,6 +108,9 @@ export const useAvailableBalances = (address?: string) => {
       address: address ?? '',
     },
     skip: !address || prefix !== account || !result,
+    onError: () => {
+      refetch();
+    },
   });
   useEffect(() => {
     if (error) refetch();
@@ -123,6 +133,9 @@ export const useDelegationBalance = (address?: string) => {
       address: address ?? '',
     },
     skip: !address || prefix !== account || !result,
+    onError: () => {
+      refetch();
+    },
   });
   useEffect(() => {
     if (error) refetch();
@@ -145,6 +158,9 @@ export const useUnbondingBalance = (address?: string) => {
       address: address ?? '',
     },
     skip: !address || prefix !== account || !result,
+    onError: () => {
+      refetch();
+    },
   });
   useEffect(() => {
     if (error) refetch();
@@ -160,6 +176,9 @@ export const useRewards = (address?: string) => {
       address: address ?? '',
     },
     skip: !address || prefix !== account || !result,
+    onError: () => {
+      refetch();
+    },
   });
   useEffect(() => {
     if (error) refetch();
