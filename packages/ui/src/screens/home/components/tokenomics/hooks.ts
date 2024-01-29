@@ -10,12 +10,14 @@ type TokenomicsState = {
   unbonding: number;
   total: number;
   denom: string;
+  maxValidators: number;
 };
 
 const formatTokenomics = (data: TokenomicsQuery, state: TokenomicsState) => {
   const results = { ...state };
   const stakingParams = StakingParams.fromJson(data?.stakingParams?.[0]?.params ?? {});
   results.denom = stakingParams.bondDenom;
+  results.maxValidators = stakingParams.maxValidators;
 
   const [total] =
     (data?.supply?.[0]?.coins as MsgCoin[])?.filter((x) => x.denom === results.denom) ?? [];
@@ -42,6 +44,7 @@ export const useTokenomics = () => {
     unbonding: 0,
     total: 0,
     denom: '',
+    maxValidators: 0,
   });
 
   useTokenomicsQuery({

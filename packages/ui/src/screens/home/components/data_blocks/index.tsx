@@ -4,11 +4,16 @@ import { FC } from 'react';
 import SingleBlock from '@/screens/home/components/data_blocks/components/single_block';
 import { useDataBlocks } from '@/screens/home/components/data_blocks/hooks';
 import useStyles from '@/screens/home/components/data_blocks/styles';
+import { useTokenomics } from '../tokenomics/hooks';
 
 const DataBlocks: FC<ComponentDefault> = ({ className }) => {
   const { t } = useTranslation('home');
   const { classes, cx } = useStyles();
   const { state } = useDataBlocks();
+  const {
+    state: { maxValidators },
+  } = useTokenomics();
+
   const data = [
     {
       key: t('latestBlock'),
@@ -24,7 +29,7 @@ const DataBlocks: FC<ComponentDefault> = ({ className }) => {
       key: t('activeValidators'),
       value: numeral(state.validators.active).format('0,0'),
       description: t('outOfValidators', {
-        num: numeral(state.validators.total).format('0,0'),
+        num: numeral(maxValidators).format('0,0'),
       }),
       className: classes.validators,
     },

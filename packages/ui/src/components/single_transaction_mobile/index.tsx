@@ -80,7 +80,7 @@ const SingleTransactionMobile: FC<SingleTransactionMobileProps> = ({
           <Typography variant="h4" className="label">
             {t('fee')}
           </Typography>
-          <Typography variant="body1" className="value">
+          <Typography variant="body1" className="value" component="div">
             {fee}
           </Typography>
         </div>
@@ -98,7 +98,7 @@ const SingleTransactionMobile: FC<SingleTransactionMobileProps> = ({
           <Typography variant="h4" className="label">
             {t('receiver')}
           </Typography>
-          <Typography variant="body1" className="value">
+          <Typography variant="body1" className="value" component="div">
             {receiver}
           </Typography>
         </div>
@@ -107,7 +107,7 @@ const SingleTransactionMobile: FC<SingleTransactionMobileProps> = ({
         <Typography variant="h4" className="label">
           {t('time')}
         </Typography>
-        <Typography variant="body1" className="value">
+        <Typography variant="body1" className="value" component="div">
           {time}
         </Typography>
       </div>

@@ -189,7 +189,7 @@ exports[`component: SingleTransactionMobile matches snapshot 1`] = `
       >
         fee
       </h4>
-      <p
+      <div
         className="MuiTypography-root MuiTypography-body1 value emotion-6"
       />
     </div>
@@ -217,7 +217,7 @@ exports[`component: SingleTransactionMobile matches snapshot 1`] = `
       >
         receiver
       </h4>
-      <p
+      <div
         className="MuiTypography-root MuiTypography-body1 value emotion-6"
       />
     </div>
@@ -230,11 +230,11 @@ exports[`component: SingleTransactionMobile matches snapshot 1`] = `
     >
       time
     </h4>
-    <p
+    <div
       className="MuiTypography-root MuiTypography-body1 value emotion-6"
     >
       2022-02-19T19:03:14.969688
-    </p>
+    </div>
   </div>
 </div>
 `;

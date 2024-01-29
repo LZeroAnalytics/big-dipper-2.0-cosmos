@@ -34,7 +34,7 @@ const Mobile: FC<MobileProps> = ({ className, items }) => {
                 <Typography variant="h4" className="label">
                   {t('token')}
                 </Typography>
-                <Typography variant="body1" className="value">
+                <Typography variant="body1" className="value" component="div">
                   {logoURL && displayName && chain ? (
                     <div className={classes.nameBlock}>
                       <div className={classes.assetLogo}>
