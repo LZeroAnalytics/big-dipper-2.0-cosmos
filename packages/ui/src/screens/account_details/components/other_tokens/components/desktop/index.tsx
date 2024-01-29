@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { ASSETS_DETAILS } from '@/utils/go_to_page';
 import numeral from 'numeral';
+import Big from 'big.js';
 import useStyles from './styles';
 
 type DesktopProps = {
@@ -19,23 +20,52 @@ type DesktopProps = {
   items?: OtherTokenType[];
 };
 
+export const formatNumberWithThousandsSeparator = (
+  inputString: string,
+  exponent: number
+): string => {
+  const number = parseFloat(inputString);
+
+  if (!Number.isNaN(number)) {
+    const formattedNumber = new Intl.NumberFormat('en-US', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: exponent,
+    }).format(number);
+
+    return formattedNumber;
+  }
+
+  return String(Number.NaN);
+};
+
 const Desktop: FC<DesktopProps> = ({ className, items }) => {
   const { t } = useTranslation('accounts');
   const { classes, cx } = useStyles();
   const router = useRouter();
 
-  const formattedItems = items?.map((x, i) => ({
-    key: i,
-    token: x.denom,
-    commission: formatNumber(x.commission.value, x.commission.exponent),
-    available: x.exponent
+  const formattedItems = items?.map((x, i) => {
+    let available = x.exponent
       ? numeral(+x.available.value / 10 ** x.exponent).format(getFormatString(x.exponent))
-      : formatNumber(x.available.value, x.available.exponent),
-    reward: x.reward ? formatNumber(x.reward.value, x.reward.exponent) : '',
-    ...(x.logoURL && { logo: x.logoURL }),
-    ...(x.displayName && { displayName: x.displayName }),
-    ...(x.chain && { chain: x.chain }),
-  }));
+      : formatNumber(x.available.value, x.available.exponent);
+
+    if (Number(x.available.value) > Number.MAX_SAFE_INTEGER && x.exponent) {
+      const ratio = Big(10 ** x.exponent);
+      const value = Big(x.available.value).div(ratio).toFixed(x.exponent);
+      available = formatNumberWithThousandsSeparator(value, x.exponent);
+    }
+
+    return {
+      key: i,
+      token: x.denom,
+      commission: formatNumber(x.commission.value, x.commission.exponent),
+      available,
+      reward: x.reward ? formatNumber(x.reward.value, x.reward.exponent) : '',
+      ...(x.logoURL && { logo: x.logoURL }),
+      ...(x.displayName && { displayName: x.displayName }),
+      ...(x.chain && { chain: x.chain }),
+      exponent: x.exponent,
+    };
+  });
 
   const handleNavigateToAsset = (denom: string) => {
     router.push(ASSETS_DETAILS(denom));
@@ -61,11 +91,11 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
           {formattedItems?.map((row) => (
             <TableRow
               key={`holders-row-${row.key}`}
-              onClick={() => row.displayName && handleNavigateToAsset(row.token)}
-              className={cx(classes.tableRow, row.displayName && classes.tableRegisteredAsset)}
+              onClick={() => row.logo && handleNavigateToAsset(row.token)}
+              className={cx(classes.tableRow, row.logo && classes.tableRegisteredAsset)}
             >
               {columns.map((column) => {
-                if (column.key === 'token' && row.displayName && row.logo && row.chain) {
+                if (column.key === 'token' && row.displayName && row.chain) {
                   return (
                     <TableCell
                       key={`holders-row-${row.key}-${column.key}`}
@@ -73,9 +103,11 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
                       style={{ width: `${column.width}%`, paddingTop: 10, paddingBottom: 10 }}
                     >
                       <div className={classes.nameBlock}>
-                        <div className={classes.assetLogo}>
-                          <Image src={row.logo} alt={row.token} width={24} height={24} />
-                        </div>
+                        {row.logo && (
+                          <div className={classes.assetLogo}>
+                            <Image src={row.logo} alt={row.token} width={24} height={24} />
+                          </div>
+                        )}
                         <div className={classes.nameColumn}>
                           <div className={classes.name}>{row.displayName}</div>
                           <div className={classes.chainRow}>

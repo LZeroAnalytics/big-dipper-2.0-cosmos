@@ -207,9 +207,9 @@ const formatOtherTokens = (data: Data, assets: Asset[], metadatas: any[]) => {
       available: availableAmount,
       reward: rewardAmount,
       commission: commissionAmount,
-      ...(asset && {
+      ...((asset || assetInMetadata) && {
         displayName: display,
-        logoURL: asset.logo_URIs.svg || asset.logo_URIs.png,
+        logoURL: asset?.logo_URIs.svg || asset?.logo_URIs.png || '',
         chain,
         exponent,
       }),

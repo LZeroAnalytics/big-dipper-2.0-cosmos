@@ -7,6 +7,8 @@ import type { OtherTokenType } from '@/screens/account_details/types';
 import useStyles from '@/screens/account_details/components/other_tokens/components/mobile/styles';
 import Image from 'next/image';
 import numeral from 'numeral';
+import Big from 'big.js';
+import { formatNumberWithThousandsSeparator } from '../desktop';
 
 type MobileProps = {
   className?: string;
@@ -20,9 +22,16 @@ const Mobile: FC<MobileProps> = ({ className, items }) => {
     <div className={className}>
       {items?.map((x, i) => {
         const { logoURL, displayName, chain } = x;
-        const available = x.exponent
+        let available = x.exponent
           ? numeral(+x.available.value / 10 ** x.exponent).format(getFormatString(x.exponent))
           : formatNumber(x.available.value, x.available.exponent);
+
+        if (Number(x.available.value) > Number.MAX_SAFE_INTEGER && x.exponent) {
+          const ratio = Big(10 ** x.exponent);
+          const value = Big(x.available.value).div(ratio).toFixed(x.exponent);
+          available = formatNumberWithThousandsSeparator(value, x.exponent);
+        }
+
         const reward = x.reward ? formatNumber(x.reward.value, x.reward.exponent) : '';
         const isLast = !items || i === items.length - 1;
 
@@ -35,11 +44,13 @@ const Mobile: FC<MobileProps> = ({ className, items }) => {
                   {t('token')}
                 </Typography>
                 <Typography variant="body1" className="value" component="div">
-                  {logoURL && displayName && chain ? (
+                  {displayName && chain ? (
                     <div className={classes.nameBlock}>
-                      <div className={classes.assetLogo}>
-                        <Image src={logoURL} alt={x.denom} width={24} height={24} />
-                      </div>
+                      {logoURL && (
+                        <div className={classes.assetLogo}>
+                          <Image src={logoURL} alt={x.denom} width={24} height={24} />
+                        </div>
+                      )}
                       <div className={classes.nameColumn}>
                         <div className={classes.name}>{displayName}</div>
                         <div className={classes.chainRow}>
