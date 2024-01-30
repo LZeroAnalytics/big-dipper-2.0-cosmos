@@ -45,12 +45,14 @@ const useStyles = makeStyles()((theme) => ({
     fontSize: theme.spacing(1.75),
     marginBottom: theme.spacing(0.25),
     textTransform: 'capitalize',
+    wordBreak: 'break-all',
   },
   denom: {
     color: theme.palette.text.secondary,
     fontWeight: 400,
     fontSize: theme.spacing(1.5),
     marginBottom: theme.spacing(0.25),
+    wordBreak: 'break-all',
   },
   chainRow: {
     display: 'flex',

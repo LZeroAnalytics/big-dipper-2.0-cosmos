@@ -80,7 +80,7 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
               <TableCell
                 key={column.key}
                 align={column.align}
-                style={{ width: `${column.width}%` }}
+                style={{ width: `${column.width}%`, maxWidth: `${column.width}%` }}
               >
                 {t(column.key)}
               </TableCell>
@@ -100,7 +100,12 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
                     <TableCell
                       key={`holders-row-${row.key}-${column.key}`}
                       align={column.align}
-                      style={{ width: `${column.width}%`, paddingTop: 10, paddingBottom: 10 }}
+                      style={{
+                        width: `${column.width}%`,
+                        maxWidth: `${column.width}%`,
+                        paddingTop: 10,
+                        paddingBottom: 10,
+                      }}
                     >
                       <div className={classes.nameBlock}>
                         {row.logo && (
@@ -124,7 +129,13 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
                   <TableCell
                     key={`holders-row-${row.key}-${column.key}`}
                     align={column.align}
-                    style={{ width: `${column.width}%`, paddingTop: 20, paddingBottom: 20 }}
+                    style={{
+                      width: `${column.width}%`,
+                      maxWidth: `${column.width}%`,
+                      paddingTop: 20,
+                      paddingBottom: 20,
+                      wordBreak: 'break-word',
+                    }}
                   >
                     {row[column.key as keyof typeof row]}
                   </TableCell>

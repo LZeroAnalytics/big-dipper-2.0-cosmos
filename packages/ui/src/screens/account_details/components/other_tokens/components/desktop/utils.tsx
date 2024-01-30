@@ -5,16 +5,16 @@ export const columns: {
 }[] = [
   {
     key: 'token',
-    width: 25,
+    width: 35,
   },
   {
     key: 'available',
-    width: 25,
+    width: 55,
     align: 'right',
   },
   {
     key: 'reward',
-    width: 25,
+    width: 10,
     align: 'right',
   },
   // {
