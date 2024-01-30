@@ -58,7 +58,7 @@ const Balance: FC<BalanceProps> = (props) => {
     .valueOf();
 
   if (Number(totalAmountValue) < 0.0001) {
-    totalAmount = `Less than $0.0001`;
+    totalAmount = `< 0.00001$`;
   } else {
     totalAmount = `$${numeral(totalAmountValue).format('0,0.0000')}`;
   }
