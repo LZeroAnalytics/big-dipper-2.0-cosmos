@@ -110,6 +110,7 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
                         )}
                         <div className={classes.nameColumn}>
                           <div className={classes.name}>{row.displayName}</div>
+                          {!row.logo && <div className={classes.denom}>{row.token}</div>}
                           <div className={classes.chainRow}>
                             <div className={classes.nameChain}>Chain: {row.chain}</div>
                           </div>

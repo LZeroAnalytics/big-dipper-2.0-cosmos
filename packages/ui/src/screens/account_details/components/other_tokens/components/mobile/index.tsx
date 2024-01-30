@@ -53,6 +53,7 @@ const Mobile: FC<MobileProps> = ({ className, items }) => {
                       )}
                       <div className={classes.nameColumn}>
                         <div className={classes.name}>{displayName}</div>
+                        {!logoURL && <div className={classes.denom}>{x.denom}</div>}
                         <div className={classes.chainRow}>
                           <div className={classes.nameChain}>Chain: {chain}</div>
                         </div>
