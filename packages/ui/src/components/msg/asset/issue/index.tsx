@@ -4,11 +4,13 @@ import { Typography } from '@mui/material';
 import { Trans } from 'react-i18next';
 import Name from '@/components/name';
 import { MsgIssue } from '@/models';
+import { formatToken } from '@/utils';
 
 const Issue: FC<{ message: MsgIssue }> = (props) => {
   const { message } = props;
-
   const issuer = useProfileRecoil(message.issuer);
+
+  const amount = formatToken(String(+message.initial_amount / 10 ** message.precision));
 
   return (
     <Typography>
@@ -17,8 +19,8 @@ const Issue: FC<{ message: MsgIssue }> = (props) => {
         components={[<Name address={message.issuer} name={issuer.name ?? message.issuer} />, <b />]}
         values={{
           issuer: message.issuer,
-          amount: message.initial_amount,
-          subunit: message.subunit,
+          amount: amount.value,
+          subunit: message.symbol.toUpperCase(),
         }}
       />
     </Typography>

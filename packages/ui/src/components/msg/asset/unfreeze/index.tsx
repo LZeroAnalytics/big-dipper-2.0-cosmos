@@ -47,8 +47,8 @@ const Unfreeze: FC<{ message: MsgUnfreeze; assets: Asset[]; metadatas: any[] }> 
         i18nKey="message_contents:msgUnfreezeContent"
         components={[
           <Name address={message.sender} name={sender.name ?? message.sender} />,
-          <Name address={message.account} name={account.name ?? message.account} />,
           <b />,
+          <Name address={message.account} name={account.name ?? message.account} />,
         ]}
         values={{
           sender: message.sender,
