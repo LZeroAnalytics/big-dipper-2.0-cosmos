@@ -6,8 +6,15 @@ import { MsgUndelegate } from '@/models';
 import { useProfileRecoil } from '@/recoil/profiles/hooks';
 import { formatNumber, formatToken } from '@/utils/format_token';
 import { Asset } from '@/screens/assets/hooks';
+import Spinner from '@/components/loadingSpinner';
 
-const Undelegate: FC<{ message: MsgUndelegate; assets: Asset[]; metadatas: any[] }> = (props) => {
+const Undelegate: FC<{
+  message: MsgUndelegate;
+  assets: Asset[];
+  metadatas: any[];
+  assetsLoading: boolean;
+  metadataLoading: boolean;
+}> = (props) => {
   const { message, assets, metadatas } = props;
   const asset = metadatas.find(
     (item) => item.base.toLowerCase() === message.amount.denom.toLowerCase()
@@ -42,6 +49,10 @@ const Undelegate: FC<{ message: MsgUndelegate; assets: Asset[]; metadatas: any[]
 
   const validator = useProfileRecoil(message.validatorAddress);
   const validatorMoniker = validator ? validator?.name : message.validatorAddress;
+
+  if (props.assetsLoading || props.metadataLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Typography>

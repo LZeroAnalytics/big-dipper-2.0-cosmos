@@ -20,6 +20,8 @@ type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   viewRaw: boolean;
   assets: Asset[];
   metadatas: any[];
+  assetsLoading: boolean;
+  metadataLoading: boolean;
 };
 
 const ListItem: FC<ListItemProps> = ({
@@ -32,11 +34,21 @@ const ListItem: FC<ListItemProps> = ({
   viewRaw,
   assets,
   metadatas,
+  assetsLoading,
+  metadataLoading,
 }) => {
   const { t } = useTranslation('transactions');
   const { rowRef } = useListRow(index, setRowHeight);
 
-  const formattedItem = getMessageByType(message, viewRaw, t, assets, metadatas);
+  const formattedItem = getMessageByType(
+    message,
+    viewRaw,
+    t,
+    assets,
+    metadatas,
+    assetsLoading,
+    metadataLoading
+  );
 
   return (
     <div style={style}>
@@ -59,6 +71,8 @@ type MessagesProps = {
   onMessageFilterCallback: (value: string) => void;
   assets: Asset[];
   metadatas: any[];
+  assetsLoading: boolean;
+  metadataLoading: boolean;
 };
 
 const Messages: FC<MessagesProps> = ({ className, ...props }) => {
@@ -119,6 +133,8 @@ const Messages: FC<MessagesProps> = ({ className, ...props }) => {
                   viewRaw={props.viewRaw}
                   assets={props.assets}
                   metadatas={props.metadatas}
+                  assetsLoading={props.assetsLoading}
+                  metadataLoading={props.metadataLoading}
                 />
               )}
             </List>

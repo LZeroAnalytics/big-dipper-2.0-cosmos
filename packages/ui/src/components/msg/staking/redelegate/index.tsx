@@ -6,8 +6,15 @@ import { MsgRedelegate } from '@/models';
 import { useProfileRecoil } from '@/recoil/profiles/hooks';
 import { formatNumber, formatToken } from '@/utils/format_token';
 import { Asset } from '@/screens/assets/hooks';
+import Spinner from '@/components/loadingSpinner';
 
-const Redelegate: FC<{ message: MsgRedelegate; assets: Asset[]; metadatas: any[] }> = (props) => {
+const Redelegate: FC<{
+  message: MsgRedelegate;
+  assets: Asset[];
+  metadatas: any[];
+  assetsLoading: boolean;
+  metadataLoading: boolean;
+}> = (props) => {
   const { message, assets, metadatas } = props;
 
   const asset = metadatas.find(
@@ -46,6 +53,10 @@ const Redelegate: FC<{ message: MsgRedelegate; assets: Asset[]; metadatas: any[]
 
   const to = useProfileRecoil(message.validatorDstAddress);
   const toMoniker = to ? to?.name : message.validatorDstAddress;
+
+  if (props.assetsLoading || props.metadataLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Typography>

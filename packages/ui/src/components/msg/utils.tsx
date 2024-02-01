@@ -555,14 +555,22 @@ export const getMessageByType = <TMessage,>(
   viewRaw: boolean,
   t: TFunction,
   assets?: Asset[],
-  metadatas?: any[]
+  metadatas?: any[],
+  assetsLoading?: boolean,
+  metadataLoading?: boolean
 ) => {
   const { type } = (message as { type: string }) ?? {};
 
   const convertedMsgType = convertMsgType([type]);
 
   type ResultType = {
-    content: FC<{ message: TMessage; assets: Asset[]; metadatas: any[] }>;
+    content: FC<{
+      message: TMessage;
+      assets: Asset[];
+      metadatas: any[];
+      assetsLoading: boolean;
+      metadataLoading: boolean;
+    }>;
     tagDisplay: Data['tagDisplay'];
     tagTheme: TagTheme;
   };
@@ -580,6 +588,8 @@ export const getMessageByType = <TMessage,>(
       message: TMessage;
       assets: Asset[];
       metadatas: any[];
+      assetsLoading: boolean;
+      metadataLoading: boolean;
     }>;
     results.tagTheme = data.tagTheme as ResultType['tagTheme'];
   }
@@ -598,6 +608,8 @@ export const getMessageByType = <TMessage,>(
         message={message as unknown as ComponentProps<typeof Content>['message']}
         assets={assets || []}
         metadatas={metadatas || []}
+        assetsLoading={assetsLoading || false}
+        metadataLoading={metadataLoading || false}
       />
     ),
   };

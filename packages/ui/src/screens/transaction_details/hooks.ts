@@ -109,6 +109,8 @@ export const useTransactionDetails = () => {
     },
     assets: [],
     metadatas: [],
+    assetsLoading: true,
+    metadataLoading: true,
   });
 
   const handleSetState = useCallback(
@@ -153,9 +155,13 @@ export const useTransactionDetails = () => {
       handleSetState((prevState) => ({
         ...prevState,
         assets: response.data.assets,
+        assetsLoading: false,
       }));
     } catch (error) {
-      console.error(error);
+      handleSetState((prevState) => ({
+        ...prevState,
+        assetsLoading: false,
+      }));
     }
   }, []);
 
@@ -177,9 +183,13 @@ export const useTransactionDetails = () => {
       handleSetState((prevState) => ({
         ...prevState,
         metadatas,
+        metadataLoading: false,
       }));
     } catch (error) {
-      console.error(error);
+      handleSetState((prevState) => ({
+        ...prevState,
+        metadataLoading: false,
+      }));
     }
   }, []);
 

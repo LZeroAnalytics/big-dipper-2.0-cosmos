@@ -6,8 +6,15 @@ import Name from '@/components/name';
 import { MsgMint } from '@/models';
 import { formatNumber, formatToken } from '@/utils';
 import { Asset } from '@/screens/assets/hooks';
+import Spinner from '@/components/loadingSpinner';
 
-const Mint: FC<{ message: MsgMint; assets: Asset[]; metadatas: any[] }> = (props) => {
+const Mint: FC<{
+  message: MsgMint;
+  assets: Asset[];
+  metadatas: any[];
+  assetsLoading: boolean;
+  metadataLoading: boolean;
+}> = (props) => {
   const { message, assets, metadatas } = props;
 
   const asset = metadatas.find(
@@ -37,6 +44,10 @@ const Mint: FC<{ message: MsgMint; assets: Asset[]; metadatas: any[] }> = (props
         // Kept the "toUpperCase()" in order to show the token symbol in uppercase
       )} ${tokenDenom}`;
     }
+  }
+
+  if (props.assetsLoading || props.metadataLoading) {
+    return <Spinner />;
   }
 
   return (

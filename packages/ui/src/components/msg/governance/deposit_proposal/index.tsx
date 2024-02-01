@@ -1,3 +1,4 @@
+import Spinner from '@/components/loadingSpinner';
 import Name from '@/components/name';
 import { MsgDeposit } from '@/models';
 import { useProfileRecoil } from '@/recoil/profiles/hooks';
@@ -8,7 +9,9 @@ import { Trans, useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { FC, useMemo } from 'react';
 
-const DepositProposal: FC<{ message: MsgDeposit; metadatas: any[] }> = (props) => {
+const DepositProposal: FC<{ message: MsgDeposit; metadatas: any[]; metadataLoading: boolean }> = (
+  props
+) => {
   const { t } = useTranslation('transactions');
   const { message, metadatas } = props;
 
@@ -38,6 +41,11 @@ const DepositProposal: FC<{ message: MsgDeposit; metadatas: any[] }> = (props) =
     ),
     [message.proposalId]
   );
+
+  if (props.metadataLoading) {
+    return <Spinner />;
+  }
+
   return (
     <Typography>
       <Trans

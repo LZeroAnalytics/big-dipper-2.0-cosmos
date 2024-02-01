@@ -6,8 +6,15 @@ import { type MsgDelegate } from '@/models';
 import { useProfileRecoil } from '@/recoil/profiles/hooks';
 import { formatNumber, formatToken } from '@/utils/format_token';
 import { Asset } from '@/screens/assets/hooks';
+import Spinner from '@/components/loadingSpinner';
 
-const Delegate: FC<{ message: MsgDelegate; assets: Asset[]; metadatas: any[] }> = (props) => {
+const Delegate: FC<{
+  message: MsgDelegate;
+  assets: Asset[];
+  metadatas: any[];
+  assetsLoading: boolean;
+  metadataLoading: boolean;
+}> = (props) => {
   const { message, assets, metadatas } = props;
   const delegator = useProfileRecoil(message.delegatorAddress);
   const delegatorMoniker = delegator ? delegator?.name : message.delegatorAddress;
@@ -41,6 +48,10 @@ const Delegate: FC<{ message: MsgDelegate; assets: Asset[]; metadatas: any[] }> 
         // Kept the "toUpperCase()" in order to show the token symbol in uppercase
       )} ${tokenDenom}`;
     }
+  }
+
+  if (props.assetsLoading || props.metadataLoading) {
+    return <Spinner />;
   }
 
   return (

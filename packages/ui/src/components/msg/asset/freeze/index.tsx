@@ -6,9 +6,16 @@ import Name from '@/components/name';
 import { MsgFreeze } from '@/models';
 import { formatToken, formatNumber } from '@/utils';
 import { Asset } from '@/screens/assets/hooks';
+import Spinner from '@/components/loadingSpinner';
 
-const Freeze: FC<{ message: MsgFreeze; assets: Asset[]; metadatas: any[] }> = (props) => {
-  const { message, assets, metadatas } = props;
+const Freeze: FC<{
+  message: MsgFreeze;
+  assets: Asset[];
+  metadatas: any[];
+  assetsLoading: boolean;
+  metadataLoading: boolean;
+}> = (props) => {
+  const { message, assets, metadatas, assetsLoading, metadataLoading } = props;
 
   const sender = useProfileRecoil(message.sender);
   const account = useProfileRecoil(message.account);
@@ -38,6 +45,10 @@ const Freeze: FC<{ message: MsgFreeze; assets: Asset[]; metadatas: any[] }> = (p
         // Kept the "toUpperCase()" in order to show the token symbol in uppercase
       )} ${tokenDenom}`;
     }
+  }
+
+  if (assetsLoading || metadataLoading) {
+    return <Spinner />;
   }
 
   return (

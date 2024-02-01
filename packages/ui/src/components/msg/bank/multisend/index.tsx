@@ -1,3 +1,4 @@
+import Spinner from '@/components/loadingSpinner';
 import useStyles from '@/components/msg/bank/multisend/styles';
 import Name from '@/components/name';
 import { MsgMultiSend } from '@/models';
@@ -39,7 +40,9 @@ const RecieverName: FC<{ address: string; coins: MsgCoin[]; metadatas: any[] }> 
   );
 };
 
-const Multisend: FC<{ message: MsgMultiSend; metadatas: any[] }> = (props) => {
+const Multisend: FC<{ message: MsgMultiSend; metadatas: any[]; metadataLoading: boolean }> = (
+  props
+) => {
   const { t } = useTranslation('transactions');
   const { classes } = useStyles();
 
@@ -63,6 +66,10 @@ const Multisend: FC<{ message: MsgMultiSend; metadatas: any[] }> = (props) => {
 
   const { address, name } = useProfileRecoil(sender?.address);
   const validatorMoniker = name || sender?.address;
+
+  if (props.metadataLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div>

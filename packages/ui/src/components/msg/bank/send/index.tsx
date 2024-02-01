@@ -1,3 +1,4 @@
+import Spinner from '@/components/loadingSpinner';
 import Name from '@/components/name';
 import { MsgSend } from '@/models';
 import { useProfileRecoil } from '@/recoil/profiles/hooks';
@@ -6,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import { Trans, useTranslation } from 'next-i18next';
 import { FC } from 'react';
 
-const Send: FC<{ message: MsgSend; metadatas: any[] }> = (props) => {
+const Send: FC<{ message: MsgSend; metadatas: any[]; metadataLoading: boolean }> = (props) => {
   const { t } = useTranslation('transactions');
   const { message, metadatas } = props;
 
@@ -30,6 +31,10 @@ const Send: FC<{ message: MsgSend; metadatas: any[] }> = (props) => {
 
   const to = useProfileRecoil(message.toAddress);
   const toMoniker = to ? to?.name : message.toAddress;
+
+  if (props.metadataLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Typography>

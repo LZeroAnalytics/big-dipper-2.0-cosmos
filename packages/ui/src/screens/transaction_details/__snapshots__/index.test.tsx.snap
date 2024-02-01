@@ -159,6 +159,7 @@ exports[`screen: Blocks/List matches snapshot 1`] = `
         />
         <div
           assets={[]}
+          assetsLoading={true}
           className="emotion-5"
           id="Messages"
           messages={
@@ -184,6 +185,7 @@ exports[`screen: Blocks/List matches snapshot 1`] = `
               },
             ]
           }
+          metadataLoading={true}
           metadatas={[]}
           onMessageFilterCallback={[Function]}
           toggleMessageDisplay={[Function]}

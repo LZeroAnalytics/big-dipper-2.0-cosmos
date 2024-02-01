@@ -6,11 +6,14 @@ import Name from '@/components/name';
 import { MsgSetWhitelistedLimit } from '@/models';
 import { formatNumber, formatToken } from '@/utils';
 import { Asset } from '@/screens/assets/hooks';
+import Spinner from '@/components/loadingSpinner';
 
 const SetWhitelistedLimit: FC<{
   message: MsgSetWhitelistedLimit;
   assets: Asset[];
   metadatas: any[];
+  assetsLoading: boolean;
+  metadataLoading: boolean;
 }> = (props) => {
   const { message, assets, metadatas } = props;
 
@@ -42,6 +45,10 @@ const SetWhitelistedLimit: FC<{
         // Kept the "toUpperCase()" in order to show the token symbol in uppercase
       )} ${tokenDenom}`;
     }
+  }
+
+  if (props.assetsLoading || props.metadataLoading) {
+    return <Spinner />;
   }
 
   return (

@@ -1,3 +1,4 @@
+import Spinner from '@/components/loadingSpinner';
 import Name from '@/components/name';
 import { MsgFundCommunityPool } from '@/models';
 import { useProfileRecoil } from '@/recoil/profiles/hooks';
@@ -6,7 +7,9 @@ import Typography from '@mui/material/Typography';
 import { Trans, useTranslation } from 'next-i18next';
 import { FC } from 'react';
 
-const Fund: FC<{ message: MsgFundCommunityPool; metadatas: any[] }> = (props) => {
+const Fund: FC<{ message: MsgFundCommunityPool; metadatas: any[]; metadataLoading: boolean }> = (
+  props
+) => {
   const { t } = useTranslation('transactions');
   const { message, metadatas } = props;
 
@@ -27,6 +30,10 @@ const Fund: FC<{ message: MsgFundCommunityPool; metadatas: any[] }> = (props) =>
 
   const depositor = useProfileRecoil(message.depositor);
   const depositorMoniker = depositor ? depositor?.name : message.depositor;
+
+  if (props.metadataLoading) {
+    return <Spinner />;
+  }
 
   return (
     <Typography>

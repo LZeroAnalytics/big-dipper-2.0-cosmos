@@ -27,4 +27,6 @@ export interface TransactionState {
   };
   assets: Asset[];
   metadatas: any[];
+  assetsLoading: boolean;
+  metadataLoading: boolean;
 }
