@@ -5,13 +5,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useTranslation } from 'next-i18next';
 import { FC } from 'react';
-import { formatNumber, getFormatString } from '@/utils/format_token';
+import { formatNumber } from '@/utils/format_token';
 import type { OtherTokenType } from '@/screens/account_details/types';
 import { columns } from '@/screens/account_details/components/other_tokens/components/desktop/utils';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { ASSETS_DETAILS } from '@/utils/go_to_page';
-import numeral from 'numeral';
 import Big from 'big.js';
 import useStyles from './styles';
 
@@ -40,15 +39,13 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
   const router = useRouter();
 
   const formattedItems = items?.map((x, i) => {
-    let available = x.exponent
-      ? numeral(+x.available.value / 10 ** x.exponent).format(getFormatString(x.exponent))
-      : formatNumber(x.available.value, x.available.exponent);
+    let available = formatNumber(x.available.value, x.available.exponent);
 
-    if (Number(x.available.value) > Number.MAX_SAFE_INTEGER && x.exponent) {
-      const ratio = Big(10 ** x.exponent);
-      const value = Big(x.available.value).div(ratio).toFixed(x.exponent).toString();
-
-      available = formatNumberWithThousandsSeparator(value);
+    if (x.exponent) {
+      const availableValue = new Big(+x.available.value)
+        .div(Big(10).pow(x.exponent))
+        .toFixed(x.exponent);
+      available = formatNumberWithThousandsSeparator(availableValue);
     }
 
     return {
