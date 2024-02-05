@@ -2,11 +2,10 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'next-i18next';
 import { FC, Fragment } from 'react';
-import { formatNumber, getFormatString } from '@/utils/format_token';
+import { formatNumber } from '@/utils/format_token';
 import type { OtherTokenType } from '@/screens/account_details/types';
 import useStyles from '@/screens/account_details/components/other_tokens/components/mobile/styles';
 import Image from 'next/image';
-import numeral from 'numeral';
 import Big from 'big.js';
 import { formatNumberWithThousandsSeparator } from '../desktop';
 
@@ -22,14 +21,13 @@ const Mobile: FC<MobileProps> = ({ className, items }) => {
     <div className={className}>
       {items?.map((x, i) => {
         const { logoURL, displayName, chain } = x;
-        let available = x.exponent
-          ? numeral(+x.available.value / 10 ** x.exponent).format(getFormatString(x.exponent))
-          : formatNumber(x.available.value, x.available.exponent);
+        let available = formatNumber(x.available.value, x.available.exponent);
 
-        if (Number(x.available.value) > Number.MAX_SAFE_INTEGER && x.exponent) {
-          const ratio = Big(10 ** x.exponent);
-          const value = Big(x.available.value).div(ratio).toFixed(x.exponent);
-          available = formatNumberWithThousandsSeparator(value);
+        if (x.exponent) {
+          const availableValue = new Big(+x.available.value)
+            .div(Big(10).pow(x.exponent))
+            .toFixed(x.exponent);
+          available = formatNumberWithThousandsSeparator(availableValue);
         }
 
         const reward = x.reward ? formatNumber(x.reward.value, x.reward.exponent) : '';

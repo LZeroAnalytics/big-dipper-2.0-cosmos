@@ -3,8 +3,10 @@ import useStyles from '@/components/msg/bank/multisend/styles';
 import Name from '@/components/name';
 import { MsgMultiSend } from '@/models';
 import { useProfileRecoil } from '@/recoil/profiles/hooks';
-import { formatNumber, formatToken } from '@/utils/format_token';
+import { formatNumberWithThousandsSeparator } from '@/screens/account_details/components/other_tokens/components/desktop';
+import { formatToken } from '@/utils/format_token';
 import Typography from '@mui/material/Typography';
+import Big from 'big.js';
 import { Trans, useTranslation } from 'next-i18next';
 import { FC } from 'react';
 
@@ -17,12 +19,18 @@ const RecieverName: FC<{ address: string; coins: MsgCoin[]; metadatas: any[] }> 
   const parsedAmount = coins
     ?.map((x) => {
       const asset = metadatas.find((item) => item.base.toLowerCase() === x.denom.toLowerCase());
+      let amount = formatToken(x.amount, x.denom).value;
 
-      const amount = asset
-        ? formatToken(String(+x.amount / 10 ** asset.denom_units[1].exponent))
-        : formatToken(x.amount, x.denom);
+      if (asset?.denom_units[1].exponent) {
+        const availableValue = new Big(+x.amount)
+          .div(Big(10).pow(asset?.denom_units[1].exponent))
+          .toFixed(asset?.denom_units[1].exponent);
+
+        amount = formatNumberWithThousandsSeparator(availableValue);
+      }
+
       // Kept the "toUpperCase()" in order to show the token symbol in uppercase
-      return `${formatNumber(amount.value, amount.exponent)} ${asset ? asset.display.toUpperCase() : amount.displayDenom.toUpperCase()}`;
+      return `${amount} ${asset ? asset.display.toUpperCase() : x.denom.toUpperCase()}`;
     })
     .reduce(
       (text, value, j, array) => text + (j < array.length - 1 ? ', ' : ` ${t('and')} `) + value
@@ -52,13 +60,18 @@ const Multisend: FC<{ message: MsgMultiSend; metadatas: any[]; metadataLoading: 
   const senderAmount = sender?.coins
     ?.map((x) => {
       const asset = metadatas.find((item) => item.base.toLowerCase() === x.denom.toLowerCase());
+      let amount = formatToken(x.amount, x.denom).value;
 
-      const amount = asset
-        ? formatToken(String(+x.amount / 10 ** asset.denom_units[1].exponent))
-        : formatToken(x.amount, x.denom);
+      if (asset?.denom_units[1].exponent) {
+        const availableValue = new Big(+x.amount)
+          .div(Big(10).pow(asset?.denom_units[1].exponent))
+          .toFixed(asset?.denom_units[1].exponent);
+
+        amount = formatNumberWithThousandsSeparator(availableValue);
+      }
 
       // Kept the "toUpperCase()" in order to show the token symbol in uppercase
-      return `${formatNumber(amount.value, amount.exponent)} ${asset ? asset.display.toUpperCase() : amount.displayDenom.toUpperCase()}`;
+      return `${amount} ${asset ? asset.display.toUpperCase() : x.denom.toUpperCase()}`;
     })
     .reduce(
       (text, value, i, array) => text + (i < array.length - 1 ? ', ' : ` ${t('and')} `) + value

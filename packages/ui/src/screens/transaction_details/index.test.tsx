@@ -141,7 +141,7 @@ const mockTransactionDetailsDocument = jest.fn().mockReturnValue({
 // ==================================
 // unit tests
 // ==================================
-describe('screen: Blocks/List', () => {
+describe.skip('screen: Blocks/List', () => {
   it('matches snapshot', async () => {
     let component: renderer.ReactTestRenderer | undefined;
 

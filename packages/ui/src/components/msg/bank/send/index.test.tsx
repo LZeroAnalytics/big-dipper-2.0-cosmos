@@ -39,7 +39,7 @@ describe('screen: TransactionDetails/MsgSend', () => {
     });
     const component = renderer.create(
       <MockTheme>
-        <Send message={message} metadatas={[]} />
+        <Send metadataLoading={false} message={message} metadatas={[]} />
       </MockTheme>
     );
     const tree = component?.toJSON();

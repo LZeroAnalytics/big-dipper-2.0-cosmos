@@ -50,7 +50,7 @@ describe('screen: TransactionDetails/MsgMultiSend', () => {
 
     const component = renderer.create(
       <MockTheme>
-        <Multisend message={message} metadatas={[]} />
+        <Multisend metadataLoading={false} message={message} metadatas={[]} />
       </MockTheme>
     );
     const tree = component?.toJSON();
@@ -58,7 +58,7 @@ describe('screen: TransactionDetails/MsgMultiSend', () => {
     expect(
       component.root.findByProps({ i18nKey: 'message_contents:txMultisendContentOne' }).props.values
         .amount
-    ).toEqual('20 DARIC');
+    ).toEqual('20.000000 UDARIC');
   });
 
   afterEach(() => {

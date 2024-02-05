@@ -24,7 +24,7 @@ exports[`screen: TransactionDetails/Fund matches snapshot 1`] = `
       name="depositor"
     />
     <b />
-    {"amount":"2 DARIC"}
+    {"amount":"2.000000 UDARIC"}
   </span>
 </p>
 `;

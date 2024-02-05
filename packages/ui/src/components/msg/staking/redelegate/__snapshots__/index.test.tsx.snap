@@ -34,7 +34,7 @@ exports[`screen: TransactionDetails/Redelegate matches snapshot 1`] = `
       id="Name"
       name="validatorDstAddress"
     />
-    {"amount":"1,000 DARIC"}
+    {"amount":"1000.000000 UDARIC"}
   </span>
 </p>
 `;

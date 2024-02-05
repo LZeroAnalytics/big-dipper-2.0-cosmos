@@ -576,7 +576,13 @@ export const getMessageByType = <TMessage,>(
   };
 
   const results: ResultType = {
-    content: COMPONENTS.Unknown as unknown as FC<{ message: TMessage }>,
+    content: COMPONENTS.Unknown as unknown as FC<{
+      message: TMessage;
+      assets: Asset[];
+      metadatas: any[];
+      assetsLoading: boolean;
+      metadataLoading: boolean;
+    }>,
     tagDisplay: convertedMsgType[0],
     tagTheme: 'zero',
   };
@@ -596,7 +602,13 @@ export const getMessageByType = <TMessage,>(
 
   // If user asks to view the raw data
   if (viewRaw || !results.content) {
-    results.content = COMPONENTS.Unknown as unknown as FC<{ message: TMessage }>;
+    results.content = COMPONENTS.Unknown as unknown as FC<{
+      message: TMessage;
+      assets: Asset[];
+      metadatas: any[];
+      assetsLoading: boolean;
+      metadataLoading: boolean;
+    }>;
   }
 
   const Content = results.content;

@@ -29,7 +29,7 @@ exports[`screen: TransactionDetails/MsgMultiSend matches snapshot 1`] = `
         name="address"
       />
       <b />
-      {"amount":"20 DARIC"}
+      {"amount":"20.000000 UDARIC"}
     </span>
   </p>
   <div
@@ -48,7 +48,7 @@ exports[`screen: TransactionDetails/MsgMultiSend matches snapshot 1`] = `
           name="output1"
         />
         <b />
-        {"amount":"19 DARIC"}
+        {"amount":"19.000000 UDARIC"}
       </span>
     </p>
     <p
@@ -64,7 +64,7 @@ exports[`screen: TransactionDetails/MsgMultiSend matches snapshot 1`] = `
           name="output2"
         />
         <b />
-        {"amount":"1 DARIC"}
+        {"amount":"1.000000 UDARIC"}
       </span>
     </p>
   </div>

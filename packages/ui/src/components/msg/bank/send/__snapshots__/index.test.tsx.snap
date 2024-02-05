@@ -29,7 +29,7 @@ exports[`screen: TransactionDetails/MsgSend matches snapshot 1`] = `
       id="Name"
       name="toAddress"
     />
-    {"amount":"200 DARIC"}
+    {"amount":"200.000000 UDARIC"}
   </span>
 </p>
 `;
