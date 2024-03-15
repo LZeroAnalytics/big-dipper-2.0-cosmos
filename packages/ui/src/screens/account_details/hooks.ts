@@ -21,7 +21,7 @@ import {
 import { formatToken } from '@/utils/format_token';
 import { getDenom } from '@/utils/get_denom';
 import axios from 'axios';
-import { Asset } from '../assets/hooks';
+import { Asset, convertHexToString } from '../assets/hooks';
 
 const { extra, primaryTokenUnit, tokenUnits, chainType } = chainConfig();
 
@@ -200,6 +200,14 @@ const formatOtherTokens = (data: Data, assets: Asset[], metadatas: any[]) => {
       display = asset.extra.ibc_info!.display_name;
       exponent = asset.extra.ibc_info!.precision;
       chain = asset.extra.ibc_info!.source_chain;
+    }
+
+    if (asset && asset.extra.xrpl_info) {
+      chain = 'XRP Ledger';
+      display =
+        asset.extra.xrpl_info.currency.length === 40
+          ? convertHexToString(asset.extra.xrpl_info.currency)
+          : asset.extra.xrpl_info.currency;
     }
 
     otherTokens.push({
