@@ -5,7 +5,7 @@ import { Trans } from 'react-i18next';
 import Name from '@/components/name';
 import { MsgSetWhitelistedLimit } from '@/models';
 import { formatToken } from '@/utils';
-import { Asset } from '@/screens/assets/hooks';
+import { Asset, convertHexToString } from '@/screens/assets/hooks';
 import Spinner from '@/components/loadingSpinner';
 import Big from 'big.js';
 import { formatNumberWithThousandsSeparator } from '@/screens/account_details/components/other_tokens/components/desktop';
@@ -35,11 +35,18 @@ const SetWhitelistedLimit: FC<{
     amount = formatNumberWithThousandsSeparator(availableValue);
   }
 
-  let parsedAmount = `${amount} ${asset?.display.toUpperCase() || message.coin.denom.toUpperCase()}`;
-
   const tokenInAssets = assets.find(
     (assetItem) => message.coin.denom.toLowerCase() === assetItem.denom.toLowerCase()
   );
+  let displayDenom = asset?.display.toUpperCase() || message.coin.denom.toUpperCase();
+  if (tokenInAssets && tokenInAssets?.extra.xrpl_info) {
+    displayDenom =
+      tokenInAssets?.extra.xrpl_info.currency.length === 40
+        ? convertHexToString(tokenInAssets?.extra.xrpl_info.currency)
+        : tokenInAssets?.extra.xrpl_info.currency;
+  }
+
+  let parsedAmount = `${amount} ${displayDenom}`;
 
   if (tokenInAssets) {
     if (message.coin.denom.includes('ibc')) {

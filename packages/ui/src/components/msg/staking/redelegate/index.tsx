@@ -5,7 +5,7 @@ import Name from '@/components/name';
 import { MsgRedelegate } from '@/models';
 import { useProfileRecoil } from '@/recoil/profiles/hooks';
 import { formatToken } from '@/utils/format_token';
-import { Asset } from '@/screens/assets/hooks';
+import { Asset, convertHexToString } from '@/screens/assets/hooks';
 import Spinner from '@/components/loadingSpinner';
 import Big from 'big.js';
 import { formatNumberWithThousandsSeparator } from '@/screens/account_details/components/other_tokens/components/desktop';
@@ -33,11 +33,17 @@ const Redelegate: FC<{
     amount = formatNumberWithThousandsSeparator(availableValue);
   }
 
-  let parsedAmount = `${amount} ${asset?.display.toUpperCase() || message.amount.denom.toUpperCase()}`;
-
   const tokenInAssets = assets.find(
     (assetItem) => message.amount.denom.toLowerCase() === assetItem.denom.toLowerCase()
   );
+  let displayDenom = asset?.display.toUpperCase() || message.amount.denom.toUpperCase();
+  if (tokenInAssets && tokenInAssets?.extra.xrpl_info) {
+    displayDenom =
+      tokenInAssets?.extra.xrpl_info.currency.length === 40
+        ? convertHexToString(tokenInAssets?.extra.xrpl_info.currency)
+        : tokenInAssets?.extra.xrpl_info.currency;
+  }
+  let parsedAmount = `${amount} ${displayDenom}`;
   if (tokenInAssets) {
     if (message.amount.denom.includes('ibc')) {
       const tokenDenom = tokenInAssets.extra.ibc_info!.display_name;
