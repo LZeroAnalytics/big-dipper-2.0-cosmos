@@ -1,5 +1,6 @@
+/* eslint-disable no-nested-ternary */
 import * as R from 'ramda';
-import { useState } from 'react';
+import { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import { convertMsgsToModels } from '@/components/msg/utils';
 import {
   TransactionsListenerSubscription,
@@ -9,6 +10,13 @@ import {
 import type { TransactionsState } from '@/screens/transactions/types';
 import { convertMsgType } from '@/utils/convert_msg_type';
 import { formatToken } from '@/utils/format_token';
+import axios from 'axios';
+import { JsonObject } from '@cosmjs/cosmwasm-stargate';
+import chainConfig from '@/chainConfig';
+import { BridgeQueryClient } from './contract/Bridge.client';
+import { Operation } from './contract/Bridge.types';
+
+const { chainType } = chainConfig();
 
 // This is a bandaid as it can get extremely
 // expensive if there is too much data
@@ -20,6 +28,250 @@ const uniqueAndSort = R.pipe(
   R.uniqBy((r: Transactions) => r?.hash),
   R.sort(R.descend((r) => r?.height))
 );
+
+const convertAmountToCoin = (amountToConvert: string): { amount: string; denom: string } => {
+  // Use a regular expression to split the string into amount and denom
+  const match = amountToConvert.match(/^(\d+)(.*)$/);
+
+  if (!match) {
+    throw new Error('Invalid amount format');
+  }
+
+  const [, amount, denom] = match;
+
+  return { amount, denom };
+};
+
+const RPC_URL =
+  chainType.toLowerCase() === 'mainnet'
+    ? 'https://full-node-uranium.mainnet-1.coreum.dev:26657'
+    : chainType.toLowerCase() === 'testnet'
+      ? 'https://full-node-pluto.testnet-1.coreum.dev:26657'
+      : 'https://full-node-uranium.devnet-1.coreum.dev:26657';
+// const RPC_URL = `https://full-node.${chainType.toLowerCase()}-1.coreum.dev:26657`;
+
+const CONTRACT_ADDRESS =
+  chainType.toLowerCase() === 'mainnet'
+    ? 'core1zhs909jp9yktml6qqx9f0ptcq2xnhhj99cja03j3lfcsp2pgm86studdrz'
+    : chainType.toLowerCase() === 'testnet'
+      ? 'testcore16sgampgtngjsmnj8zwz6h8zmh26nv2rs5kl72fuxkrzru5y5caxq82y4s5'
+      : '';
+
+const queryContractSmart = async (height: number | undefined): Promise<JsonObject> => {
+  const bridgeClient = new BridgeQueryClient(RPC_URL, CONTRACT_ADDRESS);
+  const response = await bridgeClient.pendingOperations({ height });
+
+  return response;
+};
+
+const formatTxData = (tx: any) => {
+  const attributes = tx.tx_result.events.find(
+    (item: { attributes: Array<{ key: string; value: string }>; type: string }) =>
+      item.type === 'wasm'
+  );
+
+  let sender = '';
+  let recipient = '';
+  let coin = {
+    denom: '',
+    amount: '',
+  };
+
+  if (!attributes) {
+    return undefined;
+  }
+
+  attributes.attributes.forEach((attr: { key: string; value: string }) => {
+    switch (attr.key) {
+      case 'sender':
+        sender = attr.value;
+        break;
+      case 'recipient':
+        recipient = attr.value;
+        break;
+      case 'coin':
+        coin = convertAmountToCoin(attr.value);
+        break;
+      default:
+    }
+  });
+
+  return {
+    height: tx.height,
+    txHash_1: tx.hash,
+    txHash_2: '',
+    sender,
+    destination: recipient,
+    coin,
+    source: 'coreum',
+  };
+};
+
+const getTxOperationsDiff = async (height: number): Promise<Operation[]> => {
+  try {
+    const operationsInBlock = await queryContractSmart(height);
+    const operationsInPrevBlock = await queryContractSmart(height - 1);
+
+    const { operations: operationsBlock } = operationsInBlock;
+    const { operations: operationsPrevBlock } = operationsInPrevBlock;
+
+    const setOperations = new Set(operationsBlock.map((operation: Operation) => operation.id));
+    const setOperationsInPrevBlock = new Set(
+      operationsPrevBlock.map((operation: Operation) => operation.id)
+    );
+
+    const operationsDiff: Operation[] = operationsBlock
+      .filter((item: Operation) => !setOperationsInPrevBlock.has(item.id))
+      .concat(operationsPrevBlock.filter((item: Operation) => !setOperations.has(item.id)));
+
+    return operationsDiff;
+  } catch (error) {
+    return [];
+  }
+};
+
+const fetchBridgeTxData = async ({
+  page,
+  limit,
+  order_by = 'desc',
+}: {
+  page: string;
+  limit: string;
+  order_by?: 'asc' | 'desc';
+}) => {
+  try {
+    const requestQuery = `wasm._contract_address='${CONTRACT_ADDRESS}' AND wasm.action='send_to_xrpl'`;
+    const requestData = {
+      jsonrpc: '2.0',
+      method: 'tx_search',
+      params: {
+        query: requestQuery,
+        prove: false,
+        page,
+        per_page: limit,
+        order_by,
+      },
+      id: 1,
+    };
+
+    const response = await axios.post(RPC_URL, requestData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.status === 200) {
+      const { txs } = response.data.result;
+
+      const transactions = txs.map(formatTxData);
+
+      const resultBridgeTx = await Promise.all(
+        transactions.map(async (transaction: any) => {
+          const txOperations = await getTxOperationsDiff(transaction.height);
+
+          const blockInfoData = {
+            jsonrpc: '2.0',
+            method: 'block',
+            params: {
+              height: transaction.height,
+            },
+            id: 1,
+          };
+
+          let timestamp = '';
+          try {
+            const blockResponse = await axios.post(RPC_URL, blockInfoData, {
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+
+            timestamp = blockResponse.data.result.block.header.time;
+          } catch (error) {}
+
+          const xrplTxHash = await Promise.all(
+            txOperations.map(async (operation: Operation) => {
+              const operation_id = operation.account_sequence || operation.ticket_sequence;
+              const requestQueryOperations = `wasm._contract_address='${CONTRACT_ADDRESS}' AND wasm.operation_type='coreum_to_xrpl_transfer' AND wasm.action='save_evidence' AND wasm.operation_id=${operation_id}`;
+
+              const requestDataOperations = {
+                jsonrpc: '2.0',
+                method: 'tx_search',
+                params: {
+                  query: requestQueryOperations,
+                  prove: false,
+                  order_by,
+                  page: '1',
+                  limit: '100',
+                },
+                id: 1,
+              };
+
+              const responseOperations = await axios.post(RPC_URL, requestDataOperations, {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              });
+
+              let txHash = '';
+              if (responseOperations.status === 200) {
+                const { txs: saveEvidenceTxs } = responseOperations.data.result;
+
+                const saveEvidenceAttributes = saveEvidenceTxs[0].tx_result.events.find(
+                  (item: { attributes: Array<{ key: string; value: string }>; type: string }) =>
+                    item.type === 'wasm'
+                );
+
+                if (!saveEvidenceAttributes) {
+                  return undefined;
+                }
+
+                saveEvidenceAttributes.attributes.forEach(
+                  (attr: { key: string; value: string }) => {
+                    switch (attr.key) {
+                      case 'tx_hash':
+                        txHash = attr.value;
+                        break;
+                      default:
+                        break;
+                    }
+                  }
+                );
+              }
+
+              return txHash;
+            })
+          );
+
+          return {
+            ...transaction,
+            timestamp,
+            txHashes: xrplTxHash,
+          };
+        })
+      );
+
+      const transformedArray: any[] = [];
+      resultBridgeTx.forEach((item) => {
+        if (item.txHashes.length) {
+          item.txHashes.forEach((hash: string) => {
+            transformedArray.push({
+              ...item,
+              txHash_2: hash,
+            });
+          });
+        } else {
+          transformedArray.push(item);
+        }
+      });
+
+      return transformedArray;
+    }
+    return [];
+  } catch (error) {
+    return [];
+  }
+};
 
 const formatSpenderAndReceiver = (messages: any[], transactionLogs: any[], denom: string) => {
   const attributes = transactionLogs?.[0]?.events.filter(
@@ -139,7 +391,69 @@ export const useTransactions = () => {
     hasNextPage: false,
     isNextPageLoading: true,
     items: [],
+    bridgeItems: [],
+    bridgeLoading: true,
+    isAllBridgeItemsFetched: false,
+    bridgeHasNextPage: false,
+    isBridgeNextPageLoading: true,
+    tab: 0,
+    assets: [],
+    metadatas: [],
+    assetsLoading: true,
+    metadataLoading: true,
   });
+
+  const getAssetsList = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `https://raw.githubusercontent.com/CoreumFoundation/token-registry/master/${chainType.toLowerCase()}/assets.json`
+      );
+
+      handleSetState((prevState) => ({
+        ...prevState,
+        assets: response.data.assets,
+        assetsLoading: false,
+      }));
+    } catch (error) {
+      handleSetState((prevState) => ({
+        ...prevState,
+        assetsLoading: false,
+      }));
+    }
+  }, []);
+
+  const getDenomMetadatas = useCallback(async () => {
+    try {
+      const {
+        data: {
+          pagination: { total },
+        },
+      } = await axios.get(
+        `https://full-node.${chainType.toLowerCase()}-1.coreum.dev:1317/cosmos/bank/v1beta1/denoms_metadata`
+      );
+      const {
+        data: { metadatas },
+      } = await axios.get(
+        `https://full-node.${chainType.toLowerCase()}-1.coreum.dev:1317/cosmos/bank/v1beta1/denoms_metadata?pagination.limit=${total}`
+      );
+
+      handleSetState((prevState) => ({
+        ...prevState,
+        metadatas,
+        metadataLoading: false,
+      }));
+    } catch (error) {
+      handleSetState((prevState) => ({
+        ...prevState,
+        metadataLoading: false,
+      }));
+    }
+  }, []);
+
+  useEffect(() => {
+    getAssetsList();
+    getDenomMetadatas();
+  }, []);
 
   const handleSetState = (stateChange: (prevState: TransactionsState) => TransactionsState) => {
     setState((prevState) => {
@@ -147,6 +461,16 @@ export const useTransactions = () => {
       return R.equals(prevState, newState) ? prevState : newState;
     });
   };
+
+  const handleTabChange = useCallback(
+    (_event: SyntheticEvent<Element, globalThis.Event>, newValue: number) => {
+      setState((prevState) => ({
+        ...prevState,
+        tab: newValue,
+      }));
+    },
+    []
+  );
 
   // ================================
   // tx subscription
@@ -187,7 +511,7 @@ export const useTransactions = () => {
         ...prevState,
         loading: false,
         items: newItems,
-        hasNextPage: itemsLength === 51,
+        hasNextPage: itemsLength === LIMIT,
         isNextPageLoading: false,
       }));
     },
@@ -214,13 +538,49 @@ export const useTransactions = () => {
           ...prevState,
           items: newItems,
           isNextPageLoading: false,
-          hasNextPage: itemsLength === 51,
+          hasNextPage: itemsLength === LIMIT,
         }));
       });
+  };
+
+  const BRIDGE_TX_LIMIT = 51;
+  const getBridgeTxs = async () => {
+    handleSetState((prevState) => ({
+      ...prevState,
+      isBridgeNextPageLoading: true,
+    }));
+    const currentPage = Math.floor(state.bridgeItems.length / 100);
+
+    const bridgeTransactions = await fetchBridgeTxData({
+      page: String(currentPage + 1),
+      limit: String(BRIDGE_TX_LIMIT),
+    });
+
+    handleSetState((prevState) => ({
+      ...prevState,
+      bridgeLoading: false,
+      bridgeItems: state.bridgeItems.concat(bridgeTransactions),
+      isBridgeNextPageLoading: false,
+      bridgeHasNextPage: bridgeTransactions.length === BRIDGE_TX_LIMIT,
+    }));
+  };
+
+  useEffect(() => {
+    getBridgeTxs();
+    handleSetState((prevState) => ({
+      ...prevState,
+      bridgeLoading: false,
+    }));
+  }, []);
+
+  const loadBridgeNextPage = async () => {
+    await getBridgeTxs();
   };
 
   return {
     state,
     loadNextPage,
+    handleTabChange,
+    loadBridgeNextPage,
   };
 };
