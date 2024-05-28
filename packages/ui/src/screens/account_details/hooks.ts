@@ -202,7 +202,7 @@ const formatOtherTokens = (data: Data, assets: Asset[], metadatas: any[]) => {
       chain = asset.extra.ibc_info!.source_chain;
     }
 
-    if (asset && asset.extra.xrpl_info) {
+    if (asset && asset.extra.xrpl_info && asset?.extra.xrpl_info.source_chain === 'XRPL') {
       chain = 'XRP Ledger';
       display =
         asset.extra.xrpl_info.currency.length === 40

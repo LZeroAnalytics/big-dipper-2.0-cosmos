@@ -36,7 +36,11 @@ const Burn: FC<{
     (assetItem) => message.coin.denom.toLowerCase() === assetItem.denom.toLowerCase()
   );
   let displayDenom = asset?.display.toUpperCase() || message.coin.denom.toUpperCase();
-  if (tokenInAssets && tokenInAssets?.extra.xrpl_info) {
+  if (
+    tokenInAssets &&
+    tokenInAssets?.extra.xrpl_info &&
+    tokenInAssets?.extra.xrpl_info.source_chain === 'XRPL'
+  ) {
     displayDenom =
       tokenInAssets?.extra.xrpl_info.currency.length === 40
         ? convertHexToString(tokenInAssets?.extra.xrpl_info.currency)

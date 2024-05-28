@@ -40,7 +40,11 @@ const DepositProposal: FC<{
         return `${amount} ${tokenDenom}`;
       }
 
-      if (tokenInAssets && tokenInAssets.extra.xrpl_info) {
+      if (
+        tokenInAssets &&
+        tokenInAssets.extra.xrpl_info &&
+        tokenInAssets?.extra.xrpl_info.source_chain === 'XRPL'
+      ) {
         displayDenom =
           tokenInAssets.extra.xrpl_info.currency.length === 40
             ? convertHexToString(tokenInAssets?.extra.xrpl_info.currency)
