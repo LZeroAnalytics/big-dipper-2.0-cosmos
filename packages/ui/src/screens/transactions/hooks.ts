@@ -537,7 +537,7 @@ export const useTransactions = () => {
   const getAssetsList = useCallback(async () => {
     try {
       const response = await axios.get(
-        `https://raw.githubusercontent.com/CoreumFoundation/token-registry/feat/mainnet-tokens-xrpl-info/${chainType.toLowerCase()}/assets.json`
+        `https://raw.githubusercontent.com/CoreumFoundation/token-registry/master/${chainType.toLowerCase()}/assets.json`
       );
 
       handleSetState((prevState) => ({
