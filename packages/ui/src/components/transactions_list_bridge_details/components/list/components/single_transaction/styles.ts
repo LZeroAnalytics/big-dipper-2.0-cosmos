@@ -16,6 +16,7 @@ const useStyles = makeStyles()((theme) => ({
   itemPrimaryDetailsContainer: {
     display: 'grid',
     gridTemplateColumns: 'repeat(2, 1fr)',
+    gap: theme.spacing(2),
     [theme.breakpoints.up('lg')]: {
       gridTemplateColumns: 'repeat(4, 1fr)',
     },

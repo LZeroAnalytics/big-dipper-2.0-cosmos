@@ -29,6 +29,7 @@ const useStyles = makeStyles()((theme) => ({
     '& > div': {
       width: '50%',
     },
+    gap: theme.spacing(2),
   },
 }));
 

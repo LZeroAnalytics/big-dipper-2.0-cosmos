@@ -233,52 +233,32 @@ const Desktop: FC<TransactionsListBridgeState> = ({
             {t('view_on_xrpl_explorer')}
           </Link>
         ) : (
-          <Tooltip
-            TransitionComponent={Zoom}
-            title={<pre>{x.sender}</pre>}
-            placement="bottom"
-            arrow
-          >
-            <Link
-              shallow
-              prefetch={false}
-              target="_blank"
-              href={
-                x.source === 'coreum' ? ACCOUNT_DETAILS(x.sender) : XRPL_ACCOUNT_DETAILS(x.sender)
-              }
-              className={classes.link}
-            >
-              {getMiddleEllipsis(x?.sender || '', {
-                beginning: 7,
-                ending: 4,
-              })}
-            </Link>
-          </Tooltip>
-        ),
-      destination: (
-        <Tooltip
-          TransitionComponent={Zoom}
-          title={<pre>{x.destination}</pre>}
-          placement="bottom"
-          arrow
-        >
           <Link
             shallow
             prefetch={false}
             target="_blank"
             href={
-              x.source === 'xrpl'
-                ? ACCOUNT_DETAILS(x.destination)
-                : XRPL_ACCOUNT_DETAILS(x.destination)
+              x.source === 'coreum' ? ACCOUNT_DETAILS(x.sender) : XRPL_ACCOUNT_DETAILS(x.sender)
             }
             className={classes.link}
           >
-            {getMiddleEllipsis(x?.destination || '', {
-              beginning: 7,
-              ending: 4,
-            })}
+            {x?.sender || ''}
           </Link>
-        </Tooltip>
+        ),
+      destination: (
+        <Link
+          shallow
+          prefetch={false}
+          target="_blank"
+          href={
+            x.source === 'xrpl'
+              ? ACCOUNT_DETAILS(x.destination)
+              : XRPL_ACCOUNT_DETAILS(x.destination)
+          }
+          className={classes.link}
+        >
+          {x?.destination || ''}
+        </Link>
       ),
       txHash_1: (
         <Tooltip

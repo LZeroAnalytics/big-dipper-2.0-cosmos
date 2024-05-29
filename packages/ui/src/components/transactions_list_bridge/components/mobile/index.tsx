@@ -247,54 +247,34 @@ const ListItem: FC<ListItemProps> = ({
           {t('view_on_xrpl_explorer')}
         </Link>
       ) : (
-        <Tooltip
-          TransitionComponent={Zoom}
-          title={<pre>{transaction.sender}</pre>}
-          placement="bottom"
-          arrow
-        >
-          <Link
-            shallow
-            prefetch={false}
-            target="_blank"
-            href={
-              transaction.source === 'coreum'
-                ? ACCOUNT_DETAILS(transaction.sender)
-                : XRPL_ACCOUNT_DETAILS(transaction.sender)
-            }
-            className={classes.link}
-          >
-            {getMiddleEllipsis(transaction?.sender || '', {
-              beginning: 7,
-              ending: 4,
-            })}
-          </Link>
-        </Tooltip>
-      ),
-    destination: (
-      <Tooltip
-        TransitionComponent={Zoom}
-        title={<pre>{transaction.destination}</pre>}
-        placement="bottom"
-        arrow
-      >
         <Link
           shallow
           prefetch={false}
           target="_blank"
           href={
-            transaction.source === 'xrpl'
-              ? ACCOUNT_DETAILS(transaction.destination)
-              : XRPL_ACCOUNT_DETAILS(transaction.destination)
+            transaction.source === 'coreum'
+              ? ACCOUNT_DETAILS(transaction.sender)
+              : XRPL_ACCOUNT_DETAILS(transaction.sender)
           }
           className={classes.link}
         >
-          {getMiddleEllipsis(transaction?.destination || '', {
-            beginning: 7,
-            ending: 4,
-          })}
+          {transaction?.sender || ''}
         </Link>
-      </Tooltip>
+      ),
+    destination: (
+      <Link
+        shallow
+        prefetch={false}
+        target="_blank"
+        href={
+          transaction.source === 'xrpl'
+            ? ACCOUNT_DETAILS(transaction.destination)
+            : XRPL_ACCOUNT_DETAILS(transaction.destination)
+        }
+        className={classes.link}
+      >
+        {transaction?.destination || ''}
+      </Link>
     ),
     txHash_1: (
       <Tooltip

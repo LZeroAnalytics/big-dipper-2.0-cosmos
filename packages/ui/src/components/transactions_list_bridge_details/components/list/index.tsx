@@ -317,70 +317,34 @@ const ListItem: FC<ListItemProps> = ({
           {t('view_on_xrpl_explorer')}
         </Link>
       ) : (
-        <Tooltip
-          TransitionComponent={Zoom}
-          title={<pre>{transaction.sender}</pre>}
-          placement="bottom"
-          arrow
-        >
-          <Link
-            shallow
-            prefetch={false}
-            target="_blank"
-            href={
-              transaction.source === 'coreum'
-                ? ACCOUNT_DETAILS(transaction.sender)
-                : XRPL_ACCOUNT_DETAILS(transaction.sender)
-            }
-            className={classes.link}
-          >
-            <span className={display.hiddenUntilLg}>
-              {getMiddleEllipsis(transaction?.sender || '', {
-                beginning: 15,
-                ending: 4,
-              })}
-            </span>
-            <span className={display.hiddenWhenLg}>
-              {getMiddleEllipsis(transaction?.sender || '', {
-                beginning: 15,
-                ending: 10,
-              })}
-            </span>
-          </Link>
-        </Tooltip>
-      ),
-    destination: (
-      <Tooltip
-        TransitionComponent={Zoom}
-        title={<pre>{transaction.destination}</pre>}
-        placement="bottom"
-        arrow
-      >
         <Link
           shallow
           prefetch={false}
           target="_blank"
           href={
-            transaction.source === 'xrpl'
-              ? ACCOUNT_DETAILS(transaction.destination)
-              : XRPL_ACCOUNT_DETAILS(transaction.destination)
+            transaction.source === 'coreum'
+              ? ACCOUNT_DETAILS(transaction.sender)
+              : XRPL_ACCOUNT_DETAILS(transaction.sender)
           }
           className={classes.link}
         >
-          <span className={display.hiddenUntilLg}>
-            {getMiddleEllipsis(transaction?.destination || '', {
-              beginning: 15,
-              ending: 4,
-            })}
-          </span>
-          <span className={display.hiddenWhenLg}>
-            {getMiddleEllipsis(transaction?.destination || '', {
-              beginning: 15,
-              ending: 10,
-            })}
-          </span>
+          {transaction?.sender || ''}
         </Link>
-      </Tooltip>
+      ),
+    destination: (
+      <Link
+        shallow
+        prefetch={false}
+        target="_blank"
+        href={
+          transaction.source === 'xrpl'
+            ? ACCOUNT_DETAILS(transaction.destination)
+            : XRPL_ACCOUNT_DETAILS(transaction.destination)
+        }
+        className={classes.link}
+      >
+        {transaction?.destination || ''}
+      </Link>
     ),
     time: formatDayJs(dayjs.utc(transaction.timestamp), dateFormat),
   };
