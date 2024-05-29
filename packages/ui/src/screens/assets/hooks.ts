@@ -118,7 +118,7 @@ const formatAssets = ({
       chain = item.extra.ibc_info!.source_chain;
     }
 
-    if (item.extra.xrpl_info) {
+    if (item.extra.xrpl_info && item.extra.xrpl_info.source_chain === 'XRPL') {
       chain = 'XRP Ledger';
       tokenType = 'bridged';
       display =

@@ -57,7 +57,7 @@ const formatAsset = ({
     holders = String(assetInHolders?.holders) ?? '0';
   }
 
-  if (asset.extra.xrpl_info) {
+  if (asset.extra.xrpl_info && asset.extra.xrpl_info.source_chain === 'XRPL') {
     chain = 'XRP Ledger';
     tokenType = 'bridged';
     display =
