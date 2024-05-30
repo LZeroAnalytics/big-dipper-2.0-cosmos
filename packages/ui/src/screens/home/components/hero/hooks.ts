@@ -4,10 +4,10 @@ import chainConfig from '@/chainConfig';
 import { useTokenPriceHistoryQuery } from '@/graphql/types/general_types';
 import type { HeroState } from '@/screens/home/components/hero/types';
 
-const { primaryTokenUnit, tokenUnits, chainType } = chainConfig();
+const { primaryTokenUnit, tokenUnits } = chainConfig();
 
 export const useHero = () => {
-  const itemsToLoad = 7 * (chainType.toLowerCase() === 'testnet' ? 24 : 96); // Count of ticks for the last 7 days. This value is approximate
+  const itemsToLoad = 7 * 24 * 4;
 
   const [state, setState] = useState<HeroState>({
     loading: true,
@@ -80,20 +80,21 @@ export const useHero = () => {
     }
   }, [handleSetState, loadMoreData, state.dataLoading, state.isAllDataLoaded, state.loading]);
 
-  const formattedData = useMemo(
-    () =>
-      state.tokenPriceHistory
-        .sort((a, b) => (a.timestamp > b.timestamp ? 1 : -1))
-        .map((x) => {
-          const time = new Date(x.timestamp);
+  const formattedData = useMemo(() => {
+    const oneWeekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
 
-          return {
-            value: x.price as number,
-            time: Math.floor(time.getTime() / 1000),
-          };
-        }),
-    [state.tokenPriceHistory]
-  );
+    return state.tokenPriceHistory
+      .filter((x) => new Date(x.timestamp).getTime() >= oneWeekAgo)
+      .sort((a, b) => (a.timestamp > b.timestamp ? 1 : -1))
+      .map((x) => {
+        const time = new Date(x.timestamp);
+
+        return {
+          value: x.price as number,
+          time: Math.floor(time.getTime() / 1000),
+        };
+      });
+  }, [state.tokenPriceHistory]);
 
   return {
     state,
