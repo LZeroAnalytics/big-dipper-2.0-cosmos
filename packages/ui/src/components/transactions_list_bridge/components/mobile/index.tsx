@@ -11,8 +11,8 @@ import { ListChildComponentProps, VariableSizeList as List } from 'react-window'
 import InfiniteLoader from 'react-window-infinite-loader';
 import ExtendedTimestamp from '@/components/ExtendedTimestamp';
 import SingleBridgeTransactionMobile from '@/components/single_bridge_transaction_mobile';
-import { ACCOUNT_DETAILS, formatToken, getMiddleEllipsis, TRANSACTION_DETAILS } from '@/utils';
-import { Tooltip, Typography, Zoom } from '@mui/material';
+import { ACCOUNT_DETAILS, formatToken, TRANSACTION_DETAILS } from '@/utils';
+import { Typography } from '@mui/material';
 import Link from 'next/link';
 import { formatNumberWithThousandsSeparator } from '@/screens/account_details/components/other_tokens/components/desktop';
 import { Asset, convertHexToString } from '@/screens/assets/hooks';
@@ -277,54 +277,34 @@ const ListItem: FC<ListItemProps> = ({
       </Link>
     ),
     txHash_1: (
-      <Tooltip
-        TransitionComponent={Zoom}
-        title={<pre>{transaction.txHash_1}</pre>}
-        placement="bottom"
-        arrow
+      <Link
+        shallow
+        prefetch={false}
+        target="_blank"
+        href={
+          transaction.source === 'coreum'
+            ? TRANSACTION_DETAILS(transaction.txHash_1)
+            : XRPL_TRANSACTION_DETAILS(transaction.txHash_1)
+        }
+        className={classes.link}
       >
-        <Link
-          shallow
-          prefetch={false}
-          target="_blank"
-          href={
-            transaction.source === 'coreum'
-              ? TRANSACTION_DETAILS(transaction.txHash_1)
-              : XRPL_TRANSACTION_DETAILS(transaction.txHash_1)
-          }
-          className={classes.link}
-        >
-          {getMiddleEllipsis(transaction?.txHash_1 || '', {
-            beginning: 7,
-            ending: 4,
-          })}
-        </Link>
-      </Tooltip>
+        {transaction?.txHash_1 || ''}
+      </Link>
     ),
     txHash_2: (
-      <Tooltip
-        TransitionComponent={Zoom}
-        title={<pre>{transaction.txHash_2}</pre>}
-        placement="bottom"
-        arrow
+      <Link
+        shallow
+        prefetch={false}
+        target="_blank"
+        href={
+          transaction.source === 'xrpl'
+            ? TRANSACTION_DETAILS(transaction.txHash_2)
+            : XRPL_TRANSACTION_DETAILS(transaction.txHash_2)
+        }
+        className={classes.link}
       >
-        <Link
-          shallow
-          prefetch={false}
-          target="_blank"
-          href={
-            transaction.source === 'xrpl'
-              ? TRANSACTION_DETAILS(transaction.txHash_2)
-              : XRPL_TRANSACTION_DETAILS(transaction.txHash_2)
-          }
-          className={classes.link}
-        >
-          {getMiddleEllipsis(transaction?.txHash_2 || '', {
-            beginning: 7,
-            ending: 4,
-          })}
-        </Link>
-      </Tooltip>
+        {transaction?.txHash_2 || ''}
+      </Link>
     ),
     time: <ExtendedTimestamp timestamp={transaction.timestamp} flexEnd={false} />,
   };

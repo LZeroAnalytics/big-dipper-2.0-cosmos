@@ -10,10 +10,9 @@ import useStyles from '@/components/transactions_list_bridge_details/components/
 import type { TransactionsListBridgeDetailsState } from '@/components/transactions_list_bridge_details/types';
 import { useList, useListRow } from '@/hooks/use_react_window';
 import { readDate } from '@/recoil/settings';
-import { useDisplayStyles } from '@/styles/useSharedStyles';
 import dayjs, { formatDayJs } from '@/utils/dayjs';
 import { mergeRefs } from '@/utils/merge_refs';
-import { ACCOUNT_DETAILS, formatToken, getMiddleEllipsis, TRANSACTION_DETAILS } from '@/utils';
+import { ACCOUNT_DETAILS, formatToken, TRANSACTION_DETAILS } from '@/utils';
 import Link from 'next/link';
 import { Tooltip, Typography, Zoom } from '@mui/material';
 import { Asset, convertHexToString } from '@/screens/assets/hooks';
@@ -43,7 +42,6 @@ const ListItem: FC<ListItemProps> = ({
   metadatas,
 }) => {
   const { rowRef } = useListRow(index, setRowHeight);
-  const display = useDisplayStyles().classes;
   const { t } = useTranslation('transactions');
   const dateFormat = useRecoilValue(readDate);
   const { classes } = useStyles();
@@ -257,18 +255,7 @@ const ListItem: FC<ListItemProps> = ({
           }
           className={classes.link}
         >
-          <span className={display.hiddenUntilLg}>
-            {getMiddleEllipsis(transaction?.txHash_1 || '-', {
-              beginning: 15,
-              ending: 4,
-            })}
-          </span>
-          <span className={display.hiddenWhenLg}>
-            {getMiddleEllipsis(transaction?.txHash_1 || '-', {
-              beginning: 15,
-              ending: 10,
-            })}
-          </span>
+          {transaction?.txHash_1 || '-'}
         </Link>
       </Tooltip>
     ),
@@ -290,18 +277,7 @@ const ListItem: FC<ListItemProps> = ({
           }
           className={classes.link}
         >
-          <span className={display.hiddenUntilLg}>
-            {getMiddleEllipsis(transaction?.txHash_2 || '-', {
-              beginning: 15,
-              ending: 4,
-            })}
-          </span>
-          <span className={display.hiddenWhenLg}>
-            {getMiddleEllipsis(transaction?.txHash_2 || '-', {
-              beginning: 15,
-              ending: 10,
-            })}
-          </span>
+          {transaction?.txHash_2 || '-'}
         </Link>
       </Tooltip>
     ),

@@ -12,7 +12,7 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 import { VariableSizeGrid as Grid } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import ExtendedTimestamp from '@/components/ExtendedTimestamp';
-import { ACCOUNT_DETAILS, formatToken, getMiddleEllipsis, TRANSACTION_DETAILS } from '@/utils';
+import { ACCOUNT_DETAILS, formatToken, TRANSACTION_DETAILS } from '@/utils';
 import Link from 'next/link';
 import Zoom from '@mui/material/Zoom';
 import Tooltip from '@mui/material/Tooltip';
@@ -278,10 +278,7 @@ const Desktop: FC<TransactionsListBridgeState> = ({
             }
             className={classes.link}
           >
-            {getMiddleEllipsis(x?.txHash_1 || '', {
-              beginning: 7,
-              ending: 4,
-            })}
+            {x?.txHash_1 || ''}
           </Link>
         </Tooltip>
       ),
@@ -303,10 +300,7 @@ const Desktop: FC<TransactionsListBridgeState> = ({
             }
             className={classes.link}
           >
-            {getMiddleEllipsis(x?.txHash_2 || '-', {
-              beginning: 7,
-              ending: 4,
-            })}
+            {x?.txHash_2 || '-'}
           </Link>
         </Tooltip>
       ),
