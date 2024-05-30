@@ -4,10 +4,10 @@ import chainConfig from '@/chainConfig';
 import { useTokenPriceHistoryQuery } from '@/graphql/types/general_types';
 import type { HeroState } from '@/screens/home/components/hero/types';
 
-const { primaryTokenUnit, tokenUnits } = chainConfig();
+const { primaryTokenUnit, tokenUnits, chainType } = chainConfig();
 
 export const useHero = () => {
-  const itemsToLoad = 96 * 7; // Count of ticks for the last 7 days. This value is approximate
+  const itemsToLoad = 7 * (chainType.toLowerCase() === 'testnet' ? 24 : 96); // Count of ticks for the last 7 days. This value is approximate
 
   const [state, setState] = useState<HeroState>({
     loading: true,
