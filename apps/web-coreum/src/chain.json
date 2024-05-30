@@ -270,7 +270,7 @@
       "endpoints": {
         "graphql": "https://hasura.testnet-1.coreum.dev/v1/graphql",
         "graphqlWebsocket": "wss://hasura.testnet-1.coreum.dev/v1/graphql",
-        "publicRpcWebsocket": "wss://full-node-pluto.testnet-1.coreum.dev:26657/websocket"
+        "publicRpcWebsocket": "wss://full-node-eris.testnet-1.coreum.dev:26657/websocket"
       },
       "marketing": {
         "matomoURL": "https://analytics.bigdipper.live",

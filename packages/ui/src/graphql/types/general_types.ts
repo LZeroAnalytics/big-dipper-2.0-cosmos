@@ -11808,6 +11808,7 @@ export type TokenPriceListenerSubscription = { tokenPrice: Array<{ __typename?: 
 export type TokenPriceHistoryQueryVariables = Exact<{
   denom?: InputMaybe<Scalars['String']>;
   limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
 }>;
 
 
@@ -13065,17 +13066,18 @@ export function useTokenPriceListenerSubscription(baseOptions?: Apollo.Subscript
 export type TokenPriceListenerSubscriptionHookResult = ReturnType<typeof useTokenPriceListenerSubscription>;
 export type TokenPriceListenerSubscriptionResult = Apollo.SubscriptionResult<TokenPriceListenerSubscription>;
 export const TokenPriceHistoryDocument = gql`
-    query TokenPriceHistory($denom: String, $limit: Int = 100) {
-  tokenPrice: token_price_history(
-    where: {unit_name: {_eq: $denom}}
-    limit: $limit
-    order_by: {timestamp: desc}
-  ) {
-    price
-    timestamp
+  query TokenPriceHistory($denom: String, $limit: Int = 100, $offset: Int = 0) {
+    tokenPrice: token_price_history(
+      where: {unit_name: {_eq: $denom}}
+      limit: $limit
+      order_by: {timestamp: desc}
+      offset: $offset
+    ) {
+      price
+      timestamp
+    }
   }
-}
-    `;
+`;
 
 /**
  * __useTokenPriceHistoryQuery__

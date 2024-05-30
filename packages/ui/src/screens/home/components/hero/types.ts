@@ -6,5 +6,7 @@ export interface TokenPriceType {
 export interface HeroState {
   loading: boolean;
   exists: boolean;
-  tokenPriceHistory: TokenPriceType[];
+  tokenPriceHistory: any[];
+  isAllDataLoaded: boolean;
+  dataLoading: boolean;
 }

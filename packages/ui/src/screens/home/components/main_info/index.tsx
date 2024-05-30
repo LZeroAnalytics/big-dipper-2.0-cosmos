@@ -10,7 +10,6 @@ import Big from 'big.js';
 import { formatNumber } from '@/utils/format_token';
 import useStyles from './styles';
 import { useHero } from '../hero/hooks';
-import { TokenPriceType } from '../hero/types';
 
 const PriceChart = dynamic(() => import('./price_chart'), { ssr: false });
 
@@ -20,7 +19,7 @@ const MainInfo: React.FC<{
   const { classes, cx } = useStyles();
   const { isMobile } = useScreenSize();
   const marketState = useRecoilValue(readMarket);
-  const { state } = useHero();
+  const { tokenPriceHistory } = useHero();
 
   const priceChange = useMemo(() => {
     const currentDate = new Date();
@@ -29,14 +28,12 @@ const MainInfo: React.FC<{
 
     const yesterdayTimestamp = yesterday.getTime();
 
-    const priceChangeHistory: TokenPriceType[] = state.tokenPriceHistory.filter(
-      (priceValue: TokenPriceType) => {
-        const time = new Date(priceValue.time);
-        const priceChangeTimestamp = time.getTime();
+    const priceChangeHistory: any[] = tokenPriceHistory.filter((priceValue: any) => {
+      const time = new Date(priceValue.time);
+      const priceChangeTimestamp = time.getTime();
 
-        return yesterdayTimestamp > priceChangeTimestamp;
-      }
-    );
+      return yesterdayTimestamp > priceChangeTimestamp;
+    });
 
     if (priceChangeHistory.length && marketState.price) {
       const prevValue = priceChangeHistory[priceChangeHistory.length - 1].value;
@@ -49,7 +46,7 @@ const MainInfo: React.FC<{
     }
 
     return 0;
-  }, [state.tokenPriceHistory, marketState.price]);
+  }, [tokenPriceHistory, marketState.price]);
 
   const renderPriceChange = React.useMemo(() => {
     const priceChange24h = `${formatNumber(Big(priceChange)?.toPrecision(), 2)}%`;

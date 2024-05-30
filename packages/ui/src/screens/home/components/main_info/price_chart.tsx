@@ -11,7 +11,7 @@ const PriceChart: React.FC = () => {
   const { classes } = useStyles();
   const chartRef = useRef<IChartApi>();
   const theme = useRecoilValue(readTheme);
-  const { state } = useHero();
+  const { state, tokenPriceHistory } = useHero();
   const marketState = useRecoilValue(readMarket);
 
   const currentTime = useMemo(() => {
@@ -20,21 +20,8 @@ const PriceChart: React.FC = () => {
     return Math.floor(time.getTime() / 1000);
   }, []);
 
-  const formattedData = useMemo(
-    () =>
-      state.tokenPriceHistory.map((item: any) => {
-        const time = new Date(item.time);
-
-        return {
-          value: item.value as number,
-          time: Math.floor(time.getTime() / 1000),
-        };
-      }),
-    [state.tokenPriceHistory]
-  );
-
   const finalChartData = useMemo(() => {
-    const newArray = formattedData;
+    const newArray = tokenPriceHistory;
 
     if (marketState.price) {
       newArray.push({
@@ -46,10 +33,10 @@ const PriceChart: React.FC = () => {
     }
 
     return newArray;
-  }, [formattedData, currentTime, marketState]);
+  }, [tokenPriceHistory, currentTime, marketState]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && !chartRef.current && finalChartData.length > 1) {
+    if (typeof window !== 'undefined' && !chartRef.current && !state.loading) {
       const chartOptions = {
         layout: {
           textColor: theme === 'dark' ? 'white' : 'black',

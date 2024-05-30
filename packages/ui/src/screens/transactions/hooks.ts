@@ -47,7 +47,7 @@ const RPC_URL =
   chainType.toLowerCase() === 'mainnet'
     ? 'https://full-node-uranium.mainnet-1.coreum.dev:26657'
     : chainType.toLowerCase() === 'testnet'
-      ? 'https://full-node-pluto.testnet-1.coreum.dev:26657'
+      ? 'https://full-node-eris.testnet-1.coreum.dev:26657'
       : 'https://full-node-uranium.devnet-1.coreum.dev:26657';
 
 const CONTRACT_ADDRESS =
