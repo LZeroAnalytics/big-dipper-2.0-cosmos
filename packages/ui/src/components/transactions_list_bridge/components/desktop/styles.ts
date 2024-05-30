@@ -11,8 +11,6 @@ const useStyles = makeStyles()((theme) => ({
   cell: {
     ...(theme.mixins.tableCell as CSSObject),
     padding: theme.spacing(2),
-    overflow: 'auto',
-    scrollbarWidth: 'none',
   },
   header: {
     ...(theme.mixins.tableCell as CSSObject),
@@ -26,12 +24,18 @@ const useStyles = makeStyles()((theme) => ({
   },
   body: {
     color: theme.palette.custom.fonts.fontTwo,
+
     '& .copy-icon': {
       paddingLeft: theme.spacing(1),
       paddingTop: theme.spacing(1),
       cursor: 'pointer',
       width: theme.spacing(3),
       height: theme.spacing(3),
+    },
+
+    '& .MuiTypography-body1': {
+      overflow: 'auto',
+      scrollbarWidth: 'none',
     },
   },
   combined: {
