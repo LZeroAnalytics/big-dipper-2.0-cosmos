@@ -22,21 +22,10 @@ const MainInfo: React.FC<{
   const { tokenPriceHistory } = useHero();
 
   const priceChange = useMemo(() => {
-    const currentDate = new Date();
-    const yesterday = new Date(currentDate);
-    yesterday.setDate(yesterday.getDate() - 1);
+    const priceCompareItem = tokenPriceHistory[0];
 
-    const yesterdayTimestamp = yesterday.getTime();
-
-    const priceChangeHistory: any[] = tokenPriceHistory.filter((priceValue: any) => {
-      const time = new Date(priceValue.time);
-      const priceChangeTimestamp = time.getTime();
-
-      return yesterdayTimestamp > priceChangeTimestamp;
-    });
-
-    if (priceChangeHistory.length && marketState.price) {
-      const prevValue = priceChangeHistory[priceChangeHistory.length - 1].value;
+    if (priceCompareItem && marketState.price) {
+      const prevValue = priceCompareItem.value;
       const currentValue = marketState.price;
 
       const substract = currentValue - prevValue;

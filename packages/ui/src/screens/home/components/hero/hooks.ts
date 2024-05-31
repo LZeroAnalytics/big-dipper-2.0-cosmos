@@ -81,7 +81,7 @@ export const useHero = () => {
   }, [handleSetState, loadMoreData, state.dataLoading, state.isAllDataLoaded, state.loading]);
 
   const formattedData = useMemo(() => {
-    const oneWeekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+    const oneWeekAgo = Date.now() - 24 * 60 * 60 * 1000;
 
     return state.tokenPriceHistory
       .filter((x) => new Date(x.timestamp).getTime() >= oneWeekAgo)
