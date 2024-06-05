@@ -27,6 +27,17 @@ const useStyles = makeStyles()((theme) => ({
       },
     },
   },
+  result: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+
+    '& span': {
+      display: 'flex',
+      alignItems: 'center',
+      fontSize: theme.spacing(1.75),
+    },
+  },
 }));
 
 export default useStyles;

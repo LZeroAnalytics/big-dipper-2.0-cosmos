@@ -63,7 +63,7 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
     //     {x.messages > 1 && ` + ${x.messages - 1}`}
     //   </div>
     // ),
-    result: <Result success={x.success} />,
+    result: <Result success={x.success} className={classes.result} />,
     time: <Timestamp timestamp={x.timestamp} />,
     messages: numeral(x.messages).format('0,0'),
   }));

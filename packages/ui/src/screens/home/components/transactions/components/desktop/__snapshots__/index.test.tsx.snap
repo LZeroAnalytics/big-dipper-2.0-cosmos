@@ -168,6 +168,32 @@ exports[`screen: Home/Transactions/Desktop matches snapshot 1`] = `
   font-size: 1rem;
 }
 
+.emotion-13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.emotion-13 span {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 14px;
+}
+
 <div
   className="emotion-0"
 >
@@ -319,6 +345,7 @@ exports[`screen: Home/Transactions/Desktop matches snapshot 1`] = `
             }
           >
             <div
+              className="emotion-13"
               id="Result"
               success={true}
             />
