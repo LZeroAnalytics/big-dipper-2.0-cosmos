@@ -35,7 +35,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          standard-version --bumpFiles apps/web-coreum/package.json --packageFiles apps/web-coreum/package.json -r patch --prerelease coreum
+          standard-version --bumpFiles apps/web-coreum/package.json --packageFiles apps/web-coreum/package.json --prerelease coreum
 
       - name: Push bumped version
         env:
