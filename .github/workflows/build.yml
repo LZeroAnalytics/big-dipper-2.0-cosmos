@@ -28,6 +28,9 @@ jobs:
           git config user.name "Automated Version Bump"
           git config user.email "gh-action-bump-version@users.noreply.github.com"
 
+      - name: Install dependencies
+        run: npm i -g standard-version@9.5.0
+
       - name: Bump Version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
