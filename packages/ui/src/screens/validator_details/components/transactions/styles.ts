@@ -3,7 +3,8 @@ import { makeStyles } from 'tss-react/mui';
 const useStyles = makeStyles()((theme) => ({
   root: {
     '& .MuiTypography-h2': {
-      marginBottom: theme.spacing(2),
+      fontSize: theme.spacing(2.5),
+      padding: theme.spacing(2),
     },
   },
   list: {
