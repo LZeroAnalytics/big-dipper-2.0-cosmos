@@ -11759,7 +11759,18 @@ export type OnlineVotingPowerQuery = { activeTotal: { __typename?: 'validator_st
 export type ParamsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ParamsQuery = { stakingParams: Array<{ __typename?: 'staking_params', params: any }>, slashingParams: Array<{ __typename?: 'slashing_params', params: any }>, mintParams: Array<{ __typename?: 'mint_params', params: any }>, distributionParams: Array<{ __typename?: 'distribution_params', params: any }>, govParams: Array<{ __typename?: 'gov_params', params: any }>, authParams: Array<{ __typename?: 'auth_params', params: any }>, feeModelParams: Array<{__typename?: 'feemodel_params', params: any}>, customParams: Array<{__typename?: 'custom_params', customStakingParams: any }> , nftParams: Array<{ __typename?: 'nft_params', params: any }>, ftParams: Array<{ __typename?: 'ft_params', params: any, token_upgrade_grace_period: any, token_upgrade_decision_timeout: any }>
+export type ParamsQuery = {
+  stakingParams: Array<{ __typename?: 'staking_params', params: any }>,
+  slashingParams: Array<{ __typename?: 'slashing_params', params: any }>,
+  mintParams: Array<{ __typename?: 'mint_params', params: any }>,
+  distributionParams: Array<{ __typename?: 'distribution_params', params: any }>,
+  govParams: Array<{ __typename?: 'gov_params', params: any }>,
+  authParams: Array<{ __typename?: 'auth_params', params: any }>,
+  feeModelParams: Array<{__typename?: 'feemodel_params', params: any}>,
+  customParams: Array<{__typename?: 'custom_params', customStakingParams: any }> ,
+  nftParams: Array<{ __typename?: 'nft_params', params: any }>,
+  ftParams: Array<{ __typename?: 'ft_params', params: any, token_upgrade_grace_period: any, token_upgrade_decision_timeout: any }>,
+  dexParams: Array<{ __typename?: 'dex_params', params: any }>,
 };
 
 export type ProposalDetailsQueryVariables = Exact<{
@@ -12756,27 +12767,30 @@ export type OnlineVotingPowerQueryHookResult = ReturnType<typeof useOnlineVoting
 export type OnlineVotingPowerLazyQueryHookResult = ReturnType<typeof useOnlineVotingPowerLazyQuery>;
 export type OnlineVotingPowerQueryResult = Apollo.QueryResult<OnlineVotingPowerQuery, OnlineVotingPowerQueryVariables>;
 export const ParamsDocument = gql`
-    query Params {
-  stakingParams: staking_params(limit: 1, order_by: {height: desc}) {
-    params
+  query Params {
+    stakingParams: staking_params(limit: 1, order_by: {height: desc}) {
+      params
+    }
+    slashingParams: slashing_params(limit: 1, order_by: {height: desc}) {
+      params
+    }
+    mintParams: mint_params(limit: 1, order_by: {height: desc}) {
+      params
+    }
+    distributionParams: distribution_params(limit: 1, order_by: {height: desc}) {
+      params
+    }
+    govParams: gov_params(limit: 1, order_by: {height: desc, params: asc}) {
+      params
+    }
+    authParams: auth_params(limit: 1, order_by: {height: desc, params: asc }) {
+      params
+    }
+    dexParams: dex_params(limit: 1, order_by: {height: desc, params: asc }) {
+      params
+    }
   }
-  slashingParams: slashing_params(limit: 1, order_by: {height: desc}) {
-    params
-  }
-  mintParams: mint_params(limit: 1, order_by: {height: desc}) {
-    params
-  }
-  distributionParams: distribution_params(limit: 1, order_by: {height: desc}) {
-    params
-  }
-  govParams: gov_params(limit: 1, order_by: {height: desc, params: asc}) {
-    params
-  }
-  authParams: auth_params(limit: 1, order_by: {height: desc, params: asc }) {
-    params
-  }
-}
-    `;
+`;
 
 /**
  * __useParamsQuery__

@@ -66,6 +66,16 @@ export interface Auth {
   sigVerifyCostSecp256k1: number | undefined;
 }
 
+export interface Dex {
+  order_reserve: {
+    amount: string;
+    denom: string;
+  };
+  price_tick_exponent: number;
+  max_orders_per_denom: number;
+  default_unified_ref_amount: string;
+}
+
 export interface ParamsState {
   loading: boolean;
   exists: boolean;
@@ -78,4 +88,5 @@ export interface ParamsState {
   nft: NFT | null;
   ft: FT | null;
   auth: Auth | null;
+  dex: Dex | null;
 }

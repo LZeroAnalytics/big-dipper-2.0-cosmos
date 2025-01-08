@@ -8,6 +8,7 @@ import type {
   NFT,
   FT,
   Auth,
+  Dex,
 } from '@/screens/params/types';
 import { nanoToSeconds, secondsToDays } from '@/utils/time';
 import { TFunction } from 'next-i18next';
@@ -278,5 +279,28 @@ export const formatAuth = (data: Auth, t: TFunction) => [
     key: 'sigVerifyCostSecp256k1',
     label: t('sigVerifyCostSecp256k1'),
     detail: numeral(data.sigVerifyCostSecp256k1).format('0,0'),
+  },
+];
+
+export const formatDex = (data: Dex, t: TFunction) => [
+  {
+    key: 'defaultUnifiedRefAmount',
+    label: t('defaultUnifiedRefAmount'),
+    detail: numeral(data.default_unified_ref_amount).format('0,0'),
+  },
+  {
+    key: 'maxOrdersPerDenom',
+    label: t('maxOrdersPerDenom'),
+    detail: numeral(data.max_orders_per_denom).format('0,0'),
+  },
+  {
+    key: 'priceTickExponent',
+    label: t('priceTickExponent'),
+    detail: numeral(data.price_tick_exponent).format('0,0'),
+  },
+  {
+    key: 'orderReserve',
+    label: t('orderReserve'),
+    detail: `${data.order_reserve.amount} ${data.order_reserve.denom.toUpperCase()}`,
   },
 ];

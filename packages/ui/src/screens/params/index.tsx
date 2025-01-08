@@ -16,6 +16,7 @@ import {
   formatFT,
   formatNFT,
   formatAuth,
+  formatDex,
 } from '@/screens/params/utils';
 
 const Params = () => {
@@ -72,6 +73,13 @@ const Params = () => {
       }
     : null;
 
+  const dex = state.dex
+    ? {
+        title: t('dex') ?? undefined,
+        details: formatDex(state.dex, t),
+      }
+    : null;
+
   const ft = state.ft ? { title: t('ft') ?? undefined, details: formatFT(state.ft, t) } : null;
   const nft = state.nft ? { title: t('nft') ?? undefined, details: formatNFT(state.nft, t) } : null;
 
@@ -98,6 +106,7 @@ const Params = () => {
             {ft && <BoxDetails {...ft} />}
             {nft && <BoxDetails {...nft} />}
             {auth && <BoxDetails {...auth} />}
+            {dex && <BoxDetails {...dex} />}
           </span>
         </LoadAndExist>
       </Layout>

@@ -53,5 +53,10 @@
   "maxMemoCharacters": "Max memo characters",
   "txSizeCostPerByte": "Tx Size cost per byte",
   "sigVerifyCostEd25519": "Signature verify cost ed25519",
-  "sigVerifyCostSecp256k1": "Signature verify cost secp256k1"
+  "sigVerifyCostSecp256k1": "Signature verify cost secp256k1",
+  "dex": "DEX",
+  "defaultUnifiedRefAmount": "Default Unified Ref Amount",
+  "maxOrdersPerDenom": "Max Orders Per Denom",
+  "priceTickExponent": "Price Tick Exponent",
+  "orderReserve": "Order Reserve"
 }

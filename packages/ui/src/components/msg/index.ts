@@ -77,3 +77,11 @@ export { default as NftIssueClass } from '@/components/msg/asset/nft_issue_class
 export { default as NftSend } from '@/components/msg/nft/send';
 export { default as NftAddToWhitelist } from '@/components/msg/asset/nft_add_whitelist';
 export { default as NftRemoveFromWhitelist } from '@/components/msg/asset/nft_remove_whitelist';
+export { default as UpdateDEXWhitelistedDenoms } from '@/components/msg/asset/update_dex_whitelisted_denoms';
+export { default as UpdateDEXUnifiedRefAmount } from '@/components/msg/asset/update_dex_unified_ref_amount';
+export { default as PlaceOrder } from '@/components/msg/dex/place_order';
+export { default as CancelOrder } from '@/components/msg/dex/cancel_order';
+export { default as CancelOrdersByDenom } from '@/components/msg/dex/cancel_orders_by_denom';
+export { default as TransferAdmin } from '@/components/msg/asset/transfer_admin';
+export { default as ClearAdmin } from '@/components/msg/asset/clear_admin';
+export { default as UpdateData } from '@/components/msg/asset/update_data';

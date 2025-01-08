@@ -20,4 +20,7 @@ query Params {
   authParams: auth_params(limit: 1, order_by: {height: desc, params: asc }) {
     params
   }
+  dexParams: dex_params(limit: 1, order_by: {height: desc, params: asc }) {
+    params
+  }
 }

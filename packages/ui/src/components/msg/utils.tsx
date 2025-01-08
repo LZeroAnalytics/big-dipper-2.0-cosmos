@@ -515,6 +515,54 @@ const customTypeToModel = {
     tagTheme: 'six',
     tagDisplay: 'msgUpgradeTokenLabel',
   },
+  '/coreum.asset.ft.v1.MsgUpdateDEXUnifiedRefAmount': {
+    model: MODELS.MsgUpdateDEXUnifiedRefAmount,
+    content: COMPONENTS.UpdateDEXUnifiedRefAmount,
+    tagTheme: 'six',
+    tagDisplay: 'msgUpdateDEXUnifiedRefAmount',
+  },
+  '/coreum.asset.ft.v1.MsgUpdateDEXWhitelistedDenoms': {
+    model: MODELS.MsgUpdateDEXWhitelistedDenoms,
+    content: COMPONENTS.UpdateDEXWhitelistedDenoms,
+    tagTheme: 'six',
+    tagDisplay: 'msgUpdateDexWhitelistedDenoms',
+  },
+  '/coreum.dex.v1.MsgPlaceOrder': {
+    model: MODELS.MsgPlaceOrder,
+    content: COMPONENTS.PlaceOrder,
+    tagTheme: 'six',
+    tagDisplay: 'msgPlaceOrder',
+  },
+  '/coreum.dex.v1.MsgCancelOrder': {
+    model: MODELS.MsgCancelOrder,
+    content: COMPONENTS.CancelOrder,
+    tagTheme: 'six',
+    tagDisplay: 'msgCancelOrder',
+  },
+  '/coreum.dex.v1.MsgCancelOrdersByDenom': {
+    model: MODELS.MsgCancelOrdersByDenom,
+    content: COMPONENTS.CancelOrdersByDenom,
+    tagTheme: 'six',
+    tagDisplay: 'msgCancelOrdersByDenom',
+  },
+  '/coreum.asset.ft.v1.MsgTransferAdmin': {
+    model: MODELS.MsgTransferAdmin,
+    content: COMPONENTS.TransferAdmin,
+    tagTheme: 'six',
+    tagDisplay: 'msgTransferAdmin',
+  },
+  '/coreum.asset.ft.v1.MsgClearAdmin': {
+    model: MODELS.MsgClearAdmin,
+    content: COMPONENTS.ClearAdmin,
+    tagTheme: 'six',
+    tagDisplay: 'msgClearAdmin',
+  },
+  '/coreum.asset.nft.v1.MsgUpdateData': {
+    model: MODELS.MsgUpdateData,
+    content: COMPONENTS.UpdateData,
+    tagTheme: 'six',
+    tagDisplay: 'msgUpdateData',
+  },
 };
 type CustomTypeToModel = typeof customTypeToModel;
 

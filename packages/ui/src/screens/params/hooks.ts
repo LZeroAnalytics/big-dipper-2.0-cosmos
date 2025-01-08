@@ -13,9 +13,10 @@ import {
   TokenParams,
 } from '@/models';
 import { customStakingParams } from '@/models/staking_params';
-import type { Auth, ParamsState } from '@/screens/params/types';
+import type { Auth, Dex, ParamsState } from '@/screens/params/types';
 import { formatToken } from '@/utils/format_token';
 import AuthParams from '@/models/auth_params';
+import DexParams from '@/models/dex_params';
 
 const { primaryTokenUnit } = chainConfig();
 
@@ -31,6 +32,7 @@ const initialState: ParamsState = {
   nft: null,
   ft: null,
   auth: null,
+  dex: null,
 };
 
 // ================================
@@ -212,6 +214,14 @@ const formatAuthParams = (data: ParamsQuery): Auth | null => {
   return null;
 };
 
+const formatDEXParams = (data: ParamsQuery): Dex | null => {
+  if (data.dexParams?.length) {
+    return DexParams.fromJson(data.dexParams?.[0]?.params ?? {});
+  }
+
+  return null;
+};
+
 const formatParam = (data: ParamsQuery) => {
   const results: Partial<ParamsState> = {};
 
@@ -232,6 +242,8 @@ const formatParam = (data: ParamsQuery) => {
   results.ft = formatFTParams(data);
 
   results.auth = formatAuthParams(data);
+
+  results.dex = formatDEXParams(data);
 
   return results;
 };

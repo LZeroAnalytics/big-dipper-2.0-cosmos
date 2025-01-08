@@ -88,3 +88,11 @@ export { default as MsgNftIssueClass } from '@/models/msg/asset/msg_nft_issue_cl
 export { default as MsgNftSend } from '@/models/msg/nft/msg_send';
 export { default as MsgNftAddToWhitelist } from '@/models/msg/asset/msg_nft_add_to_whitelist';
 export { default as MsgNftRemoveFromWhitelist } from '@/models/msg/asset/msg_nft_remove_from_whitelist';
+export { default as MsgUpdateDEXWhitelistedDenoms } from '@/models/msg/asset/msg_update_dex_whitelisted_denoms';
+export { default as MsgUpdateDEXUnifiedRefAmount } from '@/models/msg/asset/msg_update_dex_unified_ref_amount';
+export { default as MsgPlaceOrder } from '@/models/msg/dex/msg_place_order';
+export { default as MsgCancelOrder } from '@/models/msg/dex/msg_cancel_order';
+export { default as MsgCancelOrdersByDenom } from '@/models/msg/dex/msg_cancel_orders_by_denom';
+export { default as MsgTransferAdmin } from '@/models/msg/asset/msg_transfer_admin';
+export { default as MsgClearAdmin } from '@/models/msg/asset/msg_clear_admin';
+export { default as MsgUpdateData } from '@/models/msg/asset/msg_update_data';
