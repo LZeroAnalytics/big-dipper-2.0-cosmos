@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.0](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.2.1-coreum.3...v2.3.0-coreum.0) (2025-01-08)
+
+
+### Features
+
+* add support for custom messages, add dex params ([8936061](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/893606131380196396397b71abd6492e10341179))
+
 ### [2.2.1-coreum.3](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.2.1-coreum.2...v2.2.1-coreum.3) (2024-11-12)
 
 
