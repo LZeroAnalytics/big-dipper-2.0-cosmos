@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.2](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.1...v2.3.0-coreum.2) (2025-01-10)
+
+
+### Bug Fixes
+
+* update constructors of msg_clear_admin and msg_transfer_admin ([849f980](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/849f98013492e19dbd6f806144f6c8dcc7833019))
+
 ## [2.3.0-coreum.1](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.0...v2.3.0-coreum.1) (2025-01-10)
 
 
