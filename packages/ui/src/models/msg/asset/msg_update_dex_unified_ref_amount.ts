@@ -16,8 +16,8 @@ class MsgUpdateDEXUnifiedRefAmount {
   constructor(payload: any) {
     this.category = 'asset';
     this.type = R.pathOr('', ['type'], payload);
-    this.sender = R.pathOr('', ['sender'], payload.json);
-    this.denom = R.pathOr('', ['denom'], payload.json);
+    this.sender = R.pathOr('', ['sender'], payload);
+    this.denom = R.pathOr('', ['denom'], payload);
     this.unified_ref_amount = R.pathOr('', ['unified_ref_amount'], payload);
   }
 

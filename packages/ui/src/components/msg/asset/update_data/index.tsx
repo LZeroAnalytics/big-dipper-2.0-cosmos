@@ -9,6 +9,8 @@ const UpdateData: FC<{ message: MsgUpdateData }> = (props) => {
   const { message } = props;
   const sender = useProfileRecoil(message.sender);
 
+  console.log({ message });
+
   return (
     <Typography>
       <Trans

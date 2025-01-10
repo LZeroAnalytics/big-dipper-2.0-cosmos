@@ -16,8 +16,8 @@ class MsgUpdateDEXWhitelistedDenoms {
   constructor(payload: any) {
     this.category = 'asset';
     this.type = R.pathOr('', ['type'], payload);
-    this.sender = R.pathOr('', ['sender'], payload.json);
-    this.denom = R.pathOr('', ['denom'], payload.json);
+    this.sender = R.pathOr('', ['sender'], payload);
+    this.denom = R.pathOr('', ['denom'], payload);
     this.whitelisted_denoms = R.pathOr([], ['whitelisted_denoms'], payload);
   }
 

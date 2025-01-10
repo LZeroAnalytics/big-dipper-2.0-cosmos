@@ -14,8 +14,8 @@ class MsgCancelOrder {
   constructor(payload: any) {
     this.category = 'dex';
     this.type = R.pathOr('', ['type'], payload);
-    this.sender = R.pathOr('', ['sender'], payload.json);
-    this.id = R.pathOr('', ['id'], payload.json);
+    this.sender = R.pathOr('', ['sender'], payload);
+    this.id = R.pathOr('', ['id'], payload);
   }
 
   static fromJson(json: any) {

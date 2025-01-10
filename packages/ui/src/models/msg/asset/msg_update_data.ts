@@ -23,10 +23,10 @@ class MsgUpdateData {
   constructor(payload: any) {
     this.category = 'asset';
     this.type = R.pathOr('', ['type'], payload);
-    this.sender = R.pathOr('', ['sender'], payload.json);
-    this.class_id = R.pathOr('', ['class_id'], payload.json);
-    this.id = R.pathOr('', ['id'], payload.json);
-    this.items = R.pathOr([], ['items'], payload.json);
+    this.sender = R.pathOr('', ['sender'], payload);
+    this.class_id = R.pathOr('', ['class_id'], payload);
+    this.id = R.pathOr('', ['id'], payload);
+    this.items = R.pathOr([], ['items'], payload);
   }
 
   static fromJson(json: any) {

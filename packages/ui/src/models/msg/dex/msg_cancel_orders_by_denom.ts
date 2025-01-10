@@ -16,9 +16,9 @@ class MsgCancelOrdersByDenom {
   constructor(payload: any) {
     this.category = 'dex';
     this.type = R.pathOr('', ['type'], payload);
-    this.sender = R.pathOr('', ['sender'], payload.json);
-    this.account = R.pathOr('', ['account'], payload.json);
-    this.denom = R.pathOr('', ['denom'], payload.json);
+    this.sender = R.pathOr('', ['sender'], payload);
+    this.account = R.pathOr('', ['account'], payload);
+    this.denom = R.pathOr('', ['denom'], payload);
   }
 
   static fromJson(json: any) {
