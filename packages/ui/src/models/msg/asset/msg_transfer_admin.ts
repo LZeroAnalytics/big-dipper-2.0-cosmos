@@ -16,8 +16,8 @@ class MsgTransferAdmin {
   constructor(payload: any) {
     this.category = 'asset';
     this.type = R.pathOr('', ['type'], payload);
-    this.sender = R.pathOr('', ['sender'], payload.json);
-    this.denom = R.pathOr('', ['denom'], payload.json);
+    this.sender = R.pathOr('', ['sender'], payload);
+    this.denom = R.pathOr('', ['denom'], payload);
     this.account = R.pathOr('', ['account'], payload);
   }
 
