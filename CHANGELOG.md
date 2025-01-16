@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.4](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.3...v2.3.0-coreum.4) (2025-01-16)
+
+
+### Features
+
+* display raw_message in json format for custom messages ([e5d4f47](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/e5d4f47c20cc1fdaa07a613cc934159a1951cbd1))
+
 ## [2.3.0-coreum.3](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.2...v2.3.0-coreum.3) (2025-01-16)
 
 
