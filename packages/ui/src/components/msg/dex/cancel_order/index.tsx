@@ -12,7 +12,7 @@ const CancelOrder: FC<{ message: MsgCancelOrder }> = (props) => {
   return (
     <Typography>
       <Trans
-        i18nKey="message_contents:msgPlaceOrder"
+        i18nKey="message_contents:msgCancelOrder"
         components={[<Name address={message.sender} name={sender.name ?? message.sender} />, <b />]}
         values={{
           sender: message.sender,
