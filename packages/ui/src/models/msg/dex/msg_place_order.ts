@@ -21,6 +21,8 @@ class MsgPlaceOrder {
 
   public side: string;
 
+  public json: any;
+
   public good_till: {
     good_til_block_height: string;
     good_til_block_time: string;
@@ -31,6 +33,7 @@ class MsgPlaceOrder {
   constructor(payload: any) {
     this.category = 'dex';
     this.type = R.pathOr('', ['type'], payload);
+    this.json = R.pathOr({}, ['json'], payload);
     this.sender = R.pathOr('', ['sender'], payload);
     this.id = R.pathOr('', ['id'], payload);
     this.base_denom = R.pathOr('', ['base_denom'], payload);
@@ -44,7 +47,8 @@ class MsgPlaceOrder {
 
   static fromJson(json: any) {
     return new MsgPlaceOrder({
-      category: 'asset',
+      category: 'dex',
+      json,
       type: R.pathOr('', ['@type'], json),
       sender: R.pathOr('', ['sender'], json),
       id: R.pathOr('', ['id'], json),

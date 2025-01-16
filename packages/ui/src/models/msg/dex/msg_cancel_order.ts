@@ -11,8 +11,11 @@ class MsgCancelOrder {
 
   public id: string;
 
+  public json: any;
+
   constructor(payload: any) {
     this.category = 'dex';
+    this.json = R.pathOr({}, ['json'], payload);
     this.type = R.pathOr('', ['type'], payload);
     this.sender = R.pathOr('', ['sender'], payload);
     this.id = R.pathOr('', ['id'], payload);
@@ -20,7 +23,8 @@ class MsgCancelOrder {
 
   static fromJson(json: any) {
     return new MsgCancelOrder({
-      category: 'asset',
+      category: 'dex',
+      json,
       type: R.pathOr('', ['@type'], json),
       sender: R.pathOr('', ['sender'], json),
       id: R.pathOr('', ['id'], json),

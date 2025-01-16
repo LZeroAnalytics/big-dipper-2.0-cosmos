@@ -13,8 +13,11 @@ class MsgCancelOrdersByDenom {
 
   public denom: string;
 
+  public json: any;
+
   constructor(payload: any) {
     this.category = 'dex';
+    this.json = R.pathOr({}, ['json'], payload);
     this.type = R.pathOr('', ['type'], payload);
     this.sender = R.pathOr('', ['sender'], payload);
     this.account = R.pathOr('', ['account'], payload);
@@ -23,7 +26,8 @@ class MsgCancelOrdersByDenom {
 
   static fromJson(json: any) {
     return new MsgCancelOrdersByDenom({
-      category: 'asset',
+      category: 'dex',
+      json,
       type: R.pathOr('', ['@type'], json),
       sender: R.pathOr('', ['sender'], json),
       account: R.pathOr('', ['account'], json),

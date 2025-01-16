@@ -78,7 +78,7 @@
   "msgUpdateDEXUnifiedRefAmount": "<0>{{sender}}</0> has set unified ref amount for the token <1>{{denom}} to {{unified_ref_amount}}</1>",
   "msgPlaceOrder": "<0>{{sender}}</0> placed an order with id <1>{{id}}</1> where base denom is <1>{{base_denom}}</1>, quote_denom is <1>{{quote_denom}}</1>, price - <1>{{price}}</1>, quantity - <1>{{quantity}}</1>, side - <1>{{side}}</1>",
   "msgCancelOrder": "<0>{{sender}}</0> canceled the order with id <1>{{id}}</1>",
-  "msgCancelOrdersByDenom": "<0>{{sender}}</0> canceled all opened order for the token <1>{{denom}}</1>",
+  "msgCancelOrdersByDenom": "<0>{{sender}}</0> canceled all opened orders for the token <1>{{denom}}</1>",
   "msgUpdateData": "<0>{{sender}}</0> updated data for nft with id - <1>{{id}}</1> of nft class <1>{{class_id}}</1>",
   "msgTransferAdmin": "<0>{{sender}}</0> set as admin account <0>{{account}}</0> for the token <1>{{denom}}</1>",
   "msgClearAdmin": "<0>{{sender}}</0> cleared the list of admins for the token <1>{{denom}}</1>"

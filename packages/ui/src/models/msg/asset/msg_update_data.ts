@@ -12,6 +12,8 @@ class MsgUpdateData {
 
   public type: string;
 
+  public json: any;
+
   public sender: string;
 
   public class_id: string;
@@ -22,6 +24,7 @@ class MsgUpdateData {
 
   constructor(payload: any) {
     this.category = 'asset';
+    this.json = R.pathOr({}, ['json'], payload);
     this.type = R.pathOr('', ['type'], payload);
     this.sender = R.pathOr('', ['sender'], payload);
     this.class_id = R.pathOr('', ['class_id'], payload);
@@ -32,6 +35,7 @@ class MsgUpdateData {
   static fromJson(json: any) {
     return new MsgUpdateData({
       category: 'asset',
+      json,
       type: R.pathOr('', ['@type'], json),
       sender: R.pathOr('', ['sender'], json),
       class_id: R.pathOr('', ['class_id'], json),

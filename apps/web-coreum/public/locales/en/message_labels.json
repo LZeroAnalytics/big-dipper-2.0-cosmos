@@ -72,5 +72,13 @@
   "msgNftSendLabel": "NFT Send",
   "msgNftAddToWhitelistLabel": "Add to Whitelist",
   "msgNftRemoveFromWhitelistLabel": "Remove from Whitelist",
-  "msgUpgradeTokenLabel": "Upgrade Token"
+  "msgUpgradeTokenLabel": "Upgrade Token",
+  "msgUpdateDexWhitelistedDenoms": "Update DEX Whitelisted Denoms",
+  "msgUpdateDEXUnifiedRefAmount": "Update DEX Unified Ref Amount",
+  "msgPlaceOrder": "Place Order",
+  "msgCancelOrder": "Cancel Order",
+  "msgCancelOrdersByDenom": "Cancel Orders by Denom",
+  "msgUpdateData": "NFT Update Data",
+  "msgTransferAdmin": "Transfer Admin",
+  "msgClearAdmin": "Clear Admin"
 }
