@@ -26,7 +26,7 @@ const Fund: FC<{
         (assetItem) => x.denom.toLowerCase() === assetItem.denom.toLowerCase()
       );
       let amount = formatToken(x.amount, x.denom).value;
-      let displayDenom = asset ? asset.display.toUpperCase() : x.denom.toUpperCase();
+      let displayDenom = asset ? asset.display.toUpperCase() : x.denom.toLowerCase();
 
       if (tokenInAssets && x.denom.includes('ibc')) {
         const tokenDenom = tokenInAssets.extra.ibc_info!.display_name;

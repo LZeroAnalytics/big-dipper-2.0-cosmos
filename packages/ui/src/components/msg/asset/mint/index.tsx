@@ -37,7 +37,7 @@ const Mint: FC<{
   const tokenInAssets = assets.find(
     (assetItem) => message.coin.denom.toLowerCase() === assetItem.denom.toLowerCase()
   );
-  let displayDenom = asset?.display.toUpperCase() || message.coin.denom.toUpperCase();
+  let displayDenom = asset?.display.toUpperCase() || message.coin.denom.toLowerCase();
   if (
     tokenInAssets &&
     tokenInAssets?.extra.xrpl_info &&
