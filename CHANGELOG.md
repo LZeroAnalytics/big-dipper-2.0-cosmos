@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.6](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.5...v2.3.0-coreum.6) (2025-01-20)
+
+
+### Features
+
+* add domain search support to big dipper ([da6794a](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/da6794a330594948516d7353dd7daef315bea201))
+
 ## [2.3.0-coreum.5](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.4...v2.3.0-coreum.5) (2025-01-17)
 
 
