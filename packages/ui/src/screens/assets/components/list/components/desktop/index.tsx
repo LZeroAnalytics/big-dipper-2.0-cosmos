@@ -11,7 +11,8 @@ import numeral from 'numeral';
 import Image from 'next/image';
 import { ASSETS_DETAILS } from '@/utils/go_to_page';
 import { useRouter } from 'next/router';
-import { getFormatString } from '@/utils/format_token';
+import { formatNumberWithThousandSeparator } from '@/utils/format_token';
+import Big from 'big.js';
 
 type GridColumnProps = {
   column: ReturnType<typeof fetchColumns>[number];
@@ -73,11 +74,11 @@ const GridRow: FC<GridRowProps> = ({ column, style, rowIndex, align, item, i }) 
   const { classes, cx } = useStyles();
   const router = useRouter();
 
-  const value = item.supply / 10 ** item.exponent;
-  let supply = numeral(value).format(getFormatString(item.exponent));
+  const value = Big(item.supply).div(Big(10).pow(item.exponent));
+  let supply = formatNumberWithThousandSeparator(Big(value).toFixed(item.exponent));
 
   if (Number(value) < 1) {
-    supply = value.toFixed(item.exponent);
+    supply = Big(value).toFixed(item.exponent);
   }
 
   const holders = numeral(item.holders).format('0,0');

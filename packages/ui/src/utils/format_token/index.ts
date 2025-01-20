@@ -155,3 +155,9 @@ export const getFormatString = (precision: number) => {
 
   return formatString;
 };
+
+export const formatNumberWithThousandSeparator = (value: number | string): string => {
+  const [integerPart, decimalPart] = String(value).split('.');
+  const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return decimalPart ? `${formattedInteger}.${decimalPart}` : formattedInteger;
+};

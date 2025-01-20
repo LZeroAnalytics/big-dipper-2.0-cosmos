@@ -1,8 +1,8 @@
 import Box from '@/components/box';
-import { getFormatString } from '@/utils/format_token';
+import { formatNumberWithThousandSeparator } from '@/utils/format_token';
 import Typography from '@mui/material/Typography';
+import Big from 'big.js';
 import { useTranslation } from 'next-i18next';
-import numeral from 'numeral';
 import { FC } from 'react';
 import useStyles from './styles';
 
@@ -17,11 +17,11 @@ const AssetPriceOverview: FC<AssetPriceOverviewProps> = ({ asset, className }) =
 
   const { tokenType, supply, display, exponent } = asset;
 
-  const value = supply / 10 ** exponent;
-  let supplyValue = numeral(value).format(getFormatString(exponent));
+  const value = Big(supply).div(Big(10).pow(exponent));
+  let supplyValue = formatNumberWithThousandSeparator(Big(value).toFixed(exponent));
 
   if (Number(value) < 1) {
-    supplyValue = value.toFixed(exponent);
+    supplyValue = Big(value).toFixed(exponent);
   }
 
   const dataItems = [

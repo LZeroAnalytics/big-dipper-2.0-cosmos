@@ -8,7 +8,8 @@ import SingleAsset from '@/screens/assets/components/list/components/mobile/comp
 import numeral from 'numeral';
 import { useRouter } from 'next/router';
 import { ASSETS_DETAILS } from '@/utils/go_to_page';
-import { getFormatString } from '@/utils/format_token';
+import { formatNumberWithThousandSeparator } from '@/utils/format_token';
+import Big from 'big.js';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   setRowHeight: Parameters<typeof useListRow>[1];
@@ -22,11 +23,11 @@ const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, item, isLast,
   const { rowRef } = useListRow(index, setRowHeight);
   const router = useRouter();
 
-  const value = supply / 10 ** exponent;
-  let supplyValue = numeral(value).format(getFormatString(item.exponent));
+  const value = Big(supply).div(Big(10).pow(exponent));
+  let supplyValue = formatNumberWithThousandSeparator(Big(value).toFixed(exponent));
 
   if (Number(value) < 1) {
-    supplyValue = value.toFixed(item.exponent);
+    supplyValue = Big(value).toFixed(exponent);
   }
 
   const selectedItem = {

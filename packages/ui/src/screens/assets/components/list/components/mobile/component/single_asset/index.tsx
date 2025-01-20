@@ -29,6 +29,7 @@ const SingleAsset = ({
             </div>
           ) : (
             <svg
+              className={classes.assetLogo}
               width="32"
               height="32"
               viewBox="0 0 32 32"
