@@ -17,6 +17,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useRecoilCallback } from 'recoil';
+import { BDD, Network } from './domainRegistry';
 
 const { extra, prefix, chainType } = chainConfig();
 const consensusRegex = new RegExp(`^(${prefix.consensus})`);
@@ -25,6 +26,17 @@ const validatorRegex = new RegExp(`^(${prefix.validator})`);
 export const useSearchBar = (t: TFunction) => {
   const router = useRouter();
   const [assets, setAssetsList] = useState<Asset[]>([]);
+  const bddService = new BDD();
+
+  const getAddressFromDomain = useCallback(async (domainName: string) => {
+    try {
+      const result = await bddService.resolve(domainName, chainType.toLowerCase() as Network);
+
+      return result;
+    } catch (error) {
+      return '';
+    }
+  }, []);
 
   const getAssetsList = useCallback(async () => {
     try {
@@ -46,8 +58,11 @@ export const useSearchBar = (t: TFunction) => {
       async (value: string, clear?: () => void) => {
         const parsedValue = value.replace(/\s+/g, '');
         const { prefix: validatePrefix, result } = validateAddress(parsedValue as string);
+        const addressFromDomain = await getAddressFromDomain(value);
 
-        if (/^-?\d+$/.test(String(parsedValue.replace(/[.,]/g, '')))) {
+        if (addressFromDomain.length) {
+          router.push(ACCOUNT_DETAILS(addressFromDomain));
+        } else if (/^-?\d+$/.test(String(parsedValue.replace(/[.,]/g, '')))) {
           router.push(BLOCK_DETAILS(String(parsedValue.replace(/[.,]/g, ''))));
         } else if (consensusRegex.test(parsedValue)) {
           const validatorAddress = await snapshot.getPromise(readValidator(parsedValue));
