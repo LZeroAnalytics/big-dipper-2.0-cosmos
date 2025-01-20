@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.7](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.6...v2.3.0-coreum.7) (2025-01-20)
+
+
+### Bug Fixes
+
+* handle total supply in assets page ([b641ded](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/b641ded010b009c84b7a9476441458391f374fef))
+
 ## [2.3.0-coreum.6](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.5...v2.3.0-coreum.6) (2025-01-20)
 
 
