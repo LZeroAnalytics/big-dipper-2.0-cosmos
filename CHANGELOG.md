@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.8](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.7...v2.3.0-coreum.8) (2025-01-21)
+
+
+### Features
+
+* add console log for the result of querying the bidds client ([9ec317f](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/9ec317f14023d894a05fa3ad846cfae944418272))
+
 ## [2.3.0-coreum.7](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.6...v2.3.0-coreum.7) (2025-01-20)
 
 
