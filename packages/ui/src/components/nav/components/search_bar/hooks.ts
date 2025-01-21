@@ -60,6 +60,9 @@ export const useSearchBar = (t: TFunction) => {
         const { prefix: validatePrefix, result } = validateAddress(parsedValue as string);
         const addressFromDomain = await getAddressFromDomain(value);
 
+        // eslint-disable-next-line no-console
+        console.log({ addressFromDomain });
+
         if (addressFromDomain.length) {
           router.push(ACCOUNT_DETAILS(addressFromDomain));
         } else if (/^-?\d+$/.test(String(parsedValue.replace(/[.,]/g, '')))) {
