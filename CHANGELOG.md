@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.9](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.8...v2.3.0-coreum.9) (2025-01-23)
+
+
+### Features
+
+* add display of domain name for the account if it's present ([550b219](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/550b2198af2cb9e7e37e4a3d22e56406d3396b31))
+
 ## [2.3.0-coreum.8](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.7...v2.3.0-coreum.8) (2025-01-21)
 
 
