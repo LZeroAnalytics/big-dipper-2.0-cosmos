@@ -5,6 +5,7 @@ const useStyles = makeStyles()((theme) => ({
     [theme.breakpoints.up('md')]: {
       display: 'grid',
       gridTemplateColumns: 'repeat(2,1fr)',
+      gap: theme.spacing(2),
     },
   },
   rootDialog: {

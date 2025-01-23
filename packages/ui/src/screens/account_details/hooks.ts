@@ -21,6 +21,7 @@ import {
 import { formatToken } from '@/utils/format_token';
 import { getDenom } from '@/utils/get_denom';
 import axios from 'axios';
+import { BDD, Network } from '@/components/nav/components/search_bar/domainRegistry';
 import { Asset, convertHexToString } from '../assets/hooks';
 
 const { extra, primaryTokenUnit, tokenUnits, chainType } = chainConfig();
@@ -58,6 +59,7 @@ const initialState: AccountDetailState = {
   rewards: {},
   metadataLoading: true,
   metadatas: [],
+  domain: '',
 };
 
 type Data = {
@@ -247,6 +249,7 @@ const formatAllBalance = (data: Data, assets: Asset[], metadatas: any[]) => {
 
 export const useAccountDetails = () => {
   const router = useRouter();
+  const bddService = new BDD();
   const [state, setState] = useState<AccountDetailState>(initialState);
 
   const handleSetState = useCallback(
@@ -261,7 +264,7 @@ export const useAccountDetails = () => {
 
   const address = Array.isArray(router.query.address)
     ? router.query.address[0]
-    : router.query.address ?? '';
+    : (router.query.address ?? '');
 
   // ==========================
   // Desmos Profile
@@ -397,6 +400,29 @@ export const useAccountDetails = () => {
       }
     }
   }, [error, state.exists, handleSetState, address]);
+
+  const getDomainFromAddress = useCallback(async (account_address: string) => {
+    try {
+      const result = await bddService.lookup(account_address, chainType.toLowerCase() as Network);
+
+      return result;
+    } catch (_) {
+      return '';
+    }
+  }, []);
+
+  useEffect(() => {
+    const getDomainName = async () => {
+      const domainFromAddress = await getDomainFromAddress(address);
+
+      handleSetState((prevState) => ({
+        ...prevState,
+        domain: domainFromAddress,
+      }));
+    };
+
+    getDomainName();
+  }, [address]);
 
   return { state };
 };

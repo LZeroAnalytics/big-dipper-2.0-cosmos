@@ -35,5 +35,6 @@
   "creationTime": "Creation Time",
   "bio": "Bio",
   "status": "Status",
-  "completionTime": "Completion Time"
+  "completionTime": "Completion Time",
+  "domain": "Domain"
 }

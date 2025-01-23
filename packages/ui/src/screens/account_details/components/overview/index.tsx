@@ -29,9 +29,10 @@ type OverviewProps = {
   className?: string;
   withdrawalAddress: string;
   address: string;
+  domain: string;
 };
 
-const Overview: FC<OverviewProps> = ({ className, address, withdrawalAddress }) => {
+const Overview: FC<OverviewProps> = ({ className, address, withdrawalAddress, domain }) => {
   const { location } = useWindowOrigin();
   const { classes, cx } = useStyles();
   const display = useDisplayStyles().classes;
@@ -157,6 +158,29 @@ const Overview: FC<OverviewProps> = ({ className, address, withdrawalAddress }) 
             </Typography>
           </div>
         </div>
+
+        {!!domain.length && (
+          <div className={cx(classes.copyText, classes.item)}>
+            <Typography variant="body1" className="label">
+              {t('domain')}
+            </Typography>
+            <div className="detail">
+              <CopyIcon
+                className={classes.actionIcons}
+                onClick={() => handleCopyToClipboard(domain)}
+              />
+              <Typography variant="body1" className="value">
+                <span className={display.hiddenUntilLg}>{domain}</span>
+                <span className={display.hiddenWhenLg}>
+                  {getMiddleEllipsis(domain, {
+                    beginning: 15,
+                    ending: 5,
+                  })}
+                </span>
+              </Typography>
+            </div>
+          </div>
+        )}
       </Box>
     </>
   );

@@ -79,6 +79,7 @@ export default function AccountDetails() {
               className={classes.overview}
               withdrawalAddress={state.overview.withdrawalAddress}
               address={state.overview.address}
+              domain={state.domain}
             />
             <Balance
               className={classes.balance}

@@ -45,4 +45,5 @@ export interface AccountDetailState {
   };
   rewards: RewardsType;
   metadatas: any[];
+  domain: string;
 }
