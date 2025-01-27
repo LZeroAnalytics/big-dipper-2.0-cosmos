@@ -13,32 +13,68 @@ import { formatToken } from '@/utils/format_token';
 const LIMIT = 100;
 const LIMITPlusOne = LIMIT + 1;
 
-const formatSpenderAndReceiver = (messages: any[], transactionLogs: any[], denom: string) => {
-  const attributes = transactionLogs?.[0]?.events.filter(
-    (event: any) => event.attributes.length > 1
-  );
-  let sender = '-';
+const getSender = (messages: any[]) => {
+  const senderKeys = [
+    'executor',
+    'sender',
+    'from_address',
+    'issuer',
+    'grantee',
+    'granter',
+    'depositor',
+    'submitter',
+    'proposer',
+    'voter',
+    'delegator_address',
+    'admin',
+    'address',
+  ];
 
-  if (messages?.length) {
-    sender =
-      messages.length === 1
-        ? messages[0].executor ||
-          messages[0].sender ||
-          messages[0].from_address ||
-          messages[0].issuer ||
-          messages[0].grantee ||
-          messages[0].granter ||
-          messages[0].depositor ||
-          messages[0].submitter ||
-          messages[0].proposer ||
-          messages[0].voter ||
-          messages[0].delegator_address ||
-          messages[0].admin ||
-          messages[0].address ||
-          '-'
-        : 'Multiple';
+  const getPrimarySender = (message: any) => senderKeys.find((key) => message[key]) || '';
+
+  let firstSender = messages[0][getPrimarySender(messages[0])];
+
+  if (firstSender === '' && messages[0].inputs?.length) {
+    firstSender = messages[0].inputs[0].from_address;
   }
 
+  if (messages.length > 1) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const message of messages) {
+      const currentSender = message[getPrimarySender(message) as string];
+      if (currentSender && currentSender !== firstSender) {
+        return 'Multiple';
+      }
+
+      if (message.inputs?.length) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const senderInInputs = message.inputs.find((item: any) => item.address !== firstSender);
+
+        if (senderInInputs) {
+          return 'Multiple';
+        }
+      }
+    }
+  }
+
+  return firstSender || '-';
+};
+
+const formatSpenderAndReceiver = (messages: any[], transactionLogs: any[], denom: string) => {
+  let attributes: any = [];
+
+  if (transactionLogs) {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const transactionLog of transactionLogs) {
+      const { events } = transactionLog;
+
+      if (events.filter((event: any) => event.attributes.length > 1).length) {
+        attributes = [...attributes, ...events.filter((event: any) => event.attributes.length > 1)];
+      }
+    }
+  }
+
+  const sender = getSender(messages);
   const receivers = attributes
     ?.map((e: any) => {
       const receiverItems = e.attributes.filter((attr: any) => attr.key === 'receiver');
