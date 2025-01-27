@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.10](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.9...v2.3.0-coreum.10) (2025-01-27)
+
+
+### Bug Fixes
+
+* add formatting of number for place order ([c3cccd6](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/c3cccd6e03a925ff593c40d85d897bd79e92b715))
+
 ## [2.3.0-coreum.9](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.8...v2.3.0-coreum.9) (2025-01-23)
 
 
