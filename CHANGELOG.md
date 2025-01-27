@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.11](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.10...v2.3.0-coreum.11) (2025-01-27)
+
+
+### Bug Fixes
+
+* update price handle for dex place order msg ([f507dcb](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/f507dcbc3a581f7851133be2b2ce94e0fbd70826))
+
 ## [2.3.0-coreum.10](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.9...v2.3.0-coreum.10) (2025-01-27)
 
 
