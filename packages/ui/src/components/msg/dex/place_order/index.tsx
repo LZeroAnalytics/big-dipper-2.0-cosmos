@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { useProfileRecoil } from '@/recoil/profiles';
 import { Typography } from '@mui/material';
 import { Trans } from 'react-i18next';
@@ -9,7 +9,16 @@ import Big from 'big.js';
 const PlaceOrder: FC<{ message: MsgPlaceOrder }> = (props) => {
   const { message } = props;
   const sender = useProfileRecoil(message.sender);
-  const price = Big(message.price).toNumber();
+
+  const price = useMemo(() => {
+    try {
+      return Big(message.price).toNumber();
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      return 0;
+    }
+  }, []);
 
   return (
     <Typography>
