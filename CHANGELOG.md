@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.12](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.11...v2.3.0-coreum.12) (2025-01-27)
+
+
+### Bug Fixes
+
+* polish logic to get sender and amount ([8ae682b](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/8ae682bda7666048e97da3cece9bf3261fe0d26a))
+
 ## [2.3.0-coreum.11](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.10...v2.3.0-coreum.11) (2025-01-27)
 
 
