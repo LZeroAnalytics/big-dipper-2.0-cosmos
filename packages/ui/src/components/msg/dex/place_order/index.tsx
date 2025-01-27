@@ -4,10 +4,12 @@ import { Typography } from '@mui/material';
 import { Trans } from 'react-i18next';
 import Name from '@/components/name';
 import { MsgPlaceOrder } from '@/models';
+import Big from 'big.js';
 
 const PlaceOrder: FC<{ message: MsgPlaceOrder }> = (props) => {
   const { message } = props;
   const sender = useProfileRecoil(message.sender);
+  const price = Big(message.price).toNumber();
 
   return (
     <Typography>
@@ -19,7 +21,7 @@ const PlaceOrder: FC<{ message: MsgPlaceOrder }> = (props) => {
           id: message.id,
           base_denom: message.base_denom,
           quote_denom: message.quote_denom,
-          price: message.price,
+          price,
           quantity: message.quantity,
           side: message.side,
         }}
