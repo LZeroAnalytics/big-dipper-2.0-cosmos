@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.13](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.12...v2.3.0-coreum.13) (2025-01-29)
+
+
+### Bug Fixes
+
+* update template for dex place order to highlight the most important information ([873edee](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/873edee4d8d30fdcd151e730c18bbf1f07c5706e))
+
 ## [2.3.0-coreum.12](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.11...v2.3.0-coreum.12) (2025-01-27)
 
 
