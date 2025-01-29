@@ -76,7 +76,7 @@
   "msgUpgradeTokenContent": "<0>{{sender}}</0> has set the IBC for the token <1>{{denom}} to {{ibc_enabled}}</1>",
   "msgUpdateDexWhitelistedDenoms": "<0>{{sender}}</0> has set whitelisted denoms for the token <1>{{denom}} to {{whitelisted_denoms}}</1>",
   "msgUpdateDEXUnifiedRefAmount": "<0>{{sender}}</0> has set unified ref amount for the token <1>{{denom}} to {{unified_ref_amount}}</1>",
-  "msgPlaceOrder": "<0>{{sender}}</0> placed an order with id <1>{{id}}</1> where base denom is <1>{{base_denom}}</1>, quote_denom is <1>{{quote_denom}}</1>, price - <1>{{price}}</1>, quantity - <1>{{quantity}}</1>, side - <1>{{side}}</1>",
+  "msgPlaceOrder": "<0>{{sender}}</0> <2>placed an order with id</2> <1>{{id}}</1> <2>where base denom is</2> <1>{{base_denom}}</1>, <2>quote_denom is</2> <1>{{quote_denom}}</1>, <2>price - </2><1>{{price}}</1>, <2>quantity - </2><1>{{quantity}}</1>, <2>side - </2><1>{{side}}</1>",
   "msgCancelOrder": "<0>{{sender}}</0> canceled the order with id <1>{{id}}</1>",
   "msgCancelOrdersByDenom": "<0>{{sender}}</0> canceled all opened orders for the token <1>{{denom}}</1>",
   "msgUpdateData": "<0>{{sender}}</0> updated data for nft with id - <1>{{id}}</1> of nft class <1>{{class_id}}</1>",
