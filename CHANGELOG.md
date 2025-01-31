@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.14](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.13...v2.3.0-coreum.14) (2025-01-31)
+
+
+### Bug Fixes
+
+* update hook to get the price from message ([f5319e1](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/f5319e1eb592a4b1ec225e39c89ae79ef4fca048))
+
 ## [2.3.0-coreum.13](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.12...v2.3.0-coreum.13) (2025-01-29)
 
 
