@@ -16,11 +16,9 @@ const PlaceOrder: FC<{ message: MsgPlaceOrder }> = (props) => {
     try {
       return Big(message.price).toNumber();
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
       return 0;
     }
-  }, []);
+  }, [message.price]);
 
   return (
     <Typography>
