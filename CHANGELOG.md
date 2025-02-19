@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.16](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.15...v2.3.0-coreum.16) (2025-02-19)
+
+
+### Features
+
+* add additional check for address validation ([e3d40ca](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/e3d40ca51f76af883559817f5efca05d14032284))
+
 ## [2.3.0-coreum.15](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.14...v2.3.0-coreum.15) (2025-02-19)
 
 
