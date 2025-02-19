@@ -31,6 +31,7 @@ type OverviewProps = {
   address: string;
   domain: string;
   riskScoreData: {
+    isAddressValid: boolean;
     level: number;
     score: number;
     verdict_time: number;
@@ -193,7 +194,7 @@ const Overview: FC<OverviewProps> = ({
           </div>
         )}
       </Box>
-      {!!riskScoreData && (
+      {!!riskScoreData && riskScoreData.isAddressValid && (
         <>
           <Typography variant="h3" align="left">
             {t('account_risk_score')}

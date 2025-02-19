@@ -47,6 +47,7 @@ export interface AccountDetailState {
   metadatas: any[];
   domain: string;
   riskScoreData: {
+    isAddressValid: boolean;
     level: number;
     score: number;
     verdict_time: number;

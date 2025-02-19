@@ -257,6 +257,7 @@ const formatAddressRiskScore = (data: any, address: string) => {
     const results = riskData[address];
 
     return {
+      isAddressValid: riskData.is_address_valid,
       ...results.risk,
     };
   }
