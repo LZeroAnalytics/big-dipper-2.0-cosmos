@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.18](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.17...v2.3.0-coreum.18) (2025-02-20)
+
+
+### Features
+
+* display error message for transactions, where error exists for cosmos.group.v1.EventExec ([e6c5a35](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/e6c5a35bbb619a7edc8a98f65233b24f86add92f))
+
 ## [2.3.0-coreum.17](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.16...v2.3.0-coreum.17) (2025-02-20)
 
 
