@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.17](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.16...v2.3.0-coreum.17) (2025-02-20)
+
+
+### Bug Fixes
+
+* take is_address_valid from correct property ([b167275](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/b167275b8e1883104a00316631683f9055bf7327))
+
 ## [2.3.0-coreum.16](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.15...v2.3.0-coreum.16) (2025-02-19)
 
 
