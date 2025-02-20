@@ -13,6 +13,7 @@ export interface OverviewType {
   sender: string;
   receiver: string;
   amount: any;
+  logs?: any;
 }
 
 export interface TransactionState {

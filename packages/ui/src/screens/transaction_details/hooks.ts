@@ -14,7 +14,7 @@ const { chainType } = chainConfig();
 // overview
 // =============================
 const formatOverview = (data: TransactionDetailsQuery) => {
-  const { fee } = data.transaction[0];
+  const { fee, logs } = data.transaction[0];
   const feeAmount = fee?.amount?.[0] ?? {
     denom: '',
     amount: 0,
@@ -30,12 +30,35 @@ const formatOverview = (data: TransactionDetailsQuery) => {
     gasWanted: data.transaction[0].gasWanted,
     success,
     memo: data.transaction[0].memo ?? '',
-    error: success ? '' : data.transaction[0].rawLog ?? '',
+    error: success ? '' : (data.transaction[0].rawLog ?? ''),
     sender: '',
     receiver: '',
     amount: '',
+    logs: [],
   };
-  return overview;
+
+  let eventLogs = '';
+  const execEvent = logs[0]?.events.find((item: any) => item.type === 'cosmos.group.v1.EventExec');
+  if (!execEvent) {
+    return overview;
+  }
+
+  const execEventFailed = execEvent.attributes.find(
+    (item: any) => item.key === 'result' && item.value.includes('FAILURE')
+  );
+  if (!execEventFailed) {
+    return overview;
+  }
+
+  const execEventLog = execEvent.attributes.find((item: any) => item.key === 'logs');
+  if (execEventLog) {
+    eventLogs = execEventLog.value;
+  }
+
+  return {
+    ...overview,
+    logs: eventLogs,
+  };
 };
 
 // =============================
