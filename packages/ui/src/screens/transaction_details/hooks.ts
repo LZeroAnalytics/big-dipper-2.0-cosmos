@@ -38,7 +38,9 @@ const formatOverview = (data: TransactionDetailsQuery) => {
   };
 
   let eventLogs = '';
-  const execEvent = logs[0]?.events.find((item: any) => item.type === 'cosmos.group.v1.EventExec');
+  const execEvent = logs?.[0]?.events.find(
+    (item: any) => item.type === 'cosmos.group.v1.EventExec'
+  );
   if (!execEvent) {
     return overview;
   }

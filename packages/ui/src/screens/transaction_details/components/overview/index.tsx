@@ -88,15 +88,17 @@ const Overview: FC<OverviewProps> = ({ className, data }) => {
     });
   }
 
-  if (data.logs?.length) {
-    details.push({
-      className: 'memo',
-      key: 'error',
-      label: t('error'),
-      detail: data.logs,
-      fullWidth: false,
-    });
-  }
+  console.log({ data });
+
+  // if (data.logs?.length) {
+  //   details.push({
+  //     className: 'memo',
+  //     key: 'error',
+  //     label: t('error'),
+  //     detail: data.logs,
+  //     fullWidth: false,
+  //   });
+  // }
 
   return (
     <BoxDetails
