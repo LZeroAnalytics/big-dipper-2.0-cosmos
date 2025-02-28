@@ -88,8 +88,6 @@ const Overview: FC<OverviewProps> = ({ className, data }) => {
     });
   }
 
-  console.log({ data });
-
   if (data.logs?.length) {
     details.push({
       className: 'memo',

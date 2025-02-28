@@ -73,7 +73,17 @@ export default function AccountDetails() {
                 </svg>
                 Back
               </div>
-              <div className={classes.title}>{t('accountDetails')}</div>
+              <div className={classes.titleRow}>
+                <div className={classes.title}>{t('accountDetails')}</div>
+                <a
+                  className={classes.reportButton}
+                  href="https://web3guard.io/reports/coreum?reporttype="
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Report address
+                </a>
+              </div>
             </div>
             <Overview
               className={classes.overview}

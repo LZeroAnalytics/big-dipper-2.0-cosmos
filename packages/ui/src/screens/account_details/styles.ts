@@ -1,4 +1,5 @@
 import { CSSObject } from '@emotion/react';
+import Color from 'color';
 import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles()((theme) => ({
@@ -62,6 +63,26 @@ const useStyles = makeStyles()((theme) => ({
     color: theme.palette.primary.contrastText,
     marginTop: theme.spacing(1.5),
     marginBottom: theme.spacing(1.5),
+  },
+  titleRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    gap: theme.spacing(2),
+  },
+  reportButton: {
+    backgroundColor: Color(theme.palette.custom.tags.five).alpha(0.15).string(),
+    paddingTop: theme.spacing(0.75),
+    paddingRight: theme.spacing(1.25),
+    paddingBottom: theme.spacing(0.75),
+    paddingLeft: theme.spacing(1.25),
+    color: `${theme.palette.custom.tags.five} !important`,
+    borderRadius: theme.spacing(1),
+    fontSize: theme.spacing(2),
+    cursor: 'pointer',
+    textAlign: 'center',
   },
 }));
 
