@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.22](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.21...v2.3.0-coreum.22) (2025-03-03)
+
+
+### Bug Fixes
+
+* hide non-fungible tokens in assets page ([c6b1b15](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/c6b1b15a948fcc1c3d1d0ebe2da2e484f91aaebc))
+
 ## [2.3.0-coreum.21](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.20...v2.3.0-coreum.21) (2025-02-28)
 
 
