@@ -1,1 +1,1 @@
-export const tabLabels = ['fungibleToken', 'nonFungibleToken'];
+export const tabLabels = ['fungibleToken'];

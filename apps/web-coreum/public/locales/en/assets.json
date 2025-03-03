@@ -1,8 +1,8 @@
 {
   "assets": "Assets",
   "asset": "Asset",
-  "fungibleToken": "Fungible Token",
-  "nonFungibleToken": "Non-Fungible Token",
+  "fungibleToken": "Fungible Tokens",
+  "nonFungibleToken": "Non-Fungible Tokens",
   "id": "ID",
   "name": "Name",
   "token_type": "Token Type",
