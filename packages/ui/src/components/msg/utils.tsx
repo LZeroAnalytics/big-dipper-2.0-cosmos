@@ -605,7 +605,8 @@ export const getMessageByType = <TMessage,>(
   assets?: Asset[],
   metadatas?: any[],
   assetsLoading?: boolean,
-  metadataLoading?: boolean
+  metadataLoading?: boolean,
+  failedStatus?: string
 ) => {
   const { type } = (message as { type: string }) ?? {};
 
@@ -618,6 +619,7 @@ export const getMessageByType = <TMessage,>(
       metadatas: any[];
       assetsLoading: boolean;
       metadataLoading: boolean;
+      failedStatus: string | undefined;
     }>;
     tagDisplay: Data['tagDisplay'];
     tagTheme: TagTheme;
@@ -630,6 +632,7 @@ export const getMessageByType = <TMessage,>(
       metadatas: any[];
       assetsLoading: boolean;
       metadataLoading: boolean;
+      failedStatus: string | undefined;
     }>,
     tagDisplay: convertedMsgType[0],
     tagTheme: 'zero',
@@ -644,6 +647,7 @@ export const getMessageByType = <TMessage,>(
       metadatas: any[];
       assetsLoading: boolean;
       metadataLoading: boolean;
+      failedStatus: string | undefined;
     }>;
     results.tagTheme = data.tagTheme as ResultType['tagTheme'];
   }
@@ -656,6 +660,7 @@ export const getMessageByType = <TMessage,>(
       metadatas: any[];
       assetsLoading: boolean;
       metadataLoading: boolean;
+      failedStatus: string | undefined;
     }>;
   }
 
@@ -670,6 +675,7 @@ export const getMessageByType = <TMessage,>(
         metadatas={metadatas || []}
         assetsLoading={assetsLoading || false}
         metadataLoading={metadataLoading || false}
+        failedStatus={failedStatus}
       />
     ),
   };

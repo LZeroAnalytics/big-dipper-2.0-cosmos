@@ -81,5 +81,6 @@
   "msgCancelOrdersByDenom": "<0>{{sender}}</0> canceled all opened orders for the token <1>{{denom}}</1>",
   "msgUpdateData": "<0>{{sender}}</0> updated data for nft with id - <1>{{id}}</1> of nft class <1>{{class_id}}</1>",
   "msgTransferAdmin": "<0>{{sender}}</0> set as admin account <0>{{account}}</0> for the token <1>{{denom}}</1>",
-  "msgClearAdmin": "<0>{{sender}}</0> cleared the list of admins for the token <1>{{denom}}</1>"
+  "msgClearAdmin": "<0>{{sender}}</0> cleared the list of admins for the token <1>{{denom}}</1>",
+  "msgFailedProposal": "Message execution from <0>{{executor}}</0> of proposal <1>{{proposal_id}}</1> resulted into <1>{{result}}</1>"
 }

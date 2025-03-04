@@ -54,6 +54,7 @@ const TransactionDetails = () => {
                 metadatas={metadatas}
                 assetsLoading={assetsLoading}
                 metadataLoading={metadataLoading}
+                failedStatus={overview.logsState}
               />
             </div>
             {!!logs && <Logs logs={logs} />}

@@ -52,14 +52,14 @@ const formatOverview = (data: TransactionDetailsQuery) => {
     return overview;
   }
 
-  const execEventLog = execEvent.attributes.find((item: any) => item.key === 'logs');
-  if (execEventLog) {
-    eventLogs = execEventLog.value;
+  const execEventLogResult = execEvent.attributes.find((item: any) => item.key === 'result');
+  if (execEventLogResult && execEventLogResult.value.includes('FAIL')) {
+    eventLogs = execEventLogResult.value;
   }
 
   return {
     ...overview,
-    logs: eventLogs,
+    logsState: eventLogs,
   };
 };
 

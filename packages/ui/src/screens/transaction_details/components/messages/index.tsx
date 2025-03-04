@@ -22,6 +22,7 @@ type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   metadatas: any[];
   assetsLoading: boolean;
   metadataLoading: boolean;
+  failedStatus?: string;
 };
 
 const ListItem: FC<ListItemProps> = ({
@@ -36,6 +37,7 @@ const ListItem: FC<ListItemProps> = ({
   metadatas,
   assetsLoading,
   metadataLoading,
+  failedStatus,
 }) => {
   const { t } = useTranslation('transactions');
   const { rowRef } = useListRow(index, setRowHeight);
@@ -47,7 +49,8 @@ const ListItem: FC<ListItemProps> = ({
     assets,
     metadatas,
     assetsLoading,
-    metadataLoading
+    metadataLoading,
+    failedStatus
   );
 
   return (
@@ -73,6 +76,7 @@ type MessagesProps = {
   metadatas: any[];
   assetsLoading: boolean;
   metadataLoading: boolean;
+  failedStatus?: string;
 };
 
 const Messages: FC<MessagesProps> = ({ className, ...props }) => {
@@ -128,6 +132,7 @@ const Messages: FC<MessagesProps> = ({ className, ...props }) => {
                   style={style}
                   setRowHeight={setRowHeight}
                   message={props.messages[index]}
+                  failedStatus={props.failedStatus}
                   classes={classes}
                   isLast={index === props.messages.length}
                   viewRaw={props.viewRaw}
