@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.23](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.22...v2.3.0-coreum.23) (2025-03-04)
+
+
+### Features
+
+* add more user friendly handling of transactions with status success, but with failed logs ([2782e7a](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/2782e7a0d33f747525d350dc33d78bb9fa2eed39))
+
 ## [2.3.0-coreum.22](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.21...v2.3.0-coreum.22) (2025-03-03)
 
 
