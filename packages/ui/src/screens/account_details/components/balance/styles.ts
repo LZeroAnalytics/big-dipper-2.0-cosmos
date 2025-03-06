@@ -1,3 +1,4 @@
+import Color from 'color';
 import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles()((theme) => ({
@@ -6,10 +7,12 @@ const useStyles = makeStyles()((theme) => ({
       marginBottom: theme.spacing(2),
       fontSize: '20px',
       lineHeight: '30px',
+      fontWeight: 600,
     },
     [theme.breakpoints.up('lg')]: {
       display: 'flex',
       flexDirection: 'column',
+      width: '-webkit-fill-available',
     },
   },
   chart: {
@@ -26,7 +29,9 @@ const useStyles = makeStyles()((theme) => ({
   chartWrapper: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: theme.spacing(2),
+
     [theme.breakpoints.up('md')]: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -34,28 +39,33 @@ const useStyles = makeStyles()((theme) => ({
   },
   legends: {
     color: theme.palette.custom.fonts.fontTwo,
+    display: 'grid',
+    gridTemplateColumns: 'repeat(1, 1fr)',
+    gap: theme.spacing(2),
+
     '& .legends__single--container': {
-      marginBottom: theme.spacing(1),
+      gap: theme.spacing(0.5),
       [theme.breakpoints.up('md')]: {
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        flexDirection: 'column',
       },
     },
     '& .single__label--container': {
       display: 'flex',
       alignItems: 'center',
-      marginBottom: theme.spacing(0.5),
+
+      '& .label': {
+        textWrap: 'nowrap',
+      },
     },
     '& .legend-color': {
       width: theme.spacing(1.75),
       height: theme.spacing(1.75),
-      borderRadius: '2px',
+      borderRadius: '50%',
       marginRight: theme.spacing(1),
     },
     [theme.breakpoints.up('md')]: {
-      flex: 1,
-      marginLeft: theme.spacing(3),
+      gridTemplateColumns: 'repeat(3, 1fr)',
     },
   },
   divider: {
@@ -82,6 +92,75 @@ const useStyles = makeStyles()((theme) => ({
       [theme.breakpoints.up('md')]: {
         color: theme.palette.custom.fonts.fontTwo,
       },
+    },
+  },
+  balanceContainer: {
+    display: 'grid',
+    gap: theme.spacing(2),
+    alignItems: 'flex-start',
+    gridTemplateColumns: 'repeat(1, 1fr)',
+
+    // [theme.breakpoints.up('sm')]: {
+    //   gridTemplateColumns: 'repeat(2, 1fr)',
+    // },
+
+    [theme.breakpoints.up('lg')]: {
+      gridTemplateColumns: '1fr 3fr',
+    },
+  },
+  statsWrapper: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(1, 1fr)',
+    gap: theme.spacing(2),
+    alignItems: 'baseline',
+
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: 'repeat(2, 1fr)',
+    },
+
+    [theme.breakpoints.up('md')]: {
+      gridTemplateColumns: 'repeat(3, 1fr)',
+    },
+  },
+  column: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(1, 1fr)',
+    gap: theme.spacing(2),
+    height: '100%',
+  },
+  chartContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: 'auto',
+  },
+  statItem: {
+    height: '100%',
+  },
+  content: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+  },
+  circleOut: {
+    background: Color('#5E6773').alpha(0.25).toString(),
+    padding: theme.spacing(1),
+    borderRadius: '50%',
+  },
+  circleIn: {
+    background: Color('#5E6773').alpha(0.25).toString(),
+    borderRadius: '50%',
+    height: '300px',
+    width: '300px',
+
+    [theme.breakpoints.up('md')]: {
+      height: '200px',
+      width: '200px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      height: '150px',
+      width: '150px',
     },
   },
 }));

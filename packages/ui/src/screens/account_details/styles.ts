@@ -16,6 +16,15 @@ const useStyles = makeStyles()((theme) => ({
       // gridTemplateColumns: 'repeat(2, 1fr)',
     },
   },
+  topRow: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: theme.spacing(1.5),
+
+    [theme.breakpoints.up('lg')]: {
+      flexDirection: 'row',
+    },
+  },
   balance: {
     [theme.breakpoints.up('lg')]: {
       // gridColumn: '1 / 3',

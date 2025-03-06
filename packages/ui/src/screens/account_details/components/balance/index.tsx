@@ -5,13 +5,12 @@ import { readMarket } from '@/recoil/market';
 import useStyles from '@/screens/account_details/components/balance/styles';
 import { formatBalanceData } from '@/screens/account_details/components/balance/utils';
 import { formatNumber } from '@/utils/format_token';
-import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Big from 'big.js';
 import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import numeral from 'numeral';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import { useRecoilValue } from 'recoil';
 
@@ -43,7 +42,7 @@ const Balance: FC<BalanceProps> = (props) => {
   ];
   const formatData = formattedChartData.map((x, i) => ({
     ...x,
-    value: numeral(x.value).value(),
+    value: numeral(x.value).value() as string | number | null,
     background: backgrounds[i],
   }));
   const notEmpty = formatData.some((x) => x.value && Big(x.value).gt(0));
@@ -65,40 +64,91 @@ const Balance: FC<BalanceProps> = (props) => {
 
   // format
   const totalDisplay = formatNumber(props.total.value, props.total.exponent);
+  const totalTitle = useMemo(
+    () =>
+      t('total', {
+        // Kept the "toUpperCase()" in order to show the token symbol in uppercase
+        unit: props.total.displayDenom.toUpperCase(),
+      }),
+    [props.total.displayDenom, t]
+  );
+
+  const coreumTitle = useMemo(
+    () =>
+      `$${numeral(market.price).format('0,0.0000', Math.floor)} / ${(tokenUnits?.[primaryTokenUnit]?.display ?? '').toUpperCase()}`,
+    [market.price]
+  );
+
+  const packedMemoData = useMemo(() => {
+    const newMemoData = [...dataMemo];
+    newMemoData.splice(2, 0, {
+      value: totalDisplay,
+      display: totalTitle,
+      key: 'total',
+      background: '',
+    });
+    newMemoData.push({
+      value: totalAmount,
+      display: coreumTitle,
+      key: 'total-coreum',
+      background: '',
+    });
+
+    return newMemoData;
+  }, [market.price]);
 
   return (
     <Box className={cx(classes.root, props.className)}>
       <Typography variant="h2">{t('balance')}</Typography>
-      <div className={classes.chartWrapper}>
-        <div className={classes.chart}>
-          <ResponsiveContainer width="99%">
-            <DynamicPieChart>
-              <Pie
-                dataKey="value"
-                data={dataMemo}
-                isAnimationActive={false}
-                innerRadius="90%"
-                outerRadius="100%"
-                cornerRadius={40}
-                paddingAngle={dataCount > 1 ? 5 : 0}
-                fill="#82ca9d"
-                stroke="none"
-              >
-                {dataMemo.map((entry) => (
-                  <Cell key={entry.key} fill={entry.background} stroke={entry.background} />
-                ))}
-              </Pie>
-            </DynamicPieChart>
-          </ResponsiveContainer>
+      <div className={classes.balanceContainer}>
+        <div className={classes.chartContainer}>
+          <div className={classes.content}>
+            <div className={classes.circleOut}>
+              <div className={classes.circleIn}>
+                <ResponsiveContainer width="100%">
+                  <DynamicPieChart>
+                    <Pie
+                      dataKey="value"
+                      data={dataMemo}
+                      isAnimationActive={false}
+                      innerRadius="0%"
+                      outerRadius="100%"
+                      cornerRadius={40}
+                      paddingAngle={dataCount > 1 ? 5 : 0}
+                      fill="#82ca9d"
+                      stroke="none"
+                    >
+                      {dataMemo.map((entry) => (
+                        <Cell key={entry.key} fill={entry.background} stroke={entry.background} />
+                      ))}
+                    </Pie>
+                  </DynamicPieChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className={classes.legends}>
-          {dataMemo.map((x) => {
+        <div className={cx(classes.statsWrapper, classes.legends)}>
+          {packedMemoData.map((x) => {
             if (x.key.toLowerCase() === 'empty') {
               return null;
             }
 
+            if (x.key === 'total' || x.key === 'total-coreum') {
+              return (
+                <div className={cx(classes.statItem, 'legends__single--container')}>
+                  <div className="single__label--container">
+                    <Typography variant="body1" className="label">
+                      {x.display}
+                    </Typography>
+                  </div>
+                  <Typography variant="body1">{x.value}</Typography>
+                </div>
+              );
+            }
+
             return (
-              <div key={x.key} className="legends__single--container">
+              <div className="legends__single--container">
                 <div className="single__label--container">
                   <div className="legend-color" style={{ background: x.background }} />
                   <Typography variant="body1">{t(x.key)}</Typography>
@@ -107,28 +157,6 @@ const Balance: FC<BalanceProps> = (props) => {
               </div>
             );
           })}
-        </div>
-      </div>
-      <div>
-        <Divider className={classes.divider} />
-        <div className={classes.total}>
-          <div className="total__single--container">
-            <Typography variant="h3" className="label">
-              {t('total', {
-                // Kept the "toUpperCase()" in order to show the token symbol in uppercase
-                unit: props.total.displayDenom.toUpperCase(),
-              })}
-            </Typography>
-            <Typography variant="h3">{totalDisplay}</Typography>
-          </div>
-          <Divider />
-          <div className="total__secondary--container total__single--container">
-            <Typography variant="body1" className="label">
-              ${numeral(market.price).format('0,0.0000', Math.floor)} /{' '}
-              {(tokenUnits?.[primaryTokenUnit]?.display ?? '').toUpperCase()}
-            </Typography>
-            <Typography variant="body1">{totalAmount}</Typography>
-          </div>
         </div>
       </div>
     </Box>

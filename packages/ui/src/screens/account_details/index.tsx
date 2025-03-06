@@ -85,22 +85,24 @@ export default function AccountDetails() {
                 </a>
               </div>
             </div>
-            <Overview
-              className={classes.overview}
-              withdrawalAddress={state.overview.withdrawalAddress}
-              address={state.overview.address}
-              domain={state.domain}
-              riskScoreData={state.riskScoreData}
-            />
-            <Balance
-              className={classes.balance}
-              available={state.balance.available}
-              delegate={state.balance.delegate}
-              unbonding={state.balance.unbonding}
-              reward={state.balance.reward}
-              commission={state.balance.commission}
-              total={state.balance.total}
-            />
+            <div className={classes.topRow}>
+              <Overview
+                className={classes.overview}
+                withdrawalAddress={state.overview.withdrawalAddress}
+                address={state.overview.address}
+                domain={state.domain}
+                riskScoreData={state.riskScoreData}
+              />
+              <Balance
+                className={classes.balance}
+                available={state.balance.available}
+                delegate={state.balance.delegate}
+                unbonding={state.balance.unbonding}
+                reward={state.balance.reward}
+                commission={state.balance.commission}
+                total={state.balance.total}
+              />
+            </div>
             <OtherTokens className={classes.otherTokens} otherTokens={state.otherTokens} />
             <Staking className={classes.staking} rewards={state.rewards} />
             <Transactions className={classes.transactions} loading={state.balanceLoading} />

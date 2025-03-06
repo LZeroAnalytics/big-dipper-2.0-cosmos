@@ -3,9 +3,10 @@ import { makeStyles } from 'tss-react/mui';
 const useStyles = makeStyles()((theme) => ({
   root: {
     [theme.breakpoints.up('md')]: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(2,1fr)',
+      display: 'flex',
+      flexDirection: 'column',
       gap: theme.spacing(2),
+      minWidth: 'fit-content',
     },
   },
   rootDialog: {
@@ -86,9 +87,9 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   actionIcons: {
-    '&:hover': {
-      cursor: 'pointer',
-    },
+    // '&:hover': {
+    //   cursor: 'pointer',
+    // },
   },
   icons: {
     display: 'flex',

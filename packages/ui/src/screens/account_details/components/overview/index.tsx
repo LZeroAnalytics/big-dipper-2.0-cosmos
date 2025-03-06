@@ -171,29 +171,30 @@ const Overview: FC<OverviewProps> = ({
           </div>
         </div>
 
-        {!!domain.length && (
-          <div className={cx(classes.copyText, classes.item)}>
-            <Typography variant="body1" className="label">
-              {t('domain')}
+        {/* {!!domain.length && ( */}
+        <div className={cx(classes.copyText, classes.item)}>
+          <Typography variant="body1" className="label">
+            {t('domain')}
+          </Typography>
+          <div className="detail">
+            <CopyIcon
+              className={classes.actionIcons}
+              onClick={() => handleCopyToClipboard(domain)}
+            />
+            <Typography variant="body1" className="value">
+              <span className={display.hiddenUntilLg}>{domain || 'domain.co'}</span>
+              <span className={display.hiddenWhenLg}>
+                {getMiddleEllipsis(domain || 'domain.co', {
+                  beginning: 15,
+                  ending: 5,
+                })}
+              </span>
             </Typography>
-            <div className="detail">
-              <CopyIcon
-                className={classes.actionIcons}
-                onClick={() => handleCopyToClipboard(domain)}
-              />
-              <Typography variant="body1" className="value">
-                <span className={display.hiddenUntilLg}>{domain}</span>
-                <span className={display.hiddenWhenLg}>
-                  {getMiddleEllipsis(domain, {
-                    beginning: 15,
-                    ending: 5,
-                  })}
-                </span>
-              </Typography>
-            </div>
           </div>
-        )}
+        </div>
+        {/* )} */}
       </Box>
+
       {!!riskScoreData && riskScoreData.isAddressValid && (
         <>
           <Typography variant="h3" align="left">
