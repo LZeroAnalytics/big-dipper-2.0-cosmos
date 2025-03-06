@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.27](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.26...v2.3.0-coreum.27) (2025-03-06)
+
+
+### Bug Fixes
+
+* fetch dex params based on chain type ([8f471f1](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/8f471f1cfcbee69e87e845a35a52343425eb7741))
+
 ## [2.3.0-coreum.26](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.25...v2.3.0-coreum.26) (2025-03-06)
 
 
