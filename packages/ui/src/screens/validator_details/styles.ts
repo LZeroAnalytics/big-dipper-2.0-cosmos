@@ -83,6 +83,10 @@ const useStyles = makeStyles()((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
+
+    '& .MuiTypography-h2': {
+      marginBottom: theme.spacing(1.5),
+    },
   },
   overviewProfile: {
     display: 'grid',
