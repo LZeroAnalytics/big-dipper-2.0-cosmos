@@ -41,29 +41,31 @@ const VotingPower: FC<VotingPowerProps> = ({ className, data, status }) => {
       <div className={classes.chart}>
         <div className={classes.active} />
       </div>
-      <div className={classes.item}>
-        <Typography variant="h4" className="label">
-          {t('block')}
-        </Typography>
-        <Link shallow href={BLOCK_DETAILS(data.height)} className="value">
-          {numeral(data.height).format('0,0')}
-        </Link>
-      </div>
-      <div className={classes.item}>
-        <Typography variant="h4" className="label">
-          {t('votingPower')}
-        </Typography>
-        <Typography variant="body1" className="value">
-          {votingPower}
-        </Typography>
-      </div>
-      <div className={classes.item}>
-        <Typography variant="h4" className="label">
-          {t('votingPowerPercent')}
-        </Typography>
-        <Typography variant="body1" className="value">
-          {`${votingPowerPercent.format('0,0.00')}%`}
-        </Typography>
+      <div className={classes.rowItems}>
+        <div className={classes.item}>
+          <Typography variant="h4" className="label">
+            {t('block')}
+          </Typography>
+          <Link shallow href={BLOCK_DETAILS(data.height)} className="value">
+            {numeral(data.height).format('0,0')}
+          </Link>
+        </div>
+        <div className={classes.item}>
+          <Typography variant="h4" className="label">
+            {t('votingPower')}
+          </Typography>
+          <Typography variant="body1" className="value">
+            {votingPower}
+          </Typography>
+        </div>
+        <div className={classes.item}>
+          <Typography variant="h4" className="label">
+            {t('votingPowerPercent')}
+          </Typography>
+          <Typography variant="body1" className="value">
+            {`${votingPowerPercent.format('0,0.00')}%`}
+          </Typography>
+        </div>
       </div>
     </Box>
   );

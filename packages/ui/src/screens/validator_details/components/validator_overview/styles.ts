@@ -1,12 +1,12 @@
 import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles()((theme) => ({
-  addressRoot: {
-    [theme.breakpoints.up('md')]: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(2,1fr)',
-    },
-  },
+  // addressRoot: {
+  //   [theme.breakpoints.up('md')]: {
+  //     display: 'grid',
+  //     gridTemplateColumns: 'repeat(2,1fr)',
+  //   },
+  // },
   actionIcons: {
     '&:hover': {
       cursor: 'pointer',

@@ -30,10 +30,20 @@ const useStyles = makeStyles<{ percentage: number }>()((theme, { percentage }) =
     background: theme.palette.primary.main,
     transition: '0.3s',
   },
-  item: {
-    '&:not(:last-child)': {
-      marginBottom: theme.spacing(2),
+  rowItems: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(1, 1fr)',
+    width: '100%',
+
+    [theme.breakpoints.up('sm')]: {
+      gridTemplateColumns: 'repeat(3, 1fr)',
     },
+  },
+  item: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'baseline',
+
     '& .label': {
       marginBottom: theme.spacing(1),
       color: theme.palette.custom.fonts.fontThree,
@@ -53,7 +63,6 @@ const useStyles = makeStyles<{ percentage: number }>()((theme, { percentage }) =
 
     [theme.breakpoints.up('md')]: {
       display: 'flex',
-      alignItems: 'center',
       justifyContent: 'space-between',
     },
   },
