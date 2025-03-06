@@ -20,6 +20,7 @@ const useStyles = makeStyles()((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     gap: theme.spacing(1.5),
+    overflow: 'hidden',
 
     [theme.breakpoints.up('lg')]: {
       flexDirection: 'row',

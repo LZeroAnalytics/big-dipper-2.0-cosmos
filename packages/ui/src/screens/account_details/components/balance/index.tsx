@@ -108,15 +108,15 @@ const Balance: FC<BalanceProps> = (props) => {
                 <ResponsiveContainer width="100%">
                   <DynamicPieChart>
                     <Pie
-                      dataKey="value"
-                      data={dataMemo}
-                      isAnimationActive={false}
-                      innerRadius="0%"
-                      outerRadius="100%"
-                      cornerRadius={40}
-                      paddingAngle={dataCount > 1 ? 5 : 0}
-                      fill="#82ca9d"
                       stroke="none"
+                      data={dataMemo}
+                      startAngle={0}
+                      endAngle={360}
+                      outerRadius="100%"
+                      dataKey="value"
+                      fill="#82ca9d"
+                      isAnimationActive={false}
+                      paddingAngle={dataCount > 1 ? 1 : 0}
                     >
                       {dataMemo.map((entry) => (
                         <Cell key={entry.key} fill={entry.background} stroke={entry.background} />

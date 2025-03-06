@@ -12,7 +12,8 @@ const useStyles = makeStyles()((theme) => ({
     [theme.breakpoints.up('lg')]: {
       display: 'flex',
       flexDirection: 'column',
-      width: '-webkit-fill-available',
+      flex: 1,
+      width: '100%',
     },
   },
   chart: {

@@ -27,9 +27,7 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   profile: {
-    [theme.breakpoints.up('lg')]: {
-      gridColumn: '1 / 4',
-    },
+    gridColumn: '1 / 4',
   },
   votingPower: {
     // background: '#ffc93c',
@@ -58,6 +56,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   block: {
     [theme.breakpoints.up('lg')]: {
+      marginTop: 0,
       gridColumn: '1 / 4',
     },
   },
@@ -101,7 +100,7 @@ const useStyles = makeStyles()((theme) => ({
   votingPowerBlocks: {
     display: 'grid',
     gridTemplateColumns: 'repeat(1, 1fr)',
-    gap: theme.spacing(2),
+    gap: theme.spacing(1),
     width: '100%',
     gridColumn: '1 / 4',
     height: '100%',

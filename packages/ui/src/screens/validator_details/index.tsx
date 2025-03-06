@@ -48,7 +48,7 @@ const ValidatorDetails = () => {
       />
       <Layout navTitle={t('validatorDetails') ?? undefined}>
         <LoadAndExist exists={exists} loading={loading}>
-          <span className={classes.root}>
+          <div className={classes.root}>
             <div className={classes.block}>
               <Link href="/validators" className={classes.breadcrumb}>
                 <svg
@@ -162,7 +162,7 @@ const ValidatorDetails = () => {
             </div>
             <Staking className={classes.staking} />
             <Transactions className={classes.transactions} />
-          </span>
+          </div>
         </LoadAndExist>
       </Layout>
     </>
