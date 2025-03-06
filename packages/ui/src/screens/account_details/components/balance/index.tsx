@@ -95,7 +95,7 @@ const Balance: FC<BalanceProps> = (props) => {
     });
 
     return newMemoData;
-  }, [market.price]);
+  }, [coreumTitle, dataMemo, totalAmount, totalDisplay, totalTitle]);
 
   return (
     <Box className={cx(classes.root, props.className)}>
