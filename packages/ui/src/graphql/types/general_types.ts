@@ -12830,6 +12830,29 @@ export const ParamsDocument = gql`
   }
 `;
 
+export const ParamsDocumentWithoutDex = gql`
+  query Params {
+    stakingParams: staking_params(limit: 1, order_by: {height: desc}) {
+      params
+    }
+    slashingParams: slashing_params(limit: 1, order_by: {height: desc}) {
+      params
+    }
+    mintParams: mint_params(limit: 1, order_by: {height: desc}) {
+      params
+    }
+    distributionParams: distribution_params(limit: 1, order_by: {height: desc}) {
+      params
+    }
+    govParams: gov_params(limit: 1, order_by: {height: desc, params: asc}) {
+      params
+    }
+    authParams: auth_params(limit: 1, order_by: {height: desc, params: asc }) {
+      params
+    }
+  }
+`;
+
 /**
  * __useParamsQuery__
  *
@@ -12845,14 +12868,16 @@ export const ParamsDocument = gql`
  *   },
  * });
  */
-export function useParamsQuery(baseOptions?: Apollo.QueryHookOptions<ParamsQuery, ParamsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ParamsQuery, ParamsQueryVariables>(ParamsDocument, options);
-      }
-export function useParamsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ParamsQuery, ParamsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ParamsQuery, ParamsQueryVariables>(ParamsDocument, options);
-        }
+export function useParamsQuery(isDexParams: boolean, baseOptions?: Apollo.QueryHookOptions<ParamsQuery, ParamsQueryVariables>) {
+  const options = {...defaultOptions, ...baseOptions};
+
+  return Apollo.useQuery<ParamsQuery, ParamsQueryVariables>(isDexParams ? ParamsDocument : ParamsDocumentWithoutDex, options);
+}
+export function useParamsLazyQuery(isDexParams: boolean, baseOptions?: Apollo.LazyQueryHookOptions<ParamsQuery, ParamsQueryVariables>) {
+  const options = {...defaultOptions, ...baseOptions};
+
+  return Apollo.useLazyQuery<ParamsQuery, ParamsQueryVariables>(isDexParams ? ParamsDocument : ParamsDocumentWithoutDex, options);
+}
 export type ParamsQueryHookResult = ReturnType<typeof useParamsQuery>;
 export type ParamsLazyQueryHookResult = ReturnType<typeof useParamsLazyQuery>;
 export type ParamsQueryResult = Apollo.QueryResult<ParamsQuery, ParamsQueryVariables>;

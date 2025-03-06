@@ -18,7 +18,7 @@ import { formatToken } from '@/utils/format_token';
 import AuthParams from '@/models/auth_params';
 import DexParams from '@/models/dex_params';
 
-const { primaryTokenUnit } = chainConfig();
+const { primaryTokenUnit, chainType } = chainConfig();
 
 const initialState: ParamsState = {
   loading: true,
@@ -258,10 +258,12 @@ export const useParams = () => {
     });
   }, []);
 
+  const isDexParams = chainType.toLowerCase() === 'devnet';
+
   // ================================
   // param query
   // ================================
-  useParamsQuery({
+  useParamsQuery(isDexParams, {
     onCompleted: (data) => {
       handleSetState((prevState) => ({
         ...prevState,
