@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.26](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.25...v2.3.0-coreum.26) (2025-03-06)
+
+
+### Bug Fixes
+
+* add spacing for title ([cf4aa90](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/cf4aa90d653929778d943931292a9d0a6f9fa72a))
+
 ## [2.3.0-coreum.25](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.24...v2.3.0-coreum.25) (2025-03-06)
 
 
