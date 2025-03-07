@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.30](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.29...v2.3.0-coreum.30) (2025-03-07)
+
+
+### Bug Fixes
+
+* remove hardcoded value ([f71d439](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/f71d439a42fea8d793af358be1e104c338be7df5))
+* update styles for account balance component ([56340ee](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/56340eea25348d95dd1dca3938c31652f17a4298))
+
 ## [2.3.0-coreum.29](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.28...v2.3.0-coreum.29) (2025-03-06)
 
 
