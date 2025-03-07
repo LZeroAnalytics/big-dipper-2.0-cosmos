@@ -17,7 +17,7 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   chart: {
-    height: '300px',
+    height: '150px',
     [theme.breakpoints.up('md')]: {
       height: '200px',
       width: '200px',
@@ -100,6 +100,7 @@ const useStyles = makeStyles()((theme) => ({
     gap: theme.spacing(2),
     alignItems: 'flex-start',
     gridTemplateColumns: 'repeat(1, 1fr)',
+    overflow: 'hidden',
 
     // [theme.breakpoints.up('sm')]: {
     //   gridTemplateColumns: 'repeat(2, 1fr)',
@@ -134,7 +135,7 @@ const useStyles = makeStyles()((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between',
-    height: 'auto',
+    maxWidth: '100%',
   },
   statItem: {
     height: '100%',
@@ -152,13 +153,9 @@ const useStyles = makeStyles()((theme) => ({
   circleIn: {
     background: Color('#5E6773').alpha(0.25).toString(),
     borderRadius: '50%',
-    height: '300px',
-    width: '300px',
+    height: '200px',
+    width: '200px',
 
-    [theme.breakpoints.up('md')]: {
-      height: '200px',
-      width: '200px',
-    },
     [theme.breakpoints.up('lg')]: {
       height: '150px',
       width: '150px',
