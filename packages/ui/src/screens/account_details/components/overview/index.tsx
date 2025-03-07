@@ -182,9 +182,9 @@ const Overview: FC<OverviewProps> = ({
               onClick={() => handleCopyToClipboard(domain)}
             />
             <Typography variant="body1" className="value">
-              <span className={display.hiddenUntilLg}>{domain || 'domain.co'}</span>
+              <span className={display.hiddenUntilLg}>{domain}</span>
               <span className={display.hiddenWhenLg}>
-                {getMiddleEllipsis(domain || 'domain.co', {
+                {getMiddleEllipsis(domain, {
                   beginning: 15,
                   ending: 5,
                 })}
