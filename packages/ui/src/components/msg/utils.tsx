@@ -614,6 +614,7 @@ export const getMessageByType = <TMessage,>(
 
   type ResultType = {
     content: FC<{
+      viewRaw: boolean;
       message: TMessage;
       assets: Asset[];
       metadatas: any[];
@@ -627,6 +628,7 @@ export const getMessageByType = <TMessage,>(
 
   const results: ResultType = {
     content: COMPONENTS.Unknown as unknown as FC<{
+      viewRaw: boolean;
       message: TMessage;
       assets: Asset[];
       metadatas: any[];
@@ -642,6 +644,7 @@ export const getMessageByType = <TMessage,>(
 
   if (data) {
     results.content = data?.content as unknown as FC<{
+      viewRaw: boolean;
       message: TMessage;
       assets: Asset[];
       metadatas: any[];
@@ -655,6 +658,7 @@ export const getMessageByType = <TMessage,>(
   // If user asks to view the raw data
   if (viewRaw || !results.content) {
     results.content = COMPONENTS.Unknown as unknown as FC<{
+      viewRaw: boolean;
       message: TMessage;
       assets: Asset[];
       metadatas: any[];
@@ -676,6 +680,7 @@ export const getMessageByType = <TMessage,>(
         assetsLoading={assetsLoading || false}
         metadataLoading={metadataLoading || false}
         failedStatus={failedStatus}
+        viewRaw={viewRaw}
       />
     ),
   };

@@ -6,13 +6,13 @@ import { type MsgUnknown } from '@/models';
 import { useProfileRecoil } from '@/recoil/profiles';
 import Name from '@/components/name';
 
-const Unknown: FC<{ message: MsgUnknown; failedStatus?: string }> = (props) => {
-  const { message, failedStatus } = props;
+const Unknown: FC<{ message: MsgUnknown; failedStatus?: string; viewRaw: boolean }> = (props) => {
+  const { message, failedStatus, viewRaw } = props;
   const { classes } = useStyles();
 
   const executor = useProfileRecoil((message.json as any).executor || '');
 
-  if (failedStatus?.length && message.type === '/cosmos.group.v1.MsgExec') {
+  if (!viewRaw && failedStatus?.length && message.type === '/cosmos.group.v1.MsgExec') {
     const { proposal_id } = message.json as any;
 
     return (
