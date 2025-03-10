@@ -42,6 +42,7 @@ const useStyles = makeStyles()((theme) => ({
     // },
   },
   staking: {
+    gridColumn: '1 / 4',
     // background: '#9ddfd3',
     [theme.breakpoints.up('lg')]: {
       gridColumn: '1 / 4',
@@ -49,6 +50,7 @@ const useStyles = makeStyles()((theme) => ({
   },
   transactions: {
     padding: `0 !important`,
+    gridColumn: '1 / 4',
     // background: '#31326f',
     [theme.breakpoints.up('lg')]: {
       gridColumn: '1 / 4',
