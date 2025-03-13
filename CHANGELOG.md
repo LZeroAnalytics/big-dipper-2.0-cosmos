@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.35](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.34...v2.3.0-coreum.35) (2025-03-13)
+
+
+### Bug Fixes
+
+* update layout for blocks ([6b1374e](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/6b1374edaa9ab5795b5a59362620d8c60c7aa568))
+
 ## [2.3.0-coreum.34](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.33...v2.3.0-coreum.34) (2025-03-13)
 
 
