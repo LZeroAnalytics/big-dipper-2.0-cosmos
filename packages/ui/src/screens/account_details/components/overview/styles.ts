@@ -161,9 +161,8 @@ const useStyles = makeStyles()((theme) => ({
     flexDirection: 'column',
     gap: theme.spacing(2),
     minWidth: '50%',
-    width: '100%',
 
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       flexDirection: 'row',
       width: 'unset',
     },

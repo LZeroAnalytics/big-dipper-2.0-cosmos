@@ -41,6 +41,11 @@ const useStyles = makeStyles()((theme) => ({
     maxWidth: '100%',
     overflow: 'hidden',
     flex: 1,
+    width: '100%',
+
+    [theme.breakpoints.up('md')]: {
+      width: 'unset',
+    },
 
     [theme.breakpoints.up('lg')]: {
       // gridColumn: '1 / 3',
