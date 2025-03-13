@@ -127,104 +127,105 @@ const Overview: FC<OverviewProps> = ({
           </div>
         </Box>
       </Dialog>
-      <Box className={cx(classes.root, className)}>
-        <div className={cx(classes.copyText, classes.item)}>
-          <Typography variant="body1" className="label">
-            {t('address')}
+      <div className={classes.overviewRoot}>
+        <Box className={cx(classes.root, className)}>
+          <Typography variant="h2" align="left">
+            {t('account_overview')}
           </Typography>
-          <div className="detail">
-            <CopyIcon
-              onClick={() => handleCopyToClipboard(address)}
-              className={classes.actionIcons}
-            />
-            <ShareIcon onClick={handleOpen} className={classes.actionIcons} />
-            <Typography variant="body1" className="value">
-              <span className={display.hiddenUntilLg}>{address}</span>
-              <span className={display.hiddenWhenLg}>
-                {getMiddleEllipsis(address, {
-                  beginning: 15,
-                  ending: 5,
-                })}
-              </span>
-            </Typography>
-          </div>
-        </div>
-
-        <div className={cx(classes.copyText, classes.item)}>
-          <Typography variant="body1" className="label">
-            {t('rewardAddress')}
-          </Typography>
-          <div className="detail">
-            <CopyIcon
-              className={classes.actionIcons}
-              onClick={() => handleCopyToClipboard(withdrawalAddress)}
-            />
-            <Typography variant="body1" className="value">
-              <span className={display.hiddenUntilLg}>{withdrawalAddress}</span>
-              <span className={display.hiddenWhenLg}>
-                {getMiddleEllipsis(withdrawalAddress, {
-                  beginning: 15,
-                  ending: 5,
-                })}
-              </span>
-            </Typography>
-          </div>
-        </div>
-
-        {!!domain.length && (
-          <div className={cx(classes.copyText, classes.item)}>
-            <Typography variant="body1" className="label">
-              {t('domain')}
-            </Typography>
-            <div className="detail">
-              <CopyIcon
-                className={classes.actionIcons}
-                onClick={() => handleCopyToClipboard(domain)}
-              />
-              <Typography variant="body1" className="value">
-                <span className={display.hiddenUntilLg}>{domain}</span>
-                <span className={display.hiddenWhenLg}>
-                  {getMiddleEllipsis(domain, {
+          <div className={classes.flex}>
+            <div className={cx(classes.copyText, classes.item)}>
+              <Typography variant="body1" className="label">
+                {t('address')}
+              </Typography>
+              <div className="detail">
+                <CopyIcon
+                  onClick={() => handleCopyToClipboard(address)}
+                  className={classes.actionIcons}
+                />
+                <ShareIcon onClick={handleOpen} className={classes.actionIcons} />
+                <Typography variant="body1" className="value">
+                  {getMiddleEllipsis(address, {
                     beginning: 15,
                     ending: 5,
                   })}
-                </span>
-              </Typography>
-            </div>
-          </div>
-        )}
-      </Box>
-
-      {!!riskScoreData && riskScoreData.isAddressValid && (
-        <>
-          <Typography variant="h3" align="left">
-            {t('account_risk_score')}
-          </Typography>
-          <Box className={cx(classes.root, className)}>
-            <div className={cx(classes.copyText, classes.item)}>
-              <Typography variant="body1" className="label">
-                {t('risk_level')}
-              </Typography>
-              <div className="detail">
-                <Typography variant="body1" className="value">
-                  {riskScoreData?.level}
                 </Typography>
               </div>
             </div>
 
             <div className={cx(classes.copyText, classes.item)}>
               <Typography variant="body1" className="label">
-                {t('risk_score')}
+                {t('rewardAddress')}
               </Typography>
               <div className="detail">
+                <CopyIcon
+                  className={classes.actionIcons}
+                  onClick={() => handleCopyToClipboard(withdrawalAddress)}
+                />
                 <Typography variant="body1" className="value">
-                  {riskScoreData?.score}
+                  {getMiddleEllipsis(withdrawalAddress, {
+                    beginning: 15,
+                    ending: 5,
+                  })}
                 </Typography>
+              </div>
+            </div>
+          </div>
+
+          {!!domain.length && (
+            <div className={cx(classes.copyText, classes.item)}>
+              <Typography variant="body1" className="label">
+                {t('domain')}
+              </Typography>
+              <div className="detail">
+                <CopyIcon
+                  className={classes.actionIcons}
+                  onClick={() => handleCopyToClipboard(domain)}
+                />
+                <Typography variant="body1" className="value">
+                  <span className={display.hiddenUntilLg}>{domain}</span>
+                  <span className={display.hiddenWhenLg}>
+                    {getMiddleEllipsis(domain, {
+                      beginning: 15,
+                      ending: 5,
+                    })}
+                  </span>
+                </Typography>
+              </div>
+            </div>
+          )}
+        </Box>
+
+        {!!riskScoreData && riskScoreData.isAddressValid && (
+          <Box className={cx(classes.root, className)}>
+            <Typography variant="h2" align="left">
+              {t('account_risk_score')}
+            </Typography>
+            <div className={classes.flex}>
+              <div className={cx(classes.copyText, classes.item)}>
+                <Typography variant="body1" className="label">
+                  {t('risk_level')}
+                </Typography>
+                <div className="detail">
+                  <Typography variant="body1" className="value">
+                    {riskScoreData?.level}
+                  </Typography>
+                </div>
+              </div>
+
+              <div className={cx(classes.copyText, classes.item)}>
+                <Typography variant="body1" className="label">
+                  {t('risk_score')}
+                </Typography>
+                <div className="detail">
+                  <Typography variant="body1" className="value">
+                    {riskScoreData?.score}
+                  </Typography>
+                </div>
               </div>
             </div>
           </Box>
-        </>
-      )}
+        )}
+      </div>
     </>
   );
 };

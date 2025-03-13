@@ -100,7 +100,6 @@ const useStyles = makeStyles()((theme) => ({
     gap: theme.spacing(2),
     alignItems: 'flex-start',
     gridTemplateColumns: 'repeat(1, 1fr)',
-    overflow: 'hidden',
 
     // [theme.breakpoints.up('sm')]: {
     //   gridTemplateColumns: 'repeat(2, 1fr)',

@@ -37,7 +37,8 @@
   "status": "Status",
   "completionTime": "Completion Time",
   "domain": "Domain",
-  "account_risk_score": "Account's Risk Score",
+  "account_risk_score": "Risk Score",
   "risk_level": "Risk Level",
-  "risk_score": "Risk Score"
+  "risk_score": "Risk Score",
+  "account_overview": "Overview"
 }

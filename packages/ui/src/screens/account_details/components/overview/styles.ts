@@ -6,7 +6,13 @@ const useStyles = makeStyles()((theme) => ({
       display: 'flex',
       flexDirection: 'column',
       gap: theme.spacing(2),
-      minWidth: 'fit-content',
+      flex: 1,
+      // minWidth: 'fit-content',
+    },
+    '& .MuiTypography-h2': {
+      fontSize: '20px',
+      lineHeight: '30px',
+      fontWeight: 600,
     },
   },
   rootDialog: {
@@ -139,11 +145,32 @@ const useStyles = makeStyles()((theme) => ({
       alignItems: 'center',
       flexDirection: 'row-reverse',
       justifyContent: 'flex-end',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+
       '& svg': {
         width: '1rem',
         marginLeft: theme.spacing(1),
       },
     },
+  },
+  overviewRoot: {
+    display: 'flex',
+    alignItems: 'baseline',
+    flexDirection: 'column',
+    gap: theme.spacing(2),
+    minWidth: '50%',
+    width: '100%',
+
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'row',
+      width: 'unset',
+    },
+  },
+  flex: {
+    gap: theme.spacing(2),
+    flex: 1,
   },
 }));
 

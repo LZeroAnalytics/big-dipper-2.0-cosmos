@@ -37,6 +37,11 @@ const useStyles = makeStyles()((theme) => ({
     },
   },
   overview: {
+    height: '100%',
+    maxWidth: '100%',
+    overflow: 'hidden',
+    flex: 1,
+
     [theme.breakpoints.up('lg')]: {
       // gridColumn: '1 / 3',
     },
