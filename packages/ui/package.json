@@ -52,6 +52,7 @@
     "ramda": "^0.28.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-gauge-component": "^1.2.64",
     "react-i18next": "^12.1.5",
     "react-share": "^4.4.1",
     "react-toastify": "^9.1.1",

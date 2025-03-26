@@ -24,6 +24,9 @@ import {
 import CopyIcon from 'shared-utils/assets/icon-copy.svg';
 import ShareIcon from 'shared-utils/assets/icon-share.svg';
 import CloseButton from '@/assets/close-share-modal.svg';
+import dynamic from 'next/dynamic';
+
+const GaugeComponent = dynamic(() => import('react-gauge-component'), { ssr: false });
 
 type OverviewProps = {
   className?: string;
@@ -201,27 +204,97 @@ const Overview: FC<OverviewProps> = ({
               {t('account_risk_score')}
             </Typography>
             <div className={classes.flex}>
-              <div className={cx(classes.copyText, classes.item)}>
-                <Typography variant="body1" className="label">
-                  {t('risk_level')}
-                </Typography>
-                <div className="detail">
-                  <Typography variant="body1" className="value">
-                    {riskScoreData?.level}
-                  </Typography>
-                </div>
-              </div>
-
-              <div className={cx(classes.copyText, classes.item)}>
-                <Typography variant="body1" className="label">
-                  {t('risk_score')}
-                </Typography>
-                <div className="detail">
-                  <Typography variant="body1" className="value">
-                    {riskScoreData?.score}
-                  </Typography>
-                </div>
-              </div>
+              <GaugeComponent
+                type="radial"
+                arc={{
+                  padding: 0,
+                  width: 0.2,
+                  subArcs: [
+                    {
+                      limit: 29,
+                      color: '#179B69',
+                      showTick: false,
+                      tooltip: {
+                        text: t('risk_level_1') || '',
+                        style: {
+                          maxWidth: '300px',
+                          textShadow: 'none',
+                        },
+                      },
+                    },
+                    {
+                      limit: 50,
+                      color: '#004DC2',
+                      showTick: false,
+                      tooltip: {
+                        text: t('risk_level_2') || '',
+                        style: {
+                          maxWidth: '300px',
+                          textShadow: 'none',
+                        },
+                      },
+                    },
+                    {
+                      limit: 79,
+                      color: '#FF9900',
+                      showTick: false,
+                      tooltip: {
+                        text: t('risk_level_3') || '',
+                        style: {
+                          maxWidth: '300px',
+                          textShadow: 'none',
+                        },
+                      },
+                    },
+                    {
+                      limit: 100,
+                      color: '#C67070',
+                      showTick: false,
+                      tooltip: {
+                        text: t('risk_level_4') || '',
+                        style: {
+                          maxWidth: '300px',
+                          textShadow: 'none',
+                        },
+                      },
+                    },
+                  ],
+                }}
+                labels={{
+                  valueLabel: {
+                    style: {
+                      fontSize: 36,
+                      fontWeight: 600,
+                      // eslint-disable-next-line no-nested-ternary
+                      fill:
+                        riskScoreData?.score < 30
+                          ? '#179B69'
+                          : riskScoreData?.score <= 50
+                            ? '#004DC2'
+                            : riskScoreData?.score < 80
+                              ? '#FF9900'
+                              : '#C67070',
+                      marginTop: '-50px',
+                    },
+                    formatTextValue: () => String(riskScoreData?.score),
+                  },
+                  tickLabels: {
+                    type: 'inner',
+                    // hideMinMax: true,
+                    ticks: [{ value: 30 }, { value: 50 }, { value: 80 }],
+                    defaultTickValueConfig: {
+                      formatTextValue: (value: number) => String(value),
+                    },
+                  },
+                }}
+                value={riskScoreData?.score}
+                pointer={{
+                  type: 'arrow',
+                  length: 0.7,
+                  width: 20,
+                  color: '#a7a7a7',
+                }}
+              />
             </div>
           </Box>
         )}
