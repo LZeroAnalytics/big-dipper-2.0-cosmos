@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.37](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.36...v2.3.0-coreum.37) (2025-03-28)
+
+
+### Bug Fixes
+
+* update styles for risk score chart ([fe4fc61](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/fe4fc617ccaabe4fbefb4cd571c86da45691b7d0))
+
 ## [2.3.0-coreum.36](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.35...v2.3.0-coreum.36) (2025-03-26)
 
 
