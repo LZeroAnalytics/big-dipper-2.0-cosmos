@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import Box from '@/components/box';
 import { useWindowOrigin } from '@/hooks/use_window';
 import { useOverview } from '@/screens/account_details/components/overview/hooks';
@@ -203,9 +204,12 @@ const Overview: FC<OverviewProps> = ({
             <Typography variant="h2" align="left">
               {t('account_risk_score')}
             </Typography>
-            <div className={classes.flex}>
+            <div className={classes.flexChart}>
               <GaugeComponent
                 type="radial"
+                style={{
+                  width: 230,
+                }}
                 arc={{
                   padding: 0,
                   width: 0.2,
@@ -263,9 +267,8 @@ const Overview: FC<OverviewProps> = ({
                 labels={{
                   valueLabel: {
                     style: {
-                      fontSize: 36,
-                      fontWeight: 600,
-                      // eslint-disable-next-line no-nested-ternary
+                      fontSize: 60,
+                      fontWeight: 800,
                       fill:
                         riskScoreData?.score < 30
                           ? '#179B69'

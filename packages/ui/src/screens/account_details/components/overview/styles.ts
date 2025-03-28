@@ -170,6 +170,15 @@ const useStyles = makeStyles()((theme) => ({
   flex: {
     gap: theme.spacing(2),
     flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  flexChart: {
+    gap: theme.spacing(2),
+    flex: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 }));
 
