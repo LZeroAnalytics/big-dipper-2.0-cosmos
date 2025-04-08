@@ -10,6 +10,7 @@ import type {
   Auth,
   Dex,
 } from '@/screens/params/types';
+import { formatNumber, formatToken } from '@/utils/format_token';
 import { nanoToSeconds, secondsToDays } from '@/utils/time';
 import { TFunction } from 'next-i18next';
 import numeral from 'numeral';
@@ -301,6 +302,6 @@ export const formatDex = (data: Dex, t: TFunction) => [
   {
     key: 'orderReserve',
     label: t('orderReserve'),
-    detail: `${data.order_reserve.amount} ${data.order_reserve.denom.toUpperCase()}`,
+    detail: `${formatNumber(formatToken(data.order_reserve.amount, data.order_reserve.denom).value, formatToken(data.order_reserve.amount, data.order_reserve.denom).exponent)} ${formatToken(data.order_reserve.amount, data.order_reserve.denom).displayDenom.toUpperCase()}`,
   },
 ];
