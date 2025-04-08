@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.38](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.37...v2.3.0-coreum.38) (2025-04-08)
+
+
+### Features
+
+* add number formatting for dex params ([794b8bc](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/794b8bc6897d7358727d93f59631c703d2cc9d1e))
+
 ## [2.3.0-coreum.37](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.36...v2.3.0-coreum.37) (2025-03-28)
 
 
