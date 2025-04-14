@@ -4,11 +4,16 @@ import chainConfig from '@/chainConfig';
 const { prefix } = chainConfig();
 
 export const toValidatorAddress = (address: string) => {
-  if (!address) {
+  try {
+    if (!address) {
+      return '';
+    }
+    const decode = bech32.decode(address).words;
+    return bech32.encode(prefix.validator, decode);
+  } catch (error) {
+    console.error(address, error);
     return '';
   }
-  const decode = bech32.decode(address).words;
-  return bech32.encode(prefix.validator, decode);
 };
 
 export const isValidAddress = (address: string) => {
