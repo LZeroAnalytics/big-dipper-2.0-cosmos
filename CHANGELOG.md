@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.39](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.38...v2.3.0-coreum.39) (2025-04-14)
+
+
+### Bug Fixes
+
+* update helper to catch the error ([7e8f335](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/7e8f33545a68bce33ad99e4f2a62565c1d38d8ed))
+
 ## [2.3.0-coreum.38](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.37...v2.3.0-coreum.38) (2025-04-08)
 
 
