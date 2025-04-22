@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.41](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.40...v2.3.0-coreum.41) (2025-04-22)
+
+
+### Features
+
+* display dex settings for asset ft tokens ([4fc6fa1](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/4fc6fa166b4fe6cf50e5588c182f10b9fe4cab07))
+
 ## [2.3.0-coreum.40](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.39...v2.3.0-coreum.40) (2025-04-22)
 
 
