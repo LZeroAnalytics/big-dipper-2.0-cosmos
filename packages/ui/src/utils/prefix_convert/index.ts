@@ -5,13 +5,14 @@ const { prefix } = chainConfig();
 
 export const toValidatorAddress = (address: string) => {
   try {
-    if (!address) {
+    if (!address || address.length > 90) {
       return '';
     }
     const decode = bech32.decode(address).words;
+
     return bech32.encode(prefix.validator, decode);
   } catch (error) {
-    console.error(address, error);
+    console.error(`Error processing address ${address}:`, error);
     return '';
   }
 };
