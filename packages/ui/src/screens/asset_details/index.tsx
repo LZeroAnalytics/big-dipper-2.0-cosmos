@@ -9,6 +9,7 @@ import AssetDetailsOverview from '@/screens/asset_details/components/AssetDetail
 import AssetPriceOverview from '@/screens/asset_details/components/AssetPriceOverview';
 import Link from 'next/link';
 import { Fragment } from 'react';
+import AssetDexSettings from './components/AssetDexSettings';
 
 const AssetDetails = () => {
   const { t } = useTranslation('assets');
@@ -47,6 +48,7 @@ const AssetDetails = () => {
                 <AssetOverview className={classes.block} asset={asset} />
                 <AssetDetailsOverview className={classes.block} asset={asset} />
                 <AssetPriceOverview className={classes.block} asset={asset} />
+                {asset.dexSettings && <AssetDexSettings className={classes.block} asset={asset} />}
               </>
             )}
           </div>

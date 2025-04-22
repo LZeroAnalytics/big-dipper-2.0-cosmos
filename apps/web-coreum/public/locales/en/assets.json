@@ -33,5 +33,7 @@
   "whitepaper": "Whitepaper",
   "audit_report": "Audit Report",
   "explorer": "Explorer",
-  "commingSoon": "Coming soon"
+  "commingSoon": "Coming soon",
+  "whitelisted_denoms": "Whitelisted Denoms",
+  "unified_ref_amount": "Unified Ref Amount"
 }

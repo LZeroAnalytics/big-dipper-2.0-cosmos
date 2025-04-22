@@ -12,6 +12,7 @@ const { chainType, primaryTokenUnit, tokenUnits } = chainConfig();
 interface AssetDetailsState {
   assetsLoading: boolean;
   metadataLoading: boolean;
+  assetInfoLoading: boolean;
   loading: boolean;
   exists: boolean;
   data: {
@@ -22,16 +23,19 @@ interface AssetDetailsState {
   assetsListItem: Asset | null;
   metadata: any;
   asset: any;
+  assetInfo: any;
 }
 
 const formatAsset = ({
   metadata,
   asset,
   additionalData,
+  assetInfo,
 }: {
   metadata: any;
   asset: Asset;
   additionalData: any;
+  assetInfo: any;
 }) => {
   let holders = '0';
   let tokenType = 'native';
@@ -76,6 +80,7 @@ const formatAsset = ({
     supply,
     tokenType,
     chain,
+    dexSettings: assetInfo?.dex_settings,
   };
 };
 
@@ -96,6 +101,7 @@ export const useAssetDetails = () => {
   const [state, setState] = useState<AssetDetailsState>({
     assetsLoading: true,
     metadataLoading: true,
+    assetInfoLoading: true,
     loading: true,
     exists: true,
     data: {
@@ -113,6 +119,7 @@ export const useAssetDetails = () => {
     metadata: null,
     assetsListItem: null,
     asset: null,
+    assetInfo: null,
   });
 
   const handleSetState = useCallback(
@@ -128,7 +135,7 @@ export const useAssetDetails = () => {
   const getAssetsList = useCallback(async () => {
     try {
       const response = await axios.get(
-        `https://raw.githubusercontent.com/CoreumFoundation/token-registry/master/${chainType.toLowerCase()}/assets.json`
+        `https://raw.githubusercontent.com/CoreumFoundation/token-registry/test/features/${chainType.toLowerCase()}/assets.json`
       );
       const selectedAssets = response.data.assets.filter(
         (item: any) => item.denom === router.query.address
@@ -169,9 +176,31 @@ export const useAssetDetails = () => {
     }
   }, [router.query.address, chainType]);
 
+  const getAssetFTInfo = useCallback(async () => {
+    try {
+      const { data } = await axios.get(
+        `https://full-node.${chainType.toLowerCase()}-1.coreum.dev:1317/coreum/asset/ft/v1/tokens/${
+          router.query.address
+        }`
+      );
+
+      handleSetState((prevState) => ({
+        ...prevState,
+        assetInfoLoading: false,
+        assetInfo: data.token,
+      }));
+    } catch (error) {
+      handleSetState((prevState) => ({
+        ...prevState,
+        assetInfoLoading: false,
+      }));
+    }
+  }, [router.query.address]);
+
   useEffect(() => {
     getAssetsList();
     getDenomMetadatas();
+    getAssetFTInfo();
   }, [router]);
 
   useAssetsQuery({
@@ -191,20 +220,36 @@ export const useAssetDetails = () => {
   });
 
   useEffect(() => {
-    const { assetsListItem, assetsLoading, metadataLoading, loading, data, metadata } = state;
+    const {
+      assetsListItem,
+      assetsLoading,
+      metadataLoading,
+      loading,
+      data,
+      metadata,
+      assetInfo,
+      assetInfoLoading,
+    } = state;
 
     if (!assetsListItem && !assetsLoading && !metadataLoading && !loading) {
       handleSetState((prevState) => ({
         ...prevState,
         exists: false,
       }));
-    } else if (!assetsLoading && !metadataLoading && !loading && assetsListItem) {
+    } else if (
+      !assetsLoading &&
+      !metadataLoading &&
+      !assetInfoLoading &&
+      !loading &&
+      assetsListItem
+    ) {
       handleSetState((prevState) => ({
         ...prevState,
         asset: formatAsset({
           metadata,
           asset: assetsListItem,
           additionalData: data,
+          assetInfo,
         }),
       }));
     }
