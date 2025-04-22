@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.40](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.39...v2.3.0-coreum.40) (2025-04-22)
+
+
+### Features
+
+* separate transactions and bridge transactions under different urls ([ece00b7](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/ece00b702115eda341d5d7ad2023ecc7de2d9330))
+
 ## [2.3.0-coreum.39](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.38...v2.3.0-coreum.39) (2025-04-14)
 
 
