@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.42](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.41...v2.3.0-coreum.42) (2025-04-22)
+
+
+### Bug Fixes
+
+* add validation for length of address in toValidatorAddress helper ([4efe231](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/4efe231234e7e262c4ef732297f688cddd4a58ff))
+
 ## [2.3.0-coreum.41](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.40...v2.3.0-coreum.41) (2025-04-22)
 
 
