@@ -25,7 +25,7 @@ const DepositsRow: FC<DepositsRowProps> = ({ i, item }) => {
   const { name, address, imageUrl } = useProfileRecoil(item.user);
 
   return (
-    <TableRow>
+    <TableRow key={`depositors-mobile-${i}`}>
       {columns.map((column) => (
         <TableCell
           // eslint-disable-next-line react/no-array-index-key
@@ -85,7 +85,7 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
         <TableBody>
           {items?.map((row, i) => (
             // eslint-disable-next-line react/no-array-index-key
-            <DepositsRow i={i} item={row} />
+            <DepositsRow key={i} i={i} item={row} />
           ))}
         </TableBody>
       </Table>
