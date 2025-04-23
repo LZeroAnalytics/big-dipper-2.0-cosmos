@@ -55,7 +55,7 @@ const CONTRACT_ADDRESS =
   chainType.toLowerCase() === 'mainnet'
     ? 'core1zhs909jp9yktml6qqx9f0ptcq2xnhhj99cja03j3lfcsp2pgm86studdrz'
     : chainType.toLowerCase() === 'testnet'
-      ? 'testcore16sgampgtngjsmnj8zwz6h8zmh26nv2rs5kl72fuxkrzru5y5caxq82y4s5'
+      ? 'testcore1d90zv8wrwsalluqcezca22zds3dzvjj06fs0v88sh6shhven8pjsgq539p'
       : '';
 
 const bridgeClient = new BridgeQueryClient(RPC_URL, CONTRACT_ADDRESS);
