@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.44](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.43...v2.3.0-coreum.44) (2025-04-23)
+
+
+### Bug Fixes
+
+* update bridge contract address ([da9094d](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/da9094d8980430ff3794dedbc45bb654eb58219e))
+
 ## [2.3.0-coreum.43](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.42...v2.3.0-coreum.43) (2025-04-23)
 
 
