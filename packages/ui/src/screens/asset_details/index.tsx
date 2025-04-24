@@ -8,13 +8,16 @@ import AssetOverview from '@/screens/asset_details/components/AssetOverview';
 import AssetDetailsOverview from '@/screens/asset_details/components/AssetDetails';
 import AssetPriceOverview from '@/screens/asset_details/components/AssetPriceOverview';
 import Link from 'next/link';
-import { Fragment } from 'react';
+import { useParams } from '@/screens/params/hooks';
 import AssetDexSettings from './components/AssetDexSettings';
 
 const AssetDetails = () => {
   const { t } = useTranslation('assets');
   const { classes } = useStyles();
   const { state } = useAssetDetails();
+  const {
+    state: { dex },
+  } = useParams();
   const { exists, asset, loading, metadataLoading, assetsLoading } = state;
 
   return (
@@ -48,7 +51,9 @@ const AssetDetails = () => {
                 <AssetOverview className={classes.block} asset={asset} />
                 <AssetDetailsOverview className={classes.block} asset={asset} />
                 <AssetPriceOverview className={classes.block} asset={asset} />
-                {asset.dexSettings && <AssetDexSettings className={classes.block} asset={asset} />}
+                {asset.dexSettings && dex && (
+                  <AssetDexSettings className={classes.block} asset={asset} dex={dex} />
+                )}
               </>
             )}
           </div>
