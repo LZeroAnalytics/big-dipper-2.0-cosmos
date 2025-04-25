@@ -135,7 +135,7 @@ export const useAssetDetails = () => {
   const getAssetsList = useCallback(async () => {
     try {
       const response = await axios.get(
-        `https://raw.githubusercontent.com/CoreumFoundation/token-registry/master/${chainType.toLowerCase()}/assets.json`
+        `https://raw.githubusercontent.com/CoreumFoundation/token-registry/test/features/${chainType.toLowerCase()}/assets.json`
       );
       const selectedAssets = response.data.assets.filter(
         (item: any) => item.denom === router.query.address
