@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.48](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.47...v2.3.0-coreum.48) (2025-04-25)
+
+
+### Features
+
+* add dex params to the testnet ([e9de677](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/e9de6770de93aafb83d4b19abaa93e088e1f63ef))
+
 ## [2.3.0-coreum.47](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.46...v2.3.0-coreum.47) (2025-04-25)
 
 
