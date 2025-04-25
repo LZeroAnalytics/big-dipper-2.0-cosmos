@@ -52,7 +52,7 @@ const AssetDexSettings: FC<AssetDexSettingsProps> = ({ asset, className, dex }) 
 
   const whitelistedDenoms = useMemo(() => {
     if (
-      features?.find((item: string) => item !== 'dex_whitelisted_denoms') ||
+      !features?.find((item: string) => item === 'dex_whitelisted_denoms') ||
       asset.denom === primaryTokenUnit
     ) {
       return {
