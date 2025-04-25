@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.50](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.49...v2.3.0-coreum.50) (2025-04-25)
+
+
+### Bug Fixes
+
+* update rule to display whitelisted denoms ([30bd50f](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/30bd50f980b101713c55491dcde87f6e5921b808))
+
 ## [2.3.0-coreum.49](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.48...v2.3.0-coreum.49) (2025-04-25)
 
 
