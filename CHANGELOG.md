@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.49](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.48...v2.3.0-coreum.49) (2025-04-25)
+
+
+### Bug Fixes
+
+* update dex settings ([da50d28](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/da50d28054aca02dc2b5571386b2ffaf685580bd))
+
 ## [2.3.0-coreum.48](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.47...v2.3.0-coreum.48) (2025-04-25)
 
 
