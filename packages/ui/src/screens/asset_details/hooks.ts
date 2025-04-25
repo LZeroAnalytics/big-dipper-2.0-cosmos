@@ -81,6 +81,7 @@ const formatAsset = ({
     tokenType,
     chain,
     dexSettings: assetInfo?.dex_settings,
+    features: assetInfo?.features,
   };
 };
 

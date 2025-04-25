@@ -3,7 +3,10 @@ import Typography from '@mui/material/Typography';
 import { useTranslation } from 'next-i18next';
 import numeral from 'numeral';
 import { FC, useMemo } from 'react';
+import chainConfig from '@/chainConfig';
 import useStyles from './styles';
+
+const { primaryTokenUnit } = chainConfig();
 
 interface AssetDexSettingsProps {
   className?: string;
@@ -15,10 +18,20 @@ const AssetDexSettings: FC<AssetDexSettingsProps> = ({ asset, className, dex }) 
   const { classes, cx } = useStyles();
   const { t } = useTranslation('assets');
 
-  const { dexSettings } = asset;
+  const { dexSettings, features } = asset;
   const { default_unified_ref_amount } = dex;
 
-  const refAmount = dexSettings?.unified_ref_amount || default_unified_ref_amount;
+  const refAmount = useMemo(() => {
+    const currentRefAmount = dexSettings?.unified_ref_amount || default_unified_ref_amount;
+
+    if (currentRefAmount > 1) {
+      if (currentRefAmount <= 100000000000000000000000) {
+        return numeral(currentRefAmount).format('0,0');
+      }
+    }
+
+    return currentRefAmount;
+  }, [default_unified_ref_amount, dexSettings?.unified_ref_amount]);
 
   const unifiedRefAmount = useMemo(
     () => ({
@@ -30,15 +43,34 @@ const AssetDexSettings: FC<AssetDexSettingsProps> = ({ asset, className, dex }) 
       ),
       value: (
         <Typography variant="body1" className="value">
-          {refAmount > 1 ? numeral(refAmount).format('0,0') : dexSettings.unified_ref_amount}
+          {refAmount}
         </Typography>
       ),
     }),
-    [dexSettings, t]
+    [dexSettings, refAmount, t]
   );
 
-  const whitelistedDenoms = useMemo(
-    () => ({
+  const whitelistedDenoms = useMemo(() => {
+    if (
+      features?.find((item: string) => item !== 'dex_whitelisted_denoms') ||
+      asset.denom === primaryTokenUnit
+    ) {
+      return {
+        key: 'whitelisted_denoms',
+        name: (
+          <Typography variant="h4" className="label">
+            {t('whitelisted_denoms')}
+          </Typography>
+        ),
+        value: (
+          <Typography variant="body1" className={cx('value', classes.denomsWrapper)}>
+            {t('all')}
+          </Typography>
+        ),
+      };
+    }
+
+    return {
       key: 'whitelisted_denoms',
       name: (
         <Typography variant="h4" className="label">
@@ -48,13 +80,12 @@ const AssetDexSettings: FC<AssetDexSettingsProps> = ({ asset, className, dex }) 
       value: (
         <Typography variant="body1" className={cx('value', classes.denomsWrapper)}>
           {dexSettings?.whitelisted_denoms.length
-            ? dexSettings?.whitelisted_denoms.map((item: string) => <p>{item}</p>)
-            : 'ALL'}
+            ? dexSettings?.whitelisted_denoms.map((item: string) => <p key={item}>{item}</p>)
+            : t('no_denoms')}
         </Typography>
       ),
-    }),
-    [dexSettings, t]
-  );
+    };
+  }, [classes.denomsWrapper, cx, dexSettings?.whitelisted_denoms, features, t]);
 
   const dataItems = useMemo(() => {
     const items = [];
@@ -63,9 +94,7 @@ const AssetDexSettings: FC<AssetDexSettingsProps> = ({ asset, className, dex }) 
       items.push(unifiedRefAmount);
     }
 
-    if (whitelistedDenoms) {
-      items.push(whitelistedDenoms);
-    }
+    items.push(whitelistedDenoms);
 
     return items;
   }, [unifiedRefAmount, whitelistedDenoms]);

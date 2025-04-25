@@ -35,5 +35,7 @@
   "explorer": "Explorer",
   "commingSoon": "Coming soon",
   "whitelisted_denoms": "Whitelisted Denoms",
-  "unified_ref_amount": "Unified Ref Amount"
+  "unified_ref_amount": "Unified Ref Amount",
+  "all": "ALL",
+  "no_denoms": "There are not whitelisted denoms"
 }
