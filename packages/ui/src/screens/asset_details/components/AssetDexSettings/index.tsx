@@ -18,6 +18,8 @@ const AssetDexSettings: FC<AssetDexSettingsProps> = ({ asset, className, dex }) 
   const { dexSettings } = asset;
   const { default_unified_ref_amount } = dex;
 
+  const refAmount = dexSettings?.unified_ref_amount || default_unified_ref_amount;
+
   const unifiedRefAmount = useMemo(
     () => ({
       key: 'unified_ref_amount',
@@ -28,7 +30,7 @@ const AssetDexSettings: FC<AssetDexSettingsProps> = ({ asset, className, dex }) 
       ),
       value: (
         <Typography variant="body1" className="value">
-          {numeral(dexSettings.unified_ref_amount || default_unified_ref_amount).format('0,0')}
+          {refAmount > 1 ? numeral(refAmount).format('0,0') : dexSettings.unified_ref_amount}
         </Typography>
       ),
     }),
@@ -45,7 +47,9 @@ const AssetDexSettings: FC<AssetDexSettingsProps> = ({ asset, className, dex }) 
       ),
       value: (
         <Typography variant="body1" className={cx('value', classes.denomsWrapper)}>
-          {dexSettings.whitelisted_denoms.map((item: string) => <p>{item}</p>) || 'ALL'}
+          {dexSettings?.whitelisted_denoms.length
+            ? dexSettings?.whitelisted_denoms.map((item: string) => <p>{item}</p>)
+            : 'ALL'}
         </Typography>
       ),
     }),

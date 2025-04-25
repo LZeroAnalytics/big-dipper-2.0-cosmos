@@ -51,9 +51,7 @@ const AssetDetails = () => {
                 <AssetOverview className={classes.block} asset={asset} />
                 <AssetDetailsOverview className={classes.block} asset={asset} />
                 <AssetPriceOverview className={classes.block} asset={asset} />
-                {asset.dexSettings && dex && (
-                  <AssetDexSettings className={classes.block} asset={asset} dex={dex} />
-                )}
+                {dex && <AssetDexSettings className={classes.block} asset={asset} dex={dex} />}
               </>
             )}
           </div>

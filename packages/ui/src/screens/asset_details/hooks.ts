@@ -178,17 +178,24 @@ export const useAssetDetails = () => {
 
   const getAssetFTInfo = useCallback(async () => {
     try {
-      const { data } = await axios.get(
-        `https://full-node.${chainType.toLowerCase()}-1.coreum.dev:1317/coreum/asset/ft/v1/tokens/${
-          router.query.address
-        }`
-      );
+      if (router.query.address !== primaryTokenUnit) {
+        const { data } = await axios.get(
+          `https://full-node.${chainType.toLowerCase()}-1.coreum.dev:1317/coreum/asset/ft/v1/tokens/${
+            router.query.address
+          }`
+        );
 
-      handleSetState((prevState) => ({
-        ...prevState,
-        assetInfoLoading: false,
-        assetInfo: data.token,
-      }));
+        handleSetState((prevState) => ({
+          ...prevState,
+          assetInfoLoading: false,
+          assetInfo: data.token,
+        }));
+      } else {
+        handleSetState((prevState) => ({
+          ...prevState,
+          assetInfoLoading: false,
+        }));
+      }
     } catch (error) {
       handleSetState((prevState) => ({
         ...prevState,
