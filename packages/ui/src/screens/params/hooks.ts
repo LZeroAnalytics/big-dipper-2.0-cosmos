@@ -258,7 +258,7 @@ export const useParams = () => {
     });
   }, []);
 
-  const isDexParams = chainType.toLowerCase() === 'devnet';
+  const isDexParams = chainType.toLowerCase() !== 'mainnet';
 
   // ================================
   // param query
