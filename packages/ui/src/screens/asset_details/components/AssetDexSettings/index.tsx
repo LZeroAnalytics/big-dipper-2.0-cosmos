@@ -85,7 +85,7 @@ const AssetDexSettings: FC<AssetDexSettingsProps> = ({ asset, className, dex }) 
         </Typography>
       ),
     };
-  }, [classes.denomsWrapper, cx, dexSettings?.whitelisted_denoms, features, t]);
+  }, [asset.denom, classes.denomsWrapper, cx, dexSettings?.whitelisted_denoms, features, t]);
 
   const dataItems = useMemo(() => {
     const items = [];
