@@ -25,6 +25,7 @@ const Send: FC<{
       const tokenInAssets = assets.find(
         (assetItem) => x.denom.toLowerCase() === assetItem.denom.toLowerCase()
       );
+
       let amount = formatToken(x.amount, x.denom).value;
       let displayDenom = asset ? asset.display.toUpperCase() : x.denom.toUpperCase();
 
@@ -49,7 +50,7 @@ const Send: FC<{
             : tokenInAssets?.extra.xrpl_info.currency;
       }
 
-      if (asset?.denom_units[1].exponent) {
+      if (asset?.denom_units[1]?.exponent) {
         const availableValue = new Big(+x.amount)
           .div(Big(10).pow(asset?.denom_units[1].exponent))
           .toFixed(asset?.denom_units[1].exponent);
