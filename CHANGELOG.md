@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.52](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.51...v2.3.0-coreum.52) (2025-04-29)
+
+
+### Bug Fixes
+
+* update handle of exponent for ibc tokens ([6aa1fd6](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/6aa1fd61c32cfbf34d6342ea159deba358f797d8))
+
 ## [2.3.0-coreum.51](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.50...v2.3.0-coreum.51) (2025-04-28)
 
 
