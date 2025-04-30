@@ -29,6 +29,7 @@ type BlockItemProps = {
 const BlockItem: FC<BlockItemProps> = ({ item, rowIndex, column, style, align }) => {
   const { name, address, imageUrl } = useProfileRecoil(item.proposer);
   const { classes, cx } = useStyles();
+
   let formattedItem: ReactNode | null = null;
 
   switch (column) {
@@ -47,7 +48,12 @@ const BlockItem: FC<BlockItemProps> = ({ item, rowIndex, column, style, align })
       break;
     case 'proposer':
       formattedItem = (
-        <AvatarName address={address} imageUrl={imageUrl} name={name} className={classes.avatar} />
+        <AvatarName
+          address={address}
+          imageUrl={imageUrl}
+          name={item.moniker || name}
+          className={classes.avatar}
+        />
       );
       break;
     case 'hash':

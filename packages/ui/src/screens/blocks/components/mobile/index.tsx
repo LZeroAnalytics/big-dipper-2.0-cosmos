@@ -41,7 +41,7 @@ const ListItem: FC<ListItemProps> = ({
     ),
     txs: numeral(item.txs).format('0,0'),
     time: <Timestamp timestamp={item.timestamp} />,
-    proposer: <AvatarName address={address} imageUrl={imageUrl} name={name} />,
+    proposer: <AvatarName address={address} imageUrl={imageUrl} name={item.moniker || name} />,
     hash: getMiddleEllipsis(item.hash, {
       beginning: 13,
       ending: 10,

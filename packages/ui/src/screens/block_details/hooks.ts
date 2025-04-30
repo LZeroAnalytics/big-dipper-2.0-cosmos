@@ -19,6 +19,7 @@ export const useBlockDetails = () => {
       txs: 0,
       timestamp: '',
       proposer: '',
+      moniker: '',
     },
     signatures: [],
     transactions: [],
@@ -66,12 +67,15 @@ export const useBlockDetails = () => {
 // ==========================
 const formatOverview = (data: BlockDetailsQuery) => {
   const proposerAddress = data?.block?.[0]?.validator?.validatorInfo?.operatorAddress ?? '';
+  const moniker = data?.block?.[0]?.validator?.validatorDescriptions?.[0]?.moniker ?? '';
+
   const overview = {
     height: data.block[0].height,
     hash: data.block[0].hash,
     txs: data.block[0].txs ?? 0,
     timestamp: data.block[0].timestamp,
     proposer: proposerAddress,
+    moniker,
   };
   return overview;
 };
@@ -82,7 +86,10 @@ const formatOverview = (data: BlockDetailsQuery) => {
 const formatSignatures = (data: BlockDetailsQuery) => {
   const signatures = data.preCommits
     .filter((x) => x?.validator?.validatorInfo)
-    .map((x) => x?.validator?.validatorInfo?.operatorAddress ?? '');
+    .map((x) => ({
+      address: x?.validator?.validatorInfo?.operatorAddress ?? '',
+      moniker: x?.validator?.validatorDescriptions?.[0]?.moniker ?? '',
+    }));
   return signatures;
 };
 

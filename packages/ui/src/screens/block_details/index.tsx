@@ -47,6 +47,7 @@ const BlockDetails = () => {
               proposer={overview.proposer}
               timestamp={overview.timestamp}
               txs={overview.txs}
+              moniker={overview.moniker}
             />
             <Signatures className={classes.signatures} signatures={signatures} />
             <Transactions transactions={transactions} />

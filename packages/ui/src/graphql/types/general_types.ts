@@ -11708,7 +11708,61 @@ export type BlockDetailsQueryVariables = Exact<{
 }>;
 
 
-export type BlockDetailsQuery = { transaction: Array<{ __typename?: 'transaction', fee: any, height: any, hash: string, messages: any, success: boolean, logs?: any | null }>, block: Array<{ __typename?: 'block', height: any, hash: string, timestamp: any, txs?: number | null, validator?: { __typename?: 'validator', validatorInfo?: { __typename?: 'validator_info', operatorAddress: string } | null } | null }>, preCommitsAggregate: { __typename?: 'pre_commit_aggregate', aggregate?: { __typename?: 'pre_commit_aggregate_fields', sum?: { __typename?: 'pre_commit_sum_fields', votingPower?: any | null } | null } | null }, preCommits: Array<{ __typename?: 'pre_commit', validator: { __typename?: 'validator', validatorInfo?: { __typename?: 'validator_info', operatorAddress: string } | null } }> };
+export type BlockDetailsQuery = {
+  transaction: Array<{
+    __typename?: 'transaction',
+    fee: any,
+    height: any,
+    hash: string,
+    messages: any,
+    success: boolean,
+    logs?: any | null,
+  }>,
+  block: Array<{
+    __typename?: 'block',
+    height: any,
+    hash: string,
+    timestamp: any,
+    txs?: number | null,
+    validator?: {
+      __typename?: 'validator',
+      validatorInfo?: {
+        __typename?: 'validator_info',
+        operatorAddress: string,
+      } | null,
+      validatorDescriptions: Array<{
+        __typename?: 'validator_description',
+        moniker?: string | null,
+        identity?: string | null,
+      }>,
+    } | null,
+  }>,
+  preCommitsAggregate: {
+    __typename?: 'pre_commit_aggregate',
+    aggregate?: {
+      __typename?: 'pre_commit_aggregate_fields',
+      sum?: {
+        __typename?: 'pre_commit_sum_fields',
+        votingPower?: any | null,
+      } | null,
+    } | null,
+  },
+  preCommits: Array<{
+    __typename?: 'pre_commit',
+    validator: {
+      __typename?: 'validator',
+      validatorInfo?: {
+        __typename?: 'validator_info',
+        operatorAddress: string,
+      } | null,
+      validatorDescriptions: Array<{
+        __typename?: 'validator_description',
+        moniker?: string | null,
+        identity?: string | null,
+      }>,
+    },
+  }>,
+};
 
 export type LatestBlockHeightListenerSubscriptionVariables = Exact<{
   offset?: InputMaybe<Scalars['Int']>;
@@ -11735,7 +11789,27 @@ export type BlocksListenerSubscriptionVariables = Exact<{
 }>;
 
 
-export type BlocksListenerSubscription = { blocks: Array<{ __typename?: 'block', height: any, hash: string, timestamp: any, txs?: number | null, validator?: { __typename?: 'validator', validatorInfo?: { __typename?: 'validator_info', operatorAddress: string } | null } | null }> };
+export type BlocksListenerSubscription = {
+  blocks: Array<{
+    __typename?: 'block',
+    height: any,
+    hash: string,
+    timestamp: any,
+    txs?: number | null,
+    validator?: {
+      __typename?: 'validator',
+      validatorInfo?: {
+        __typename?: 'validator_info',
+        operatorAddress: string,
+      } | null,
+      validatorDescriptions: Array<{
+        __typename?: 'validator_description',
+        moniker?: string | null,
+        identity?: string | null,
+      }>,
+    } | null
+  }>
+};
 
 export type BlocksQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
@@ -11743,7 +11817,28 @@ export type BlocksQueryVariables = Exact<{
 }>;
 
 
-export type BlocksQuery = { blocks: Array<{ __typename?: 'block', height: any, hash: string, timestamp: any, txs?: number | null, validator?: { __typename?: 'validator', validatorInfo?: { __typename?: 'validator_info', self_delegate_address?: string | null, operatorAddress: string } | null, validatorDescriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, identity?: string | null }> } | null }> };
+export type BlocksQuery = {
+  blocks: Array<{
+    __typename?: 'block',
+    height: any,
+    hash: string,
+    timestamp: any,
+    txs?: number | null,
+    validator?: {
+      __typename?: 'validator',
+      validatorInfo?: {
+        __typename?: 'validator_info',
+        self_delegate_address?: string | null,
+        operatorAddress: string,
+      } | null,
+      validatorDescriptions: Array<{
+        __typename?: 'validator_description',
+        moniker?: string | null,
+        identity?: string | null,
+      }>
+    } | null
+  }>
+};
 
 export type ChainIdQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -12393,44 +12488,57 @@ export type ActiveValidatorCountQueryHookResult = ReturnType<typeof useActiveVal
 export type ActiveValidatorCountLazyQueryHookResult = ReturnType<typeof useActiveValidatorCountLazyQuery>;
 export type ActiveValidatorCountQueryResult = Apollo.QueryResult<ActiveValidatorCountQuery, ActiveValidatorCountQueryVariables>;
 export const BlockDetailsDocument = gql`
-    query BlockDetails($height: bigint, $signatureHeight: bigint) {
-  transaction(where: {height: {_eq: $height}}) {
-    height
-    hash
-    messages
-    success
-    logs
-    fee
-  }
-  block(limit: 1, where: {height: {_eq: $height}}) {
-    height
-    hash
-    timestamp
-    txs: num_txs
-    validator {
-      validatorInfo: validator_info {
-        operatorAddress: operator_address
+  query BlockDetails($height: bigint, $signatureHeight: bigint) {
+    transaction(where: {height: {_eq: $height}}) {
+      height
+      hash
+      messages
+      success
+      logs
+      fee
+    }
+    block(limit: 1, where: {height: {_eq: $height}}) {
+      height
+      hash
+      timestamp
+      txs: num_txs
+      validator {
+        validatorInfo: validator_info {
+          operatorAddress: operator_address
+        }
+        validatorDescriptions: validator_descriptions(
+          limit: 1
+          order_by: {height: desc}
+        ) {
+          moniker
+        }
+      }
+    }
+    preCommitsAggregate: pre_commit_aggregate(
+      where: {height: {_eq: $signatureHeight}}
+    ) {
+      aggregate {
+        sum {
+          votingPower: voting_power
+        }
+      }
+    }
+    preCommits: pre_commit(where: {height: {_eq: $signatureHeight}}) {
+      validator {
+        validatorInfo: validator_info {
+          operatorAddress: operator_address
+        }
+        validatorDescriptions: validator_descriptions(
+          limit: 1
+          order_by: {height: desc}
+        ) {
+          moniker
+          identity
+        }
       }
     }
   }
-  preCommitsAggregate: pre_commit_aggregate(
-    where: {height: {_eq: $signatureHeight}}
-  ) {
-    aggregate {
-      sum {
-        votingPower: voting_power
-      }
-    }
-  }
-  preCommits: pre_commit(where: {height: {_eq: $signatureHeight}}) {
-    validator {
-      validatorInfo: validator_info {
-        operatorAddress: operator_address
-      }
-    }
-  }
-}
-    `;
+`;
 
 /**
  * __useBlockDetailsQuery__
@@ -12573,6 +12681,13 @@ export const BlocksListenerDocument = gql`
       validatorInfo: validator_info {
         operatorAddress: operator_address
       }
+      validatorDescriptions: validator_descriptions(
+        limit: 1
+        order_by: {height: desc}
+      ) {
+        moniker
+        identity
+      }
     }
   }
 }
@@ -12602,28 +12717,28 @@ export function useBlocksListenerSubscription(baseOptions?: Apollo.SubscriptionH
 export type BlocksListenerSubscriptionHookResult = ReturnType<typeof useBlocksListenerSubscription>;
 export type BlocksListenerSubscriptionResult = Apollo.SubscriptionResult<BlocksListenerSubscription>;
 export const BlocksDocument = gql`
-    query Blocks($limit: Int = 7, $offset: Int = 0) {
-  blocks: block(limit: $limit, offset: $offset, order_by: {height: desc}) {
-    height
-    txs: num_txs
-    hash
-    timestamp
-    validator {
-      validatorInfo: validator_info {
-        operatorAddress: operator_address
-        self_delegate_address
-      }
-      validatorDescriptions: validator_descriptions(
-        limit: 1
-        order_by: {height: desc}
-      ) {
-        moniker
-        identity
+  query Blocks($limit: Int = 7, $offset: Int = 0) {
+    blocks: block(limit: $limit, offset: $offset, order_by: {height: desc}) {
+      height
+      txs: num_txs
+      hash
+      timestamp
+      validator {
+        validatorInfo: validator_info {
+          operatorAddress: operator_address
+          self_delegate_address
+        }
+        validatorDescriptions: validator_descriptions(
+          limit: 1
+          order_by: {height: desc}
+        ) {
+          moniker
+          identity
+        }
       }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useBlocksQuery__

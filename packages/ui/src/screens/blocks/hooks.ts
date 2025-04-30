@@ -20,6 +20,7 @@ const uniqueAndSort = R.pipe(
 
 const formatBlocks = (data: BlocksListenerSubscription): BlockType[] => {
   let formattedData = data.blocks;
+
   if (data.blocks.length === 51) {
     formattedData = data.blocks.slice(0, 51);
   }
@@ -32,6 +33,7 @@ const formatBlocks = (data: BlocksListenerSubscription): BlockType[] => {
         hash: x.hash,
         timestamp: x.timestamp,
         proposer: proposerAddress,
+        moniker: x.validator?.validatorDescriptions?.[0]?.moniker || undefined,
       };
     }) ?? []
   );
@@ -86,6 +88,7 @@ export const useBlocks = () => {
     onCompleted: (data) => {
       const itemsLength = data.blocks.length;
       const newItems = uniqueAndSort([...state.items, ...formatBlocks(data)]);
+
       handleSetState((prevState) => ({
         ...prevState,
         loading: false,

@@ -4,6 +4,7 @@ export interface BlockType {
   timestamp: string;
   proposer: string;
   hash: string;
+  moniker?: string;
 }
 
 export interface BlocksState {

@@ -13,12 +13,13 @@ export const columns: {
   },
 ];
 
-const FormatRow: FC<{ rowAddress: string }> = ({ rowAddress }) => {
+const FormatRow: FC<{ rowAddress: string; moniker: string }> = ({ rowAddress, moniker }) => {
   const { name, address, imageUrl } = useProfileRecoil(rowAddress);
-  return <AvatarName address={address} imageUrl={imageUrl} name={name} />;
+
+  return <AvatarName address={address} imageUrl={imageUrl} name={moniker || name} />;
 };
 
-export const formatRows = (data: string[]) =>
+export const formatRows = (data: { address: string; moniker: string }[]) =>
   data.map((x) => ({
-    validator: <FormatRow key={x} rowAddress={x} />,
+    validator: <FormatRow key={x.address} rowAddress={x.address} moniker={x.moniker} />,
   }));

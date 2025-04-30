@@ -35,7 +35,11 @@ const Overview: FC<OverviewType & ComponentDefault> = (props) => {
         </div>
         <div className={classes.item}>
           <div className="label">{t('proposer')}</div>
-          <AvatarName address={address} imageUrl={imageUrl} name={name} />
+          <AvatarName
+            address={address}
+            imageUrl={imageUrl}
+            name={props.moniker?.length ? props.moniker : name}
+          />
         </div>
         <div className={classes.item}>
           <div className="label">{t('txs')}</div>

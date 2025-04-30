@@ -11,7 +11,7 @@ import AvatarName from '@/components/avatar_name';
 
 type ListItemProps = Pick<ListChildComponentProps, 'index' | 'style'> & {
   setRowHeight: Parameters<typeof useListRow>[1];
-  signatures: string[] | undefined;
+  signatures: { address: string; moniker: string }[] | undefined;
 };
 
 const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, signatures }) => {
@@ -19,7 +19,8 @@ const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, signatures })
   const { classes } = useStyles();
   const { rowRef } = useListRow(index, setRowHeight);
   const selectedItem = signatures?.[index];
-  const { name, address, imageUrl } = useProfileRecoil(selectedItem ?? '');
+  const { name, address, imageUrl } = useProfileRecoil(selectedItem?.address ?? '');
+
   return (
     <div style={style}>
       <div ref={rowRef}>
@@ -29,7 +30,11 @@ const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, signatures })
             <Typography variant="h4" className="label">
               {t('validator')}
             </Typography>
-            <AvatarName address={address ?? ''} imageUrl={imageUrl} name={name ?? ''} />
+            <AvatarName
+              address={address ?? ''}
+              imageUrl={imageUrl}
+              name={selectedItem?.moniker || (name ?? '')}
+            />
           </div>
         </div>
         {/* single signature end */}
@@ -41,7 +46,7 @@ const ListItem: FC<ListItemProps> = ({ index, style, setRowHeight, signatures })
 
 type MobileProps = {
   className?: string;
-  signatures?: string[];
+  signatures?: { address: string; moniker: string }[];
 };
 
 const Mobile: FC<MobileProps> = ({ className, signatures }) => {

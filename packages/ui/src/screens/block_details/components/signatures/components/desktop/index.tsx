@@ -13,7 +13,7 @@ import { useGrid } from '@/hooks/use_react_window';
 
 type DesktopProps = {
   className?: string;
-  signatures: string[];
+  signatures: { address: string; moniker: string }[];
 };
 
 const Desktop: FC<DesktopProps> = ({ className, signatures }) => {

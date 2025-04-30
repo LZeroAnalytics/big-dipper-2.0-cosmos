@@ -9,7 +9,7 @@ import { useTranslation } from 'next-i18next';
 import { FC } from 'react';
 
 type SignaturesProps = ComponentDefault & {
-  signatures: string[];
+  signatures: { address: string; moniker: string }[];
 };
 
 const Signatures: FC<SignaturesProps> = ({ className, signatures }) => {

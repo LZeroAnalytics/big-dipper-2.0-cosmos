@@ -29,6 +29,7 @@ const LIMIT = 20;
 export const useDesmosProfile = (options: Options) => {
   const { addresses, skip } = options;
   const addressesMemo = useShallowMemo(addresses);
+
   const delegatorAddresses = useRecoilValue(readDelegatorAddresses(addressesMemo));
   const delegatorAddressesMemo = useShallowMemo(
     delegatorAddresses.map((a, i) => a || addresses[i])

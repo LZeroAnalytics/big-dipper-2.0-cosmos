@@ -4,6 +4,7 @@ export interface OverviewType {
   txs: number;
   timestamp: string;
   proposer: string;
+  moniker?: string;
   // votingPower: number;
 }
 
@@ -11,6 +12,6 @@ export interface BlockDetailState {
   loading: boolean;
   exists: boolean;
   overview: OverviewType;
-  signatures: string[];
+  signatures: { address: string; moniker: string }[];
   transactions: Transactions[];
 }

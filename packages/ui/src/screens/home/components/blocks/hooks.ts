@@ -15,6 +15,7 @@ const formatBlocks = (data: BlocksListenerSubscription) =>
       hash: x.hash,
       timestamp: x.timestamp,
       proposer: proposerAddress,
+      moniker: x.validator?.validatorDescriptions?.[0]?.moniker || undefined,
     };
   }) ?? [];
 
