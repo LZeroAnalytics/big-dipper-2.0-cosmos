@@ -51,7 +51,7 @@ const formatValidators = (data: ValidatorsQuery): Partial<ValidatorsState> => {
         jailed: x?.validatorStatuses?.[0]?.jailed ?? false,
         tombstoned: x?.validatorSigningInfos?.[0]?.tombstoned ?? false,
         overview: {
-          moniker: x.validatorDescriptions?.[0].moniker || undefined,
+          moniker: x.validatorDescriptions?.[0]?.moniker || undefined,
         },
       };
     });
