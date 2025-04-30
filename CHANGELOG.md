@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.53](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.52...v2.3.0-coreum.53) (2025-04-30)
+
+
+### Bug Fixes
+
+* update queries to use moniker values ([1c4af1d](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/1c4af1dd15b3c8c860d95c1a1aff4dc6aa6308f2))
+
 ## [2.3.0-coreum.52](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.51...v2.3.0-coreum.52) (2025-04-29)
 
 
