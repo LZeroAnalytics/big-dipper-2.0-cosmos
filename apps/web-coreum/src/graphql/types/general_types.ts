@@ -11927,7 +11927,44 @@ export type ValidatorsQueryVariables = Exact<{
 }>;
 
 
-export type ValidatorsQuery = { stakingPool: Array<{ __typename?: 'staking_pool', bondedTokens: any }>, validator: Array<{ __typename?: 'validator', validatorStatuses: Array<{ __typename?: 'validator_status', status: number, jailed: boolean, height: any }>, validatorSigningInfos: Array<{ __typename?: 'validator_signing_info', tombstoned: boolean, missedBlocksCounter: any }>, validatorInfo?: { __typename?: 'validator_info', operatorAddress: string, selfDelegateAddress?: string | null } | null, validatorVotingPowers: Array<{ __typename?: 'validator_voting_power', votingPower: any }>, validatorCommissions: Array<{ __typename?: 'validator_commission', commission: any }> }>, slashingParams: Array<{ __typename?: 'slashing_params', params: any }> };
+export type ValidatorsQuery = {
+  stakingPool: Array<{ __typename?: 'staking_pool', bondedTokens: any }>,
+  validator: Array<{
+    __typename?: 'validator',
+    validatorStatuses: Array<{
+      __typename?: 'validator_status',
+      status: number,
+      jailed: boolean,
+      height: any,
+    }>,
+    validatorSigningInfos: Array<{
+      __typename?: 'validator_signing_info',
+      tombstoned: boolean,
+      missedBlocksCounter: any,
+    }>,
+    validatorInfo?: {
+      __typename?: 'validator_info',
+      operatorAddress: string,
+      selfDelegateAddress?: string | null
+    } | null,
+    validatorVotingPowers: Array<{
+      __typename?: 'validator_voting_power',
+      votingPower: any,
+    }>,
+    validatorCommissions: Array<{
+      __typename?: 'validator_commission',
+      commission: any,
+    }>,
+    validatorDescriptions: Array<{
+      __typename?: 'validator_description',
+      moniker?: string | null,
+    }>,
+  }>,
+  slashingParams: Array<{
+    __typename?: 'slashing_params',
+    params: any,
+  }>
+};
 
 export type ValidatorsAddressListQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -13714,6 +13751,12 @@ export const ValidatorsDocument = gql`
         limit: 1
       ) {
         missedBlocksCounter: missed_blocks_counter
+      }
+      validatorDescriptions: validator_descriptions(
+        order_by: {height: desc}
+        limit: 1
+      ) {
+        moniker
       }
     }
     slashingParams: slashing_params(order_by: {height: desc}, limit: 1) {

@@ -16,9 +16,21 @@ const List: FC<ComponentDefault> = ({ className }) => {
   const display = useDisplayStyles().classes;
   const { state, handleTabChange, handleSort, sortItems, search } = useValidators();
   const validatorsMemo = useShallowMemo(state.items.map((x) => x.validator));
+
   const { profiles: dataProfiles, loading } = useProfilesRecoil(validatorsMemo);
+
   const items = useMemo(
-    () => sortItems(state.items.map((x, i) => ({ ...x, validator: dataProfiles?.[i] }))),
+    () =>
+      sortItems(
+        state.items.map((x, i) => ({
+          ...x,
+          validator: {
+            address: dataProfiles?.[i].address,
+            imageUrl: dataProfiles?.[i].imageUrl,
+            name: x.overview?.moniker || dataProfiles?.[i].name,
+          },
+        }))
+      ),
     [state.items, dataProfiles, sortItems]
   );
 
