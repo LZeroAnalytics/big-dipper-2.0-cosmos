@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.56](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.55...v2.3.0-coreum.56) (2025-05-01)
+
+
+### Features
+
+* add dex params for mainnet ([2c7ce34](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/2c7ce3449e3f7a2d1c6066f1be917c9d99782d67))
+
+
+### Bug Fixes
+
+* remove unused env ([1f32f09](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/1f32f09573f643a0a83e5c39a7ae250c0d07e2cc))
+* update exponent handle in the transactions bridge history ([eb09e82](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/eb09e82cad6dcdc4f472414e744722a62f83a4e3))
+
 ## [2.3.0-coreum.55](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.54...v2.3.0-coreum.55) (2025-04-30)
 
 
