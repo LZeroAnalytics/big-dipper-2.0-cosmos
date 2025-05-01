@@ -18,7 +18,7 @@ import { formatToken } from '@/utils/format_token';
 import AuthParams from '@/models/auth_params';
 import DexParams from '@/models/dex_params';
 
-const { primaryTokenUnit, chainType } = chainConfig();
+const { primaryTokenUnit } = chainConfig();
 
 const initialState: ParamsState = {
   loading: true,
