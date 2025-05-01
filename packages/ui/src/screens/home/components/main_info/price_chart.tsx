@@ -109,9 +109,10 @@ const PriceChart: React.FC = () => {
   useEffect(() => {
     const handle = () => {
       const container: any = document.getElementById('price-chart');
+
       const dimensions = {
-        width: container.clientWidth * (container.clientWidth > 767 ? 0.5 : 0.9),
-        height: container.clientHeight,
+        width: (container?.clientWidth || 300) * (container?.clientWidth > 767 ? 0.5 : 0.9),
+        height: container?.clientHeight || 250,
       };
       chartRef.current?.applyOptions(dimensions);
     };

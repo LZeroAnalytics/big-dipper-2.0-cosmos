@@ -168,7 +168,7 @@ const Desktop: FC<TransactionsListBridgeState> = ({
 
     let amount = formatToken(x.coin.amount, denom).value;
 
-    if (asset?.denom_units[1].exponent) {
+    if (asset?.denom_units[1]?.exponent) {
       const availableValue = new Big(+x.coin.amount)
         .div(Big(10).pow(asset?.denom_units[1].exponent))
         .toFixed();
