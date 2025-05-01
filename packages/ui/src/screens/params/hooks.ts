@@ -258,12 +258,10 @@ export const useParams = () => {
     });
   }, []);
 
-  const isDexParams = chainType.toLowerCase() !== 'mainnet';
-
   // ================================
   // param query
   // ================================
-  useParamsQuery(isDexParams, {
+  useParamsQuery({
     onCompleted: (data) => {
       handleSetState((prevState) => ({
         ...prevState,
