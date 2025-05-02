@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.57](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.56...v2.3.0-coreum.57) (2025-05-02)
+
+
+### Bug Fixes
+
+* update useParamsQuery hooks ([b9b4b86](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/b9b4b86f948e9e3cb9e7839a7a67701faaf537a4))
+
 ## [2.3.0-coreum.56](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.55...v2.3.0-coreum.56) (2025-05-01)
 
 
