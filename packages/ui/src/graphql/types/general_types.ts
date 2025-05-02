@@ -13002,7 +13002,7 @@ export function useParamsQuery(baseOptions?: Apollo.QueryHookOptions<ParamsQuery
 
   return Apollo.useQuery<ParamsQuery, ParamsQueryVariables>(ParamsDocument, options);
 }
-export function useParamsLazyQuery(isDexParams: boolean, baseOptions?: Apollo.LazyQueryHookOptions<ParamsQuery, ParamsQueryVariables>) {
+export function useParamsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ParamsQuery, ParamsQueryVariables>) {
   const options = {...defaultOptions, ...baseOptions};
 
   return Apollo.useLazyQuery<ParamsQuery, ParamsQueryVariables>(ParamsDocument, options);
