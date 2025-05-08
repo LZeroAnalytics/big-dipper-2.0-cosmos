@@ -13,7 +13,6 @@ import {
   useAccountRiskActivity,
   useAccountWithdrawalAddress,
   useAvailableBalances,
-  useCommission,
   useDelegationBalance,
   useRewards,
   useUnbondingBalance,
@@ -52,7 +51,6 @@ const initialState: AccountDetailState = {
     delegate: defaultTokenUnit,
     unbonding: defaultTokenUnit,
     reward: defaultTokenUnit,
-    commission: defaultTokenUnit,
     total: defaultTokenUnit,
   },
   assetsList: [],
@@ -69,7 +67,6 @@ type Data = {
   accountBalances?: ReturnType<typeof useAvailableBalances>['accountBalances'];
   delegationBalance?: ReturnType<typeof useDelegationBalance>['delegationBalance'];
   unbondingBalance?: ReturnType<typeof useUnbondingBalance>['unbondingBalance'];
-  commission?: ReturnType<typeof useCommission>['commission'];
 };
 
 // ============================
@@ -94,6 +91,7 @@ const formatRewards = (data: Data) => {
 const formatBalance = (data: Data): BalanceType => {
   const available = getDenom(R.pathOr([], ['accountBalances', 'coins'], data), primaryTokenUnit);
   const availableAmount = formatToken(available.amount, primaryTokenUnit);
+
   const delegate = getDenom(R.pathOr([], ['delegationBalance', 'coins'], data), primaryTokenUnit);
   const delegateAmount = formatToken(delegate.amount, primaryTokenUnit);
 
@@ -110,21 +108,10 @@ const formatBalance = (data: Data): BalanceType => {
     }, '0') ?? '0';
   const rewardsAmount = formatToken(rewards, primaryTokenUnit);
 
-  const commission = getDenom(
-    R.pathOr<NonNullable<NonNullable<(typeof data)['commission']>['coins']>>(
-      [],
-      ['commission', 'coins'],
-      data
-    ),
-    primaryTokenUnit
-  );
-  const commissionAmount = formatToken(commission.amount, primaryTokenUnit);
-
   const total = Big(availableAmount.value)
     .plus(delegateAmount.value)
     .plus(unbondingAmount.value)
     .plus(rewardsAmount.value)
-    .plus(commissionAmount.value)
     .toFixed(tokenUnits?.[primaryTokenUnit].exponent);
 
   const balance: BalanceType = {
@@ -132,7 +119,6 @@ const formatBalance = (data: Data): BalanceType => {
     delegate: delegateAmount,
     unbonding: unbondingAmount,
     reward: rewardsAmount,
-    commission: commissionAmount,
     total: {
       value: total,
       displayDenom: availableAmount.displayDenom,
@@ -167,13 +153,6 @@ const formatOtherTokens = (data: Data, assets: Asset[], metadatas: any[]) => {
     });
   });
 
-  // commission tokens
-  const commission = R.pathOr<MsgCoin[]>([], ['commission', 'coins'], data);
-
-  commission.forEach((x) => {
-    otherTokenUnits.add(x.denom);
-  });
-
   // remove the primary token unit thats being shown in balance
   otherTokenUnits.delete(primaryTokenUnit);
 
@@ -186,8 +165,6 @@ const formatOtherTokens = (data: Data, assets: Asset[], metadatas: any[]) => {
       return Big(a).plus(denom.amount).toPrecision();
     }, '0');
     const rewardAmount = formatToken(rewardsRawAmount, x);
-    const commissionRawAmount = getDenom(commission, x);
-    const commissionAmount = formatToken(commissionRawAmount.amount, x);
 
     const asset = assets.find(
       (assetItem: Asset) => assetItem.denom.toLowerCase() === x.toLowerCase()
@@ -218,7 +195,6 @@ const formatOtherTokens = (data: Data, assets: Asset[], metadatas: any[]) => {
       denom: tokenUnits?.[x]?.display ?? x,
       available: availableAmount,
       reward: rewardAmount,
-      commission: commissionAmount,
       ...((asset || assetInMetadata) && {
         displayName: display,
         logoURL: asset?.logo_URIs.svg || asset?.logo_URIs.png || '',
@@ -302,7 +278,6 @@ export const useAccountDetails = () => {
     [dataDesmosProfile, loadingDesmosProfile]
   );
 
-  const commission = useCommission(address);
   const available = useAvailableBalances(address);
   const delegation = useDelegationBalance(address);
   const unbonding = useUnbondingBalance(address);
@@ -362,13 +337,11 @@ export const useAccountDetails = () => {
 
   useEffect(() => {
     const formattedRawData: {
-      commission?: (typeof commission)['commission'];
       accountBalances?: (typeof available)['accountBalances'];
       delegationBalance?: (typeof delegation)['delegationBalance'];
       unbondingBalance?: (typeof unbonding)['unbondingBalance'];
       delegationRewards?: (typeof rewards)['delegationRewards'];
     } = {};
-    formattedRawData.commission = R.pathOr({ coins: [] }, ['commission'], commission);
     formattedRawData.accountBalances = R.pathOr({ coins: [] }, ['accountBalances'], available);
     formattedRawData.delegationBalance = R.pathOr({ coins: [] }, ['delegationBalance'], delegation);
     formattedRawData.unbondingBalance = R.pathOr({ coins: [] }, ['unbondingBalance'], unbonding);
@@ -379,7 +352,6 @@ export const useAccountDetails = () => {
       ...formatAllBalance(formattedRawData, state.assetsList, state.metadatas),
     }));
   }, [
-    commission,
     available,
     delegation,
     unbonding,

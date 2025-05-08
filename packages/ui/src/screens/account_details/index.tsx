@@ -99,7 +99,6 @@ export default function AccountDetails() {
                 delegate={state.balance.delegate}
                 unbonding={state.balance.unbonding}
                 reward={state.balance.reward}
-                commission={state.balance.commission}
                 total={state.balance.total}
               />
             </div>
