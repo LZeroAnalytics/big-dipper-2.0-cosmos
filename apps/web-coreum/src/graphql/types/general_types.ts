@@ -11735,6 +11735,7 @@ export type BlockDetailsQuery = {
         __typename?: 'validator_description',
         moniker?: string | null,
         identity?: string | null,
+        avatarUrl?: string | null,
       }>,
     } | null,
   }>,
@@ -11760,6 +11761,7 @@ export type BlockDetailsQuery = {
         __typename?: 'validator_description',
         moniker?: string | null,
         identity?: string | null,
+        avatarUrl?: string | null,
       }>,
     },
   }>,
@@ -11807,6 +11809,7 @@ export type BlocksListenerSubscription = {
         __typename?: 'validator_description',
         moniker?: string | null,
         identity?: string | null,
+        avatarUrl?: string | null,
       }>,
     } | null
   }>
@@ -11836,6 +11839,7 @@ export type BlocksQuery = {
         __typename?: 'validator_description',
         moniker?: string | null,
         identity?: string | null,
+        avatarUrl?: string | null,
       }>
     } | null
   }>
@@ -11984,7 +11988,7 @@ export type ValidatorDetailsQueryVariables = Exact<{
 }>;
 
 
-export type ValidatorDetailsQuery = { stakingPool: Array<{ __typename?: 'staking_pool', height: any, bonded: any }>, validator: Array<{ __typename?: 'validator', validatorDescriptions: Array<{ __typename?: 'validator_description', details?: string | null, website?: string | null, moniker?: string | null }>, validatorStatuses: Array<{ __typename?: 'validator_status', status: number, jailed: boolean, height: any }>, validatorSigningInfos: Array<{ __typename?: 'validator_signing_info', tombstoned: boolean, missedBlocksCounter: any }>, validatorInfo?: { __typename?: 'validator_info', operatorAddress: string, selfDelegateAddress?: string | null, maxRate: string } | null, validatorCommissions: Array<{ __typename?: 'validator_commission', commission: any }>, validatorVotingPowers: Array<{ __typename?: 'validator_voting_power', height: any, votingPower: any }> }>, slashingParams: Array<{ __typename?: 'slashing_params', params: any }> };
+export type ValidatorDetailsQuery = { stakingPool: Array<{ __typename?: 'staking_pool', height: any, bonded: any }>, validator: Array<{ __typename?: 'validator', validatorDescriptions: Array<{ __typename?: 'validator_description', details?: string | null, website?: string | null, moniker?: string | null, avatarUrl?: string | null }>, validatorStatuses: Array<{ __typename?: 'validator_status', status: number, jailed: boolean, height: any }>, validatorSigningInfos: Array<{ __typename?: 'validator_signing_info', tombstoned: boolean, missedBlocksCounter: any }>, validatorInfo?: { __typename?: 'validator_info', operatorAddress: string, selfDelegateAddress?: string | null, maxRate: string } | null, validatorCommissions: Array<{ __typename?: 'validator_commission', commission: any }>, validatorVotingPowers: Array<{ __typename?: 'validator_voting_power', height: any, votingPower: any }> }>, slashingParams: Array<{ __typename?: 'slashing_params', params: any }> };
 
 export type ValidatorDelegationsQueryVariables = Exact<{
   validatorAddress: Scalars['String'];
@@ -12053,6 +12057,7 @@ export type ValidatorsQuery = {
     validatorDescriptions: Array<{
       __typename?: 'validator_description',
       moniker?: string | null,
+      avatarUrl?: string | null,
     }>,
   }>,
   slashingParams: Array<{
@@ -12509,6 +12514,7 @@ export const BlockDetailsDocument = gql`
         order_by: {height: desc}
       ) {
         moniker
+        avatarUrl: avatar_url
       }
     }
   }
@@ -12532,6 +12538,7 @@ export const BlockDetailsDocument = gql`
       ) {
         moniker
         identity
+        avatarUrl: avatar_url
       }
     }
   }
@@ -12685,6 +12692,7 @@ export const BlocksListenerDocument = gql`
       ) {
         moniker
         identity
+        avatarUrl: avatar_url
       }
     }
   }
@@ -12732,6 +12740,7 @@ export const BlocksDocument = gql`
         ) {
           moniker
           identity
+          avatarUrl: avatar_url
         }
       }
     }
@@ -13595,6 +13604,7 @@ export const ValidatorDetailsDocument = gql`
       moniker
       details
       website
+      avatarUrl: avatar_url
     }
     validatorStatuses: validator_statuses(order_by: {height: desc}, limit: 1) {
       status
@@ -13836,6 +13846,7 @@ export const ValidatorsDocument = gql`
         limit: 1
       ) {
         moniker
+        avatarUrl: avatar_url
       }
     }
     slashingParams: slashing_params(order_by: {height: desc}, limit: 1) {

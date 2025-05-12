@@ -50,7 +50,7 @@ const BlockItem: FC<BlockItemProps> = ({ item, rowIndex, column, style, align })
       formattedItem = (
         <AvatarName
           address={address}
-          imageUrl={imageUrl}
+          imageUrl={item.avatarUrl ?? imageUrl}
           name={item.moniker || name}
           className={classes.avatar}
         />

@@ -5,6 +5,7 @@ export interface OverviewType {
   description: string;
   website: string;
   moniker?: string;
+  avatarURL?: string;
 }
 
 export interface StatusType {

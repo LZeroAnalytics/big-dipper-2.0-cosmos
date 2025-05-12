@@ -10,6 +10,7 @@ export interface ValidatorType {
   topVotingPower?: boolean; // top 34% VP
   overview?: {
     moniker?: string;
+    avatarUrl?: string;
   };
 }
 

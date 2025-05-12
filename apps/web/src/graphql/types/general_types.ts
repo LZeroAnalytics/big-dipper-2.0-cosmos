@@ -12811,6 +12811,7 @@ export const BlocksDocument = gql`
       ) {
         moniker
         identity
+        avatarUrl: avatar_url
       }
     }
   }

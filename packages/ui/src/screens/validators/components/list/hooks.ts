@@ -52,6 +52,7 @@ const formatValidators = (data: ValidatorsQuery): Partial<ValidatorsState> => {
         tombstoned: x?.validatorSigningInfos?.[0]?.tombstoned ?? false,
         overview: {
           moniker: x.validatorDescriptions?.[0]?.moniker || undefined,
+          avatarUrl: x.validatorDescriptions?.[0]?.avatarUrl || undefined,
         },
       };
     });

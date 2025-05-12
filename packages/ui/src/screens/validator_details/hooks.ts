@@ -51,6 +51,9 @@ const initialState: ValidatorDetailsState = {
 const formatOverview = (data: ValidatorDetailsQuery) => {
   const operatorAddress = data?.validator?.[0]?.validatorInfo?.operatorAddress ?? '';
   const selfDelegateAddress = data?.validator?.[0]?.validatorInfo?.selfDelegateAddress ?? '';
+
+  console.log(data.validator);
+
   const profile = {
     validator: operatorAddress,
     operatorAddress,
@@ -58,6 +61,7 @@ const formatOverview = (data: ValidatorDetailsQuery) => {
     description: data.validator[0]?.validatorDescriptions?.[0]?.details ?? '',
     website: data.validator[0]?.validatorDescriptions?.[0]?.website ?? '',
     moniker: data.validator[0]?.validatorDescriptions?.[0]?.moniker ?? '',
+    avatarUrl: data.validator[0]?.validatorDescriptions?.[0]?.avatarUrl ?? '',
   };
 
   return profile;

@@ -5,6 +5,7 @@ export interface BlockType {
   proposer: string;
   hash: string;
   moniker?: string;
+  avatarUrl?: string;
 }
 
 export interface BlocksState {

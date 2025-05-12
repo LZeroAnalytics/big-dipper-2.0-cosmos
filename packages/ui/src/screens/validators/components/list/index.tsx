@@ -26,7 +26,7 @@ const List: FC<ComponentDefault> = ({ className }) => {
           ...x,
           validator: {
             address: dataProfiles?.[i].address,
-            imageUrl: dataProfiles?.[i].imageUrl,
+            imageUrl: x.overview?.avatarUrl || dataProfiles?.[i].imageUrl,
             name: x.overview?.moniker || dataProfiles?.[i].name,
           },
         }))

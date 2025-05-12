@@ -42,7 +42,13 @@ const BlockRow: FC<BlockRowProps> = ({ item }) => {
     ),
     txs: numeral(item.txs).format('0,0'),
     time: <Timestamp timestamp={item.timestamp} />,
-    proposer: <AvatarName address={address} imageUrl={imageUrl} name={item.moniker || name} />,
+    proposer: (
+      <AvatarName
+        address={address}
+        imageUrl={item.avatarUrl ?? imageUrl}
+        name={item.moniker || name}
+      />
+    ),
     hash: getMiddleEllipsis(item.hash, {
       beginning: 6,
       ending: 5,
