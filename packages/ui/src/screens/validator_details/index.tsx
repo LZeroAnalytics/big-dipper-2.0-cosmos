@@ -70,7 +70,7 @@ const ValidatorDetails = () => {
                 <div className={classes.bio}>
                   <Avatar
                     address={overview.operatorAddress}
-                    imageUrl={state.overview.avatarURL ?? imageUrl ?? undefined}
+                    imageUrl={overview.avatarUrl ?? imageUrl ?? undefined}
                     className={cx(classes.avatar, display.hiddenUntilLg)}
                   />
                   <div>

@@ -52,8 +52,6 @@ const formatOverview = (data: ValidatorDetailsQuery) => {
   const operatorAddress = data?.validator?.[0]?.validatorInfo?.operatorAddress ?? '';
   const selfDelegateAddress = data?.validator?.[0]?.validatorInfo?.selfDelegateAddress ?? '';
 
-  console.log(data.validator);
-
   const profile = {
     validator: operatorAddress,
     operatorAddress,

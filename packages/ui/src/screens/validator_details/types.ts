@@ -5,7 +5,7 @@ export interface OverviewType {
   description: string;
   website: string;
   moniker?: string;
-  avatarURL?: string;
+  avatarUrl?: string;
 }
 
 export interface StatusType {
