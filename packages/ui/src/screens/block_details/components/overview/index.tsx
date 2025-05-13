@@ -37,7 +37,7 @@ const Overview: FC<OverviewType & ComponentDefault> = (props) => {
           <div className="label">{t('proposer')}</div>
           <AvatarName
             address={address}
-            imageUrl={imageUrl}
+            imageUrl={props.avatarUrl ?? imageUrl}
             name={props.moniker?.length ? props.moniker : name}
           />
         </div>

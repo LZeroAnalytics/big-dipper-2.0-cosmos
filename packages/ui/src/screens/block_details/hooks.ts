@@ -68,6 +68,7 @@ export const useBlockDetails = () => {
 const formatOverview = (data: BlockDetailsQuery) => {
   const proposerAddress = data?.block?.[0]?.validator?.validatorInfo?.operatorAddress ?? '';
   const moniker = data?.block?.[0]?.validator?.validatorDescriptions?.[0]?.moniker ?? '';
+  const avatarUrl = data?.block?.[0]?.validator?.validatorDescriptions?.[0]?.avatarUrl ?? '';
 
   const overview = {
     height: data.block[0].height,
@@ -76,6 +77,7 @@ const formatOverview = (data: BlockDetailsQuery) => {
     timestamp: data.block[0].timestamp,
     proposer: proposerAddress,
     moniker,
+    avatarUrl,
   };
   return overview;
 };

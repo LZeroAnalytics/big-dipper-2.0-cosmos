@@ -5,6 +5,7 @@ export interface OverviewType {
   timestamp: string;
   proposer: string;
   moniker?: string;
+  avatarUrl?: string;
   // votingPower: number;
 }
 
