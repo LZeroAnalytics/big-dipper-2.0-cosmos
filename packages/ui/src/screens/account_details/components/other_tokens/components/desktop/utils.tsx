@@ -17,9 +17,4 @@ export const columns: {
     width: 10,
     align: 'right',
   },
-  // {
-  //   key: 'commission',
-  //   width: 25,
-  //   align: 'right',
-  // },
 ];

@@ -17,6 +17,7 @@ type MobileProps = {
 const Mobile: FC<MobileProps> = ({ className, items }) => {
   const { classes } = useStyles();
   const { t } = useTranslation('accounts');
+
   return (
     <div className={className}>
       {items?.map((x, i) => {

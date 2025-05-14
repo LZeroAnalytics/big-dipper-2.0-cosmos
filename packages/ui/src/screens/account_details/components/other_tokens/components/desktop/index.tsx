@@ -51,9 +51,8 @@ const Desktop: FC<DesktopProps> = ({ className, items }) => {
     return {
       key: i,
       token: x.denom,
-      commission: formatNumber(x.commission.value, x.commission.exponent),
       available,
-      reward: x.reward ? formatNumber(x.reward.value, x.reward.exponent) : '',
+      reward: x.reward ? formatNumber(x.reward?.value, x.reward?.exponent) : '',
       ...(x.logoURL && { logo: x.logoURL }),
       ...(x.displayName && { displayName: x.displayName }),
       ...(x.chain && { chain: x.chain }),
