@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.61](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.60...v2.3.0-coreum.61) (2025-05-14)
+
+
+### Bug Fixes
+
+* remove commission definition for other tokens, because this data is unused ([141e9ed](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/141e9edd16f3eb468d4427fb013dafb6881471dc))
+
 ## [2.3.0-coreum.60](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.59...v2.3.0-coreum.60) (2025-05-13)
 
 
