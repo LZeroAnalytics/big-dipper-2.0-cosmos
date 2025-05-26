@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.63](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.62...v2.3.0-coreum.63) (2025-05-26)
+
+
+### Bug Fixes
+
+* update initial_load with memoization of theme value ([23730e2](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/23730e2b0a4b14f145fd9da1e9cb9b75dd4758ec))
+
 ## [2.3.0-coreum.62](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.61...v2.3.0-coreum.62) (2025-05-26)
 
 
