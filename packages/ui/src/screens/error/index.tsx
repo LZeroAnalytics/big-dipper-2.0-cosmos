@@ -5,6 +5,7 @@ import { Trans, useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { FC, useCallback } from 'react';
 import generalConfig from 'shared-utils/configs/general.json';
+import Image from 'next/image';
 
 const Error: FC = () => {
   const { classes } = useStyles();
@@ -16,8 +17,9 @@ const Error: FC = () => {
 
   return (
     <div className={classes.root}>
+      <Image src="/coreum/images/error.svg" alt="Error" width={240} height={240} />
       <div className="container">
-        <Typography variant="h2">{t('common:errorTitle')}</Typography>
+        <Typography variant="h3">{t('common:errorTitle')}</Typography>
         <Typography className="details">
           <Trans
             i18nKey="common:errorDetails"

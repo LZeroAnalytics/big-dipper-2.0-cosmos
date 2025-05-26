@@ -7,11 +7,12 @@ const ValidatorsPage: NextPage = () => <Validators />;
 
 export const getStaticProps = withGetStaticProps(
   nextI18NextConfig,
-  'validators',
-  'transactions',
   'accounts',
+  'common',
   'message_labels',
-  'message_contents'
+  'message_contents',
+  'transactions',
+  'validators'
 );
 
 export default ValidatorsPage;

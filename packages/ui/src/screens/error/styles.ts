@@ -8,14 +8,24 @@ const useStyles = makeStyles()((theme) => ({
     flexDirection: 'column',
     minHeight: '100vh',
     padding: theme.spacing(6),
-    '& .MuiTypography-h2': {
+
+    '& .MuiTypography-h3': {
       marginBottom: theme.spacing(2),
+      color: theme.palette.custom.tags.six,
     },
     '& .details': {
       marginBottom: theme.spacing(5),
+      color: theme.palette.custom.tags.six,
     },
     '& .container': {
-      maxWidth: '600px',
+      maxWidth: '460px',
+      width: '100%',
+
+      a: {
+        cursor: 'pointer',
+        color: theme.palette.custom.tags.two,
+        wordBreak: 'break-word',
+      },
     },
   },
 }));

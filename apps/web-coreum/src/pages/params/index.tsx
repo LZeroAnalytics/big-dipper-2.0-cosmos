@@ -5,6 +5,6 @@ import nextI18NextConfig from '../../../next-i18next.config';
 
 const ParamsPage: NextPage = () => <Params />;
 
-export const getStaticProps = withGetStaticProps(nextI18NextConfig, 'params');
+export const getStaticProps = withGetStaticProps(nextI18NextConfig, 'common', 'params');
 
 export default ParamsPage;

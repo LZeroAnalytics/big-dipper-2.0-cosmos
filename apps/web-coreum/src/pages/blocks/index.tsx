@@ -7,6 +7,7 @@ const BlocksPage: NextPage = () => <Blocks />;
 
 export const getStaticProps = withGetStaticProps(
   nextI18NextConfig,
+  'common',
   'blocks',
   'transactions',
   'message_labels',

@@ -7,6 +7,7 @@ const TransactionsPage: NextPage = () => <Transactions />;
 
 export const getStaticProps = withGetStaticProps(
   nextI18NextConfig,
+  'common',
   'transactions',
   'message_labels',
   'message_contents'

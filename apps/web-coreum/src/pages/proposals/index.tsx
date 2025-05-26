@@ -1,10 +1,10 @@
 import withGetStaticProps from '@/pages/withGetStaticProps';
-import Tokens from '@/screens/proposals';
+import Proposals from '@/screens/proposals';
 import type { NextPage } from 'next';
 import nextI18NextConfig from '../../../next-i18next.config';
 
-const TokensPage: NextPage = () => <Tokens />;
+const ProposalsPage: NextPage = () => <Proposals />;
 
-export const getStaticProps = withGetStaticProps(nextI18NextConfig, 'proposals');
+export const getStaticProps = withGetStaticProps(nextI18NextConfig, 'common', 'proposals');
 
-export default TokensPage;
+export default ProposalsPage;

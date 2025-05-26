@@ -9,6 +9,7 @@ export const getStaticPaths = () => ({ paths: [], fallback: 'blocking' });
 export const getStaticProps = withGetStaticProps(
   nextI18NextConfig,
   'assets',
+  'common',
   'message_labels',
   'message_contents'
 );

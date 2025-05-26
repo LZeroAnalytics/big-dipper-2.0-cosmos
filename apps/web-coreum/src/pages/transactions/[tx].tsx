@@ -8,6 +8,7 @@ const TransactionDetailsPage: NextPage = () => <TransactionDetails />;
 export const getStaticPaths = () => ({ paths: [], fallback: 'blocking' });
 export const getStaticProps = withGetStaticProps(
   nextI18NextConfig,
+  'common',
   'transactions',
   'message_labels',
   'message_contents'
