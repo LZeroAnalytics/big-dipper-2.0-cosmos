@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.62](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.61...v2.3.0-coreum.62) (2025-05-26)
+
+
+### Features
+
+* update error page ([f312d91](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/f312d914b1f4a59ba175d7ebfc6e081f2c7f56be))
+
+
+### Bug Fixes
+
+* update usage of logo for light theme in loading screen ([16ef177](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/16ef177be9f2fe2fdc008cb141352d33a4229893))
+
 ## [2.3.0-coreum.61](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.60...v2.3.0-coreum.61) (2025-05-14)
 
 
