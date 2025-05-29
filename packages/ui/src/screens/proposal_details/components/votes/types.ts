@@ -15,6 +15,10 @@ export interface VoteState {
   voteCount: VoteCount;
   validatorsNotVoted: VoteType[];
   tab: number;
+  proposalVote: any[];
+  validatorStatuses: any[];
+  dataLoading: boolean;
+  isAllDataLoaded: boolean;
 }
 
 export type ItemType = VoteType;

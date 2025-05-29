@@ -11912,6 +11912,8 @@ export type ProposalDetailsDepositsQuery = { proposalDeposit: Array<{ __typename
 
 export type ProposalDetailsVotesQueryVariables = Exact<{
   proposalId?: InputMaybe<Scalars['Int']>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
 }>;
 
 
@@ -13166,25 +13168,27 @@ export type ProposalDetailsDepositsQueryHookResult = ReturnType<typeof usePropos
 export type ProposalDetailsDepositsLazyQueryHookResult = ReturnType<typeof useProposalDetailsDepositsLazyQuery>;
 export type ProposalDetailsDepositsQueryResult = Apollo.QueryResult<ProposalDetailsDepositsQuery, ProposalDetailsDepositsQueryVariables>;
 export const ProposalDetailsVotesDocument = gql`
-    query ProposalDetailsVotes($proposalId: Int) {
-  proposalVote: proposal_vote(
-    where: {proposal_id: {_eq: $proposalId}}
-    order_by: {height: desc}
-  ) {
-    option
-    voterAddress: voter_address
-  }
-  validatorStatuses: proposal_validator_status_snapshot(
-    where: {proposal_id: {_eq: $proposalId}, status: {_eq: 3}}
-  ) {
-    validator {
-      validatorInfo: validator_info {
-        selfDelegateAddress: self_delegate_address
+  query ProposalDetailsVotes($proposalId: Int, $limit: Int = 100, $offset: Int = 0) {
+    proposalVote: proposal_vote(
+      where: {proposal_id: {_eq: $proposalId}}
+      order_by: {height: desc}
+      limit: $limit
+      offset: $offset
+    ) {
+      option
+      voterAddress: voter_address
+    }
+    validatorStatuses: proposal_validator_status_snapshot(
+      where: {proposal_id: {_eq: $proposalId}, status: {_eq: 3}}
+    ) {
+      validator {
+        validatorInfo: validator_info {
+          selfDelegateAddress: self_delegate_address
+        }
       }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useProposalDetailsVotesQuery__

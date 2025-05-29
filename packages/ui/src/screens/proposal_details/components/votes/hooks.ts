@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import * as R from 'ramda';
-import { SyntheticEvent, useCallback, useState } from 'react';
+import { SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import {
   ProposalDetailsVotesQuery,
   useProposalDetailsVotesQuery,
@@ -80,6 +80,10 @@ export const useVotes = (resetPagination: () => void) => {
       didNotVote: 0,
     },
     tab: 0,
+    proposalVote: [],
+    validatorStatuses: [],
+    dataLoading: true,
+    isAllDataLoaded: false,
   });
 
   const handleSetState = useCallback((stateChange: (prevState: VoteState) => VoteState) => {
@@ -99,14 +103,61 @@ export const useVotes = (resetPagination: () => void) => {
     [handleSetState, resetPagination]
   );
 
-  useProposalDetailsVotesQuery({
+  const proposalDetailsVotedQuery = useProposalDetailsVotesQuery({
     variables: {
+      limit: 100,
       proposalId: parseFloat((router?.query?.id as string) ?? '0'),
     },
     onCompleted: (data) => {
-      handleSetState((prevState) => ({ ...prevState, ...formatVotes(data) }));
+      handleSetState((prevState) => ({
+        ...prevState,
+        validatorStatuses: data.validatorStatuses,
+        proposalVote: data.proposalVote,
+      }));
+    },
+    onError: () => {
+      handleSetState((prevState) => ({
+        ...prevState,
+        dataLoading: false,
+      }));
     },
   });
+
+  const loadMoreData = useCallback(async () => {
+    const limit = 100;
+
+    await proposalDetailsVotedQuery
+      .fetchMore({
+        variables: {
+          offset: state.proposalVote.length,
+          limit,
+        },
+      })
+      .then(({ data }) => {
+        handleSetState((prevState) => ({
+          ...prevState,
+          proposalVote: data.proposalVote.concat(state.proposalVote),
+          ...(data.proposalVote.length < limit && {
+            dataLoading: false,
+            isAllDataLoaded: true,
+          }),
+        }));
+      });
+  }, [handleSetState, proposalDetailsVotedQuery, state.proposalVote]);
+
+  useEffect(() => {
+    if (state.isAllDataLoaded) {
+      handleSetState((prevState) => ({
+        ...prevState,
+        ...formatVotes({
+          proposalVote: prevState.proposalVote,
+          validatorStatuses: prevState.validatorStatuses,
+        }),
+      }));
+    } else {
+      loadMoreData();
+    }
+  }, [handleSetState, loadMoreData, state.isAllDataLoaded]);
 
   return {
     state,
