@@ -88,7 +88,6 @@ export default function AccountDetails() {
             <div className={classes.topRow}>
               <Overview
                 className={classes.overview}
-                withdrawalAddress={state.overview.withdrawalAddress}
                 address={state.overview.address}
                 domain={state.domain}
                 riskScoreData={state.riskScoreData}

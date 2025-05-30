@@ -31,7 +31,6 @@ const GaugeComponent = dynamic(() => import('react-gauge-component'), { ssr: fal
 
 type OverviewProps = {
   className?: string;
-  withdrawalAddress: string;
   address: string;
   domain: string;
   riskScoreData: {
@@ -42,13 +41,7 @@ type OverviewProps = {
   } | null;
 };
 
-const Overview: FC<OverviewProps> = ({
-  className,
-  address,
-  withdrawalAddress,
-  domain,
-  riskScoreData,
-}) => {
+const Overview: FC<OverviewProps> = ({ className, address, domain, riskScoreData }) => {
   const { location } = useWindowOrigin();
   const { classes, cx } = useStyles();
   const display = useDisplayStyles().classes;
@@ -149,24 +142,6 @@ const Overview: FC<OverviewProps> = ({
                 <ShareIcon onClick={handleOpen} className={classes.actionIcons} />
                 <Typography variant="body1" className="value">
                   {getMiddleEllipsis(address, {
-                    beginning: 15,
-                    ending: 5,
-                  })}
-                </Typography>
-              </div>
-            </div>
-
-            <div className={cx(classes.copyText, classes.item)}>
-              <Typography variant="body1" className="label">
-                {t('rewardAddress')}
-              </Typography>
-              <div className="detail">
-                <CopyIcon
-                  className={classes.actionIcons}
-                  onClick={() => handleCopyToClipboard(withdrawalAddress)}
-                />
-                <Typography variant="body1" className="value">
-                  {getMiddleEllipsis(withdrawalAddress, {
                     beginning: 15,
                     ending: 5,
                   })}
