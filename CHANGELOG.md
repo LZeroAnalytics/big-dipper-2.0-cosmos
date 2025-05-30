@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.65](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.64...v2.3.0-coreum.65) (2025-05-30)
+
+
+### Bug Fixes
+
+* remove reward_address from account details page ([630fe33](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/630fe338b5e51aa1d858030633b42252eee14fa4))
+
 ## [2.3.0-coreum.64](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.63...v2.3.0-coreum.64) (2025-05-29)
 
 
