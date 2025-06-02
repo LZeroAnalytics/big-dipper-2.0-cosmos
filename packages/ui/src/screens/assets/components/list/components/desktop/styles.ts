@@ -8,7 +8,6 @@ const useStyles = makeStyles()((theme) => ({
   },
   cell: {
     ...(theme.mixins.tableCell as CSSObject),
-    height: '50px !important',
     '&.sort:hover': {
       cursor: 'pointer',
     },
