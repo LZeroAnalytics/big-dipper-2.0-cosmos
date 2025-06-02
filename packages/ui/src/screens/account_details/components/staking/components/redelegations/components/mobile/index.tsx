@@ -33,13 +33,21 @@ const RedelegationsItem: FC<RedelegationsItemProps> = ({ item, isLast }) => {
           <Typography variant="h4" className="label">
             {t('from')}
           </Typography>
-          <AvatarName address={fromAddress} imageUrl={fromImageUrl} name={fromName} />
+          <AvatarName
+            name={item.overviewTo?.moniker ?? fromName}
+            address={fromAddress}
+            imageUrl={item.overviewTo?.avatarUrl ?? fromImageUrl}
+          />
         </div>
         <div className={classes.item}>
           <Typography variant="h4" className="label">
             {t('to')}
           </Typography>
-          <AvatarName address={toAddress} imageUrl={toImageUrl} name={toName} />
+          <AvatarName
+            name={item.overviewTo?.moniker ?? toName}
+            address={toAddress}
+            imageUrl={item.overviewTo?.avatarUrl ?? toImageUrl}
+          />
         </div>
         <div className={classes.item}>
           <Typography variant="h4" className="label">

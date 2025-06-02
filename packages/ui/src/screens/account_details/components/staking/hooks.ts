@@ -34,7 +34,7 @@ export const formatDelegations = (
     validator_address?: string;
     coins?: MsgCoin[];
   }>,
-  validatorsCommission: Pick<ValidatorType, 'validator' | 'commission'>[],
+  validatorsCommission: Pick<ValidatorType, 'validator' | 'commission' | 'overview'>[],
   rewards: RewardsType
 ) =>
   data
@@ -49,6 +49,7 @@ export const formatDelegations = (
           ).value() ?? 0,
         amount: formatToken(delegation.amount, delegation.denom),
         reward: rewards[validator],
+        overview: validatorsCommission.find((val) => val.validator === validator)?.overview,
       };
     })
     .sort((a, b) => (Big(a.amount?.value).gt(b.amount?.value) ? -1 : 1));
@@ -58,16 +59,22 @@ export const formatRedelegations = (
     entries?: Array<{ balance: string | number; completion_time?: string }>;
     validator_src_address?: string;
     validator_dst_address?: string;
-  }>
+  }>,
+  validatorsCommission: Pick<ValidatorType, 'validator' | 'commission' | 'overview'>[]
 ) => {
   const results: RedelegationType[] = [];
   data.forEach((x) => {
     x.entries?.forEach((y) => {
+      const validatorFrom = x?.validator_src_address ?? '';
+      const validatorTo = x?.validator_dst_address ?? '';
+
       results.push({
         from: x?.validator_src_address ?? '',
         to: x?.validator_dst_address ?? '',
         amount: formatToken(y.balance, primaryTokenUnit),
         completionTime: y?.completion_time ?? '',
+        overviewFrom: validatorsCommission.find((val) => val.validator === validatorFrom)?.overview,
+        overviewTo: validatorsCommission.find((val) => val.validator === validatorTo)?.overview,
       });
     });
   });
@@ -81,15 +88,24 @@ export const formatUnbondings = (
   data: Array<{
     entries?: Array<{ balance: string | number; completion_time?: string }>;
     validator_address?: string;
-  }>
+  }>,
+  validatorsCommission: Pick<ValidatorType, 'validator' | 'commission' | 'overview'>[]
 ) => {
-  const results: Array<{ validator: string; amount: TokenUnit; completionTime: string }> = [];
+  const results: Array<{
+    validator: string;
+    amount: TokenUnit;
+    completionTime: string;
+    overview?: { moniker?: string; avatarUrl?: string };
+  }> = [];
   data.forEach((x) => {
     x?.entries?.forEach((y) => {
+      const validator = x?.validator_address ?? '';
+
       results.push({
         validator: x?.validator_address ?? '',
         amount: formatToken(y.balance, primaryTokenUnit),
         completionTime: y?.completion_time ?? '',
+        overview: validatorsCommission.find((val) => val.validator === validator)?.overview,
       });
     });
   });
@@ -111,7 +127,7 @@ export const useStaking = (
   });
 
   const [validatorsCommission, setValidatorsCommission] = useState<
-    Pick<ValidatorType, 'validator' | 'commission'>[]
+    Pick<ValidatorType, 'validator' | 'commission' | 'overview'>[]
   >([]);
 
   // ==========================
@@ -131,6 +147,10 @@ export const useStaking = (
         .map((x) => ({
           validator: x.validatorInfo?.operatorAddress ?? '',
           commission: (x?.validatorCommissions?.[0]?.commission ?? 0) * 100,
+          overview: {
+            moniker: x?.validatorDescriptions?.[0]?.moniker ?? '',
+            avatarUrl: x?.validatorDescriptions?.[0]?.avatarUrl ?? '',
+          },
         }));
 
       setValidatorsCommission(formattedItems);
@@ -144,7 +164,7 @@ export const useStaking = (
 
   const address = Array.isArray(router?.query?.address)
     ? router.query.address[0]
-    : router?.query?.address ?? '';
+    : (router?.query?.address ?? '');
   const { prefix, result } = validateAddress(address as string);
 
   // =====================================
@@ -387,13 +407,19 @@ export const useStaking = (
     redelegations: {
       loading: redelegationsLoading,
       count: redelegationsPagination,
-      data: formatRedelegations(redelegationsData?.redelegations?.redelegations ?? []),
+      data: formatRedelegations(
+        redelegationsData?.redelegations?.redelegations ?? [],
+        validatorsCommission
+      ),
       error: redelegationsError,
     },
     unbondings: {
       loading: undelegationsLoading,
       count: undelegationsPagination,
-      data: formatUnbondings(undelegationsData?.undelegations?.undelegations ?? []),
+      data: formatUnbondings(
+        undelegationsData?.undelegations?.undelegations ?? [],
+        validatorsCommission
+      ),
       error: undelegationsError,
     },
     handleTabChange,

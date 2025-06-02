@@ -12,6 +12,13 @@ export interface DelegationType {
   amount: TokenUnit;
   reward: TokenUnit;
   commission?: number;
+  name?: string;
+  address?: string;
+  imageUrl?: string;
+  overview?: {
+    moniker?: string;
+    avatarUrl?: string;
+  };
 }
 
 export interface RedelegationType {
@@ -19,12 +26,24 @@ export interface RedelegationType {
   to: string;
   amount: TokenUnit;
   completionTime: string;
+  overviewFrom?: {
+    moniker?: string;
+    avatarUrl?: string;
+  };
+  overviewTo?: {
+    moniker?: string;
+    avatarUrl?: string;
+  };
 }
 
 export interface UnbondingType {
   validator: string;
   amount: TokenUnit;
   completionTime: string;
+  overview?: {
+    moniker?: string;
+    avatarUrl?: string;
+  };
 }
 
 export type DelegationsType = StakingType<DelegationType>;

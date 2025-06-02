@@ -29,8 +29,20 @@ const RedelegationsRow: FC<RedelegationsRowProps> = ({ item, i }) => {
   const dateFormat = useRecoilValue(readDate);
   const formattedItem = {
     identifier: i,
-    to: <AvatarName address={toAddress} imageUrl={toImageUrl} name={toName} />,
-    from: <AvatarName address={fromAddress} imageUrl={fromImageUrl} name={fromName} />,
+    to: (
+      <AvatarName
+        name={item.overviewTo?.moniker ?? toName}
+        address={toAddress}
+        imageUrl={item.overviewTo?.avatarUrl ?? toImageUrl}
+      />
+    ),
+    from: (
+      <AvatarName
+        name={item.overviewTo?.moniker ?? fromName}
+        address={fromAddress}
+        imageUrl={item.overviewTo?.avatarUrl ?? fromImageUrl}
+      />
+    ),
     amount: item.amount
       ? `${formatNumber(
           item.amount.value,

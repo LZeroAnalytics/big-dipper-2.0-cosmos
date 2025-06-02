@@ -22,7 +22,13 @@ const UnbondingsRow: FC<UnbondingsRowProps> = ({ item }) => {
   const { name, address, imageUrl } = useProfileRecoil(item.validator);
   const dateFormat = useRecoilValue(readDate);
   const formattedItem = {
-    validator: <AvatarName address={address} imageUrl={imageUrl} name={name} />,
+    validator: (
+      <AvatarName
+        name={item.overview?.moniker ?? name}
+        address={address}
+        imageUrl={item.overview?.avatarUrl ?? imageUrl}
+      />
+    ),
     amount: item.amount
       ? `${formatNumber(
           item.amount.value,
