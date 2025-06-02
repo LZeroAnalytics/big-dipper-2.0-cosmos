@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.68](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.67...v2.3.0-coreum.68) (2025-06-02)
+
+
+### Bug Fixes
+
+* update styles for assets table ([1125bbf](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/1125bbf3061a1b0f310ed18672a735727ec62a46))
+
 ## [2.3.0-coreum.67](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.66...v2.3.0-coreum.67) (2025-06-02)
 
 
