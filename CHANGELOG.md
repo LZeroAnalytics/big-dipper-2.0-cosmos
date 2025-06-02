@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.70](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.69...v2.3.0-coreum.70) (2025-06-02)
+
+
+### Bug Fixes
+
+* don't display features and issuer data for native currency ([a229713](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/a229713a27093d6131e429a9a628bb4f402be4b5))
+
 ## [2.3.0-coreum.69](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.68...v2.3.0-coreum.69) (2025-06-02)
 
 
