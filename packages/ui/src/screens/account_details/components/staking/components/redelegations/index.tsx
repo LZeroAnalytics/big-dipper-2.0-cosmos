@@ -32,7 +32,7 @@ const Redelegations: FC<RedelegationsProps> = (props) => {
   let component = null;
 
   if (props.redelegations.error) {
-    component = <pre>{props.redelegations.error.message}</pre>;
+    component = <p className={classes.errorMessage}>{props.redelegations.error.message}</p>;
   } else if (props.redelegations.loading && !itemsMemo?.length) {
     component = <Loading />;
   } else if (!itemsMemo?.length) {

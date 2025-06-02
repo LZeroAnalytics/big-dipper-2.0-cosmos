@@ -32,7 +32,7 @@ const Unbondings: FC<UnbondingsProps> = (props) => {
   let component = null;
 
   if (props.unbondings.error) {
-    component = <pre>{props.unbondings.error.message}</pre>;
+    component = <p className={classes.errorMessage}>{props.unbondings.error.message}</p>;
   } else if (props.unbondings.loading && !itemsMemo?.length) {
     component = <Loading />;
   } else if (!itemsMemo?.length) {

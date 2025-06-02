@@ -33,7 +33,7 @@ const Delegations: FC<DelegationsProps> = (props) => {
   let component = null;
 
   if (props.delegations.error) {
-    component = <pre>{props.delegations.error.message}</pre>;
+    component = <p className={classes.errorMessage}>{props.delegations.error.message}</p>;
   } else if (props.delegations.loading && !itemsMemo?.length) {
     component = <Loading />;
   } else if (!itemsMemo?.length) {

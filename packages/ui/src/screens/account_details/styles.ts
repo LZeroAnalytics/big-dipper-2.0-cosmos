@@ -21,6 +21,7 @@ const useStyles = makeStyles()((theme) => ({
     flexDirection: 'column',
     gap: theme.spacing(1.5),
     overflow: 'hidden',
+    maxWidth: '100%',
 
     [theme.breakpoints.up('lg')]: {
       flexDirection: 'row',
