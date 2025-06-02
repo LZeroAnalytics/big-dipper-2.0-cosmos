@@ -4,7 +4,10 @@ import { useTranslation } from 'next-i18next';
 import { FC } from 'react';
 import numeral from 'numeral';
 import { Divider } from '@mui/material';
+import chainConfig from '@/chainConfig';
 import useStyles from './styles';
+
+const { primaryTokenUnit } = chainConfig();
 
 type AssetDetailsOverviewProps = {
   className?: string;
@@ -43,19 +46,6 @@ const AssetDetailsOverview: FC<AssetDetailsOverviewProps> = ({ asset, className 
       ),
     },
     {
-      key: 'issuer',
-      name: (
-        <Typography variant="h4" className="label">
-          {t('issuer')}
-        </Typography>
-      ),
-      value: (
-        <Typography variant="body1" className="value">
-          {issuer}
-        </Typography>
-      ),
-    },
-    {
       key: 'precision',
       name: (
         <Typography variant="h4" className="label">
@@ -82,6 +72,22 @@ const AssetDetailsOverview: FC<AssetDetailsOverviewProps> = ({ asset, className 
       ),
     },
   ];
+
+  if (denom !== primaryTokenUnit) {
+    preDividerDataItems.splice(1, 0, {
+      key: 'issuer',
+      name: (
+        <Typography variant="h4" className="label">
+          {t('issuer')}
+        </Typography>
+      ),
+      value: (
+        <Typography variant="body1" className="value">
+          {issuer}
+        </Typography>
+      ),
+    });
+  }
 
   const postDividerDataItems = [
     {
@@ -175,15 +181,19 @@ const AssetDetailsOverview: FC<AssetDetailsOverviewProps> = ({ asset, className 
             </div>
           ))}
         </div>
-        <Divider className={classes.divider} />
-        <div className={classes.statusRoot}>
-          {postDividerDataItems.map((x) => (
-            <div key={x.key} className={classes.statusItem}>
-              {x.name}
-              {x.value}
+        {denom !== primaryTokenUnit && (
+          <>
+            <Divider className={classes.divider} />
+            <div className={classes.statusRoot}>
+              {postDividerDataItems.map((x) => (
+                <div key={x.key} className={classes.statusItem}>
+                  {x.name}
+                  {x.value}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
       </div>
     </Box>
   );

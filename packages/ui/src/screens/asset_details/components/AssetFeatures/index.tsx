@@ -25,9 +25,9 @@ const AssetFeatures: FC<AssetFeaturesProps> = ({ asset, className }) => {
       value: (
         <Typography variant="body1" className="value links">
           {features?.map((feature: string) => (
-            <div key={`feature-${feature}`} className={classes.linkRow}>
+            <span key={`feature-${feature}`} className={classes.linkRow}>
               <span className={classes.linkItem}>{feature}</span>
-            </div>
+            </span>
           ))}
         </Typography>
       ),

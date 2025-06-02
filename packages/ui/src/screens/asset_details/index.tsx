@@ -9,8 +9,11 @@ import AssetDetailsOverview from '@/screens/asset_details/components/AssetDetail
 import AssetPriceOverview from '@/screens/asset_details/components/AssetPriceOverview';
 import Link from 'next/link';
 import { useParams } from '@/screens/params/hooks';
+import chainConfig from '@/chainConfig';
 import AssetDexSettings from './components/AssetDexSettings';
 import AssetFeatures from './components/AssetFeatures';
+
+const { primaryTokenUnit } = chainConfig();
 
 const AssetDetails = () => {
   const { t } = useTranslation('assets');
@@ -52,7 +55,9 @@ const AssetDetails = () => {
                 <AssetOverview className={classes.block} asset={asset} />
                 <AssetDetailsOverview className={classes.block} asset={asset} />
                 <AssetPriceOverview className={classes.block} asset={asset} />
-                <AssetFeatures className={classes.block} asset={asset} />
+                {asset.denom !== primaryTokenUnit && (
+                  <AssetFeatures className={classes.block} asset={asset} />
+                )}
                 {dex && <AssetDexSettings className={classes.block} asset={asset} dex={dex} />}
               </>
             )}
