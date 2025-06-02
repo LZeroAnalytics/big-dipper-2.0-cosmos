@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.67](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.66...v2.3.0-coreum.67) (2025-06-02)
+
+
+### Bug Fixes
+
+* display validators name and image in account details delegations, redelegations and unbondings ([3f33cdd](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/3f33cdddb55d4069816eb17d9862b568f193208a))
+
 ## [2.3.0-coreum.66](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.65...v2.3.0-coreum.66) (2025-06-02)
 
 
