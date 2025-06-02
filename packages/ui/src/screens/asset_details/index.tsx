@@ -10,6 +10,7 @@ import AssetPriceOverview from '@/screens/asset_details/components/AssetPriceOve
 import Link from 'next/link';
 import { useParams } from '@/screens/params/hooks';
 import AssetDexSettings from './components/AssetDexSettings';
+import AssetFeatures from './components/AssetFeatures';
 
 const AssetDetails = () => {
   const { t } = useTranslation('assets');
@@ -51,6 +52,7 @@ const AssetDetails = () => {
                 <AssetOverview className={classes.block} asset={asset} />
                 <AssetDetailsOverview className={classes.block} asset={asset} />
                 <AssetPriceOverview className={classes.block} asset={asset} />
+                <AssetFeatures className={classes.block} asset={asset} />
                 {dex && <AssetDexSettings className={classes.block} asset={asset} dex={dex} />}
               </>
             )}

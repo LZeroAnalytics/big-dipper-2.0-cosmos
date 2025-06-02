@@ -82,6 +82,13 @@ const formatAsset = ({
     chain,
     dexSettings: assetInfo?.dex_settings,
     features: assetInfo?.features,
+    sendCommissionRate: assetInfo.send_commission_rate,
+    burnRate: assetInfo.burn_rate,
+    mintingEnabled: assetInfo?.features.includes('minting'),
+    burningEnabled: assetInfo?.features.includes('burning'),
+    freezingEnabled: assetInfo?.features.includes('freezing'),
+    whitelistingEnabled: assetInfo?.features.includes('whitelisting'),
+    issuer: assetInfo?.issuer,
   };
 };
 
@@ -136,7 +143,7 @@ export const useAssetDetails = () => {
   const getAssetsList = useCallback(async () => {
     try {
       const response = await axios.get(
-        `https://raw.githubusercontent.com/CoreumFoundation/token-registry/test/features/${chainType.toLowerCase()}/assets.json`
+        `https://raw.githubusercontent.com/CoreumFoundation/token-registry/master/${chainType.toLowerCase()}/assets.json`
       );
       const selectedAssets = response.data.assets.filter(
         (item: any) => item.denom === router.query.address
