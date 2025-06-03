@@ -37,6 +37,6 @@
   "whitelisted_denoms": "Whitelisted Denoms",
   "unified_ref_amount": "Unified Ref Amount",
   "all": "ALL",
-  "no_denoms": "There are not whitelisted denoms",
+  "no_denoms": "There are no whitelisted denoms",
   "features": "Features"
 }
