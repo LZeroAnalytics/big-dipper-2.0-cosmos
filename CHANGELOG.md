@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0-coreum.72](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.71...v2.3.0-coreum.72) (2025-06-03)
+
+
+### Features
+
+* revert testing link to the registry ([603980c](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/603980cdac8feb9b2a07e2460eaa0577bc6132e3))
+
+
+### Bug Fixes
+
+* update message, when no denoms are in the whitelist ([797561e](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/commit/797561e0e5813c8859842895ad7e98705fcc327e))
+
 ## [2.3.0-coreum.71](https://github.com/CoreumFoundation/big-dipper-2.0-cosmos/compare/v2.3.0-coreum.70...v2.3.0-coreum.71) (2025-06-03)
 
 
