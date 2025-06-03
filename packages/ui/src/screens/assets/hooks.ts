@@ -244,7 +244,7 @@ export const useAssets = () => {
   const getAssetsList = useCallback(async () => {
     try {
       const response = await axios.get(
-        `https://raw.githubusercontent.com/CoreumFoundation/token-registry/master/${chainType.toLowerCase()}/assets.json`
+        `https://raw.githubusercontent.com/CoreumFoundation/token-registry/test/asset-details/${chainType.toLowerCase()}/assets.json`
       );
 
       handleSetState((prevState) => ({
