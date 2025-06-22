@@ -64,6 +64,8 @@ import strideLogoDark from 'shared-utils/assets/logos/stride-dark.svg?url';
 import strideLogoLight from 'shared-utils/assets/logos/stride-light.svg?url';
 import quicksilverLogoLight from 'shared-utils/assets/logos/quicksilver-light.svg?url';
 import quicksilverLogoDark from 'shared-utils/assets/logos/quicksilver-dark.svg?url';
+import thorchainLogoLight from 'shared-utils/assets/logos/thorchain-light.png';
+import thorchainLogoDark from 'shared-utils/assets/logos/thorchain-dark.png';
 
 interface IconProps extends Omit<ImageProps, 'id' | 'src'> {
   type: 'icon' | 'logo';
@@ -212,6 +214,12 @@ const ChainIcon = ({
         type === 'icon'
           ? [quicksilverLogoDark, quicksilverLogoDark]
           : [quicksilverLogoLight, quicksilverLogoLight];
+      break;
+    case 'thorchain':
+      [iconDark, iconLight] =
+        type === 'icon'
+          ? [thorchainLogoDark, thorchainLogoDark]
+          : [thorchainLogoLight, thorchainLogoLight];
       break;
     default:
       throw new Error(`chain ${chainName} not supported`);
