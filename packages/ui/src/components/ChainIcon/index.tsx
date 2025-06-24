@@ -17,8 +17,7 @@ const ChainIcon = ({
 }: IconProps) => {
   const { classes, cx } = useStyles();
 
-  let [iconDark, iconLight] =
-    type === 'icon' ? [baseIconLight, baseIconLight] : [baseLogoLight, baseLogoLight];
+  let [iconDark, iconLight] = ['', ''];
   switch (chainName) {
     case 'thorchain':
       [iconDark, iconLight] =
